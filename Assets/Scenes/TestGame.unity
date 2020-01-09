@@ -282,6 +282,7 @@ GameObject:
   - component: {fileID: 1552016573}
   - component: {fileID: 1552016572}
   - component: {fileID: 1552016571}
+  - component: {fileID: 1552016574}
   m_Layer: 5
   m_Name: Procedural Image
   m_TagString: Untagged
@@ -343,7 +344,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -358,6 +359,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1552016569}
   m_CullTransparentMesh: 0
+--- !u!114 &1552016574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1552016569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c018942b349b84856b8a155672a17466, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 1552016572}
+  time: 10
 --- !u!1 &1892333781
 GameObject:
   m_ObjectHideFlags: 0
