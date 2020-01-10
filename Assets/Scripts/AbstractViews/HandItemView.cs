@@ -1,8 +1,6 @@
-﻿using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
+﻿using UnityEngine.EventSystems;
 
-namespace View.AbstractViews
+namespace AbstractViews
 {
     public abstract class HandItemView : BaseItem, IPointerEnterHandler, IPointerExitHandler
     {
@@ -20,12 +18,12 @@ namespace View.AbstractViews
         /// <param name="eventData"></param>
         public virtual void OnPointerEnter(PointerEventData eventData)
         {
-            var draggableView = eventData.pointerDrag;
-            if (Placeholder != null || draggableView != null || HasDraggable)
-                return;
-            ParentToReturnTo = transform.parent;
-            CreatePlaceholder();
-            transform.SetParent(MainParenTransform);
+//            var draggableView = eventData.pointerDrag;
+//            if (Placeholder != null || draggableView != null || HasDraggable)
+//                return;
+//            ParentToReturnTo = transform.parent;
+////            CreatePlaceholder();
+//            transform.SetParent(MainParenTransform);
         }
 
         /// <inheritdoc />
@@ -35,45 +33,45 @@ namespace View.AbstractViews
         /// <param name="eventData"></param>
         public virtual void OnPointerExit(PointerEventData eventData)
         {
-            if (Placeholder == null)
-                return;
-            ZoomOutAnimation();
+//            if (Placeholder == null)
+//                return;
+//            ZoomOutAnimation();
         }
 
-        /// <summary>
-        /// Create Stub
-        /// </summary>
-        /// <param name="stubName"></param>
-        public void CreatePlaceholder(string stubName = "placeholder")
-        {
-            if (Placeholder != null)
-                return;
-            var siblingIndex = transform.GetSiblingIndex();
-            var width = GetComponent<LayoutElement>().preferredWidth;
-            var placeholderGo = new GameObject {name = stubName};
-
-            var rectTransform = placeholderGo.AddComponent<RectTransform>();
-            rectTransform.localScale = Vector3.one;
-            rectTransform.sizeDelta = new Vector2(width, 0);
-
-            var le = placeholderGo.AddComponent<LayoutElement>();
-            le.preferredWidth = width;
-            le.preferredHeight = 0;
-            le.flexibleWidth = 0;
-            le.flexibleHeight = 0;
-
-            placeholderGo.transform.SetParent(PlaceholderParent);
-            placeholderGo.transform.SetSiblingIndex(siblingIndex);
-
-            Placeholder = placeholderGo.transform;
-        }
+//        /// <summary>
+//        /// Create Stub
+//        /// </summary>
+//        /// <param name="stubName"></param>
+//        public void CreatePlaceholder(string stubName = "placeholder")
+//        {
+//            if (Placeholder != null)
+//                return;
+//            var siblingIndex = transform.GetSiblingIndex();
+//            var width = GetComponent<LayoutElement>().preferredWidth;
+//            var placeholderGo = new GameObject {name = stubName};
+//
+//            var rectTransform = placeholderGo.AddComponent<RectTransform>();
+//            rectTransform.localScale = Vector3.one;
+//            rectTransform.sizeDelta = new Vector2(width, 0);
+//
+//            var le = placeholderGo.AddComponent<LayoutElement>();
+//            le.preferredWidth = width;
+//            le.preferredHeight = 0;
+//            le.flexibleWidth = 0;
+//            le.flexibleHeight = 0;
+//
+//            placeholderGo.transform.SetParent(PlaceholderParent);
+//            placeholderGo.transform.SetSiblingIndex(siblingIndex);
+//
+//            Placeholder = placeholderGo.transform;
+//        }
 
         /// <summary>
         /// Start path animation
         /// </summary>
         public void StartPathAnimation()
         {
-            var wayPoints = new[] {PlaceholderParent.position, Placeholder.position};
+//            var wayPoints = new[] {PlaceholderParent.position, Placeholder.position};
         }
 
         /// <summary>
@@ -82,10 +80,10 @@ namespace View.AbstractViews
         public void DestroyView()
         {
             Destroy(gameObject);
-            if (Placeholder != null)
-            {
-                Destroy(Placeholder.gameObject);
-            }
+//            if (Placeholder != null)
+//            {
+//                Destroy(Placeholder.gameObject);
+//            }
         }
 
         /// <summary>
