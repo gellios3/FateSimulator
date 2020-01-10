@@ -15,7 +15,8 @@ namespace AbstractViews
         {
             if (eventData.pointerDrag == null)
                 return;
-            Debug.LogError($"DroppableView {eventData.pointerDrag}");   
+            Debug.LogError($"DroppableView {eventData.pointerDrag}"); 
+            eventData.pointerDrag.transform.SetAsLastSibling();
         }
 
         /// <inheritdoc />
@@ -27,7 +28,7 @@ namespace AbstractViews
         {
             if (eventData.pointerDrag == null)
                 return;
-            Debug.LogError($"OnPointerEnter {eventData.pointerDrag}");   
+//            Debug.LogError($"OnPointerEnter {eventData.pointerDrag}");   
                   
         }
 
@@ -40,7 +41,7 @@ namespace AbstractViews
         {
             if (eventData.pointerDrag == null)
                 return;
-            Debug.LogError($"OnPointerExit {eventData.pointerDrag}");
+//            Debug.LogError($"OnPointerExit {eventData.pointerDrag}");
         }
     }
 }

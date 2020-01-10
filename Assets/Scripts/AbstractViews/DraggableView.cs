@@ -18,6 +18,8 @@ namespace AbstractViews
         {
             if (!CanDraggable)
                 return;
+            
+            transform.SetAsFirstSibling();
 
             HasDraggable = true;
         }
