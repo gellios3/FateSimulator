@@ -67,7 +67,7 @@ namespace AbstractViews
             HasDraggable = false;
             
             var position = transform.position;
-            position.z = -2;
+            position.z = -3;
             transform.position = position;
         }
     }
