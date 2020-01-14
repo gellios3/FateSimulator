@@ -15,8 +15,7 @@ namespace AbstractViews
         {
             if (eventData.pointerDrag == null)
                 return;
-            Debug.LogError($"DroppableView {eventData.pointerDrag}"); 
-            eventData.pointerDrag.transform.SetAsLastSibling();
+            Debug.LogError("On Drop !!!");
         }
 
         /// <inheritdoc />

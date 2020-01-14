@@ -19,8 +19,6 @@ namespace AbstractViews
             if (!CanDraggable)
                 return;
 
-            transform.SetAsFirstSibling();
-
             HasDraggable = true;
         }
 
@@ -36,7 +34,7 @@ namespace AbstractViews
 
             if (Camera.main == null)
                 return;
-            var pos = GetWorldPositionOnPlane(eventData.position, 0);
+            var pos = GetWorldPositionOnPlane(eventData.position, -1);
             transform.position = pos;
         }
 
@@ -67,6 +65,10 @@ namespace AbstractViews
                 return;
 
             HasDraggable = false;
+            
+            var position = transform.position;
+            position.z = -2;
+            transform.position = position;
         }
     }
 }
