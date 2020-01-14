@@ -18,7 +18,7 @@ namespace AbstractViews
         {
             if (!CanDraggable)
                 return;
-            
+
             transform.SetAsFirstSibling();
 
             HasDraggable = true;
@@ -34,11 +34,26 @@ namespace AbstractViews
             if (!CanDraggable)
                 return;
 
-            if (Camera.main == null) 
+            if (Camera.main == null)
                 return;
+            var pos = GetWorldPositionOnPlane(eventData.position, 0);
+            transform.position = pos;
+        }
 
-            transform.position = eventData.position;
-            
+        /// <summary>
+        /// Get World position on plane
+        /// </summary>
+        /// <param name="screenPosition"></param>
+        /// <param name="z"></param>
+        /// <returns></returns>
+        public Vector3 GetWorldPositionOnPlane(Vector3 screenPosition, float z)
+        {
+            if (Camera.main == null)
+                return Vector3.zero;
+            var ray = Camera.main.ScreenPointToRay(screenPosition);
+            var xy = new Plane(Vector3.forward, new Vector3(0, 0, z));
+            xy.Raycast(ray, out var distance);
+            return ray.GetPoint(distance);
         }
 
         /// <inheritdoc />
