@@ -188,7 +188,7 @@ namespace RTS_Cam
         #region RTSCamera_Methods
 
         /// <summary>
-        /// update camera movement and rotation
+        /// Update camera movement and rotation
         /// </summary>
         private void CameraUpdate()
         {
@@ -203,7 +203,7 @@ namespace RTS_Cam
         }
 
         /// <summary>
-        /// move camera with keyboard or with screen edge
+        /// Move camera with keyboard or with screen edge
         /// </summary>
         private void Move()
         {
@@ -253,7 +253,7 @@ namespace RTS_Cam
         }
 
         /// <summary>
-        /// calcualte height
+        /// Calculate height
         /// </summary>
         private void HeightCalculation()
         {
@@ -307,9 +307,8 @@ namespace RTS_Cam
             if (!limitMap)
                 return;
 
+            // Delta between start position and zoom
             var delta = startY - m_Transform.position.y;
-
-//            Debug.LogError($"delta {delta}");
 
             m_Transform.position = new Vector3(Mathf.Clamp(m_Transform.position.x, -limitX - delta, limitX + delta),
                 m_Transform.position.y,
@@ -340,11 +339,7 @@ namespace RTS_Cam
         private float DistanceToGround()
         {
             var ray = new Ray(m_Transform.position, Vector3.down);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, groundMask.value))
-                return (hit.point - m_Transform.position).magnitude;
-
-            return 0f;
+            return Physics.Raycast(ray, out var hit, groundMask.value) ? (hit.point - m_Transform.position).magnitude : 0f;
         }
 
         #endregion
