@@ -49,7 +49,7 @@ namespace AbstractViews
             if (Camera.main == null)
                 return Vector3.zero;
             var ray = Camera.main.ScreenPointToRay(screenPosition);
-            var xy = new Plane(Vector3.forward, new Vector3(0, 0, z));
+            var xy = new Plane(Vector3.down, new Vector3(0, 0, z));
             xy.Raycast(ray, out var distance);
             return ray.GetPoint(distance);
         }
@@ -65,9 +65,9 @@ namespace AbstractViews
                 return;
 
             HasDraggable = false;
-            
+
             var position = transform.position;
-            position.z = -3;
+            position.y = 3;
             transform.position = position;
         }
     }
