@@ -5,11 +5,9 @@ namespace Activities.Installers
 {
     public class ActivitiesInstaller : MonoInstaller
     {
-        // Start is called before the first frame update
-        void Start()
+        public override void InstallBindings()
         {
-            Container.Bind<string>().FromInstance("Hello World!");
-            Container.Bind<ActivitiesService>().AsSingle().NonLazy();
+            Container.Bind<ActivitiesService>().AsSingle();
         }
 
     }

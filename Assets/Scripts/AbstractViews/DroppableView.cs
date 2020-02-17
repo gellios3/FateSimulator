@@ -1,10 +1,17 @@
-﻿using UnityEngine;
+﻿using System;
+using Cards.Models;
+using Cards.Views;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace AbstractViews
 {
     public sealed class DroppableView : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
     {
+        /// <summary>
+        /// On Card drop
+        /// </summary>
+        public event Action<CardData> OnCardDrop;
 
         /// <inheritdoc />
         /// <summary>
@@ -15,7 +22,9 @@ namespace AbstractViews
         {
             if (eventData.pointerDrag == null)
                 return;
-            Debug.LogError("On Drop !!!");
+            var cardView = eventData.pointerDrag.GetComponent<CardView>();
+            if (cardView != null)
+                OnCardDrop?.Invoke(cardView.CardData);
         }
 
         /// <inheritdoc />
@@ -28,7 +37,6 @@ namespace AbstractViews
             if (eventData.pointerDrag == null)
                 return;
 //            Debug.LogError($"OnPointerEnter {eventData.pointerDrag}");   
-                  
         }
 
         /// <inheritdoc />

@@ -4,9 +4,10 @@ namespace Activities.Services
 {
     public class ActivitiesService
     {
-        public ActivitiesService(string msg)
+
+        public void ShowPopup()
         {
-            Debug.Log(msg);
+            Debug.Log("Show popup");
         }
     }
 }
