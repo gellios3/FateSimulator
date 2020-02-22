@@ -1,10 +1,11 @@
-﻿using Cards.Models;
+﻿using System.Collections.Generic;
+using Cards.Models;
 using Enums;
 using UnityEngine;
 
 namespace ScriptableObjects
 {
-    [CreateAssetMenu(fileName = "Card Obj", menuName = "Create Card Obj", order = 0)]
+    [CreateAssetMenu(fileName = "New Card Obj", menuName = "Create Card Obj", order = 0)]
     public class CardObj : ScriptableObject
     {
         public ushort id;
@@ -17,6 +18,8 @@ namespace ScriptableObjects
 
         public CardType type;
 
-        public Sprite cardImg;
+        public Sprite cardIcon;
+
+        public List<AspectObj> cardAspects;
     }
 }

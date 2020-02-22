@@ -2,7 +2,7 @@
 
 namespace ScriptableObjects
 {
-    [CreateAssetMenu(fileName = "Aspect Obj", menuName = "Create Aspect Obj", order = 0)]
+    [CreateAssetMenu(fileName = "New Aspect Obj", menuName = "Create Aspect Obj", order = 0)]
     public class AspectObj : ScriptableObject
     {
         public ushort id;
