@@ -5,7 +5,7 @@ namespace ScriptableObjects.Interfaces.Aspects
     /// <summary>
     /// Interface for Person Aspect
     /// </summary>
-    public interface IPersonAspect
+    public interface IPersonAspect : IBaseAspect
     {
         /// <summary>
         /// Person type

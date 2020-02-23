@@ -15,7 +15,7 @@ namespace ScriptableObjects.Aspects
         /// </summary>
         public BattleSkillType skillType;
         public BattleSkillType SkillType => skillType;
-        
+
         /// <summary>
         /// Skill level
         /// </summary>

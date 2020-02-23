@@ -1,27 +1,30 @@
 ﻿using System;
 using Enums;
-using ScriptableObjects.Interfaces;
+using Enums.Aspects;
+using ScriptableObjects.Interfaces.Aspects;
 using UnityEngine;
 
-namespace SerializableStructs
+namespace SerializableStructs.Aspects
 {
     /// <summary>
-    /// Base aspect - Serializable struct
+    /// Person Aspect - Serializable struct
     /// </summary>
     [Serializable]
-    public struct BaseAspect : IBaseAspect
+    public struct PersonAspect : IPersonAspect
     {
         public ushort Id { get; }
         public string AspectName { get; }
         public Sprite AspectImg { get; }
         public AspectType AspectType { get; }
-
-        public BaseAspect(IBaseAspect aspect)
+        public PersonType PersonType { get; }
+        
+        public PersonAspect(IPersonAspect aspect)
         {
             Id = aspect.Id;
             AspectName = aspect.AspectName;
             AspectImg = aspect.AspectImg;
             AspectType = aspect.AspectType;
+            PersonType = aspect.PersonType;
         }
     }
 }
