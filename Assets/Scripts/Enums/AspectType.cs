@@ -5,5 +5,6 @@
         Characteristic,
         Skill,
         Resource,
+        Person
     }
 }

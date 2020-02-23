@@ -7,7 +7,7 @@ using UnityEngine.Serialization;
 namespace ScriptableObjects
 {
     [CreateAssetMenu(fileName = "New Aspect Obj", menuName = "Create Aspect Obj", order = 0)]
-    public class BaseBaseAspect : ScriptableObject, IBaseAspect
+    public class BaseAspectObj : ScriptableObject, IBaseAspect
     {
         public ushort id;
         public ushort Id => id;

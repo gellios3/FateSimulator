@@ -21,6 +21,6 @@ namespace ScriptableObjects
 
         public Sprite cardIcon;
 
-        public List<BaseBaseAspect> cardAspects;
+        public List<BaseAspectObj> cardAspects;
     }
 }
