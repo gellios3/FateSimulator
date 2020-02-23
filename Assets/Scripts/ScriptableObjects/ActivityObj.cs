@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Enums;
+using UnityEngine;
 
 namespace ScriptableObjects
 {
@@ -10,5 +11,9 @@ namespace ScriptableObjects
         public string activityName;
 
         public string shortDescription;
+
+        public ActivityType activityType;
+        
+        public Sprite activityIcon;
     }
 }

@@ -12,6 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea873575b6a34e0889c70fec7983c6e3, type: 3}
   m_Name: Card Obj
   m_EditorClassIdentifier: 
-  id: 0
-  cardName: 
+  id: 1
+  cardName: Test
+  shortDescription: Bla bla bla
+  cardCoordinate:
+    terrainPos: {x: 15, y: 20}
+    globalPos: {x: 300, y: 20}
   type: 0
+  cardIcon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  cardAspects:
+  - {fileID: 11400000, guid: f0f517d1a4dd1e5438383f5bbd12e767, type: 2}

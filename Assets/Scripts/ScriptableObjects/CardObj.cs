@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Cards.Models;
 using Enums;
+using SerializableStructs;
 using UnityEngine;
 
 namespace ScriptableObjects
@@ -20,6 +21,6 @@ namespace ScriptableObjects
 
         public Sprite cardIcon;
 
-        public List<AspectObj> cardAspects;
+        public List<BaseBaseAspect> cardAspects;
     }
 }

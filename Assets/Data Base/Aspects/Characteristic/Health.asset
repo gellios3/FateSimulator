@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a5f77a3cd5b4dbd920b1c050184aa15, type: 3}
-  m_Name: Test Aspect Obj
+  m_Script: {fileID: 11500000, guid: 1261f7781aaa42a48beab67546886faa, type: 3}
+  m_Name: Health
   m_EditorClassIdentifier: 
-  id: 0
-  aspectName: Test
-  aspectImg: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
+  id: 1
+  aspectName: Heath
+  aspectImg: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  aspectType: 1
+  characteristicType: 0
