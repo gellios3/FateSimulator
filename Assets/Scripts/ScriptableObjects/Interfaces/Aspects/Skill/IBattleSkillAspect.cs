@@ -1,6 +1,6 @@
 ﻿using Enums.Aspects;
 
-namespace ScriptableObjects.Interfaces.Aspects
+namespace ScriptableObjects.Interfaces.Aspects.Skill
 {
     /// <summary>
     /// Interface for Battle Skill Aspect

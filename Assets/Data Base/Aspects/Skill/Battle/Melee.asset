@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 358a4d755c084e1b9413c081035667d7, type: 3}
-  m_Name: Merlin
+  m_Script: {fileID: 11500000, guid: 2a7f702f47ba44f58aa0cd8fa9c8d9f5, type: 3}
+  m_Name: Melee
   m_EditorClassIdentifier: 
   id: 1
-  aspectName: Merlin
-  aspectImg: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-  aspectType: 3
-  personType: 0
+  aspectName: Melee
+  aspectImg: {fileID: 0}
+  aspectType: 1
+  skillType: 0
+  level: 1

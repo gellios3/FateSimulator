@@ -5,6 +5,7 @@
         Characteristic,
         Skill,
         Resource,
-        Person
+        Person,
+        Equipment
     }
 }

@@ -1,10 +1,10 @@
 ﻿using System;
 using Enums;
 using Enums.Aspects;
-using ScriptableObjects.Interfaces.Aspects;
+using ScriptableObjects.Interfaces.Aspects.Skill;
 using UnityEngine;
 
-namespace SerializableStructs.Aspects
+namespace SerializableStructs.Aspects.Skill
 {
     /// <summary>
     /// Battle Skill Aspect - Serializable struct

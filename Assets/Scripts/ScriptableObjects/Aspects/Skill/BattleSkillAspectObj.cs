@@ -1,13 +1,13 @@
 ﻿using Enums.Aspects;
-using ScriptableObjects.Interfaces.Aspects;
+using ScriptableObjects.Interfaces.Aspects.Skill;
 using UnityEngine;
 
-namespace ScriptableObjects.Aspects
+namespace ScriptableObjects.Aspects.Skill
 {
     /// <summary>
     /// Battle skill aspect
     /// </summary>
-    [CreateAssetMenu(fileName = "New Battle Skill Aspect", menuName = "Aspects/Create Battle Skill Aspect", order = 0)]
+    [CreateAssetMenu(fileName = "New Battle Skill Aspect", menuName = "Aspects/Skill/Create Battle Skill Aspect", order = 0)]
     public class BattleSkillAspectObj : BaseAspectObj, IBattleSkillAspect
     {
         /// <summary>

@@ -1,14 +1,14 @@
 ﻿using Enums.Aspects;
-using ScriptableObjects.Interfaces.Aspects;
+using ScriptableObjects.Interfaces.Aspects.Skill;
 using UnityEngine;
 
-namespace ScriptableObjects.Aspects
+namespace ScriptableObjects.Aspects.Skill
 {
     
     /// <summary>
     /// Routine skill aspect 
     /// </summary>
-    [CreateAssetMenu(fileName = "New Routine Skill Aspect", menuName = "Aspects/Create Routine Skill Aspect",
+    [CreateAssetMenu(fileName = "New Routine Skill Aspect", menuName = "Aspects/Skill/Create Routine Skill Aspect",
         order = 0)]
     public class RoutineSkillAspectObj : BaseAspectObj, IRoutineSkillAspect
     {
