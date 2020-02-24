@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Enums;
 using Enums.Aspects;
 using Enums.Aspects.Equipment;
@@ -17,8 +18,7 @@ namespace SerializableStructs.Aspects.Equipment
         public EquipmentType EquipmentType { get; }
         public byte Level { get; }
         public WeaponType WeaponType { get; }
-        public CharacteristicType DamageType { get; }
-        public byte DamageValue { get; }
+        public List<CharacteristicPair> WeaponDamages { get; }
 
         public WeaponEquipmentAspect(IWeaponEquipmentAspect aspect)
         {
@@ -29,8 +29,7 @@ namespace SerializableStructs.Aspects.Equipment
             EquipmentType = aspect.EquipmentType;
             Level = aspect.Level;
             WeaponType = aspect.WeaponType;
-            DamageType = aspect.DamageType;
-            DamageValue = aspect.DamageValue;
+            WeaponDamages = aspect.WeaponDamages;
         }
     }
 }

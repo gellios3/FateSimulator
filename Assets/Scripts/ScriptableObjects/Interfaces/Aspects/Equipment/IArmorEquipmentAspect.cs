@@ -1,5 +1,6 @@
-﻿using Enums.Aspects;
+﻿using System.Collections.Generic;
 using Enums.Aspects.Equipment;
+using SerializableStructs.Aspects.Equipment;
 
 namespace ScriptableObjects.Interfaces.Aspects.Equipment
 {
@@ -14,13 +15,8 @@ namespace ScriptableObjects.Interfaces.Aspects.Equipment
         ArmorEquipmentType ArmorEquipmentType { get; }
         
         /// <summary>
-        /// Defence type
+        /// Defence Buffs List
         /// </summary>
-        CharacteristicType DefenceType { get; }
-        
-        /// <summary>
-        /// Defence value
-        /// </summary>
-        byte DefenceValue { get; }
+        List<CharacteristicPair> DefenceBuffs { get; }
     }
 }

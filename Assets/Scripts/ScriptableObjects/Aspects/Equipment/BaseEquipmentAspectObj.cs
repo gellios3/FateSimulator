@@ -22,7 +22,9 @@ namespace ScriptableObjects.Aspects.Equipment
         /// </summary>
         public byte level;
         public byte Level => level;
-        
-        
+
+        public byte useCount;
+
+
     }
 }

@@ -1,6 +1,8 @@
-﻿using Enums.Aspects;
+﻿using System.Collections.Generic;
+using Enums.Aspects;
 using Enums.Aspects.Equipment;
 using ScriptableObjects.Interfaces.Aspects.Equipment;
+using SerializableStructs.Aspects.Equipment;
 using UnityEngine;
 
 namespace ScriptableObjects.Aspects.Equipment
@@ -13,11 +15,8 @@ namespace ScriptableObjects.Aspects.Equipment
     {
         public WeaponType weaponType;
         public WeaponType WeaponType => weaponType;
-        
-        public CharacteristicType damageType;
-        public CharacteristicType DamageType => damageType;
-        
-        public byte damageValue;
-        public byte DamageValue => damageValue;
+
+        public List<CharacteristicPair> weaponDamages;
+        public List<CharacteristicPair> WeaponDamages => weaponDamages;
     }
 }

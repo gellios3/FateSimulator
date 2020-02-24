@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Enums;
 using Enums.Aspects;
 using Enums.Aspects.Equipment;
@@ -17,8 +18,7 @@ namespace SerializableStructs.Aspects.Equipment
         public EquipmentType EquipmentType { get; }
         public byte Level { get; }
         public ArmorEquipmentType ArmorEquipmentType { get; }
-        public CharacteristicType DefenceType { get; }
-        public byte DefenceValue { get; }
+        public List<CharacteristicPair> DefenceBuffs { get; }
 
         public ArmorEquipmentAspect(IArmorEquipmentAspect aspect)
         {
@@ -29,8 +29,7 @@ namespace SerializableStructs.Aspects.Equipment
             EquipmentType = aspect.EquipmentType;
             Level = aspect.Level;
             ArmorEquipmentType = aspect.ArmorEquipmentType;
-            DefenceType = aspect.DefenceType;
-            DefenceValue = aspect.DefenceValue;
+            DefenceBuffs = aspect.DefenceBuffs;
         }
     }
 }
