@@ -1,6 +1,7 @@
 ﻿using System;
 using Enums;
-using ScriptableObjects.Interfaces;
+using Interfaces;
+using Interfaces.Aspects;
 using UnityEngine;
 
 namespace SerializableStructs

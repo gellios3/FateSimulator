@@ -1,7 +1,7 @@
 ﻿using System;
 using Enums;
 using Enums.Aspects;
-using ScriptableObjects.Interfaces.Aspects.Skill;
+using Interfaces.Aspects.Skill;
 using UnityEngine;
 
 namespace SerializableStructs.Aspects.Skill

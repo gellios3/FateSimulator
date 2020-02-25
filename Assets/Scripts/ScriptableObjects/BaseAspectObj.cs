@@ -1,5 +1,6 @@
 ﻿using Enums;
-using ScriptableObjects.Interfaces;
+using Interfaces;
+using Interfaces.Aspects;
 using SerializableStructs;
 using UnityEngine;
 using UnityEngine.Serialization;

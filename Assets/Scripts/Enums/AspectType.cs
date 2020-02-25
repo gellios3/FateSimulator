@@ -6,6 +6,8 @@
         Skill,
         Resource,
         Person,
-        Equipment
+        Equipment,
+        Coordinates,
+        Lesson
     }
 }

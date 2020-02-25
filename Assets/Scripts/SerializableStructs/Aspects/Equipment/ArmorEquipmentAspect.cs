@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Enums;
 using Enums.Aspects;
 using Enums.Aspects.Equipment;
-using ScriptableObjects.Interfaces.Aspects.Equipment;
+using Interfaces.Aspects.Equipment;
 using UnityEngine;
 
 namespace SerializableStructs.Aspects.Equipment

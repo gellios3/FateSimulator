@@ -12,12 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05936770cd1c460695d545f6eb7d228b, type: 3}
   m_Name: Leather Armor
   m_EditorClassIdentifier: 
-  id: 0
-  aspectName: 
+  id: 1
+  aspectName: Leather armor
   aspectImg: {fileID: 0}
-  aspectType: 0
+  aspectType: 4
   equipmentType: 0
-  level: 0
+  level: 1
+  useCount: 5
   armorEquipmentType: 0
-  defenceType: 0
-  defenceValue: 0
+  defenceBuffs:
+  - type: 0
+    value: 1
+  - type: 2
+    value: 1

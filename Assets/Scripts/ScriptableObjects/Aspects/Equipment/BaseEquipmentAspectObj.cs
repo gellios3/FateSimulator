@@ -1,6 +1,6 @@
 ﻿using Enums.Aspects;
 using Enums.Aspects.Equipment;
-using ScriptableObjects.Interfaces.Aspects.Equipment;
+using Interfaces.Aspects.Equipment;
 using UnityEngine;
 
 namespace ScriptableObjects.Aspects.Equipment

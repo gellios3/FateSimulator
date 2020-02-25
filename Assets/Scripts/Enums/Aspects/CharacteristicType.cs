@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Enums.Aspects
+﻿namespace Enums.Aspects
 {
     public enum CharacteristicType
     {

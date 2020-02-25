@@ -13,7 +13,7 @@
         Subject,
         Skill,
         Work,
-        Lesson,
-        Coordinates
+        Teacher,
+        Enemy
     }
 }

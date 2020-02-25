@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Enums.Aspects.Equipment;
-using ScriptableObjects.Interfaces.Aspects.Equipment;
+using Interfaces.Aspects.Equipment;
 using SerializableStructs.Aspects.Equipment;
 using UnityEngine;
 
@@ -12,8 +12,7 @@ namespace ScriptableObjects.Aspects.Equipment
     {
         public ArmorEquipmentType armorEquipmentType;
         public ArmorEquipmentType ArmorEquipmentType => armorEquipmentType;
-        
-        
+
         public List<CharacteristicPair> defenceBuffs;
         public List<CharacteristicPair> DefenceBuffs => defenceBuffs;
     }

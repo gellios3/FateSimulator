@@ -1,5 +1,5 @@
 ﻿using Enums.Aspects;
-using ScriptableObjects.Interfaces.Aspects.Skill;
+using Interfaces.Aspects.Skill;
 using UnityEngine;
 
 namespace ScriptableObjects.Aspects.Skill
