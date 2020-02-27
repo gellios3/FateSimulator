@@ -10,12 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 919cc27edf9c4002aaa82dbf7da2dd5b, type: 3}
-  m_Name: New Activity Obj
+  m_Name: Midle Battle Activity
   m_EditorClassIdentifier: 
-  id: 0
-  activityName: 
-  shortDescription: 
-  activityType: 0
+  id: 3
+  activityName: Middle battle
+  shortDescription: Middle battle
+  activityType: 4
   activityIcon: {fileID: 0}
-  requiredObjs: []
-  optionalObjs: []
+  requiredList:
+  - {fileID: 11400000, guid: 21fc79fad14a8f54d9768a4ce4312509, type: 2}
+  - {fileID: 11400000, guid: 21fc79fad14a8f54d9768a4ce4312509, type: 2}
+  optionalRequiresList:
+  - {fileID: 11400000, guid: 81d4d8a043b890e4899edc3f22789270, type: 2}
+  - {fileID: 11400000, guid: 81d4d8a043b890e4899edc3f22789270, type: 2}
+  - {fileID: 11400000, guid: 21fc79fad14a8f54d9768a4ce4312509, type: 2}
+  resultsList: []
+  optionalResultsList:
+  - {fileID: 11400000, guid: 7ae3a81298c9f914e94a0732d8c05805, type: 2}
+  - {fileID: 11400000, guid: f508a55d6db54ca4d9c53250010d2e2e, type: 2}

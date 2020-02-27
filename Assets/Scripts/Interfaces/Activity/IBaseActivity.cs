@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Enums;
 using ScriptableObjects.Requires;
+using ScriptableObjects.Results;
 using UnityEngine;
 
 namespace Interfaces.Activity
@@ -12,7 +13,9 @@ namespace Interfaces.Activity
         string ShortDescription { get; }
         ActivityType ActivityType { get; }
         Sprite ActivityIcon { get; }
-        List<BaseRequireObj> RequiredObjs { get; }
-        List<BaseRequireObj> OptionalObjs { get; }
+        List<BaseRequireObj> RequiredList { get; }
+        List<BaseRequireObj> OptionalRequiresList { get; }
+        List<BaseResultObj> ResultsList { get; } 
+        List<BaseResultObj> OptionalResultsList { get; }
     }
 }

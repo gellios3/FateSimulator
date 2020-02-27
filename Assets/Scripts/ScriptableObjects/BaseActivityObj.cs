@@ -2,6 +2,7 @@
 using Enums;
 using Interfaces.Activity;
 using ScriptableObjects.Requires;
+using ScriptableObjects.Results;
 using UnityEngine;
 
 namespace ScriptableObjects
@@ -12,8 +13,6 @@ namespace ScriptableObjects
     [CreateAssetMenu(fileName = "New Activity Obj", menuName = "Create Activity", order = 0)]
     public class BaseActivityObj : ScriptableObject, IBaseActivity
     {
-        // @Todo Add Return card types
-        
         /// <summary>
         /// Id
         /// </summary>
@@ -45,16 +44,28 @@ namespace ScriptableObjects
         public Sprite ActivityIcon => activityIcon;
         
         /// <summary>
-        /// Required aspects for start Activity
+        /// Required aspects or cards for start Activity
         /// </summary>
-        public List<BaseRequireObj> requiredObjs;
-        public List<BaseRequireObj> RequiredObjs => requiredObjs;  
+        public List<BaseRequireObj> requiredList;
+        public List<BaseRequireObj> RequiredList => requiredList;
+        
+
+        /// <summary>
+        /// Optional aspects or cards for start Activity
+        /// </summary>
+        public List<BaseRequireObj> optionalRequiresList; 
+        public List<BaseRequireObj> OptionalRequiresList => optionalRequiresList;
         
         /// <summary>
-        /// Optional aspects for start Activity
+        /// Results aspects or cards on end activity
         /// </summary>
-        public List<BaseRequireObj> optionalObjs;
-        public List<BaseRequireObj> OptionalObjs => optionalObjs;
+        public List<BaseResultObj> resultsList;
+        public List<BaseResultObj> ResultsList => resultsList;
         
+        /// <summary>
+        /// Optional results aspects or cards on end activity
+        /// </summary>
+        public List<BaseResultObj> optionalResultsList;
+        public List<BaseResultObj> OptionalResultsList => optionalResultsList;
     }
 }

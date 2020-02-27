@@ -10,10 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 919cc27edf9c4002aaa82dbf7da2dd5b, type: 3}
-  m_Name: Base Activity
+  m_Name: Study Activity
   m_EditorClassIdentifier: 
   id: 1
-  activityName: Regular Work
-  shortDescription: Regular Work
-  activityType: 0
+  activityName: Study Activity
+  shortDescription: Study Activity
+  activityType: 2
   activityIcon: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  requiredList:
+  - {fileID: 11400000, guid: 3df1790a7b80c4041aa2f367aa277532, type: 2}
+  - {fileID: 11400000, guid: 2a240bfcaa3cdbc498e6e552917de0d3, type: 2}
+  - {fileID: 11400000, guid: aa797e432b9b45f4ca82f12db665a0d5, type: 2}
+  - {fileID: 11400000, guid: cc9f053b23672224494eceb2a0be522f, type: 2}
+  - {fileID: 11400000, guid: 783011e8884e6f34f811a059c702ed77, type: 2}
+  optionalRequiresList:
+  - {fileID: 11400000, guid: 2aebb3287482a864fbb384bb1362229e, type: 2}
+  resultsList:
+  - {fileID: 11400000, guid: f508a55d6db54ca4d9c53250010d2e2e, type: 2}
+  - {fileID: 11400000, guid: 2d56e03ee70681841acfeed06d03559e, type: 2}
+  optionalResultsList:
+  - {fileID: 11400000, guid: 6ff4733a230ffae4c8a8fa344551e9f7, type: 2}
