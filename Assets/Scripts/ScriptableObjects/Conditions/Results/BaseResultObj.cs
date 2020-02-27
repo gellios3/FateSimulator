@@ -1,11 +1,15 @@
-﻿using UnityEngine;
+﻿using Interfaces.Conditions;
+using UnityEngine;
 
-namespace ScriptableObjects.Results
+namespace ScriptableObjects.Conditions.Results
 {
     [CreateAssetMenu(fileName = "BaseResultObj", menuName = "", order = 0)]
-    public class BaseResultObj : ScriptableObject
+    public class BaseResultObj : ScriptableObject, IBaseResult
     {
         public byte level;
+        public byte Level => level;
+
         public byte percent;
+        public byte Percent => percent;
     }
 }

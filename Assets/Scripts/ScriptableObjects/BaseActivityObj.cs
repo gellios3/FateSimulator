@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Enums;
 using Interfaces.Activity;
-using ScriptableObjects.Requires;
-using ScriptableObjects.Results;
+using ScriptableObjects.Conditions.Requires;
+using ScriptableObjects.Conditions.Results;
 using UnityEngine;
 
 namespace ScriptableObjects

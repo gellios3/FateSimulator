@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Enums;
-using ScriptableObjects.Requires;
-using ScriptableObjects.Results;
+using ScriptableObjects.Conditions.Requires;
+using ScriptableObjects.Conditions.Results;
 using UnityEngine;
 
 namespace Interfaces.Activity
