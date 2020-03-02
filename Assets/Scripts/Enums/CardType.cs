@@ -6,14 +6,10 @@
         Person,
         Resource,
         Equipment,
-        Satellite,
-        Quest,
+        Companion,
         Information,
-        Location,
         Subject,
         Skill,
-        Work,
-        Teacher,
-        Enemy
+        Activity
     }
 }

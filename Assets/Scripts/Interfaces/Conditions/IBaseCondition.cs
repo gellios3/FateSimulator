@@ -1,6 +1,6 @@
 ﻿namespace Interfaces.Conditions
 {
-    public interface IBaseRequire
+    public interface IBaseCondition
     {
         byte Level { get; }
     }

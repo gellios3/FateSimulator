@@ -1,8 +1,7 @@
 ﻿namespace Interfaces.Conditions
 {
-    public interface IBaseResult
+    public interface IBaseResult: IBaseCondition
     {
-        byte Level { get; }
         byte Percent { get; }
     }
 }

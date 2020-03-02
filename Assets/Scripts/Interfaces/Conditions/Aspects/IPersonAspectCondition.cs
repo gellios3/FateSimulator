@@ -2,7 +2,7 @@
 
 namespace Interfaces.Conditions.Aspects
 {
-    public interface IPersonAspectRequire : IAspectRequire
+    public interface IPersonAspectCondition : IAspectCondition
     {
         PersonType PersonType { get; }
     }

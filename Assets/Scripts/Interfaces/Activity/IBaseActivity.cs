@@ -13,8 +13,8 @@ namespace Interfaces.Activity
         string ShortDescription { get; }
         ActivityType ActivityType { get; }
         Sprite ActivityIcon { get; }
-        List<BaseRequireObj> RequiredList { get; }
-        List<BaseRequireObj> OptionalRequiresList { get; }
+        List<BaseConditionObj> RequiredList { get; }
+        List<BaseConditionObj> OptionalRequiresList { get; }
         List<BaseResultObj> ResultsList { get; } 
         List<BaseResultObj> OptionalResultsList { get; }
     }

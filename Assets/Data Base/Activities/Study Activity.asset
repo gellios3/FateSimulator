@@ -19,7 +19,7 @@ MonoBehaviour:
   activityIcon: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   requiredList:
   - {fileID: 11400000, guid: 3df1790a7b80c4041aa2f367aa277532, type: 2}
-  - {fileID: 11400000, guid: 2a240bfcaa3cdbc498e6e552917de0d3, type: 2}
+  - {fileID: 11400000, guid: 74470126658d4ae42b00f5dc1fa01de2, type: 2}
   - {fileID: 11400000, guid: aa797e432b9b45f4ca82f12db665a0d5, type: 2}
   - {fileID: 11400000, guid: cc9f053b23672224494eceb2a0be522f, type: 2}
   - {fileID: 11400000, guid: 783011e8884e6f34f811a059c702ed77, type: 2}

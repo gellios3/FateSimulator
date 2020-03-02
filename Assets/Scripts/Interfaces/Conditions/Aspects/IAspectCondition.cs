@@ -2,7 +2,7 @@
 
 namespace Interfaces.Conditions.Aspects
 {
-    public interface IAspectResult  : IBaseResult
+    public interface IAspectCondition : IBaseCondition
     {
         AspectType AspectType { get; }
     }

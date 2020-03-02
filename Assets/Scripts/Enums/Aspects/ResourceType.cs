@@ -3,8 +3,6 @@
     public enum ResourceType
     {
         Food,
-        Gold,
-        Silver,
-        Bronze
+        Money
     }
 }

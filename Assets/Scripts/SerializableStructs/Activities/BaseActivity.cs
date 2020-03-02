@@ -16,8 +16,8 @@ namespace SerializableStructs.Activities
         public string ShortDescription { get; }
         public ActivityType ActivityType { get; }
         public Sprite ActivityIcon { get; }
-        public List<BaseRequireObj> RequiredList { get; }
-        public List<BaseRequireObj> OptionalRequiresList { get; }
+        public List<BaseConditionObj> RequiredList { get; }
+        public List<BaseConditionObj> OptionalRequiresList { get; }
         public List<BaseResultObj> ResultsList { get; }
         
         public List<BaseResultObj> OptionalResultsList { get; }

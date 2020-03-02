@@ -46,15 +46,15 @@ namespace ScriptableObjects
         /// <summary>
         /// Required aspects or cards for start Activity
         /// </summary>
-        public List<BaseRequireObj> requiredList;
-        public List<BaseRequireObj> RequiredList => requiredList;
+        public List<BaseConditionObj> requiredList;
+        public List<BaseConditionObj> RequiredList => requiredList;
         
 
         /// <summary>
         /// Optional aspects or cards for start Activity
         /// </summary>
-        public List<BaseRequireObj> optionalRequiresList; 
-        public List<BaseRequireObj> OptionalRequiresList => optionalRequiresList;
+        public List<BaseConditionObj> optionalRequiresList; 
+        public List<BaseConditionObj> OptionalRequiresList => optionalRequiresList;
         
         /// <summary>
         /// Results aspects or cards on end activity
