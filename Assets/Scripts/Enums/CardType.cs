@@ -6,7 +6,6 @@
         Person,
         Resource,
         Equipment,
-        Companion,
         Information,
         Subject,
         Skill,

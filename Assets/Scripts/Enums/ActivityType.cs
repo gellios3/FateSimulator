@@ -3,7 +3,7 @@
     public enum ActivityType
     {
         Work,
-        Investigate,
+        Exploration,
         Learning,
         Quest,
         BattleClash,

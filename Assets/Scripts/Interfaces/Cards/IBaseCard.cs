@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Cards.Models;
 using Enums;
 using ScriptableObjects;
+using ScriptableObjects.Aspects;
 using UnityEngine;
 
 namespace Interfaces.Cards
@@ -14,12 +14,10 @@ namespace Interfaces.Cards
 
         string ShortDescription { get; }
 
-        CardCoordinate CardCoordinate { get; }
-
         CardType Type { get; }
 
         Sprite CardIcon { get; }
 
-        List<BaseAspectObj> CardAspects { get; }
+        List<BaseAspectObj> AspectsList { get; }
     }
 }

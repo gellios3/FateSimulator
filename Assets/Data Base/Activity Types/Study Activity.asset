@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eea1b9588bf28b84eb3123452d42328b, type: 3}
+  m_Name: Study Activity
+  m_EditorClassIdentifier: 
+  id: 1
+  activityName: Study Activity
+  shortDescription: Study Activity
+  activityType: 2
+  activityIcon: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  requiredList:
+  - {fileID: 11400000, guid: 7329284566b4c1742855b78c4562eb58, type: 2}
+  - {fileID: 11400000, guid: 74470126658d4ae42b00f5dc1fa01de2, type: 2}
+  - {fileID: 11400000, guid: aa797e432b9b45f4ca82f12db665a0d5, type: 2}
+  - {fileID: 11400000, guid: cc9f053b23672224494eceb2a0be522f, type: 2}
+  - {fileID: 11400000, guid: 783011e8884e6f34f811a059c702ed77, type: 2}
+  optionalRequiresList: []
+  resultsList: []
+  optionalResultsList:
+  - {fileID: 11400000, guid: 5ceda41d56ccc71409b7bbaa870ecfe0, type: 2}
