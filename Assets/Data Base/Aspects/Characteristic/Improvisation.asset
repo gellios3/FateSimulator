@@ -15,5 +15,5 @@ MonoBehaviour:
   id: 3
   aspectName: Improvisation
   aspectImg: {fileID: 0}
-  aspectType: 1
+  aspectType: 0
   characteristicType: 2

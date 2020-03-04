@@ -15,6 +15,12 @@ namespace ScriptableObjects.Aspects
         /// </summary>
         public ResourceType resourceType;
         public ResourceType ResourceType => resourceType;
+       
+        /// <summary>
+        /// Money type
+        /// </summary>
+        public MoneyType moneyType;
+        public MoneyType MoneyType => moneyType;
         
         /// <summary>
         /// Resource Value

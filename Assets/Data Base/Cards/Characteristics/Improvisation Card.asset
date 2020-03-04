@@ -9,16 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea873575b6a34e0889c70fec7983c6e3, type: 3}
-  m_Name: Base Sword
+  m_Script: {fileID: 11500000, guid: 3615902913c44e728d0194d3f27854de, type: 3}
+  m_Name: Improvisation Card
   m_EditorClassIdentifier: 
-  id: 2
-  cardName: 
-  shortDescription: 
-  cardCoordinate:
-    terrainPos: {x: 0, y: 0}
-    globalPos: {x: 0, y: 0}
-  type: 3
+  id: 0
+  cardName: Improvisation Card
+  shortDescription: Improvisation Card
+  type: 0
   cardIcon: {fileID: 0}
-  cardAspects:
-  - {fileID: 11400000, guid: 6b1c179fc82ca8a4abfb5bf7c8449b6b, type: 2}
+  aspectsList: []
+  characteristicType: 2

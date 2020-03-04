@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ad071d1c20f423eb1e15b6d39895e0f, type: 3}
-  m_Name: Food
+  m_Script: {fileID: 11500000, guid: 3615902913c44e728d0194d3f27854de, type: 3}
+  m_Name: Health Card
   m_EditorClassIdentifier: 
-  id: 1
-  aspectName: Food
-  aspectImg: {fileID: 0}
-  aspectType: 2
-  resourceType: 0
-  moneyType: 0
-  resourceValue: 1
+  id: 0
+  cardName: Health Card
+  shortDescription: Health Card
+  type: 0
+  cardIcon: {fileID: 0}
+  aspectsList: []
+  characteristicType: 0

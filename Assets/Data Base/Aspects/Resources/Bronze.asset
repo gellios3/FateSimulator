@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Bronze
   m_EditorClassIdentifier: 
   id: 1
-  aspectName: Gold
+  aspectName: Bronze
   aspectImg: {fileID: 0}
   aspectType: 2
-  resourceType: 2
+  resourceType: 1
+  moneyType: 3
   resourceValue: 1

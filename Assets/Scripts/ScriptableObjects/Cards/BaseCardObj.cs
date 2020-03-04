@@ -9,7 +9,7 @@ namespace ScriptableObjects.Cards
     /// <summary>
     /// Base Card Obj
     /// </summary>
-    [CreateAssetMenu(fileName = "New Card Obj", menuName = "Create Card Obj", order = 0)]
+    [CreateAssetMenu(fileName = "New Card Obj", menuName = "Cards/Create Card Obj", order = 0)]
     public class BaseCardObj : ScriptableObject, IBaseCard
     {
         public ushort id;

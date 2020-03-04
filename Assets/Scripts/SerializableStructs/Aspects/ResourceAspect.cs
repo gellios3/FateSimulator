@@ -17,6 +17,7 @@ namespace SerializableStructs.Aspects
         public Sprite AspectImg { get; }
         public AspectType AspectType { get; }
         public ResourceType ResourceType { get; }
+        public MoneyType MoneyType { get; }
         public ushort ResourceValue { get; }
 
         public ResourceAspect(IResourceAspect aspect)
@@ -27,6 +28,7 @@ namespace SerializableStructs.Aspects
             AspectType = aspect.AspectType;
             ResourceType = aspect.ResourceType;
             ResourceValue = aspect.ResourceValue;
+            MoneyType = aspect.MoneyType;
         }
     }
 }

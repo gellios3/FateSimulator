@@ -1,11 +1,8 @@
 ﻿using Enums.Aspects;
 
-namespace Interfaces.Aspects
+namespace Interfaces.Cards
 {
-    /// <summary>
-    /// Interface for Resource Aspect
-    /// </summary>
-    public interface IResourceAspect : IBaseAspect
+    public interface IResource 
     {
         /// <summary>
         /// Resource type

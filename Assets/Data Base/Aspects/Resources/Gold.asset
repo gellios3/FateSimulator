@@ -17,4 +17,5 @@ MonoBehaviour:
   aspectImg: {fileID: 0}
   aspectType: 2
   resourceType: 1
+  moneyType: 1
   resourceValue: 1

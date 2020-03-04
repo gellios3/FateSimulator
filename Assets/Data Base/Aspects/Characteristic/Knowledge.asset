@@ -15,5 +15,5 @@ MonoBehaviour:
   id: 2
   aspectName: Knowledge
   aspectImg: {fileID: 0}
-  aspectType: 1
+  aspectType: 0
   characteristicType: 1

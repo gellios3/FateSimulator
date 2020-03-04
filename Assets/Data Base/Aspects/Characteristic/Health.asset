@@ -15,5 +15,5 @@ MonoBehaviour:
   id: 1
   aspectName: Heath
   aspectImg: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-  aspectType: 1
+  aspectType: 0
   characteristicType: 0
