@@ -1,4 +1,5 @@
 ﻿using Enums;
+using Enums.Activities;
 
 namespace Interfaces.Conditions.Cards
 {

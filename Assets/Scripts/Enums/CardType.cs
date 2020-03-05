@@ -6,9 +6,8 @@
         Person,
         Resource,
         Equipment,
-        Information,
         Subject,
         Skill,
-        Activity
+        Activity,
     }
 }

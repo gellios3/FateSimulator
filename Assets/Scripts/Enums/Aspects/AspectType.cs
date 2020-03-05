@@ -1,4 +1,4 @@
-﻿namespace Enums
+﻿namespace Enums.Aspects
 {
     public enum AspectType
     {
@@ -8,6 +8,7 @@
         Person,
         Equipment,
         Coordinates,
-        Lesson
+        Lesson,
+        Information
     }
 }

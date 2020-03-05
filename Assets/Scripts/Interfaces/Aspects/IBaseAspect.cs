@@ -1,4 +1,5 @@
 ﻿using Enums;
+using Enums.Aspects;
 using UnityEngine;
 
 namespace Interfaces.Aspects

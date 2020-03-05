@@ -1,4 +1,5 @@
 ﻿using Enums.Aspects;
+using Enums.Person;
 using Interfaces.Aspects;
 using UnityEngine;
 

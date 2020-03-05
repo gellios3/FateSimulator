@@ -1,4 +1,4 @@
-﻿namespace Enums.Aspects
+﻿namespace Enums.Person
 {
     public enum PersonType
     {

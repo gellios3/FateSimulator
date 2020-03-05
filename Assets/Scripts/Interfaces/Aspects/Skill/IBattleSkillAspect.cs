@@ -1,4 +1,5 @@
 ﻿using Enums.Aspects;
+using Enums.Skill;
 
 namespace Interfaces.Aspects.Skill
 {

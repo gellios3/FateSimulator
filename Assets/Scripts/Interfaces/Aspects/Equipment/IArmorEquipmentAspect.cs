@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Enums.Aspects.Equipment;
+using Enums.Equipment;
 using SerializableStructs.Aspects.Equipment;
 
 namespace Interfaces.Aspects.Equipment

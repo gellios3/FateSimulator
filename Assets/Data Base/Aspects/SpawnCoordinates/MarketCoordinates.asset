@@ -9,16 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f41d5535b28b4034af6ec927ee85ac44, type: 3}
-  m_Name: ProviantCardObj
+  m_Script: {fileID: 11500000, guid: c638af0f597e4291a8c3a49f349660ab, type: 3}
+  m_Name: MarketCoordinates
   m_EditorClassIdentifier: 
   id: 0
-  cardName: Proviant
-  shortDescription: ProviantCardObj
-  type: 0
-  cardIcon: {fileID: 0}
-  aspectsList: []
-  resourcesList:
-  - resourceType: 0
-    moneyType: 0
-    resourceValue: 10
+  aspectName: CoordinatesAspectObj
+  aspectImg: {fileID: 0}
+  aspectType: 5
+  coordinate:
+    terrainPos: {x: 1, y: 2}
+    globalPos: {x: 1, y: 1}

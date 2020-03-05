@@ -1,4 +1,5 @@
 ﻿using Enums.Aspects;
+using Enums.Person;
 using Interfaces.Cards;
 using UnityEngine;
 
@@ -9,5 +10,8 @@ namespace ScriptableObjects.Cards
     {
         public PersonType personType;
         public PersonType PersonType => personType;
+
+        public PersonStatus personStatus;
+        public PersonStatus PersonStatus => personStatus;
     }
 }

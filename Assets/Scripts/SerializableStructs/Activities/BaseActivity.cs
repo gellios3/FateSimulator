@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Enums;
+using Enums.Activities;
 using Interfaces.Activity;
 using ScriptableObjects.Conditions.Requires;
 using ScriptableObjects.Conditions.Results;

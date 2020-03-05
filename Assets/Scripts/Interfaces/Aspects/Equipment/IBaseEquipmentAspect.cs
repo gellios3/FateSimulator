@@ -1,4 +1,4 @@
-﻿using Enums.Aspects.Equipment;
+﻿using Enums.Equipment;
 
 namespace Interfaces.Aspects.Equipment
 {

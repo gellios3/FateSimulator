@@ -1,5 +1,5 @@
 ﻿using Enums.Aspects;
-using Enums.Aspects.Equipment;
+using Enums.Equipment;
 using Interfaces.Aspects.Equipment;
 using UnityEngine;
 

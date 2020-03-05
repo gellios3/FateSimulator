@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Enums;
+using Enums.Activities;
 using ScriptableObjects.Conditions.Requires;
 using ScriptableObjects.Conditions.Results;
 using UnityEngine;

@@ -1,4 +1,5 @@
 ﻿using Enums.Aspects;
+using Enums.Person;
 
 namespace Interfaces.Conditions.Cards
 {

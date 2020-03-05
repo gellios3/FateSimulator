@@ -1,4 +1,5 @@
 ﻿using Enums;
+using Enums.Aspects;
 
 namespace Interfaces.Conditions.Aspects
 {

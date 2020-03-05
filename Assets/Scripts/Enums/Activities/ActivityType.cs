@@ -1,4 +1,4 @@
-﻿namespace Enums
+﻿namespace Enums.Activities
 {
     public enum ActivityType
     {

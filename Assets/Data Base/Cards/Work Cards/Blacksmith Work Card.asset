@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d30053bf69b84ac380de16672d0f1256, type: 3}
+  m_Name: Blacksmith Work Card
+  m_EditorClassIdentifier: 
+  id: 0
+  cardName: Blacksmith Work Card
+  shortDescription: Blacksmith Work Card Description
+  type: 0
+  cardIcon: {fileID: 0}
+  aspectsList:
+  - {fileID: 11400000, guid: df6b137448c8ff840a2565753e6746da, type: 2}
+  - {fileID: 11400000, guid: e251d724cca607e43b0d5ee8377fb4be, type: 2}
+  workType: 2
+  requireSkill: {fileID: 11400000, guid: 904eb6eaa6f4ee2459d201742c8d54dd, type: 2}
