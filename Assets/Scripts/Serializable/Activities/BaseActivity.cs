@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using Enums;
 using Enums.Activities;
 using Interfaces.Activity;
 using ScriptableObjects.Conditions.Requires;
 using ScriptableObjects.Conditions.Results;
 using UnityEngine;
 
-namespace SerializableStructs.Activities
+namespace Serializable.Activities
 {
     [Serializable]
-    public struct BaseActivity : IBaseActivity
+    public class BaseActivity : IBaseActivity
     {
         public ushort Id { get; }
         public string ActivityName { get; }

@@ -3,7 +3,7 @@ using Enums.Person;
 
 namespace Interfaces.Cards
 {
-    public interface IPersonCard
+    public interface IPersonCard : IBaseCard
     {
         PersonType PersonType { get; }
         

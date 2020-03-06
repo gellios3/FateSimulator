@@ -17,7 +17,9 @@ MonoBehaviour:
   shortDescription: QuestCard
   type: 6
   cardIcon: {fileID: 0}
-  aspectsList:
-  - {fileID: 11400000, guid: e251d724cca607e43b0d5ee8377fb4be, type: 2}
+  aspectsList: []
   activityType: 3
   fromPerson: {fileID: 11400000, guid: c5fff250fe1de314a88e33205f7c7069, type: 2}
+  questCoordinate:
+    terrainPos: {x: 0, y: 0}
+    globalPos: {x: 0, y: 0}

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Enums.Aspects;
 using Interfaces.Conditions.Aspects;
-using SerializableStructs.Conditions;
+using Serializable.Conditions;
 using UnityEngine;
 
 namespace ScriptableObjects.Conditions.Results

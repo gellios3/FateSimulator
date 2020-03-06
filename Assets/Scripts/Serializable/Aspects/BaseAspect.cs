@@ -1,34 +1,27 @@
 ﻿using System;
-using Enums;
 using Enums.Aspects;
 using Interfaces.Aspects;
 using UnityEngine;
 
-namespace SerializableStructs.Aspects
+namespace Serializable.Aspects
 {
     /// <summary>
-    /// Resource Aspect - Serializable struct
+    /// Base aspect
     /// </summary>
     [Serializable]
-    public struct ResourceAspect : IResourceAspect
+    public class BaseAspect : IBaseAspect
     {
         public ushort Id { get; }
         public string AspectName { get; }
         public Sprite AspectImg { get; }
         public AspectType AspectType { get; }
-        public ResourceType ResourceType { get; }
-        public MoneyType MoneyType { get; }
-        public ushort ResourceValue { get; }
 
-        public ResourceAspect(IResourceAspect aspect)
+        public BaseAspect(IBaseAspect aspect)
         {
             Id = aspect.Id;
             AspectName = aspect.AspectName;
             AspectImg = aspect.AspectImg;
             AspectType = aspect.AspectType;
-            ResourceType = aspect.ResourceType;
-            ResourceValue = aspect.ResourceValue;
-            MoneyType = aspect.MoneyType;
         }
     }
 }

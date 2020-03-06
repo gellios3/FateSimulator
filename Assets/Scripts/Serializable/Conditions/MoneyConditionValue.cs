@@ -2,7 +2,7 @@
 using Enums.Aspects;
 using Interfaces.Conditions.Aspects;
 
-namespace SerializableStructs.Conditions
+namespace Serializable.Conditions
 {
     /// <summary>
     /// Money condition value

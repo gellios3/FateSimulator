@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Enums.Aspects;
-using SerializableStructs.Conditions;
+using Serializable.Conditions;
 
 namespace Interfaces.Conditions.Aspects
 {

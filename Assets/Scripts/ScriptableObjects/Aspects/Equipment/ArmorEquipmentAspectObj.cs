@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Enums.Equipment;
 using Interfaces.Aspects.Equipment;
-using SerializableStructs.Aspects.Equipment;
+using Serializable.Aspects.Equipment;
 using UnityEngine;
 
 namespace ScriptableObjects.Aspects.Equipment

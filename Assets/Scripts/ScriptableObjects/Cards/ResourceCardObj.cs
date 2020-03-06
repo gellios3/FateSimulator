@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Interfaces.Cards;
-using SerializableStructs;
+using Serializable;
 using UnityEngine;
 
 namespace ScriptableObjects.Cards

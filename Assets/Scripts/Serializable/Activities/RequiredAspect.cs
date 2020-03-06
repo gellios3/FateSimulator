@@ -1,8 +1,7 @@
 ﻿using System;
-using Enums;
 using Enums.Aspects;
 
-namespace SerializableStructs.Activities
+namespace Serializable.Activities
 {
     [Serializable]
     public struct RequiredAspect

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Enums.Equipment;
-using SerializableStructs.Aspects.Equipment;
+using Serializable.Aspects.Equipment;
 
 namespace Interfaces.Aspects.Equipment
 {

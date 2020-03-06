@@ -1,7 +1,7 @@
 ﻿using System;
 using Enums.Aspects;
 
-namespace SerializableStructs.Aspects.Equipment
+namespace Serializable.Aspects.Equipment
 {
     [Serializable]
     public struct CharacteristicPair

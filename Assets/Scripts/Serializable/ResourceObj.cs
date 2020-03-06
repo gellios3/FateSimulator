@@ -2,7 +2,7 @@
 using Enums.Aspects;
 using Interfaces.Cards;
 
-namespace SerializableStructs
+namespace Serializable
 {
     [Serializable]
     public struct ResourceObj: IResource
