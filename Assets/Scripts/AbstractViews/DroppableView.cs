@@ -24,7 +24,10 @@ namespace AbstractViews
                 return;
             var cardView = eventData.pointerDrag.GetComponent<CardView>();
             if (cardView != null)
+            {
+                Debug.LogError($"OnDrop {cardView.CardData}");
                 OnCardDrop?.Invoke(cardView.CardData);
+            }
         }
 
         /// <inheritdoc />
@@ -36,7 +39,7 @@ namespace AbstractViews
         {
             if (eventData.pointerDrag == null)
                 return;
-//            Debug.LogError($"OnPointerEnter {eventData.pointerDrag}");   
+            // Debug.LogError($"OnPointerEnter {eventData.pointerDrag}");   
         }
 
         /// <inheritdoc />
@@ -48,7 +51,7 @@ namespace AbstractViews
         {
             if (eventData.pointerDrag == null)
                 return;
-//            Debug.LogError($"OnPointerExit {eventData.pointerDrag}");
+            // Debug.LogError($"OnPointerExit {eventData.pointerDrag}");
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Cards.Models
+namespace Serializable.Cards
 {
     [Serializable]
     public struct CardCoordinate

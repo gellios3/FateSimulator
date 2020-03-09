@@ -1,5 +1,6 @@
 ﻿using Cards.Models;
 using Interfaces.Cards;
+using Serializable.Cards;
 using UnityEngine;
 
 namespace ScriptableObjects.Cards

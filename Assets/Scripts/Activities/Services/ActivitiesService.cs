@@ -7,7 +7,7 @@ namespace Activities.Services
 
         public void ShowPopup()
         {
-            Debug.Log("Show popup");
+            Debug.LogError("Show popup");
         }
     }
 }
