@@ -9,6 +9,8 @@ namespace AbstractViews
 
         public bool CanDroppable { get; } = true;
 
+        [SerializeField] private GameObject topCard;
+
         /// <inheritdoc />
         /// <summary>
         /// On begin drag
@@ -20,6 +22,7 @@ namespace AbstractViews
                 return;
 
             HasDraggable = true;
+            topCard.SetActive(true);
         }
 
         /// <inheritdoc />
@@ -29,13 +32,11 @@ namespace AbstractViews
         /// <param name="eventData"></param>
         public void OnDrag(PointerEventData eventData)
         {
-            if (!CanDraggable)
-                return;
-
-            if (Camera.main == null)
+            if (!CanDraggable || Camera.main == null)
                 return;
             var pos = GetWorldPositionOnPlane(eventData.position, -1);
             transform.position = pos;
+            topCard.transform.position = pos;
         }
 
         /// <summary>
@@ -44,7 +45,7 @@ namespace AbstractViews
         /// <param name="screenPosition"></param>
         /// <param name="z"></param>
         /// <returns></returns>
-        public Vector3 GetWorldPositionOnPlane(Vector3 screenPosition, float z)
+        private static Vector3 GetWorldPositionOnPlane(Vector3 screenPosition, float z)
         {
             if (Camera.main == null)
                 return Vector3.zero;
@@ -69,6 +70,8 @@ namespace AbstractViews
             var position = transform.position;
             position.y = 3;
             transform.position = position;
+            topCard.transform.position = position;
+            // topCard.SetActive(false);
         }
     }
 }

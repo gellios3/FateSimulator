@@ -9,5 +9,7 @@ namespace Cards.Views
         [SerializeField] private BaseCardObj sourceCard;
         
         public CardData CardData { get; private set; }
+        
+        
     }
 }

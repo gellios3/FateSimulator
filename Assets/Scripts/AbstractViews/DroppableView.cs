@@ -3,6 +3,7 @@ using Cards.Models;
 using Cards.Views;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI.ProceduralImage;
 
 namespace AbstractViews
 {
@@ -13,6 +14,11 @@ namespace AbstractViews
         /// </summary>
         public event Action<CardData> OnCardDrop;
 
+        [SerializeField] private ProceduralImage borderImg;
+
+        // public event Action<GameObject> OnCardEnter;
+        // public event Action<GameObject> OnCardExit;
+
         /// <inheritdoc />
         /// <summary>
         /// On drop 
@@ -22,11 +28,12 @@ namespace AbstractViews
         {
             if (eventData.pointerDrag == null)
                 return;
-            var cardView = eventData.pointerDrag.GetComponent<CardView>();
+            var cardView = eventData.pointerDrag.GetComponent<DraggableView>();
             if (cardView != null)
             {
-                Debug.LogError($"OnDrop {cardView.CardData}");
-                OnCardDrop?.Invoke(cardView.CardData);
+                Debug.LogError($"OnDrop ");
+                cardView.transform.position = transform.position;
+                OnCardDrop?.Invoke(null);
             }
         }
 
@@ -39,6 +46,9 @@ namespace AbstractViews
         {
             if (eventData.pointerDrag == null)
                 return;
+            borderImg.color = Color.black;
+          
+
             // Debug.LogError($"OnPointerEnter {eventData.pointerDrag}");   
         }
 
@@ -51,7 +61,13 @@ namespace AbstractViews
         {
             if (eventData.pointerDrag == null)
                 return;
-            // Debug.LogError($"OnPointerExit {eventData.pointerDrag}");
+            borderImg.color = Color.white;
+            var cardView = eventData.pointerDrag.GetComponent<DraggableView>();
+            if (cardView != null)
+            {
+                // cardView.CanDraggable = true;
+                // Debug.LogError($"OnPointerExit {eventData.pointerDrag}");
+            }
         }
     }
 }
