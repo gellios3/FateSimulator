@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using Cards.Views;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace AbstractViews
@@ -10,6 +12,11 @@ namespace AbstractViews
         public bool CanDroppable { get; } = true;
 
         [SerializeField] private GameObject topCard;
+
+        private void Start()
+        {
+            topCard.transform.position = transform.position;
+        }
 
         /// <inheritdoc />
         /// <summary>
@@ -23,6 +30,10 @@ namespace AbstractViews
 
             HasDraggable = true;
             topCard.SetActive(true);
+            
+            var cardView = topCard.GetComponent<CardView>();
+            if (cardView != null)
+                cardView.OnDragCard();
         }
 
         /// <inheritdoc />
@@ -71,7 +82,20 @@ namespace AbstractViews
             position.y = 3;
             transform.position = position;
             topCard.transform.position = position;
-            // topCard.SetActive(false);
+            
+            var cardView = topCard.GetComponent<CardView>();
+            if (cardView != null)
+                cardView.OnEndDrag();
+        }
+
+        /// <summary>
+        /// On drop card
+        /// </summary>
+        public void OnDropCard()
+        {
+            var cardView = topCard.GetComponent<CardView>();
+            if (cardView != null)
+                cardView.OnDropDrag();
         }
     }
 }

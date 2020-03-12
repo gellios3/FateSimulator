@@ -34,6 +34,7 @@ namespace AbstractViews
                 Debug.LogError($"OnDrop ");
                 cardView.transform.position = transform.position;
                 OnCardDrop?.Invoke(null);
+                cardView.OnDropCard();
             }
         }
 
