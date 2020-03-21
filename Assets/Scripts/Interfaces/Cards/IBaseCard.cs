@@ -9,6 +9,8 @@ namespace Interfaces.Cards
     public interface IBaseCard
     {
         ushort Id { get; }
+        
+        Vector2 PosOnTable { get; }
 
         string CardName { get; }
 

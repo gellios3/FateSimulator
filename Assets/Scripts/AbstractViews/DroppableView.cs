@@ -16,9 +16,6 @@ namespace AbstractViews
 
         [SerializeField] private ProceduralImage borderImg;
 
-        // public event Action<GameObject> OnCardEnter;
-        // public event Action<GameObject> OnCardExit;
-
         /// <inheritdoc />
         /// <summary>
         /// On drop 
@@ -28,13 +25,13 @@ namespace AbstractViews
         {
             if (eventData.pointerDrag == null)
                 return;
-            var cardView = eventData.pointerDrag.GetComponent<DraggableView>();
-            if (cardView != null)
+            var draggableView = eventData.pointerDrag.GetComponent<DraggableView>();
+            if (draggableView != null)
             {
-                Debug.LogError($"OnDrop ");
-                cardView.transform.position = transform.position;
+                Debug.LogError("On Drop event !!! ");
+                draggableView.transform.position = transform.position;
                 OnCardDrop?.Invoke(null);
-                cardView.OnDropCard();
+                draggableView.OnDropCard();
             }
         }
 

@@ -12,18 +12,38 @@ namespace ScriptableObjects.Cards
     [CreateAssetMenu(fileName = "New Card Obj", menuName = "Cards/Create Card Obj", order = 0)]
     public class BaseCardObj : ScriptableObject, IBaseCard
     {
+        /// <summary>
+        /// Card Id
+        /// </summary>
         public ushort id;
         public ushort Id => id;
-        
+
+        public Vector2 posOnTable;
+        public Vector2 PosOnTable => posOnTable;
+
+        /// <summary>
+        /// Card name
+        /// </summary>
         public string cardName;
         public string CardName => cardName;
         
+        /// <summary>
+        /// Short Description
+        /// </summary>
         public string shortDescription;
         public string ShortDescription => shortDescription;
 
+        /// <summary>
+        /// Card type
+        /// </summary>
         public CardType type;
         public CardType Type => type;
+
+        public Color backgroundColor;
         
+        /// <summary>
+        /// Card icon
+        /// </summary>
         public Sprite cardIcon;
         public Sprite CardIcon => cardIcon;
         

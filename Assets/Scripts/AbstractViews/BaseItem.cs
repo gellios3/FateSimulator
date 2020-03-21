@@ -4,6 +4,6 @@ namespace AbstractViews
 {
     public abstract class BaseItem : MonoBehaviour
     {
-        protected bool HasDraggable;
+        // protected bool HasDraggable;
     }
 }

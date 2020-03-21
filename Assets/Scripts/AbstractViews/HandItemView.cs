@@ -91,8 +91,8 @@ namespace AbstractViews
         /// </summary>
         protected void ZoomOutAnimation()
         {
-            if (HasDraggable)
-                return;
+            // if (HasDraggable)
+            //     return;
         }
 
        
