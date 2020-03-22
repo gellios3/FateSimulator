@@ -268,6 +268,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Card (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8508281432158114590, guid: 35c5b406ccbc84d53929b965a436fef4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9142551062984918635, guid: 35c5b406ccbc84d53929b965a436fef4,
         type: 3}
       propertyPath: m_IsActive
@@ -528,6 +533,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Card View
+      objectReference: {fileID: 0}
+    - target: {fileID: 7270637377167215922, guid: c3470259095833b4ca1e6d37750fc44e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7905539812644350092, guid: c3470259095833b4ca1e6d37750fc44e,
         type: 3}
@@ -1071,6 +1081,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Card
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508281432158114590, guid: 35c5b406ccbc84d53929b965a436fef4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9142551062984918635, guid: 35c5b406ccbc84d53929b965a436fef4,
         type: 3}
@@ -4098,6 +4113,7 @@ GameObject:
   - component: {fileID: 749814638}
   - component: {fileID: 749814637}
   - component: {fileID: 749814636}
+  - component: {fileID: 749814640}
   m_Layer: 5
   m_Name: Gragable Card Canvas
   m_TagString: Untagged
@@ -4187,6 +4203,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -0}
   m_SizeDelta: {x: 2150, y: 1136.2}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &749814640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749814635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8febd59e2c7742558a632cb7c5a0e170, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardPrefab: {fileID: 8508281432158114590, guid: 35c5b406ccbc84d53929b965a436fef4,
+    type: 3}
+  cardViewPrefab: {fileID: 7270637377167215922, guid: c3470259095833b4ca1e6d37750fc44e,
+    type: 3}
+  cardViewParent: {fileID: 1529122950}
 --- !u!1001 &751912635
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4380,6 +4413,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Card View (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7270637377167215922, guid: c3470259095833b4ca1e6d37750fc44e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7470884459913494840, guid: c3470259095833b4ca1e6d37750fc44e,
         type: 3}
@@ -5113,6 +5151,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Card (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508281432158114590, guid: 35c5b406ccbc84d53929b965a436fef4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9142551062984918635, guid: 35c5b406ccbc84d53929b965a436fef4,
         type: 3}
@@ -7168,9 +7211,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89715ad69b973a14899afa2c6730b30b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scriptableObjectInstallers: []
+  _scriptableObjectInstallers:
+  - {fileID: 11400000, guid: d5b3fd504e856a74587577771c5f69d1, type: 2}
   _monoInstallers:
   - {fileID: 1080292746}
+  - {fileID: 749814640}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -10824,6 +10869,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Card View (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7270637377167215922, guid: c3470259095833b4ca1e6d37750fc44e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7470884459913494840, guid: c3470259095833b4ca1e6d37750fc44e,
         type: 3}

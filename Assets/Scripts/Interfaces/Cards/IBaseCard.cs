@@ -9,8 +9,12 @@ namespace Interfaces.Cards
     public interface IBaseCard
     {
         ushort Id { get; }
+
+        byte Level { get; }
         
         Vector2 PosOnTable { get; }
+        
+        Color BackgroundColor { get; }
 
         string CardName { get; }
 

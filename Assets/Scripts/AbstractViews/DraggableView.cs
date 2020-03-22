@@ -16,13 +16,14 @@ namespace AbstractViews
 
         public Vector3 startTempPosition;
 
-        public GameObject TopCard => topCard;
+        public CardView TopCard { get; set; }
 
-        [SerializeField] private GameObject topCard;
+        // [SerializeField] private GameObject topCard;
 
-        private void Start()
+        public void SetCardView(CardView topCard)
         {
-            topCard.transform.position = transform.position;
+            TopCard = topCard;
+            TopCard.transform.position = transform.position;
         }
 
         /// <inheritdoc />
@@ -38,9 +39,9 @@ namespace AbstractViews
             HasDrop = false;
             // HasDraggable = true;
 
-            topCard.SetActive(true);
+            TopCard.gameObject.SetActive(true);
             startTempPosition = transform.position;
-            var cardView = topCard.GetComponent<CardView>();
+            var cardView = TopCard.GetComponent<CardView>();
             if (cardView != null)
                 cardView.OnStartDragCard();
         }
@@ -56,7 +57,7 @@ namespace AbstractViews
                 return;
             var pos = GetWorldPositionOnPlane(eventData.position, -1);
             transform.position = pos;
-            topCard.transform.position = pos;
+            TopCard.transform.position = pos;
         }
 
         /// <summary>
@@ -90,12 +91,12 @@ namespace AbstractViews
                 ReturnBack();
                 return;
             }
-            
+
             HasSetInInventory = false;
 
             if (!CanDraggable)
                 return;
-            
+
             CallEndDrag();
         }
 
@@ -103,8 +104,8 @@ namespace AbstractViews
         {
             HasOutArea = false;
             transform.position = startTempPosition;
-            topCard.transform.position = startTempPosition;
-            var cardView = topCard.GetComponent<CardView>();
+            TopCard.transform.position = startTempPosition;
+            var cardView = TopCard.GetComponent<CardView>();
             if (cardView != null)
             {
                 if (HasSetInInventory)
@@ -116,7 +117,7 @@ namespace AbstractViews
 
         public void CallEndDrag()
         {
-            var cardView = topCard.GetComponent<CardView>();
+            var cardView = TopCard.GetComponent<CardView>();
             if (!HasOutArea)
                 CanDraggable = true;
             if (cardView != null)
@@ -130,12 +131,12 @@ namespace AbstractViews
         /// </summary>
         public void OnDropCard()
         {
-            var cardView = topCard.GetComponent<CardView>();
+            var cardView = TopCard.GetComponent<CardView>();
             if (cardView != null)
             {
                 HasDrop = true;
                 HasSetInInventory = true;
-                topCard.transform.position = transform.position;
+                TopCard.transform.position = transform.position;
                 cardView.OnDropDrag();
             }
         }

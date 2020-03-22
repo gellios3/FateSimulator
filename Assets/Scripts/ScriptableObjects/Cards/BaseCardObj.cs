@@ -18,6 +18,9 @@ namespace ScriptableObjects.Cards
         public ushort id;
         public ushort Id => id;
 
+        /// <summary>
+        /// Position on table
+        /// </summary>
         public Vector2 posOnTable;
         public Vector2 PosOnTable => posOnTable;
 
@@ -39,7 +42,17 @@ namespace ScriptableObjects.Cards
         public CardType type;
         public CardType Type => type;
 
+        /// <summary>
+        /// Card level
+        /// </summary>
+        public byte level;
+        public byte Level => level;
+        
+        /// <summary>
+        /// Background color
+        /// </summary>
         public Color backgroundColor;
+        public Color BackgroundColor => backgroundColor;
         
         /// <summary>
         /// Card icon
@@ -47,6 +60,9 @@ namespace ScriptableObjects.Cards
         public Sprite cardIcon;
         public Sprite CardIcon => cardIcon;
         
+        /// <summary>
+        /// List of spects
+        /// </summary>
         public List<BaseAspectObj> aspectsList;
         public List<BaseAspectObj> AspectsList => aspectsList;
     }

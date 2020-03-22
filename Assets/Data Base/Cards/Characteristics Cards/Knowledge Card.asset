@@ -17,8 +17,10 @@ MonoBehaviour:
   cardName: Knowledge Card
   shortDescription: Knowledge Card
   type: 0
+  level: 0
   backgroundColor: {r: 0.2783019, g: 0.79023385, b: 1, a: 1}
   cardIcon: {fileID: 21300000, guid: 565d04f6d77598a4c921517814adb74a, type: 3}
   aspectsList:
   - {fileID: 11400000, guid: 6ab0f85854b05144e8b21fb02663ef4c, type: 2}
+  - {fileID: 11400000, guid: 242d8420be4522a44aa08e2d6811235f, type: 2}
   characteristicType: 1

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 581388904628739094}
   - component: {fileID: 3016927846998550675}
   m_Layer: 5
-  m_Name: Card
+  m_Name: Dragable Card
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36,8 +36,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -248, y: 284}
-  m_SizeDelta: {x: 55, y: 100}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 60, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6832804279343925613
 CanvasRenderer:
@@ -59,6 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24fe10fe038e4af6ab63f3524902cada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startTempPosition: {x: 0, y: 0, z: 0}
   topCard: {fileID: 0}
 --- !u!114 &581388904628739094
 MonoBehaviour:
