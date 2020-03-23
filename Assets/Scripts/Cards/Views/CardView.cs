@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿using Interfaces.Cards;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UI.ProceduralImage;
 
 namespace Cards.Views
 {
@@ -9,11 +13,25 @@ namespace Cards.Views
         [SerializeField] private Vector3 defaultMask;
         [SerializeField] private Vector3 dragMask;
 
+        [SerializeField] private Image iconImg;
+        [SerializeField] private ProceduralImage backgroundImg;
+        [SerializeField] private TextMeshProUGUI title;
+
         private Vector2 defaultSizeDelta;
+
+        private IBaseCard CardObj { get; set; }
 
         private void Start()
         {
             defaultSizeDelta = mask.sizeDelta;
+        }
+
+        public void SetCardView(IBaseCard cardObj)
+        {
+            CardObj = cardObj;
+            iconImg.sprite = cardObj.CardIcon;
+            backgroundImg.color = cardObj.BackgroundColor;
+            title.text = cardObj.CardName;
         }
 
         public void OnStartDragCard()

@@ -187,7 +187,7 @@ MonoBehaviour:
   m_fontSizeMin: 8
   m_fontSizeMax: 18
   m_fontStyle: 1
-  m_textAlignment: 513
+  m_textAlignment: 514
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -648,10 +648,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9060ad206ed4332a7cd088c1d795a52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sourceCard: {fileID: 0}
   mask: {fileID: 5984645855160819822}
   defaultMask: {x: 2.5, y: -2, z: 0}
   dragMask: {x: 7, y: -6, z: 0}
+  iconImg: {fileID: 7905539812644350092}
+  backgroundImg: {fileID: 7470884459913494840}
+  title: {fileID: 3242163799179741985}
 --- !u!1 &7788376385360943175
 GameObject:
   m_ObjectHideFlags: 0

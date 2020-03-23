@@ -1,5 +1,7 @@
 ﻿using System;
 using Cards.Views;
+using Interfaces.Cards;
+using ScriptableObjects.Cards;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -12,18 +14,19 @@ namespace AbstractViews
         private bool HasDrop { get; set; }
         public bool HasOutArea { get; set; }
 
-        public bool HasSetInInventory { get; set; }
+        private bool HasSetInInventory { get; set; }
 
         public Vector3 startTempPosition;
 
-        public CardView TopCard { get; set; }
+        private CardView TopCard { get; set; }
 
         // [SerializeField] private GameObject topCard;
 
-        public void SetCardView(CardView topCard)
+        public void SetCardView(CardView topCard, IBaseCard cardObj)
         {
             TopCard = topCard;
             TopCard.transform.position = transform.position;
+            TopCard.SetCardView(cardObj);
         }
 
         /// <inheritdoc />

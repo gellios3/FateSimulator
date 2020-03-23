@@ -30,7 +30,7 @@ namespace Cards.Installers
                 cardGameObject.transform.localPosition = new Vector3(cardObj.PosOnTable.x, cardObj.PosOnTable.y, -3);
                 var draggableCard = cardGameObject.GetComponent<DraggableView>();
                 var topCardObject = Instantiate(cardViewPrefab, cardViewParent);
-                draggableCard.SetCardView(topCardObject.GetComponent<CardView>());
+                draggableCard.SetCardView(topCardObject.GetComponent<CardView>(), cardObj);
             }
         }
     }
