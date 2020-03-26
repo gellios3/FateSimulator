@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Activities.Installers;
 using Interfaces;
 using ScriptableObjects.Cards;
 using UnityEngine;

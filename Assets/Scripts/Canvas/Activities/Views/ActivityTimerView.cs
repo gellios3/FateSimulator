@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI.ProceduralImage;
 
-namespace Activities.Views
+namespace Canvas.Activities.Views
 {
     public class ActivityTimerView : MonoBehaviour
     {

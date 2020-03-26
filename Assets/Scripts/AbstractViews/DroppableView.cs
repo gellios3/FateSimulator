@@ -1,6 +1,6 @@
 ﻿using System;
-using Cards.Models;
-using Cards.Views;
+using Canvas.Cards.Models;
+using Canvas.Cards.Views;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI.ProceduralImage;

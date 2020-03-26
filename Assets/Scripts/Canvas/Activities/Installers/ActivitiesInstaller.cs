@@ -1,10 +1,7 @@
-﻿using System.Collections.Generic;
-using Activities.Services;
-using ScriptableObjects.Cards;
-using UnityEngine;
+﻿using Canvas.Activities.Services;
 using Zenject;
 
-namespace Activities.Installers
+namespace Canvas.Activities.Installers
 {
     public class ActivitiesInstaller : MonoInstaller
     {

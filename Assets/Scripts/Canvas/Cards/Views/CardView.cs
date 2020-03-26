@@ -4,8 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UI.ProceduralImage;
 
-namespace Cards.Views
+namespace Canvas.Cards.Views
 {
+    /// <summary>
+    /// Card View
+    /// </summary>
     public class CardView : MonoBehaviour
     {
         [SerializeField] private RectTransform mask;
@@ -16,6 +19,8 @@ namespace Cards.Views
         [SerializeField] private Image iconImg;
         [SerializeField] private ProceduralImage backgroundImg;
         [SerializeField] private TextMeshProUGUI title;
+
+       
 
         private Vector2 defaultSizeDelta;
 

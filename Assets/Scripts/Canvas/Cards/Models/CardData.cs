@@ -1,4 +1,4 @@
-﻿namespace Cards.Models
+﻿namespace Canvas.Cards.Models
 {
     public class CardData
     {

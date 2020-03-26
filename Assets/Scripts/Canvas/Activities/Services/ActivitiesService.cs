@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Activities.Services
+namespace Canvas.Activities.Services
 {
     public class ActivitiesService
     {

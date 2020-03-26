@@ -1,5 +1,4 @@
-﻿using Cards.Models;
-using Interfaces.Aspects;
+﻿using Interfaces.Aspects;
 using Serializable.Cards;
 using UnityEngine;
 

@@ -1,29 +1,52 @@
-﻿using System;
-using Cards.Views;
+﻿using AbstractViews;
+using Canvas.Cards.Services;
+using Canvas.Popups.Signals;
 using Interfaces.Cards;
-using ScriptableObjects.Cards;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using Zenject;
 
-namespace AbstractViews
+namespace Canvas.Cards.Views
 {
-    public sealed class DraggableView : BaseItem, IBeginDragHandler, IDragHandler, IEndDragHandler
+    public class DraggableView : BaseItem, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         public bool CanDraggable { private get; set; } = true;
-
         private bool HasDrop { get; set; }
         public bool HasOutArea { get; set; }
-
         private bool HasSetInInventory { get; set; }
+        private bool HasStartDrag { get; set; }
 
         public Vector3 startTempPosition;
 
+        [SerializeField] private Button openPopupBtn;
+
         private CardView TopCard { get; set; }
 
-        // [SerializeField] private GameObject topCard;
+        // [Inject] public DraggableCardService DraggableCardService { get; }
+
+        // Note that we can't use a constructor anymore since we are a MonoBehaviour now
+        [Inject]
+        public void Construct(IBaseCard cardObj)
+        {
+            CardObj = cardObj;
+        }
+
+        private IBaseCard CardObj { get; set; }
+
+        private void Start()
+        {
+            openPopupBtn.onClick.AddListener(() =>
+            {
+                if (!HasStartDrag)
+                    Debug.LogError("Show popup");
+                // DraggableCardService.ShowPopup(CardObj);
+            });
+        }
 
         public void SetCardView(CardView topCard, IBaseCard cardObj)
         {
+            CardObj = cardObj;
             TopCard = topCard;
             TopCard.transform.position = transform.position;
             TopCard.SetCardView(cardObj);
@@ -40,7 +63,7 @@ namespace AbstractViews
                 return;
 
             HasDrop = false;
-            // HasDraggable = true;
+            HasStartDrag = true;
 
             TopCard.gameObject.SetActive(true);
             startTempPosition = transform.position;
@@ -86,6 +109,8 @@ namespace AbstractViews
         /// <param name="eventData"></param>
         public void OnEndDrag(PointerEventData eventData)
         {
+            HasStartDrag = false;
+
             if (HasDrop)
                 return;
 
@@ -142,6 +167,10 @@ namespace AbstractViews
                 TopCard.transform.position = transform.position;
                 cardView.OnDropDrag();
             }
+        }
+
+        public class Factory : PlaceholderFactory<IBaseCard, DraggableView>
+        {
         }
     }
 }

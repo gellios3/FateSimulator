@@ -1,9 +1,9 @@
 ﻿using AbstractViews;
-using Activities.Services;
+using Canvas.Activities.Services;
 using UnityEngine;
 using Zenject;
 
-namespace Activities.Views
+namespace Canvas.Activities.Views
 {
     public class ActivityView : MonoBehaviour
     {
