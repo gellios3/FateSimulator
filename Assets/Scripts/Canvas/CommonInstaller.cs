@@ -1,25 +1,23 @@
 ﻿using Canvas.Cards.Services;
-using Canvas.Cards.Views;
-using Canvas.Popups;
 using Canvas.Popups.Signals;
+using UnityEngine;
 using Zenject;
 
 namespace Canvas
 {
     public class CommonInstaller : MonoInstaller
     {
+        [SerializeField] private GameObject shortDescription;
+        
         public override void InstallBindings()
         {
             SignalBusInstaller.Install(Container);
 
             Container.DeclareSignal<ShowCardPopupSignal>();
 
-            // Container.BindInterfacesTo<DraggableCardService>().AsSingle();
-            
-            Container.Bind<CardShortDescriptionView>().AsSingle();
-            Container.BindSignal<ShowCardPopupSignal>().ToMethod<CardShortDescriptionView>(
-                x => x.ShowCardPopupSignal
-            ).FromResolve();
+            // Container.InstantiateComponent<CardShortDescriptionView>(shortDescription);
+
+            Container.Bind<DraggableCardService>().AsSingle();
         }
     }
 }

@@ -6,16 +6,20 @@ namespace Canvas.Popups
 {
     public class CardShortDescriptionView : MonoBehaviour
     {
-         readonly SignalBus _signalBus;
-
-         private void Start()
-         {
-             _signalBus.Subscribe<ShowCardPopupSignal>(ShowCardPopupSignal);
+        private SignalBus SignalBus { get; set; }
+         
+         [Inject]
+         public void Construct(SignalBus signalBus){
+             Debug.LogError("Construct");
+             SignalBus = signalBus;
+             SignalBus.Subscribe<ShowCardPopupSignal>(ShowCardPopupSignal);
          }
 
          public void ShowCardPopupSignal(ShowCardPopupSignal args)
          {
              Debug.LogError($"ShowCardPopupSignal {args.BaseCard.CardName}");
          }
+
+
     }
 }

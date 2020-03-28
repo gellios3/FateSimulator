@@ -22,8 +22,10 @@ namespace Canvas.Cards.Views
         [SerializeField] private Button openPopupBtn;
 
         private CardView TopCard { get; set; }
-        
+
         private IBaseCard CardObj { get; set; }
+
+        [Inject] public DraggableCardService DraggableCardService { get; }
 
         [Inject]
         public void Construct(IBaseCard cardObj)
@@ -36,8 +38,9 @@ namespace Canvas.Cards.Views
             openPopupBtn.onClick.AddListener(() =>
             {
                 if (!HasStartDrag)
-                    Debug.LogError("Show popup");
-                // DraggableCardService.ShowPopup(CardObj);
+                {
+                    DraggableCardService.ShowPopup(CardObj);
+                }
             });
         }
 
