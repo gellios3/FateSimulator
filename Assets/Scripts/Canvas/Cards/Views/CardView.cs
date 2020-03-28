@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UI.ProceduralImage;
+using Zenject;
 
 namespace Canvas.Cards.Views
 {
@@ -20,11 +21,15 @@ namespace Canvas.Cards.Views
         [SerializeField] private ProceduralImage backgroundImg;
         [SerializeField] private TextMeshProUGUI title;
 
-       
-
         private Vector2 defaultSizeDelta;
 
         private IBaseCard CardObj { get; set; }
+        
+        [Inject]
+        public void Construct(IBaseCard cardObj)
+        {
+            CardObj = cardObj;
+        }
 
         private void Start()
         {
@@ -56,6 +61,10 @@ namespace Canvas.Cards.Views
             Debug.LogError("OnDropDrag");
             mask.sizeDelta = new Vector2(50, 90);
             // mask.sizeDelta = GetComponent<RectTransform>().sizeDelta;
+        }
+        
+        public class Factory : PlaceholderFactory<IBaseCard, CardView>
+        {
         }
     }
 }

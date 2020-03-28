@@ -22,17 +22,14 @@ namespace Canvas.Cards.Views
         [SerializeField] private Button openPopupBtn;
 
         private CardView TopCard { get; set; }
+        
+        private IBaseCard CardObj { get; set; }
 
-        // [Inject] public DraggableCardService DraggableCardService { get; }
-
-        // Note that we can't use a constructor anymore since we are a MonoBehaviour now
         [Inject]
         public void Construct(IBaseCard cardObj)
         {
             CardObj = cardObj;
         }
-
-        private IBaseCard CardObj { get; set; }
 
         private void Start()
         {
@@ -143,7 +140,7 @@ namespace Canvas.Cards.Views
             }
         }
 
-        public void CallEndDrag()
+        private void CallEndDrag()
         {
             var cardView = TopCard.GetComponent<CardView>();
             if (!HasOutArea)

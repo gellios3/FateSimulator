@@ -1,6 +1,4 @@
-﻿using System;
-using Canvas.Popups.Signals;
-using Interfaces.Cards;
+﻿using Canvas.Popups.Signals;
 using UnityEngine;
 using Zenject;
 

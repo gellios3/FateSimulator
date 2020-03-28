@@ -1,8 +1,5 @@
-﻿using System.Collections.Generic;
-using AbstractViews;
-using Canvas.Cards.Views;
+﻿using Canvas.Cards.Views;
 using Interfaces.Cards;
-using ScriptableObjects.Cards;
 using UnityEngine;
 using Zenject;
 
@@ -20,12 +17,19 @@ namespace Canvas.Cards.Installers
             InstantiateCards();
         }
 
-        public void InstantiateCards()
+        private void InstantiateCards()
         {
-            Container.BindInterfacesTo<CardDraggableSpawner>().AsSingle();
+            Container.BindInstance(transform).AsTransient().WhenInjectedInto<CardDraggableSpawner>();
+            Container.BindInterfacesAndSelfTo<CardDraggableSpawner>().AsSingle();  
+            
+            Container.BindInstance(cardViewParent).AsTransient().WhenInjectedInto<CardViewSpawner>();
+            Container.Bind<CardViewSpawner>().AsSingle();
+            
             Container.Bind<DraggableView>().AsSingle();
-            Container.BindFactory<IBaseCard, DraggableView, DraggableView.Factory>()
-                .FromComponentInNewPrefab(cardPrefab);
+            Container.Bind<CardView>().AsSingle();
+            
+            Container.BindFactory<IBaseCard, DraggableView, DraggableView.Factory>().FromComponentInNewPrefab(cardPrefab);
+            Container.BindFactory<IBaseCard, CardView, CardView.Factory>().FromComponentInNewPrefab(cardViewPrefab);
         }
     }
 }
