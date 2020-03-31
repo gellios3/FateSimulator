@@ -1,4 +1,5 @@
-﻿using Canvas.Cards.Views;
+﻿using Canvas.Cards.Services;
+using Canvas.Cards.Views;
 using Interfaces.Cards;
 using UnityEngine;
 using Zenject;
@@ -14,6 +15,9 @@ namespace Canvas.Cards.Installers
 
         public override void InstallBindings()
         {
+            Container.Bind<DraggableCardService>().AsSingle();
+            Container.Bind<CardAppearanceService>().AsTransient();
+            
             InstantiateCards();
         }
 

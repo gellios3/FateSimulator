@@ -1,6 +1,5 @@
 ﻿using Canvas.Popups.Signals;
 using Interfaces.Cards;
-using UnityEngine;
 using Zenject;
 
 namespace Canvas.Cards.Services
@@ -9,8 +8,6 @@ namespace Canvas.Cards.Services
     {
         private SignalBus SignalBus { get; }
 
-        // public IBaseCard BaseCard { get; private set; }
-
         public DraggableCardService(SignalBus signalBus)
         {
             SignalBus = signalBus;
@@ -18,7 +15,6 @@ namespace Canvas.Cards.Services
 
         public void ShowPopup(IBaseCard baseCard)
         {
-            Debug.LogError("Show popup");
             SignalBus.Fire(new ShowCardPopupSignal {BaseCard = baseCard});
         }
         
