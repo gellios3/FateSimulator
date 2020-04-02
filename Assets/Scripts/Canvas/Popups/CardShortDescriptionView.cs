@@ -7,6 +7,9 @@ using Zenject;
 
 namespace Canvas.Popups
 {
+    /// <summary>
+    /// Card short description view
+    /// </summary>
     public class CardShortDescriptionView : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI titleTxt;
@@ -26,10 +29,14 @@ namespace Canvas.Popups
         {
             gameObject.SetActive(false);
             SignalBus = signalBus;
-            SignalBus.Subscribe<ShowCardPopupSignal>(ShowCardPopupSignal);
+            SignalBus.Subscribe<ShowCardPopupSignal>(ShowCardPopup);
         }
 
-        private void ShowCardPopupSignal(ShowCardPopupSignal args)
+        /// <summary>
+        /// Show card popup signal
+        /// </summary>
+        /// <param name="args"></param>
+        private void ShowCardPopup(ShowCardPopupSignal args)
         {
             gameObject.SetActive(true);
             var cardObj = args.BaseCard;
@@ -38,7 +45,6 @@ namespace Canvas.Popups
             iconImg.sprite = cardObj.CardIcon;
             iconBg.color = cardObj.BackgroundColor;
             aspectsBarView.SetAspectsBar(cardObj.AspectsList);
-            Debug.LogError($"ShowCardPopupSignal {args.BaseCard.CardName}");
         }
     }
 }

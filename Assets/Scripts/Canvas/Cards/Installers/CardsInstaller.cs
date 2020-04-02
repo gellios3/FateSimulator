@@ -1,5 +1,6 @@
 ﻿using Canvas.Cards.Services;
 using Canvas.Cards.Views;
+using Canvas.Popups.Servises;
 using Interfaces.Cards;
 using UnityEngine;
 using Zenject;

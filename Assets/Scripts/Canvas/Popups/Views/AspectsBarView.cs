@@ -19,7 +19,8 @@ namespace Canvas.Popups.Views
             
             foreach (var baseAspectObj in cardObjAspectsList)
             {
-                var aspectView = Instantiate(aspectPrefab, transform);
+                var aspectView = Instantiate(aspectPrefab, transform).GetComponent<AspectIconView>();
+                aspectView.SetAspect(baseAspectObj);
             }
         }
     }

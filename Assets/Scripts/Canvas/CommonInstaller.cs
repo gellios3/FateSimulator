@@ -1,4 +1,5 @@
-﻿using Canvas.Popups.Signals;
+﻿using Canvas.Popups.Servises;
+using Canvas.Popups.Signals;
 using Zenject;
 
 namespace Canvas
@@ -10,7 +11,10 @@ namespace Canvas
         {
             SignalBusInstaller.Install(Container);
 
-            Container.DeclareSignal<ShowCardPopupSignal>();
+            Container.DeclareSignal<ShowCardPopupSignal>(); 
+            Container.DeclareSignal<ShowAspectPopupSignal>();
+            
+            Container.Bind<ShowAspectService>().AsSingle();
         }
     }
 }
