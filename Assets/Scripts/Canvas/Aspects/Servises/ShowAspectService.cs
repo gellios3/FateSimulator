@@ -13,9 +13,9 @@ namespace Canvas.Aspects.Servises
             SignalBus = signalBus;
         }
 
-        public void ShowPopup(IBaseAspect baseCard)
+        public void ShowPopup(IBaseAspect baseAspect)
         {
-            SignalBus.Fire(new ShowAspectPopupSignal {BaseAspectObj = baseCard});
+            SignalBus.Fire(new ShowAspectPopupSignal {BaseAspectObj = baseAspect});
         }
     }
 }

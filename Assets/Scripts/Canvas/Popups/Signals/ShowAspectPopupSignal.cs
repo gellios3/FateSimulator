@@ -1,5 +1,4 @@
 ﻿using Interfaces.Aspects;
-using ScriptableObjects.Aspects;
 
 namespace Canvas.Popups.Signals
 {

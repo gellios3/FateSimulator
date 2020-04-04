@@ -13,6 +13,7 @@ namespace Serializable.Aspects
     {
         public ushort Id { get; }
         public string AspectName { get; }
+        public string AspectDescription { get; }
         public Sprite AspectImg { get; }
         public AspectType AspectType { get; }
 
@@ -22,6 +23,7 @@ namespace Serializable.Aspects
             AspectName = aspect.AspectName;
             AspectImg = aspect.AspectImg;
             AspectType = aspect.AspectType;
+            AspectDescription = aspect.AspectDescription;
         }
     }
 }
