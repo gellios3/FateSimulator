@@ -798,6 +798,7 @@ GameObject:
   - component: {fileID: 901787479}
   - component: {fileID: 4165021671177869790}
   - component: {fileID: 8482438347635390642}
+  - component: {fileID: 6371117690406609791}
   m_Layer: 5
   m_Name: ShortDescription
   m_TagString: Untagged
@@ -898,6 +899,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 12
+--- !u!114 &6371117690406609791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7217881750305555278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 8173297700084846677}
+  _installerPrefabs: []
+  _autoRun: 1
+  _kernel: {fileID: 0}
 --- !u!1 &7287403928624349936
 GameObject:
   m_ObjectHideFlags: 0
@@ -1065,6 +1084,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8703518426629780119}
   - component: {fileID: 4007354964444251673}
+  - component: {fileID: 8173297700084846677}
   - component: {fileID: 2591168330387959141}
   - component: {fileID: 630280594340769366}
   - component: {fileID: 5133934828906659400}
@@ -1103,6 +1123,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7827556936948801047}
   m_CullTransparentMesh: 0
+--- !u!114 &8173297700084846677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7827556936948801047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b90dc8a77354b8dbbcdf0c038e2b4ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aspectPrefab: {fileID: 5488217080769953605, guid: 73b6a9d2ae7ec6445aa2ea0aa1004ae8,
+    type: 3}
 --- !u!114 &2591168330387959141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1115,9 +1149,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19258d20b4234fbe89e0823d4f26e4fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aspectsList: []
-  aspectPrefab: {fileID: 5488217080769953605, guid: 73b6a9d2ae7ec6445aa2ea0aa1004ae8,
-    type: 3}
 --- !u!114 &630280594340769366
 MonoBehaviour:
   m_ObjectHideFlags: 0

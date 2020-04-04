@@ -1,9 +1,8 @@
 ﻿using Canvas.Popups.Signals;
 using Interfaces.Aspects;
-using Interfaces.Cards;
 using Zenject;
 
-namespace Canvas.Popups.Servises
+namespace Canvas.Aspects.Servises
 {
     public class ShowAspectService
     {

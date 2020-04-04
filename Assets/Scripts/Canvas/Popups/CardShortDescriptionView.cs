@@ -1,5 +1,8 @@
-﻿using Canvas.Popups.Signals;
-using Canvas.Popups.Views;
+﻿using System.Collections.Generic;
+using Canvas.Aspects.Installers;
+using Canvas.Aspects.Views;
+using Canvas.Popups.Signals;
+using Interfaces.Aspects;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -44,7 +47,7 @@ namespace Canvas.Popups
             descriptionTxt.text = cardObj.ShortDescription;
             iconImg.sprite = cardObj.CardIcon;
             iconBg.color = cardObj.BackgroundColor;
-            aspectsBarView.SetAspectsBar(cardObj.AspectsList);
+            aspectsBarView.SetAspectsBar(cardObj);
         }
     }
 }

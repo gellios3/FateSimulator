@@ -1,10 +1,10 @@
-﻿using Canvas.Popups.Servises;
+﻿using Canvas.Aspects.Servises;
 using Interfaces.Aspects;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace Canvas.Popups.Views
+namespace Canvas.Aspects.Views
 {
     public class AspectIconView : MonoBehaviour
     {
@@ -16,19 +16,25 @@ namespace Canvas.Popups.Views
 
         [Inject] private ShowAspectService ShowAspectService { get; }
 
-        private void Start()
+        [Inject]
+        public void Construct()
         {
-            showAspectPopup.onClick.AddListener(() =>
-            {
-                Debug.LogError($"showAspectPopup click!!");
-                ShowAspectService.ShowPopup(BaseAspectObj);
-            });
         }
 
         public void SetAspect(IBaseAspect baseAspectObj)
         {
             BaseAspectObj = baseAspectObj;
             aspectImg.sprite = baseAspectObj.AspectImg;
+            showAspectPopup.onClick.AddListener(() =>
+            {
+                Debug.LogError($"showAspectPopup click!!");
+                ShowAspectService.ShowPopup(BaseAspectObj);
+            });
+        }
+        
+
+        public class Factory : PlaceholderFactory<AspectIconView>
+        {
         }
     }
 }

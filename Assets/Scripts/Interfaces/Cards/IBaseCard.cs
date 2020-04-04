@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Enums;
+using Interfaces.Aspects;
 using ScriptableObjects;
 using ScriptableObjects.Aspects;
 using UnityEngine;
