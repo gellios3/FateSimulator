@@ -1,14 +1,11 @@
-﻿using System.Collections.Generic;
-using Canvas.Aspects.Installers;
-using Canvas.Aspects.Views;
+﻿using Canvas.Aspects.Views;
 using Canvas.Popups.Signals;
-using Interfaces.Aspects;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace Canvas.Popups
+namespace Canvas.Popups.Views
 {
     /// <summary>
     /// Card short description view

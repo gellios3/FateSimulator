@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace Canvas.Popups
+namespace Canvas.Popups.Views
 {
     public class AspectDescriptionPopupView : MonoBehaviour
     {
