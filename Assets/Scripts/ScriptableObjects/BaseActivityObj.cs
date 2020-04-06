@@ -45,6 +45,12 @@ namespace ScriptableObjects
         public Sprite ActivityIcon => activityIcon;
         
         /// <summary>
+        /// Start base condition 
+        /// </summary>
+        public BaseConditionObj startActivityCondition;
+        public BaseConditionObj StartActivityCondition => startActivityCondition;
+        
+        /// <summary>
         /// Required aspects or cards for start Activity
         /// </summary>
         public List<BaseConditionObj> requiredList;

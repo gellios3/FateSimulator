@@ -8,6 +8,8 @@ namespace Canvas.Activities.Views
     public class ActivityView : MonoBehaviour
     {
         [SerializeField] private DroppableView droppableView;
+
+        [SerializeField] private GameObject timer;
         
         [Inject] private ActivitiesService activitiesService;
 

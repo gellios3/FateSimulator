@@ -16,7 +16,9 @@ MonoBehaviour:
   activityName: Base Work
   shortDescription: Base Work
   activityType: 0
-  activityIcon: {fileID: 0}
+  activityIcon: {fileID: 21300000, guid: b9e5ae9d2165eda4a95766a9bfc26409, type: 3}
+  startActivityCondition: {fileID: 11400000, guid: 49d40230ba0573c47adfeb72f8058b53,
+    type: 2}
   requiredList:
   - {fileID: 11400000, guid: 49d40230ba0573c47adfeb72f8058b53, type: 2}
   - {fileID: 11400000, guid: cc9f053b23672224494eceb2a0be522f, type: 2}

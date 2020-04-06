@@ -16,23 +16,24 @@ namespace Serializable.Activities
         public string ShortDescription { get; }
         public ActivityType ActivityType { get; }
         public Sprite ActivityIcon { get; }
+        public BaseConditionObj StartActivityCondition { get; }
         public List<BaseConditionObj> RequiredList { get; }
         public List<BaseConditionObj> OptionalRequiresList { get; }
         public List<BaseResultObj> ResultsList { get; }
-        
         public List<BaseResultObj> OptionalResultsList { get; }
 
-        public BaseActivity(IBaseActivity aspect)
+        public BaseActivity(IBaseActivity baseActivity)
         {
-            Id = aspect.Id;
-            ActivityName = aspect.ActivityName;
-            ShortDescription = aspect.ShortDescription;
-            ActivityType = aspect.ActivityType;
-            ActivityIcon = aspect.ActivityIcon;
-            RequiredList = aspect.RequiredList;
-            OptionalRequiresList = aspect.OptionalRequiresList;
-            ResultsList = aspect.ResultsList;
-            OptionalResultsList = aspect.OptionalResultsList;
+            Id = baseActivity.Id;
+            ActivityName = baseActivity.ActivityName;
+            ShortDescription = baseActivity.ShortDescription;
+            ActivityType = baseActivity.ActivityType;
+            ActivityIcon = baseActivity.ActivityIcon;
+            StartActivityCondition = baseActivity.StartActivityCondition;
+            RequiredList = baseActivity.RequiredList;
+            OptionalRequiresList = baseActivity.OptionalRequiresList;
+            ResultsList = baseActivity.ResultsList;
+            OptionalResultsList = baseActivity.OptionalResultsList;
         }
     }
 }
