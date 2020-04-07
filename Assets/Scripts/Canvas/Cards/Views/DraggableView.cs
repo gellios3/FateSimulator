@@ -64,6 +64,8 @@ namespace Canvas.Cards.Views
 
             HasDrop = false;
             HasStartDrag = true;
+            
+            DraggableCardService.StartDragCard(CardObj);
 
             TopCard.gameObject.SetActive(true);
             startTempPosition = transform.position;
@@ -145,6 +147,7 @@ namespace Canvas.Cards.Views
 
         private void CallEndDrag()
         {
+            DraggableCardService.EndDragCard(CardObj);
             var cardView = TopCard.GetComponent<CardView>();
             if (!HasOutArea)
                 CanDraggable = true;

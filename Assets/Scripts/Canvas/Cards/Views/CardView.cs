@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Canvas.Cards.Services;
+using Canvas.Cards.Signals;
 using Enums;
 using Interfaces.Cards;
 using Serializable;
@@ -48,6 +49,7 @@ namespace Canvas.Cards.Views
             CardAppearanceService.Init(appearances);
         }
 
+        // @TODO complete logic for card active inactive status 
         public void SetExhaustionStatus()
         {
             var exhaustionAppear = CardAppearanceService.GetAppearance(CardStatus.Exhaustion);

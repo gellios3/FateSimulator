@@ -26,13 +26,12 @@ namespace AbstractViews
             if (eventData.pointerDrag == null)
                 return;
             var draggableView = eventData.pointerDrag.GetComponent<DraggableView>();
-            if (draggableView != null)
-            {
-                Debug.LogError("On Drop event !!! ");
-                draggableView.transform.position = transform.position;
-                OnCardDrop?.Invoke(null);
-                draggableView.OnDropCard();
-            }
+            if (draggableView == null) 
+                return;
+            Debug.LogError("On Drop event !!! ");
+            draggableView.transform.position = transform.position;
+            OnCardDrop?.Invoke(null);
+            draggableView.OnDropCard();
         }
 
         /// <inheritdoc />
@@ -45,8 +44,6 @@ namespace AbstractViews
             if (eventData.pointerDrag == null)
                 return;
             borderImg.color = Color.black;
-          
-
             // Debug.LogError($"OnPointerEnter {eventData.pointerDrag}");   
         }
 

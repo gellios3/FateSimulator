@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   droppableView: {fileID: 3163646952858835419}
+  borderImg: {fileID: 4402496640146924816}
   timer: {fileID: 338561878896875919}
 --- !u!1 &338561878896875919
 GameObject:
@@ -1133,6 +1134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4016682466175527192}
   - component: {fileID: 8589894568313179849}
+  - component: {fileID: 4402496640146924816}
   - component: {fileID: 7319220828440099966}
   - component: {fileID: 7718843555624662937}
   m_Layer: 5
@@ -1169,6 +1171,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7668305360275681753}
   m_CullTransparentMesh: 0
+--- !u!114 &4402496640146924816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7668305360275681753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4cfd88fc4d04e22b233aa4b67eb73cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sourceImg: {fileID: 7319220828440099966}
+  presets:
+  - status: 0
+    color: {r: 1, g: 1, b: 1, a: 0.8509804}
+  - status: 1
+    color: {r: 0.703, g: 0.95, b: 0.9424, a: 0.9019608}
 --- !u!114 &7319220828440099966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1182,7 +1202,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5849056, g: 0, b: 0, a: 0.5529412}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8509804}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
