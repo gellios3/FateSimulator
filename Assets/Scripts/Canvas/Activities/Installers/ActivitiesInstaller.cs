@@ -15,7 +15,7 @@ namespace Canvas.Activities.Installers
         {
             // Debug.LogError($"CardList {CardList.Count}");
             Container.Bind<ActivitiesService>().AsSingle();
-            Container.Bind<ActivitiesController>().FromComponentOn(activitiesController).AsSingle();
+            // Container.Bind<ActivitiesController>().FromComponentOn(activitiesController).AsSingle();
         }
 
     }

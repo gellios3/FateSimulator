@@ -6,7 +6,7 @@ using Zenject;
 
 namespace ScriptableObjects
 {
-    [CreateAssetMenu(fileName = "SaveGameObj", menuName = "GameSaveObj", order = 0)]
+    [CreateAssetMenu(fileName = "SaveGameObj", menuName = "", order = 0)]
     public class GameSaveObj : ScriptableObjectInstaller<GameSaveObj>, ISaveGameObj
     {
         public List<BaseCardObj> cardList;

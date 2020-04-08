@@ -18,8 +18,6 @@ namespace Canvas.Activities.Views
 
         [SerializeField] private GameObject timer;
 
-        [Inject] private ActivitiesController activitiesController;
-
         [Inject] private ActivitiesService activitiesService;
 
         [Inject]
@@ -40,7 +38,7 @@ namespace Canvas.Activities.Views
         /// <param name="obj"></param>
         private void OnStartDragCard(OnStartDragCardSignal obj)
         {
-            var foundActivity = activitiesController.GetActivityByActivity(obj.BaseCard) != null;
+            var foundActivity = activitiesService.GetActivityByActivity(obj.BaseCard) != null;
             if (foundActivity)
                 borderImg.SetStatus(Status.Highlighted);
             droppableView.SetDroppable(foundActivity);
