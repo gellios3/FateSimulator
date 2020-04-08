@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Enums.Activities;
 using Interfaces.Activity;
+using ScriptableObjects.Cards;
 using ScriptableObjects.Conditions.Requires;
 using ScriptableObjects.Conditions.Results;
 using UnityEngine;
@@ -16,7 +17,7 @@ namespace Serializable.Activities
         public string ShortDescription { get; }
         public ActivityType ActivityType { get; }
         public Sprite ActivityIcon { get; }
-        public BaseConditionObj StartActivityCondition { get; }
+        public BaseCardObj StartActivityCard { get; }
         public List<BaseConditionObj> RequiredList { get; }
         public List<BaseConditionObj> OptionalRequiresList { get; }
         public List<BaseResultObj> ResultsList { get; }
@@ -29,7 +30,7 @@ namespace Serializable.Activities
             ShortDescription = baseActivity.ShortDescription;
             ActivityType = baseActivity.ActivityType;
             ActivityIcon = baseActivity.ActivityIcon;
-            StartActivityCondition = baseActivity.StartActivityCondition;
+            StartActivityCard = baseActivity.StartActivityCard;
             RequiredList = baseActivity.RequiredList;
             OptionalRequiresList = baseActivity.OptionalRequiresList;
             ResultsList = baseActivity.ResultsList;

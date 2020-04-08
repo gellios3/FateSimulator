@@ -2,6 +2,8 @@
 using Canvas.Activities.Services;
 using Canvas.Cards.Signals;
 using Enums;
+using Interfaces.Cards;
+using ScriptableObjects.Conditions.Requires;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -15,6 +17,8 @@ namespace Canvas.Activities.Views
         [SerializeField] private ColorsPresetImage borderImg;
 
         [SerializeField] private GameObject timer;
+
+        [Inject] private ActivitiesController activitiesController;
 
         [Inject] private ActivitiesService activitiesService;
 
@@ -30,9 +34,16 @@ namespace Canvas.Activities.Views
             borderImg.SetStatus(Status.Normal);
         }
 
+        /// <summary>
+        /// Start drag card
+        /// </summary>
+        /// <param name="obj"></param>
         private void OnStartDragCard(OnStartDragCardSignal obj)
         {
-            borderImg.SetStatus(Status.Highlighted);
+            var foundActivity = activitiesController.GetActivityByActivity(obj.BaseCard) != null;
+            if (foundActivity)
+                borderImg.SetStatus(Status.Highlighted);
+            droppableView.SetDroppable(foundActivity);
         }
 
         private void Start()

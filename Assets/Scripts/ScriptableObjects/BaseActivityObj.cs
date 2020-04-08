@@ -2,6 +2,7 @@
 using Enums;
 using Enums.Activities;
 using Interfaces.Activity;
+using ScriptableObjects.Cards;
 using ScriptableObjects.Conditions.Requires;
 using ScriptableObjects.Conditions.Results;
 using UnityEngine;
@@ -47,8 +48,8 @@ namespace ScriptableObjects
         /// <summary>
         /// Start base condition 
         /// </summary>
-        public BaseConditionObj startActivityCondition;
-        public BaseConditionObj StartActivityCondition => startActivityCondition;
+        public BaseCardObj startActivityCard;
+        public BaseCardObj StartActivityCard => startActivityCard;
         
         /// <summary>
         /// Required aspects or cards for start Activity

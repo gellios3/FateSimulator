@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Canvas.Cards.Services;
-using Canvas.Cards.Signals;
 using Enums;
 using Interfaces.Cards;
 using Serializable;

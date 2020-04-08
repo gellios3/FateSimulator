@@ -1,8 +1,11 @@
 ﻿using System;
+using Canvas;
 using Canvas.Cards.Models;
 using Canvas.Cards.Views;
+using Enums;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using UnityEngine.UI.ProceduralImage;
 
 namespace AbstractViews
@@ -14,7 +17,18 @@ namespace AbstractViews
         /// </summary>
         public event Action<CardData> OnCardDrop;
 
-        [SerializeField] private ProceduralImage borderImg;
+        [SerializeField] private Image bgImg;
+
+        public bool CanDropCard { get; private set; } = true;
+
+        [SerializeField] private ColorsPresetImage borderImg;
+
+        public void SetDroppable(bool status)
+        {
+            CanDropCard = status;
+            bgImg.raycastTarget = status;
+        }
+        
 
         /// <inheritdoc />
         /// <summary>
@@ -23,10 +37,10 @@ namespace AbstractViews
         /// <param name="eventData"></param>
         public void OnDrop(PointerEventData eventData)
         {
-            if (eventData.pointerDrag == null)
+            if (eventData.pointerDrag == null || !CanDropCard)
                 return;
             var draggableView = eventData.pointerDrag.GetComponent<DraggableView>();
-            if (draggableView == null) 
+            if (draggableView == null)
                 return;
             Debug.LogError("On Drop event !!! ");
             draggableView.transform.position = transform.position;
@@ -41,9 +55,9 @@ namespace AbstractViews
         /// <param name="eventData"></param>
         public void OnPointerEnter(PointerEventData eventData)
         {
-            if (eventData.pointerDrag == null)
+            if (eventData.pointerDrag == null || !CanDropCard)
                 return;
-            borderImg.color = Color.black;
+            borderImg.SetStatus(Status.Highlighted);
             // Debug.LogError($"OnPointerEnter {eventData.pointerDrag}");   
         }
 
@@ -54,9 +68,9 @@ namespace AbstractViews
         /// <param name="eventData"></param>
         public void OnPointerExit(PointerEventData eventData)
         {
-            if (eventData.pointerDrag == null)
+            if (eventData.pointerDrag == null || !CanDropCard)
                 return;
-            borderImg.color = Color.white;
+            borderImg.SetStatus(Status.Normal);
             var cardView = eventData.pointerDrag.GetComponent<DraggableView>();
             if (cardView != null)
             {
