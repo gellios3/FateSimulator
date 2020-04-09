@@ -82,7 +82,6 @@ namespace Canvas.Cards.Views
 
         public void OnDropDrag()
         {
-            Debug.LogError("OnDropDrag");
             mask.sizeDelta = new Vector2(50, 90);
             // mask.sizeDelta = GetComponent<RectTransform>().sizeDelta;
         }

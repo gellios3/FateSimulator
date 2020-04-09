@@ -23,7 +23,7 @@ namespace Canvas.Cards.Views
 
         private CardView TopCard { get; set; }
 
-        private IBaseCard CardObj { get; set; }
+        public IBaseCard CardObj { get; private set; }
 
         [Inject] public DraggableCardService DraggableCardService { get; }
 

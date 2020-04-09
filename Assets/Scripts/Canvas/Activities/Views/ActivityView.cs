@@ -10,6 +10,9 @@ using Zenject;
 
 namespace Canvas.Activities.Views
 {
+    /// <summary>
+    /// Activity view
+    /// </summary>
     public class ActivityView : MonoBehaviour
     {
         [SerializeField] private DroppableView droppableView;
@@ -18,7 +21,7 @@ namespace Canvas.Activities.Views
 
         [SerializeField] private GameObject timer;
 
-        [Inject] private ActivitiesService activitiesService;
+        [Inject] private ActivityService activityService;
 
         [Inject]
         public void Construct(SignalBus signalBus)
@@ -27,6 +30,15 @@ namespace Canvas.Activities.Views
             signalBus.Subscribe<OnEndDragCardSignal>(OnEndDragCard);
         }
 
+        private void Start()
+        {
+            droppableView.OnCardDrop += baseCard => { activityService.ShowPopup(baseCard); };
+        }
+
+        /// <summary>
+        /// On end drag card
+        /// </summary>
+        /// <param name="obj"></param>
         private void OnEndDragCard(OnEndDragCardSignal obj)
         {
             borderImg.SetStatus(Status.Normal);
@@ -38,15 +50,10 @@ namespace Canvas.Activities.Views
         /// <param name="obj"></param>
         private void OnStartDragCard(OnStartDragCardSignal obj)
         {
-            var foundActivity = activitiesService.GetActivityByActivity(obj.BaseCard) != null;
+            var foundActivity = activityService.GetActivityByActivity(obj.BaseCard) != null;
             if (foundActivity)
                 borderImg.SetStatus(Status.Highlighted);
             droppableView.SetDroppable(foundActivity);
-        }
-
-        private void Start()
-        {
-            droppableView.OnCardDrop += cardData => { activitiesService.ShowPopup(); };
         }
     }
 }

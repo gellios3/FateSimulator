@@ -3,6 +3,7 @@ using Canvas;
 using Canvas.Cards.Models;
 using Canvas.Cards.Views;
 using Enums;
+using Interfaces.Cards;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -15,7 +16,7 @@ namespace AbstractViews
         /// <summary>
         /// On Card drop
         /// </summary>
-        public event Action<CardData> OnCardDrop;
+        public event Action<IBaseCard> OnCardDrop;
 
         [SerializeField] private Image bgImg;
 
@@ -42,9 +43,8 @@ namespace AbstractViews
             var draggableView = eventData.pointerDrag.GetComponent<DraggableView>();
             if (draggableView == null)
                 return;
-            Debug.LogError("On Drop event !!! ");
             draggableView.transform.position = transform.position;
-            OnCardDrop?.Invoke(null);
+            OnCardDrop?.Invoke(draggableView.CardObj);
             draggableView.OnDropCard();
         }
 

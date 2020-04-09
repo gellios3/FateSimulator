@@ -14,7 +14,7 @@ namespace Canvas.Activities.Installers
         public override void InstallBindings()
         {
             // Debug.LogError($"CardList {CardList.Count}");
-            Container.Bind<ActivitiesService>().AsSingle();
+            Container.Bind<ActivityService>().AsSingle();
             // Container.Bind<ActivitiesController>().FromComponentOn(activitiesController).AsSingle();
         }
 
