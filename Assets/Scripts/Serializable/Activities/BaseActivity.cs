@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Enums.Activities;
 using Interfaces.Activity;
+using Interfaces.Conditions.Cards;
 using ScriptableObjects.Cards;
 using ScriptableObjects.Conditions.Requires;
 using ScriptableObjects.Conditions.Results;
@@ -22,6 +24,10 @@ namespace Serializable.Activities
         public List<BaseConditionObj> OptionalRequiresList { get; }
         public List<BaseResultObj> ResultsList { get; }
         public List<BaseResultObj> OptionalResultsList { get; }
+        public List<BaseConditionObj> GetCardConditions()
+        {
+            return RequiredList.FindAll(obj => obj is CardConditionObj);
+        }
 
         public BaseActivity(IBaseActivity baseActivity)
         {

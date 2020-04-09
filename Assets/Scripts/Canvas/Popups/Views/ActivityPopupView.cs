@@ -6,6 +6,8 @@ namespace Canvas.Popups.Views
 {
     public class ActivityPopupView : MonoBehaviour
     {
+        [SerializeField] private ActivityPopupCardConditionsView conditionsView;
+
         [Inject]
         public void Construct(SignalBus signalBus)
         {
@@ -16,6 +18,7 @@ namespace Canvas.Popups.Views
         {
             // obj.BaseActivity
             gameObject.SetActive(true);
+            conditionsView.Init(obj.BaseActivity);
         }
     }
 }

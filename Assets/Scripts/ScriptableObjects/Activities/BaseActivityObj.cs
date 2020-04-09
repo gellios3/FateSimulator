@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Enums;
 using Enums.Activities;
 using Interfaces.Activity;
+using Interfaces.Conditions.Cards;
 using ScriptableObjects.Cards;
 using ScriptableObjects.Conditions.Requires;
 using ScriptableObjects.Conditions.Results;
@@ -75,5 +77,10 @@ namespace ScriptableObjects
         /// </summary>
         public List<BaseResultObj> optionalResultsList;
         public List<BaseResultObj> OptionalResultsList => optionalResultsList;
+
+        public List<BaseConditionObj> GetCardConditions()
+        {
+            return RequiredList.FindAll(obj => obj is CardConditionObj);
+        }
     }
 }

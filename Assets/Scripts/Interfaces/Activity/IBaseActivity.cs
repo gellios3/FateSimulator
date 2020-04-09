@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Enums;
 using Enums.Activities;
+using Interfaces.Conditions.Cards;
 using ScriptableObjects.Cards;
 using ScriptableObjects.Conditions.Requires;
 using ScriptableObjects.Conditions.Results;
@@ -20,5 +21,6 @@ namespace Interfaces.Activity
         List<BaseConditionObj> OptionalRequiresList { get; }
         List<BaseResultObj> ResultsList { get; } 
         List<BaseResultObj> OptionalResultsList { get; }
+        List<BaseConditionObj> GetCardConditions();
     }
 }

@@ -11,7 +11,7 @@ using UnityEngine.UI.ProceduralImage;
 
 namespace AbstractViews
 {
-    public sealed class DroppableView : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
+    public class DroppableView : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
     {
         /// <summary>
         /// On Card drop
