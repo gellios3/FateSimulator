@@ -1,5 +1,4 @@
-﻿using Cards.Models;
-using Serializable.Cards;
+﻿using Serializable.Cards;
 
 namespace Interfaces.Aspects
 {

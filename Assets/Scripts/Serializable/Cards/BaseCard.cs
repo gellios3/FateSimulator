@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Enums;
+using Interfaces.Aspects;
 using Interfaces.Cards;
 using ScriptableObjects.Aspects;
 using UnityEngine;

@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Enums.Activities;
 using Interfaces.Activity;
+using Interfaces.Conditions.Cards;
+using ScriptableObjects.Cards;
 using ScriptableObjects.Conditions.Requires;
 using ScriptableObjects.Conditions.Results;
 using UnityEngine;
@@ -16,23 +19,28 @@ namespace Serializable.Activities
         public string ShortDescription { get; }
         public ActivityType ActivityType { get; }
         public Sprite ActivityIcon { get; }
+        public BaseCardObj StartActivityCard { get; }
         public List<BaseConditionObj> RequiredList { get; }
         public List<BaseConditionObj> OptionalRequiresList { get; }
         public List<BaseResultObj> ResultsList { get; }
-        
         public List<BaseResultObj> OptionalResultsList { get; }
-
-        public BaseActivity(IBaseActivity aspect)
+        public List<BaseConditionObj> GetCardConditions()
         {
-            Id = aspect.Id;
-            ActivityName = aspect.ActivityName;
-            ShortDescription = aspect.ShortDescription;
-            ActivityType = aspect.ActivityType;
-            ActivityIcon = aspect.ActivityIcon;
-            RequiredList = aspect.RequiredList;
-            OptionalRequiresList = aspect.OptionalRequiresList;
-            ResultsList = aspect.ResultsList;
-            OptionalResultsList = aspect.OptionalResultsList;
+            return RequiredList.FindAll(obj => obj is CardConditionObj);
+        }
+
+        public BaseActivity(IBaseActivity baseActivity)
+        {
+            Id = baseActivity.Id;
+            ActivityName = baseActivity.ActivityName;
+            ShortDescription = baseActivity.ShortDescription;
+            ActivityType = baseActivity.ActivityType;
+            ActivityIcon = baseActivity.ActivityIcon;
+            StartActivityCard = baseActivity.StartActivityCard;
+            RequiredList = baseActivity.RequiredList;
+            OptionalRequiresList = baseActivity.OptionalRequiresList;
+            ResultsList = baseActivity.ResultsList;
+            OptionalResultsList = baseActivity.OptionalResultsList;
         }
     }
 }

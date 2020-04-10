@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: WorkCardCondition
   m_EditorClassIdentifier: 
   level: 0
-  cardType: 7
+  title: Work
+  cardType: 6
   activityType: 0

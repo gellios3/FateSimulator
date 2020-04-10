@@ -14,6 +14,9 @@ namespace ScriptableObjects.Aspects
         public string aspectName;
         public string AspectName => aspectName;
 
+        public string aspectDescription;
+        public string AspectDescription => aspectDescription;
+
         public Sprite aspectImg;
         public Sprite AspectImg => aspectImg;
 

@@ -1,5 +1,4 @@
-﻿using Cards.Models;
-using ScriptableObjects.Cards;
+﻿using ScriptableObjects.Cards;
 using Serializable.Cards;
 
 namespace Interfaces.Cards

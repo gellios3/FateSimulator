@@ -1,5 +1,4 @@
 ﻿using System;
-using Cards.Models;
 using Interfaces.Cards;
 using ScriptableObjects.Cards;
 

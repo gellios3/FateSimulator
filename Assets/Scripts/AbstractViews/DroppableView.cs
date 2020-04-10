@@ -1,38 +1,53 @@
 ﻿using System;
-using Cards.Models;
-using Cards.Views;
+using Canvas;
+using Canvas.Cards.Models;
+using Canvas.Cards.Views;
+using Enums;
+using Interfaces.Cards;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using UnityEngine.UI.ProceduralImage;
 
 namespace AbstractViews
 {
-    public sealed class DroppableView : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
+    public class DroppableView : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
     {
         /// <summary>
         /// On Card drop
         /// </summary>
-        public event Action<CardData> OnCardDrop;
+        public event Action OnCardDrop;
 
-        [SerializeField] private ProceduralImage borderImg;
+        [SerializeField] private Image bgImg;
 
+        public bool CanDropCard { get; private set; } = true;
+        
+        public DraggableView DropCardView { get; protected set; }
+
+        [SerializeField] private ColorsPresetImage borderImg;
+
+        public void SetDroppable(bool status)
+        {
+            CanDropCard = status;
+            bgImg.raycastTarget = status;
+        }
+        
         /// <inheritdoc />
         /// <summary>
         /// On drop 
         /// </summary>
         /// <param name="eventData"></param>
-        public void OnDrop(PointerEventData eventData)
+        public virtual void OnDrop(PointerEventData eventData)
         {
-            if (eventData.pointerDrag == null)
+            DropCardView = null;
+            if (eventData.pointerDrag == null || !CanDropCard)
                 return;
-            var draggableView = eventData.pointerDrag.GetComponent<DraggableView>();
-            if (draggableView != null)
-            {
-                Debug.LogError("On Drop event !!! ");
-                draggableView.transform.position = transform.position;
-                OnCardDrop?.Invoke(null);
-                draggableView.OnDropCard();
-            }
+            DropCardView = eventData.pointerDrag.GetComponent<DraggableView>();
+            if (DropCardView == null)
+                return;
+            DropCardView.transform.position = transform.position;
+            OnCardDrop?.Invoke();
+            DropCardView.OnDropCard();
         }
 
         /// <inheritdoc />
@@ -42,11 +57,9 @@ namespace AbstractViews
         /// <param name="eventData"></param>
         public void OnPointerEnter(PointerEventData eventData)
         {
-            if (eventData.pointerDrag == null)
+            if (eventData.pointerDrag == null || !CanDropCard)
                 return;
-            borderImg.color = Color.black;
-          
-
+            borderImg.SetStatus(Status.Highlighted);
             // Debug.LogError($"OnPointerEnter {eventData.pointerDrag}");   
         }
 
@@ -57,9 +70,9 @@ namespace AbstractViews
         /// <param name="eventData"></param>
         public void OnPointerExit(PointerEventData eventData)
         {
-            if (eventData.pointerDrag == null)
+            if (eventData.pointerDrag == null || !CanDropCard)
                 return;
-            borderImg.color = Color.white;
+            borderImg.SetStatus(Status.Normal);
             var cardView = eventData.pointerDrag.GetComponent<DraggableView>();
             if (cardView != null)
             {

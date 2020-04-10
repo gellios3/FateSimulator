@@ -17,7 +17,12 @@ namespace Interfaces.Aspects
         /// <summary>
         /// Aspect Name
         /// </summary>
-        string AspectName { get; }
+        string AspectName { get; }   
+        
+        /// <summary>
+        /// Aspect Name
+        /// </summary>
+        string AspectDescription { get; }
         
         /// <summary>
         /// Aspect img

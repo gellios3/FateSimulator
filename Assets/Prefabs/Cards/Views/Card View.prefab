@@ -654,6 +654,12 @@ MonoBehaviour:
   iconImg: {fileID: 7905539812644350092}
   backgroundImg: {fileID: 7470884459913494840}
   title: {fileID: 3242163799179741985}
+  appearances:
+  - cardStatus: 1
+    color: {r: 0.45, g: 0.45, b: 0.45, a: 1}
+  - cardStatus: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+  currentStatus: 0
 --- !u!1 &7788376385360943175
 GameObject:
   m_ObjectHideFlags: 0
