@@ -1,6 +1,5 @@
 ﻿using AbstractViews;
 using Canvas.Cards.Services;
-using Canvas.Popups.Signals;
 using Interfaces.Cards;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -16,14 +15,15 @@ namespace Canvas.Cards.Views
         public bool HasOutArea { get; set; }
         private bool HasSetInInventory { get; set; }
         private bool HasStartDrag { get; set; }
+        public bool HasActivate { get; set; }
 
         public Vector3 startTempPosition;
 
         [SerializeField] private Button openPopupBtn;
 
-        private CardView TopCard { get; set; }
+        public CardView TopCard { get; private set; }
 
-        public IBaseCard CardObj { get; private set; }
+        public IBaseCard CardObj { get; set; }
 
         [Inject] public DraggableCardService DraggableCardService { get; }
 
@@ -44,12 +44,30 @@ namespace Canvas.Cards.Views
             });
         }
 
+        public void Hide()
+        {
+            gameObject.SetActive(false);
+            TopCard.gameObject.SetActive(false);
+        }
+
+        public void Show()
+        {
+            gameObject.SetActive(true);
+            TopCard.gameObject.SetActive(true);
+        }
+
         public void SetCardView(CardView topCard, IBaseCard cardObj)
         {
             CardObj = cardObj;
             TopCard = topCard;
-            TopCard.transform.position = transform.position;
+            TopCard.SetCardPosition(transform.position);
             TopCard.SetCardView(cardObj);
+        }
+
+        public void SetPosition(Vector3 pos)
+        {
+            transform.position = pos;
+            TopCard.SetCardPosition(pos);
         }
 
         /// <inheritdoc />
@@ -64,7 +82,8 @@ namespace Canvas.Cards.Views
 
             HasDrop = false;
             HasStartDrag = true;
-            
+            HasActivate = false;
+
             DraggableCardService.StartDragCard(CardObj);
 
             TopCard.gameObject.SetActive(true);
@@ -84,8 +103,7 @@ namespace Canvas.Cards.Views
             if (!CanDraggable || Camera.main == null)
                 return;
             var pos = GetWorldPositionOnPlane(eventData.position, -1);
-            transform.position = pos;
-            TopCard.transform.position = pos;
+            SetPosition(pos);
         }
 
         /// <summary>
@@ -94,7 +112,7 @@ namespace Canvas.Cards.Views
         /// <param name="screenPosition"></param>
         /// <param name="z"></param>
         /// <returns></returns>
-        private static Vector3 GetWorldPositionOnPlane(Vector3 screenPosition, float z)
+        public static Vector3 GetWorldPositionOnPlane(Vector3 screenPosition, float z)
         {
             if (Camera.main == null)
                 return Vector3.zero;
@@ -130,11 +148,10 @@ namespace Canvas.Cards.Views
             CallEndDrag();
         }
 
-        private void ReturnBack()
+        public void ReturnBack()
         {
             HasOutArea = false;
-            transform.position = startTempPosition;
-            TopCard.transform.position = startTempPosition;
+            SetPosition(startTempPosition);
             var cardView = TopCard.GetComponent<CardView>();
             if (cardView != null)
             {
@@ -167,7 +184,7 @@ namespace Canvas.Cards.Views
             {
                 HasDrop = true;
                 HasSetInInventory = true;
-                TopCard.transform.position = transform.position;
+                TopCard.SetCardPosition(transform.position);
                 cardView.OnDropDrag();
             }
         }

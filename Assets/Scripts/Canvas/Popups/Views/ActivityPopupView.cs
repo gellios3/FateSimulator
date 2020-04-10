@@ -1,5 +1,6 @@
 ﻿using Canvas.Popups.Signals;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 namespace Canvas.Popups.Views
@@ -8,17 +9,23 @@ namespace Canvas.Popups.Views
     {
         [SerializeField] private ActivityPopupCardConditionsView conditionsView;
 
+        [SerializeField] private Button closeBtn;
+
         [Inject]
         public void Construct(SignalBus signalBus)
         {
             signalBus.Subscribe<ShowActivityPopupSignal>(ShowActivityPopup);
+            closeBtn.onClick.AddListener(() =>
+            {
+                signalBus.Fire(new CloseActivityPopupSignal());
+                gameObject.SetActive(false);
+            });
         }
 
         private void ShowActivityPopup(ShowActivityPopupSignal obj)
         {
-            // obj.BaseActivity
             gameObject.SetActive(true);
-            conditionsView.Init(obj.BaseActivity);
+            conditionsView.Init(obj.SourceActivity.FoundActivity,obj.StartActionCard);
         }
     }
 }

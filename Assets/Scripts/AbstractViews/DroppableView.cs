@@ -16,11 +16,13 @@ namespace AbstractViews
         /// <summary>
         /// On Card drop
         /// </summary>
-        public event Action<IBaseCard> OnCardDrop;
+        public event Action OnCardDrop;
 
         [SerializeField] private Image bgImg;
 
         public bool CanDropCard { get; private set; } = true;
+        
+        public DraggableView DropCardView { get; protected set; }
 
         [SerializeField] private ColorsPresetImage borderImg;
 
@@ -30,22 +32,22 @@ namespace AbstractViews
             bgImg.raycastTarget = status;
         }
         
-
         /// <inheritdoc />
         /// <summary>
         /// On drop 
         /// </summary>
         /// <param name="eventData"></param>
-        public void OnDrop(PointerEventData eventData)
+        public virtual void OnDrop(PointerEventData eventData)
         {
+            DropCardView = null;
             if (eventData.pointerDrag == null || !CanDropCard)
                 return;
-            var draggableView = eventData.pointerDrag.GetComponent<DraggableView>();
-            if (draggableView == null)
+            DropCardView = eventData.pointerDrag.GetComponent<DraggableView>();
+            if (DropCardView == null)
                 return;
-            draggableView.transform.position = transform.position;
-            OnCardDrop?.Invoke(draggableView.CardObj);
-            draggableView.OnDropCard();
+            DropCardView.transform.position = transform.position;
+            OnCardDrop?.Invoke();
+            DropCardView.OnDropCard();
         }
 
         /// <inheritdoc />

@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46138877475f4b88ac8dd7d094158602, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  droppableView: {fileID: 3163646952858835419}
+  droppableView: {fileID: 8809799192356252851}
   borderImg: {fileID: 4402496640146924816}
   timer: {fileID: 338561878896875919}
 --- !u!1 &338561878896875919
@@ -1088,15 +1088,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 8618667141374153436}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3163646952858835419 stripped
+--- !u!114 &8809799192356252851 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6664236997736254215, guid: e388cd63f9f06024ba0c57765c6087cb,
+  m_CorrespondingSourceObject: {fileID: 997857008698457711, guid: e388cd63f9f06024ba0c57765c6087cb,
     type: 3}
   m_PrefabInstance: {fileID: 8618667141374153436}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1af3d1a0cca42079413916a1c970e96, type: 3}
+  m_Script: {fileID: 11500000, guid: d51a59ae1d2c44298982bb2c9c8c34c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

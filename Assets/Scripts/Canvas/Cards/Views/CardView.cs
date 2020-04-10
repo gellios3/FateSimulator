@@ -33,7 +33,7 @@ namespace Canvas.Cards.Views
 
         private Vector2 defaultSizeDelta;
 
-        private IBaseCard CardObj { get; set; }
+        public IBaseCard CardObj { get; private set; }
 
         [Inject]
         public void Construct(IBaseCard cardObj)
@@ -75,6 +75,11 @@ namespace Canvas.Cards.Views
             mask.transform.localPosition = new Vector3(dragMask.x, dragMask.y, dragMask.z);
         }
 
+        public void SetCardPosition(Vector3 pos)
+        {
+            transform.position = pos;
+        }
+
         public void OnEndDrag()
         {
             mask.transform.localPosition = new Vector3(defaultMask.x, defaultMask.y, defaultMask.z);
@@ -82,8 +87,10 @@ namespace Canvas.Cards.Views
 
         public void OnDropDrag()
         {
-            mask.sizeDelta = new Vector2(50, 90);
-            // mask.sizeDelta = GetComponent<RectTransform>().sizeDelta;
+            
+            // mask.sizeDelta = new Vector2(50, 90);
+            mask.localPosition = Vector3.zero;
+            mask.sizeDelta = GetComponent<RectTransform>().sizeDelta;
         }
 
         public class Factory : PlaceholderFactory<IBaseCard, CardView>

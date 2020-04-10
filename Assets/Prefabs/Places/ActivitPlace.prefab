@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7829992227662087377}
   - component: {fileID: 7011959838938264023}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -191,7 +191,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8605630782665660052}
   m_Layer: 0
-  m_Name: ActivityCardPlace
+  m_Name: ActivitPlace
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -253,7 +253,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 4.71, y: -3.300003}
+  m_AnchoredPosition: {x: 4.709961, y: -3.2999878}
   m_SizeDelta: {x: -44.59, y: -43.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5331998812963461735
@@ -317,7 +317,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7869451405984047380}
   - component: {fileID: 3594416396524538256}
-  - component: {fileID: 6664236997736254215}
+  - component: {fileID: 997857008698457711}
   - component: {fileID: 4611735029315861918}
   - component: {fileID: 2965839649444186134}
   m_Layer: 5
@@ -356,7 +356,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8736321783080188740}
   m_CullTransparentMesh: 0
---- !u!114 &6664236997736254215
+--- !u!114 &997857008698457711
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -365,7 +365,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8736321783080188740}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1af3d1a0cca42079413916a1c970e96, type: 3}
+  m_Script: {fileID: 11500000, guid: d51a59ae1d2c44298982bb2c9c8c34c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bgImg: {fileID: 4611735029315861918}

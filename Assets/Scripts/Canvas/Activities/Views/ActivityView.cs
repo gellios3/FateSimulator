@@ -2,6 +2,7 @@
 using Canvas.Activities.Services;
 using Canvas.Cards.Signals;
 using Enums;
+using Interfaces.Activity;
 using Interfaces.Cards;
 using ScriptableObjects.Conditions.Requires;
 using UnityEngine;
@@ -15,11 +16,13 @@ namespace Canvas.Activities.Views
     /// </summary>
     public class ActivityView : MonoBehaviour
     {
-        [SerializeField] private DroppableView droppableView;
+        [SerializeField] private ActivityDroppableView droppableView;
 
         [SerializeField] private ColorsPresetImage borderImg;
 
         [SerializeField] private GameObject timer;
+
+        public IBaseActivity FoundActivity { get; private set; }
 
         [Inject] private ActivityService activityService;
 
@@ -32,7 +35,7 @@ namespace Canvas.Activities.Views
 
         private void Start()
         {
-            droppableView.OnCardDrop += baseCard => { activityService.ShowPopup(baseCard); };
+            droppableView.OnCardDrop += () => { activityService.ShowPopup(droppableView.DropCardView, this); };
         }
 
         /// <summary>
@@ -50,10 +53,10 @@ namespace Canvas.Activities.Views
         /// <param name="obj"></param>
         private void OnStartDragCard(OnStartDragCardSignal obj)
         {
-            var foundActivity = activityService.GetActivityByActivity(obj.BaseCard) != null;
-            if (foundActivity)
+            FoundActivity = activityService.GetActivityByActivity(obj.BaseCard);
+            if (FoundActivity != null)
                 borderImg.SetStatus(Status.Highlighted);
-            droppableView.SetDroppable(foundActivity);
+            droppableView.SetDroppable(FoundActivity != null);
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Canvas.Activities.Views;
 using Canvas.Cards.Models;
+using Canvas.Cards.Views;
 using Canvas.Popups.Signals;
 using Interfaces.Activity;
 using Interfaces.Cards;
@@ -26,11 +28,12 @@ namespace Canvas.Activities.Services
             return possibleActivities.FirstOrDefault(obj => ReferenceEquals(obj.StartActivityCard, startActivityCard));
         }
 
-        public void ShowPopup(IBaseCard baseCard)
+        public void ShowPopup(DraggableView draggableView, ActivityView activityView )
         {
             signalBus.Fire(new ShowActivityPopupSignal
             {
-                BaseActivity = GetActivityByActivity(baseCard), BaseCard = baseCard
+                StartActionCard = draggableView,
+                SourceActivity = activityView
             });
         }
     }
