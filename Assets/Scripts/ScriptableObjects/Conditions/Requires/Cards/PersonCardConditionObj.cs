@@ -1,9 +1,8 @@
-﻿using Enums.Aspects;
-using Enums.Person;
+﻿using Enums.Person;
 using Interfaces.Conditions.Cards;
 using UnityEngine;
 
-namespace ScriptableObjects.Conditions.Requires
+namespace ScriptableObjects.Conditions.Requires.Cards
 {
     [CreateAssetMenu(fileName = "PersonCardCondition", menuName = "Conditions/Requires/Card/PersonCardCondition", order = 0)]
     public class PersonCardConditionObj : CardConditionObj, IPersonCardCondition

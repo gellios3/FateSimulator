@@ -8,5 +8,8 @@ namespace ScriptableObjects.Conditions.Requires
     {
         public byte level;
         public byte Level => level;
+
+        public string title;
+        public string Title => title;
     }
 }

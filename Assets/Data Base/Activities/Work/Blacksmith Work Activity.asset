@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eea1b9588bf28b84eb3123452d42328b, type: 3}
-  m_Name: Blacksmish Work Activity
+  m_Name: Blacksmith Work Activity
   m_EditorClassIdentifier: 
   id: 6
   activityName: Blacksmith Work
@@ -20,9 +20,8 @@ MonoBehaviour:
   startActivityCard: {fileID: 11400000, guid: 94554ea81f66d714282feb0395499971, type: 2}
   requiredList:
   - {fileID: 11400000, guid: 49d40230ba0573c47adfeb72f8058b53, type: 2}
-  - {fileID: 11400000, guid: cc9f053b23672224494eceb2a0be522f, type: 2}
-  - {fileID: 11400000, guid: 783011e8884e6f34f811a059c702ed77, type: 2}
-  - {fileID: 11400000, guid: aa797e432b9b45f4ca82f12db665a0d5, type: 2}
+  - {fileID: 11400000, guid: c47f9c99ae64a9747bc8290aa2450fc1, type: 2}
+  - {fileID: 11400000, guid: 6d8409ce2ebddf343a9f16c4172c3b7d, type: 2}
   optionalRequiresList: []
   resultsList:
   - {fileID: 11400000, guid: 58679369a4f18034582089d950cbf5b4, type: 2}

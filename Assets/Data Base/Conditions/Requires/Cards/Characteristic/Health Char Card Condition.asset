@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5095130acb774deb81b3cb5c375415e5, type: 3}
-  m_Name: WorkCardCondition
+  m_Script: {fileID: 11500000, guid: 2ac6820dace947e182711da373f926cd, type: 3}
+  m_Name: Health Char Card Condition
   m_EditorClassIdentifier: 
   level: 0
-  title: Work
-  cardType: 6
-  activityType: 0
+  title: Health
+  cardType: 0
+  characteristicType: 0

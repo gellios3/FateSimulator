@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5095130acb774deb81b3cb5c375415e5, type: 3}
-  m_Name: WorkCardCondition
+  m_Script: {fileID: 11500000, guid: 42a800837264427aac871fe154050a75, type: 3}
+  m_Name: Blacksmith Skill Card Condition
   m_EditorClassIdentifier: 
   level: 0
-  title: Work
-  cardType: 6
-  activityType: 0
+  title: Blacksmith Skill
+  cardType: 5
+  routineSkillType: 3
+  battleSkillType: 1
