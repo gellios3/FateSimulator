@@ -10,6 +10,8 @@ namespace Canvas.Cards.Views
 {
     public class DraggableView : BaseItem, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
+        #region Parameters
+        
         public bool CanDraggable { private get; set; } = true;
         private bool HasDrop { get; set; }
         public bool HasOutArea { get; set; }
@@ -21,11 +23,13 @@ namespace Canvas.Cards.Views
 
         [SerializeField] private Button openPopupBtn;
 
-        public CardView TopCard { get; private set; }
+        private CardView TopCard { get; set; }
 
-        public IBaseCard CardObj { get; set; }
+        private IBaseCard CardObj { get; set; }
 
         [Inject] public DraggableCardService DraggableCardService { get; }
+        
+        #endregion
 
         [Inject]
         public void Construct(IBaseCard cardObj)
@@ -43,6 +47,14 @@ namespace Canvas.Cards.Views
                 }
             });
         }
+        
+        public void Init(CardView topCard, IBaseCard cardObj)
+        {
+            CardObj = cardObj;
+            TopCard = topCard;
+            TopCard.SetCardPosition(transform.position);
+            TopCard.SetCardView(cardObj);
+        }
 
         public void Hide()
         {
@@ -56,14 +68,10 @@ namespace Canvas.Cards.Views
             TopCard.gameObject.SetActive(true);
         }
 
-        public void SetCardView(CardView topCard, IBaseCard cardObj)
-        {
-            CardObj = cardObj;
-            TopCard = topCard;
-            TopCard.SetCardPosition(transform.position);
-            TopCard.SetCardView(cardObj);
-        }
-
+        /// <summary>
+        /// Set card position 
+        /// </summary>
+        /// <param name="pos"></param>
         public void SetPosition(Vector3 pos)
         {
             transform.position = pos;
@@ -106,22 +114,6 @@ namespace Canvas.Cards.Views
             SetPosition(pos);
         }
 
-        /// <summary>
-        /// Get World position on plane
-        /// </summary>
-        /// <param name="screenPosition"></param>
-        /// <param name="z"></param>
-        /// <returns></returns>
-        public static Vector3 GetWorldPositionOnPlane(Vector3 screenPosition, float z)
-        {
-            if (Camera.main == null)
-                return Vector3.zero;
-            var ray = Camera.main.ScreenPointToRay(screenPosition);
-            var xy = new Plane(Vector3.down, new Vector3(0, 0, z));
-            xy.Raycast(ray, out var distance);
-            return ray.GetPoint(distance);
-        }
-
         /// <inheritdoc />
         /// <summary>
         /// On End drag card
@@ -136,7 +128,7 @@ namespace Canvas.Cards.Views
 
             if (HasOutArea)
             {
-                ReturnBack();
+                ReturnBack(HasSetInInventory);
                 return;
             }
 
@@ -145,33 +137,24 @@ namespace Canvas.Cards.Views
             if (!CanDraggable)
                 return;
 
-            CallEndDrag();
+            EndDrag();
         }
 
-        public void ReturnBack()
+        /// <summary>
+        /// Return card back
+        /// </summary>
+        public void ReturnBack(bool hasSetInInventory)
         {
             HasOutArea = false;
             SetPosition(startTempPosition);
             var cardView = TopCard.GetComponent<CardView>();
-            if (cardView != null)
-            {
-                if (HasSetInInventory)
-                    cardView.OnDropDrag();
-                else
-                    cardView.OnEndDrag();
-            }
-        }
-
-        private void CallEndDrag()
-        {
-            DraggableCardService.EndDragCard(CardObj);
-            var cardView = TopCard.GetComponent<CardView>();
-            if (!HasOutArea)
-                CanDraggable = true;
-            if (cardView != null)
-            {
-                cardView.OnEndDrag();
-            }
+            if (cardView == null) 
+                return;
+            HasSetInInventory = hasSetInInventory;
+            if (hasSetInInventory)
+                cardView.HideCartShadow();
+            else
+                cardView.ReturnDefaultCartShadow();
         }
 
         /// <summary>
@@ -180,13 +163,40 @@ namespace Canvas.Cards.Views
         public void OnDropCard()
         {
             var cardView = TopCard.GetComponent<CardView>();
+            if (cardView == null) 
+                return;
+            HasDrop = true;
+            HasSetInInventory = true;
+            TopCard.SetCardPosition(transform.position);
+            cardView.HideCartShadow();
+        }
+        
+        private void EndDrag()
+        {
+            DraggableCardService.EndDragCard(CardObj);
+            var cardView = TopCard.GetComponent<CardView>();
+            if (!HasOutArea)
+                CanDraggable = true;
             if (cardView != null)
             {
-                HasDrop = true;
-                HasSetInInventory = true;
-                TopCard.SetCardPosition(transform.position);
-                cardView.OnDropDrag();
+                cardView.ReturnDefaultCartShadow();
             }
+        }
+        
+        /// <summary>
+        /// Get World position on plane
+        /// </summary>
+        /// <param name="screenPosition"></param>
+        /// <param name="z"></param>
+        /// <returns></returns>
+        private static Vector3 GetWorldPositionOnPlane(Vector3 screenPosition, float z)
+        {
+            if (Camera.main == null)
+                return Vector3.zero;
+            var ray = Camera.main.ScreenPointToRay(screenPosition);
+            var xy = new Plane(Vector3.down, new Vector3(0, 0, z));
+            xy.Raycast(ray, out var distance);
+            return ray.GetPoint(distance);
         }
 
         public class Factory : PlaceholderFactory<IBaseCard, DraggableView>

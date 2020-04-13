@@ -29,7 +29,7 @@ namespace Canvas.Cards
                 transform.localPosition = new Vector3(cardObj.PosOnTable.x, cardObj.PosOnTable.y, -3);
                 transform.localRotation = Quaternion.identity;
                 var topCard = CardViewSpawner.CreateViewCard(cardObj);
-                cardGameObject.SetCardView(topCard,cardObj);
+                cardGameObject.Init(topCard,cardObj);
             }
         }
     }

@@ -24,7 +24,7 @@ namespace AbstractViews
         
         public DraggableView DropCardView { get; protected set; }
 
-        [SerializeField] private ColorsPresetImage borderImg;
+        [SerializeField] protected ColorsPresetImage borderImg;
 
         public void SetDroppable(bool status)
         {

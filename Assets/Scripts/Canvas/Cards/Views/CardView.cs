@@ -16,6 +16,8 @@ namespace Canvas.Cards.Views
     /// </summary>
     public class CardView : MonoBehaviour
     {
+        #region Parameters
+
         [SerializeField] private RectTransform mask;
 
         [SerializeField] private Vector3 defaultMask;
@@ -33,12 +35,11 @@ namespace Canvas.Cards.Views
 
         private Vector2 defaultSizeDelta;
 
-        public IBaseCard CardObj { get; private set; }
+        #endregion
 
         [Inject]
         public void Construct(IBaseCard cardObj)
         {
-            CardObj = cardObj;
         }
 
         private void Start()
@@ -60,7 +61,6 @@ namespace Canvas.Cards.Views
 
         public void SetCardView(IBaseCard cardObj)
         {
-            CardObj = cardObj;
             iconImg.sprite = cardObj.CardIcon;
             backgroundImg.color = cardObj.BackgroundColor;
             currentStatus = CardStatus.Normal;
@@ -71,26 +71,30 @@ namespace Canvas.Cards.Views
         public void OnStartDragCard()
         {
             transform.SetAsLastSibling();
-            mask.sizeDelta = defaultSizeDelta;
-            mask.transform.localPosition = new Vector3(dragMask.x, dragMask.y, dragMask.z);
+            SetDragCartShadow();
         }
 
         public void SetCardPosition(Vector3 pos)
         {
             transform.position = pos;
         }
-
-        public void OnEndDrag()
+        
+        public void ReturnDefaultCartShadow()
         {
             mask.transform.localPosition = new Vector3(defaultMask.x, defaultMask.y, defaultMask.z);
+            mask.sizeDelta = defaultSizeDelta;
         }
 
-        public void OnDropDrag()
+        public void HideCartShadow()
         {
-            
-            // mask.sizeDelta = new Vector2(50, 90);
             mask.localPosition = Vector3.zero;
             mask.sizeDelta = GetComponent<RectTransform>().sizeDelta;
+        }
+        
+        private void SetDragCartShadow()
+        {
+            mask.sizeDelta = defaultSizeDelta;
+            mask.transform.localPosition = new Vector3(dragMask.x, dragMask.y, dragMask.z);
         }
 
         public class Factory : PlaceholderFactory<IBaseCard, CardView>

@@ -1,6 +1,7 @@
 ﻿using AbstractViews;
 using Canvas.Activities.Services;
 using Canvas.Cards.Signals;
+using Canvas.Popups.Signals;
 using Enums;
 using Interfaces.Activity;
 using Interfaces.Cards;
@@ -31,6 +32,7 @@ namespace Canvas.Activities.Views
         {
             signalBus.Subscribe<OnStartDragCardSignal>(OnStartDragCard);
             signalBus.Subscribe<OnEndDragCardSignal>(OnEndDragCard);
+            signalBus.Subscribe<ShowActivityPopupSignal>(() => ReturnToNormalStatus());
         }
 
         private void Start()
@@ -39,12 +41,26 @@ namespace Canvas.Activities.Views
         }
 
         /// <summary>
+        /// Return activity to normal status
+        /// </summary>
+        /// <param name="returnCard"></param>
+        public void ReturnToNormalStatus(bool returnCard = false)
+        {
+            if (returnCard)
+            {
+                droppableView.ReturnDropCard();
+            }
+
+            borderImg.SetStatus(Status.Normal);
+        }
+
+        /// <summary>
         /// On end drag card
         /// </summary>
         /// <param name="obj"></param>
         private void OnEndDragCard(OnEndDragCardSignal obj)
         {
-            borderImg.SetStatus(Status.Normal);
+            ReturnToNormalStatus();
         }
 
         /// <summary>

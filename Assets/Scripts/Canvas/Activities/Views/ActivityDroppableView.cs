@@ -1,5 +1,6 @@
 ﻿using AbstractViews;
 using Canvas.Popups.Signals;
+using Enums;
 using UnityEngine.EventSystems;
 using Zenject;
 
@@ -13,18 +14,17 @@ namespace Canvas.Activities.Views
         public void Construct(SignalBus signalBus)
         {
             SignalBus = signalBus;
-            signalBus.Subscribe<CloseActivityPopupSignal>(OnReturnDropCard);
         }
 
-        private void OnReturnDropCard()
+        public void ReturnDropCard( )
         {
             if (DropCardView == null)
                 return;
+            borderImg.SetStatus(Status.Normal);
             DropCardView.Show();
-            DropCardView.ReturnBack();
+            DropCardView.ReturnBack(false);
             DropCardView = null;
         }
-
 
         public override void OnDrop(PointerEventData eventData)
         {
