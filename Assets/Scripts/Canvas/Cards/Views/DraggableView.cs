@@ -143,7 +143,7 @@ namespace Canvas.Cards.Views
         /// <summary>
         /// Return card back
         /// </summary>
-        public void ReturnBack(bool hasSetInInventory)
+        public void ReturnBack(bool hasSetInInventory = false)
         {
             HasOutArea = false;
             SetPosition(startTempPosition);

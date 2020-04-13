@@ -16,12 +16,12 @@ namespace Canvas.Cards.Services
 
         public void StartDragCard(IBaseCard baseCard)
         {
-            SignalBus.Fire(new OnStartDragCardSignal {BaseCard = baseCard});
+            SignalBus.Fire(new StartDragCardSignal {BaseCard = baseCard});
         } 
         
         public void EndDragCard(IBaseCard baseCard)
         {
-            SignalBus.Fire(new OnEndDragCardSignal {BaseCard = baseCard});
+            SignalBus.Fire(new EndDragCardSignal {BaseCard = baseCard});
         }
 
         public void ShowPopup(IBaseCard baseCard)

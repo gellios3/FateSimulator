@@ -15,8 +15,8 @@ namespace Canvas
             Container.DeclareSignal<ShowCardPopupSignal>(); 
             Container.DeclareSignal<ShowAspectPopupSignal>(); 
             Container.DeclareSignal<ShowActivityPopupSignal>(); 
-            Container.DeclareSignal<OnStartDragCardSignal>();
-            Container.DeclareSignal<OnEndDragCardSignal>();
+            Container.DeclareSignal<StartDragCardSignal>();
+            Container.DeclareSignal<EndDragCardSignal>();
             Container.DeclareSignal<CloseActivityPopupSignal>();
             
             Container.Bind<ShowAspectService>().AsSingle();

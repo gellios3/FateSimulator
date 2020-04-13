@@ -20,9 +20,9 @@ namespace AbstractViews
 
         [SerializeField] private Image bgImg;
 
-        public bool CanDropCard { get; private set; } = true;
+        protected bool CanDropCard { get; private set; } = true;
         
-        public DraggableView DropCardView { get; protected set; }
+        public DraggableView DropCardView { get;  set; }
 
         [SerializeField] protected ColorsPresetImage borderImg;
 

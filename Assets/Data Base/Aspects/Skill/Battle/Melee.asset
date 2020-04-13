@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1
   aspectName: Melee
-  aspectImg: {fileID: 0}
+  aspectDescription: 
+  aspectImg: {fileID: 21300000, guid: 3ae81557b9c86d747b92258f8ea5094f, type: 3}
   aspectType: 1
   skillType: 0
   level: 1

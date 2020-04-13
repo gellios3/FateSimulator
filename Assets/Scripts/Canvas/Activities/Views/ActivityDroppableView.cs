@@ -1,20 +1,11 @@
 ﻿using AbstractViews;
-using Canvas.Popups.Signals;
 using Enums;
 using UnityEngine.EventSystems;
-using Zenject;
 
 namespace Canvas.Activities.Views
 {
     public class ActivityDroppableView : DroppableView
     {
-        private SignalBus SignalBus { get; set; }
-
-        [Inject]
-        public void Construct(SignalBus signalBus)
-        {
-            SignalBus = signalBus;
-        }
 
         public void ReturnDropCard( )
         {
@@ -32,7 +23,6 @@ namespace Canvas.Activities.Views
             if (DropCardView == null)
                 return;
             DropCardView.HasActivate = true;
-            // DropCardView.Hide();
         }
     }
 }

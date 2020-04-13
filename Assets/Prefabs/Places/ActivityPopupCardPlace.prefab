@@ -64,7 +64,7 @@ MonoBehaviour:
   - status: 0
     color: {r: 1, g: 0.9254902, b: 0.7254902, a: 1}
   - status: 1
-    color: {r: 0, g: 0.49237692, b: 0.8018868, a: 1}
+    color: {r: 0.39013296, g: 0.90099996, b: 0.43757522, a: 1}
 --- !u!114 &7084255131861200591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,7 +93,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
-  borderWidth: 2
+  borderWidth: 3
   falloffDistance: 0.9
 --- !u!114 &9052411618728354624
 MonoBehaviour:
@@ -304,7 +304,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 60, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1579663873348066294
 CanvasRenderer:

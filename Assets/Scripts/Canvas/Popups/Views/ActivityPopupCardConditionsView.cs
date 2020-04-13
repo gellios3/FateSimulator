@@ -16,10 +16,12 @@ namespace Canvas.Popups.Views
             var cardConditions = baseActivity.GetCardConditions();
             for (byte i = 0; i < cardConditions.Count; i++)
             {
+                if (i == 0)
+                {
+                    droppableViews[i].DropCardView = startActionCard;
+                }
                 droppableViews[i].Init(cardConditions[i] as ICardCondition);
             }
-
-            startActionCard.SetPosition(droppableViews[0].transform.position);
         }
     }
 }

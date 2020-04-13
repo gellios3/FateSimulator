@@ -12,18 +12,22 @@ namespace Canvas.Popups.Views
 
         [SerializeField] private Button closeBtn;
 
+        private SignalBus SignalBus { get; set; }
+
         private ActivityView sourceActivityView;
 
         [Inject]
         public void Construct(SignalBus signalBus)
         {
-            signalBus.Subscribe<ShowActivityPopupSignal>(ShowActivityPopup);
+            SignalBus = signalBus;
+            SignalBus.Subscribe<ShowActivityPopupSignal>(ShowActivityPopup);
             closeBtn.onClick.AddListener(OnClosePopup);
         }
 
         private void OnClosePopup()
         {
             sourceActivityView.ReturnToNormalStatus(true);
+            SignalBus.Fire(new CloseActivityPopupSignal());
             gameObject.SetActive(false);
         }
 

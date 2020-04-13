@@ -2,7 +2,7 @@
 
 namespace Canvas.Cards.Signals
 {
-    public class OnStartDragCardSignal
+    public class EndDragCardSignal
     {
         public IBaseCard BaseCard;
     }

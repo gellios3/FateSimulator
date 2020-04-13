@@ -30,8 +30,8 @@ namespace Canvas.Activities.Views
         [Inject]
         public void Construct(SignalBus signalBus)
         {
-            signalBus.Subscribe<OnStartDragCardSignal>(OnStartDragCard);
-            signalBus.Subscribe<OnEndDragCardSignal>(OnEndDragCard);
+            signalBus.Subscribe<StartDragCardSignal>(OnStartDragCard);
+            signalBus.Subscribe<EndDragCardSignal>(OnEndDragCard);
             signalBus.Subscribe<ShowActivityPopupSignal>(() => ReturnToNormalStatus());
         }
 
@@ -58,7 +58,7 @@ namespace Canvas.Activities.Views
         /// On end drag card
         /// </summary>
         /// <param name="obj"></param>
-        private void OnEndDragCard(OnEndDragCardSignal obj)
+        private void OnEndDragCard(EndDragCardSignal obj)
         {
             ReturnToNormalStatus();
         }
@@ -67,7 +67,7 @@ namespace Canvas.Activities.Views
         /// Start drag card
         /// </summary>
         /// <param name="obj"></param>
-        private void OnStartDragCard(OnStartDragCardSignal obj)
+        private void OnStartDragCard(StartDragCardSignal obj)
         {
             FoundActivity = activityService.GetActivityByActivity(obj.BaseCard);
             if (FoundActivity != null)
