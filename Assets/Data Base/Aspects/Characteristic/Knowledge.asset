@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2
   aspectName: Knowledge
-  aspectImg: {fileID: 0}
+  aspectDescription: 
+  aspectImg: {fileID: 21300000, guid: 0278004276bef2043940de70a939db1c, type: 3}
   aspectType: 0
   characteristicType: 1

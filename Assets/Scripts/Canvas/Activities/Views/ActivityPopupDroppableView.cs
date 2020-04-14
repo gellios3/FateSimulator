@@ -11,6 +11,9 @@ using Zenject;
 
 namespace Canvas.Activities.Views
 {
+    /// <summary>
+    /// Activity popup Droppable Card View
+    /// </summary>
     public class ActivityPopupDroppableView : DroppableView
     {
         [SerializeField] private TextMeshProUGUI title;

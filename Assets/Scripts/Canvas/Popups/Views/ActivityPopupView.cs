@@ -6,6 +6,9 @@ using Zenject;
 
 namespace Canvas.Popups.Views
 {
+    /// <summary>
+    /// Activity popup view
+    /// </summary>
     public class ActivityPopupView : MonoBehaviour
     {
         [SerializeField] private ActivityPopupCardConditionsView conditionsView;

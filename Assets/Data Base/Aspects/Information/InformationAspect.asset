@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   aspectName: InformationAspect
-  aspectImg: {fileID: 0}
+  aspectDescription: 
+  aspectImg: {fileID: 21300000, guid: e5d3dc369e16ea24083a2de5acfca75b, type: 3}
   aspectType: 7
   popupDescription: InformationAspect Description
   popupImg: {fileID: 0}

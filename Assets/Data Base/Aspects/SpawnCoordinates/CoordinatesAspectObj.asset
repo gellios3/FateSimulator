@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   aspectName: CoordinatesAspectObj
-  aspectImg: {fileID: 0}
+  aspectDescription: 
+  aspectImg: {fileID: 21300000, guid: b8733f87f9d57f94392861f81f237e9d, type: 3}
   aspectType: 5
   coordinate:
     terrainPos: {x: 1, y: 2}

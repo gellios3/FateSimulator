@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   posOnTable: {x: -400, y: 400}
-  cardName: MeleeSkillCard
-  shortDescription: MeleeSkillCard
+  cardName: Melee Skill Card
+  shortDescription: Melee Skill Card
   type: 5
   level: 1
   backgroundColor: {r: 0.764151, g: 0.5454418, b: 0.36405307, a: 1}
