@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using Canvas.Cards.Interfaces;
 using Canvas.Cards.Services;
+using DG.Tweening;
 using Enums;
 using Interfaces.Cards;
 using Serializable;
@@ -14,7 +16,7 @@ namespace Canvas.Cards.Views
     /// <summary>
     /// Card View
     /// </summary>
-    public class CardView : MonoBehaviour
+    public class CardView : MonoBehaviour, ICardView
     {
         #region Parameters
 
@@ -29,7 +31,12 @@ namespace Canvas.Cards.Views
 
         [SerializeField] private List<StatusAppearance> appearances;
 
+        [SerializeField] private ColorsPresetImage borderImg;
+
         [SerializeField] private CardStatus currentStatus;
+
+        public GameObject GameObject => gameObject;
+        public IBaseCard BaseCard { get; private set; }
 
         [Inject] private CardAppearanceService CardAppearanceService { get; }
 
@@ -40,6 +47,7 @@ namespace Canvas.Cards.Views
         [Inject]
         public void Construct(IBaseCard cardObj)
         {
+            BaseCard = cardObj;
         }
 
         private void Start()
@@ -57,6 +65,13 @@ namespace Canvas.Cards.Views
             iconImg.color = new Color(
                 exhaustionAppear.color.r, exhaustionAppear.color.g, exhaustionAppear.color.b, 0.65f
             );
+        }
+
+        public void HighlightCard()
+        {
+            const float animDuration = 0.5f;
+            borderImg.PlayHighlightAnim(animDuration);
+            transform.DOScale(1.1f, animDuration).onComplete += () => { transform.DOScale(1f, animDuration); };
         }
 
         public void SetCardView(IBaseCard cardObj)
@@ -78,7 +93,7 @@ namespace Canvas.Cards.Views
         {
             transform.position = pos;
         }
-        
+
         public void ReturnDefaultCartShadow()
         {
             mask.transform.localPosition = new Vector3(defaultMask.x, defaultMask.y, defaultMask.z);
@@ -90,7 +105,7 @@ namespace Canvas.Cards.Views
             mask.localPosition = Vector3.zero;
             mask.sizeDelta = GetComponent<RectTransform>().sizeDelta;
         }
-        
+
         private void SetDragCartShadow()
         {
             mask.sizeDelta = defaultSizeDelta;

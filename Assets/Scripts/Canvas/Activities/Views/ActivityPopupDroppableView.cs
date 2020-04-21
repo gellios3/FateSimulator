@@ -1,8 +1,8 @@
 ﻿using AbstractViews;
 using Canvas.Cards.Signals;
 using Canvas.Popups.Signals;
+using Canvas.Services;
 using Enums;
-using Interfaces.Cards;
 using Interfaces.Conditions.Cards;
 using TMPro;
 using UnityEngine;
@@ -12,11 +12,13 @@ using Zenject;
 namespace Canvas.Activities.Views
 {
     /// <summary>
-    /// Activity popup Droppable Card View
+    /// Activity popup Droppable Card container
     /// </summary>
-    public class ActivityPopupDroppableView : DroppableView
+    public class ActivityPopupDroppableView : DroppableView, IPointerDownHandler
     {
         [SerializeField] private TextMeshProUGUI title;
+
+        [Inject] private ConditionsService ConditionsService { get; }
 
         private ICardCondition conditionObj;
 
@@ -31,9 +33,13 @@ namespace Canvas.Activities.Views
             SignalBus.Subscribe<CloseActivityPopupSignal>(OnCloseActivityPopup);
         }
 
+        /// <summary>
+        /// On close popup 
+        /// </summary>
+        /// <param name="obj"></param>
         private void OnCloseActivityPopup(CloseActivityPopupSignal obj)
         {
-            if (DropCardView == null) 
+            if (DropCardView == null)
                 return;
             DropCardView.CanDraggable = true;
             DropCardView.ReturnBack();
@@ -41,52 +47,70 @@ namespace Canvas.Activities.Views
             borderImg.SetStatus(Status.Normal);
         }
 
+        /// <summary>
+        /// Override base on Drop
+        /// </summary>
+        /// <param name="eventData"></param>
         public override void OnDrop(PointerEventData eventData)
         {
             base.OnDrop(eventData);
-            DropCardView.CanDraggable = false;
+            if (DropCardView != null)
+                DropCardView.CanDraggable = false;
         }
 
+        /// <summary>
+        /// On end drag some card
+        /// </summary>
+        /// <param name="obj"></param>
         private void OnEndDragCard(EndDragCardSignal obj)
         {
             if (conditionObj == null)
                 return;
+            if (DropCardView == null)
+                SetDroppable(true);
             borderImg.SetStatus(Status.Normal);
         }
 
+        /// <summary>
+        /// On start drag some card
+        /// </summary>
+        /// <param name="obj"></param>
         private void OnStartDragCard(StartDragCardSignal obj)
         {
             if (conditionObj == null)
                 return;
-            switch (conditionObj)
-            {
-                case ICharacteristicCardCondition charCondition when obj.BaseCard is ICharacteristicCard charCard:
-                    SetDroppable(charCondition.CharacteristicType == charCard.CharacteristicType);
-                    break;
-                default:
-                    SetDroppable(conditionObj.CardType == obj.BaseCard.Type);
-                    break;
-            }
-
+            SetDroppable(ConditionsService.CheckCondition(conditionObj, obj.BaseCard));
             if (CanDropCard)
                 borderImg.SetStatus(Status.Highlighted);
         }
 
+        /// <summary>
+        /// On hide 
+        /// </summary>
         private void OnDisable()
         {
             conditionObj = null;
         }
 
+        /// <summary>
+        /// Init popup
+        /// </summary>
+        /// <param name="cardConditionObj"></param>
         public void Init(ICardCondition cardConditionObj)
         {
             conditionObj = cardConditionObj;
             gameObject.SetActive(true);
             title.text = cardConditionObj.Title;
 
-            if (DropCardView == null) 
+            if (DropCardView == null)
                 return;
             DropCardView.CanDraggable = false;
             DropCardView.SetPosition(transform.position);
+        }
+
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            SignalBus.Fire(new FindCardForActivitySignal {Condition = conditionObj});
         }
     }
 }

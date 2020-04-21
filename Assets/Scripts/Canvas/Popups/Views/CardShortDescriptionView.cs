@@ -13,13 +13,9 @@ namespace Canvas.Popups.Views
     public class CardShortDescriptionView : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI titleTxt;
-
         [SerializeField] private TextMeshProUGUI descriptionTxt;
-
         [SerializeField] private Image iconBg;
-
         [SerializeField] private Image iconImg;
-
         [SerializeField] private AspectsBarView aspectsBarView;
 
         private SignalBus SignalBus { get; set; }

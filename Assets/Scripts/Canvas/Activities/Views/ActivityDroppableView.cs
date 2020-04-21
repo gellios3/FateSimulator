@@ -1,6 +1,5 @@
 ﻿using AbstractViews;
 using Enums;
-using UnityEngine.EventSystems;
 
 namespace Canvas.Activities.Views
 {
@@ -13,16 +12,8 @@ namespace Canvas.Activities.Views
                 return;
             borderImg.SetStatus(Status.Normal);
             DropCardView.Show();
-            DropCardView.ReturnBack(false);
+            DropCardView.ReturnBack();
             DropCardView = null;
-        }
-
-        public override void OnDrop(PointerEventData eventData)
-        {
-            base.OnDrop(eventData);
-            if (DropCardView == null)
-                return;
-            DropCardView.HasActivate = true;
         }
     }
 }

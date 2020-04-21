@@ -12,8 +12,8 @@ namespace Canvas.Popups.Views
     public class ActivityPopupView : MonoBehaviour
     {
         [SerializeField] private ActivityPopupCardConditionsView conditionsView;
-
         [SerializeField] private Button closeBtn;
+        [SerializeField] private Button startActivityBtn;
 
         private SignalBus SignalBus { get; set; }
 
@@ -25,6 +25,14 @@ namespace Canvas.Popups.Views
             SignalBus = signalBus;
             SignalBus.Subscribe<ShowActivityPopupSignal>(ShowActivityPopup);
             closeBtn.onClick.AddListener(OnClosePopup);
+            startActivityBtn.gameObject.SetActive(true);
+
+            conditionsView.AllConditionsDone += OnAllConditionsDone;
+        }
+
+        private void OnAllConditionsDone()
+        {
+            startActivityBtn.gameObject.SetActive(true);
         }
 
         private void OnClosePopup()
@@ -38,6 +46,7 @@ namespace Canvas.Popups.Views
         {
             gameObject.SetActive(true);
             sourceActivityView = obj.SourceActivity;
+            startActivityBtn.gameObject.SetActive(false);
             conditionsView.Init(sourceActivityView.FoundActivity, obj.StartActionCard);
         }
     }

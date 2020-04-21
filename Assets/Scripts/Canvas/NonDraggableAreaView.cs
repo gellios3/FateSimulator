@@ -1,11 +1,10 @@
-﻿using AbstractViews;
-using Canvas.Cards.Views;
+﻿using Canvas.Cards.Views;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace Canvas
 {
-    public class DraggableAreaView : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    public class NonDraggableAreaView : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         private DraggableView tempDraggable;
 
@@ -14,14 +13,11 @@ namespace Canvas
             if (eventData.pointerDrag == null)
                 return;
             var draggableView = eventData.pointerDrag.GetComponent<DraggableView>();
-            if (draggableView != null)
-            {
-                draggableView.CanDraggable = false;
-                draggableView.HasOutArea = true;
-                // draggableView.CallEndDrag();
-            
-                tempDraggable = draggableView;
-            }
+            if (draggableView == null) 
+                return;
+            draggableView.CanDraggable = false;
+            draggableView.HasOutArea = true;
+            tempDraggable = draggableView;
         }
 
         public void OnPointerExit(PointerEventData eventData)

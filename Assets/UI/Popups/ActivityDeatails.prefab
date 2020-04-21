@@ -911,6 +911,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   conditionsView: {fileID: 5460897185379974482}
   closeBtn: {fileID: 7947121126938000383}
+  startActivityBtn: {fileID: 3084890179492738844}
 --- !u!1 &5727077289981873979
 GameObject:
   m_ObjectHideFlags: 0

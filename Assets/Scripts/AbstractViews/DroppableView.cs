@@ -1,16 +1,16 @@
 ﻿using System;
 using Canvas;
-using Canvas.Cards.Models;
 using Canvas.Cards.Views;
 using Enums;
-using Interfaces.Cards;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using UnityEngine.UI.ProceduralImage;
 
 namespace AbstractViews
 {
+    /// <summary>
+    /// Visible card on the table
+    /// </summary>
     public class DroppableView : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
     {
         /// <summary>

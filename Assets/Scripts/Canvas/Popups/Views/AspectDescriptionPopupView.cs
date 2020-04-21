@@ -7,17 +7,18 @@ using Zenject;
 
 namespace Canvas.Popups.Views
 {
+    /// <summary>
+    /// Aspect popup
+    /// </summary>
     public class AspectDescriptionPopupView : MonoBehaviour
     {
-        private SignalBus SignalBus { get; set; }
-
         [SerializeField] private Image icon;
-
         [SerializeField] private TextMeshProUGUI title;
         [SerializeField] private TextMeshProUGUI description;
         [SerializeField] private Button closeBtn;
 
         private IBaseAspect BaseAspect { get; set; }
+        private SignalBus SignalBus { get; set; }
 
         [Inject]
         public void Construct(SignalBus signalBus)

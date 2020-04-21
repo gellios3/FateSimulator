@@ -660,6 +660,7 @@ MonoBehaviour:
     color: {r: 0.45, g: 0.45, b: 0.45, a: 1}
   - cardStatus: 0
     color: {r: 1, g: 1, b: 1, a: 1}
+  borderImg: {fileID: 896357044205551176}
   currentStatus: 0
 --- !u!1 &7788376385360943175
 GameObject:
@@ -671,6 +672,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8575013999218509091}
   - component: {fileID: 6738753095614489093}
+  - component: {fileID: 896357044205551176}
   - component: {fileID: 474931635647560140}
   - component: {fileID: 9114823258183515260}
   m_Layer: 5
@@ -707,6 +709,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7788376385360943175}
   m_CullTransparentMesh: 0
+--- !u!114 &896357044205551176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7788376385360943175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4cfd88fc4d04e22b233aa4b67eb73cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sourceImg: {fileID: 474931635647560140}
+  presets:
+  - status: 0
+    color: {r: 0.3254902, g: 0.34117648, b: 0.49019608, a: 1}
+  - status: 1
+    color: {r: 0.14901958, g: 0.9137255, b: 0.28201133, a: 1}
 --- !u!114 &474931635647560140
 MonoBehaviour:
   m_ObjectHideFlags: 0

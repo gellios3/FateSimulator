@@ -869,7 +869,7 @@ MonoBehaviour:
   - status: 0
     color: {r: 1, g: 1, b: 1, a: 0.8509804}
   - status: 1
-    color: {r: 0.703, g: 0.95, b: 0.9424, a: 0.9019608}
+    color: {r: 0.1888549, g: 0.9490196, b: 0.9248873, a: 0.9019608}
 --- !u!114 &7319220828440099966
 MonoBehaviour:
   m_ObjectHideFlags: 0

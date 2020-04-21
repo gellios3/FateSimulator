@@ -1,5 +1,7 @@
 ﻿using AbstractViews;
+using Canvas.Cards.Interfaces;
 using Canvas.Cards.Services;
+using Canvas.Popups.Signals;
 using Interfaces.Cards;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,27 +10,29 @@ using Zenject;
 
 namespace Canvas.Cards.Views
 {
+    /// <summary>
+    /// Not visible but draggable card on the table 
+    /// </summary>
     public class DraggableView : BaseItem, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         #region Parameters
-        
+
         public bool CanDraggable { private get; set; } = true;
         private bool HasDrop { get; set; }
         public bool HasOutArea { get; set; }
         private bool HasSetInInventory { get; set; }
         private bool HasStartDrag { get; set; }
-        public bool HasActivate { get; set; }
 
         public Vector3 startTempPosition;
 
         [SerializeField] private Button openPopupBtn;
 
-        private CardView TopCard { get; set; }
+        private ICardView TopCard { get; set; }
 
         private IBaseCard CardObj { get; set; }
 
         [Inject] public DraggableCardService DraggableCardService { get; }
-        
+
         #endregion
 
         [Inject]
@@ -47,25 +51,26 @@ namespace Canvas.Cards.Views
                 }
             });
         }
-        
-        public void Init(CardView topCard, IBaseCard cardObj)
+
+        public void Init(ICardView topCard, IBaseCard cardObj)
         {
             CardObj = cardObj;
             TopCard = topCard;
             TopCard.SetCardPosition(transform.position);
             TopCard.SetCardView(cardObj);
+            DraggableCardService.AddCardView(TopCard);
         }
 
         public void Hide()
         {
             gameObject.SetActive(false);
-            TopCard.gameObject.SetActive(false);
+            TopCard.GameObject.SetActive(false);
         }
 
         public void Show()
         {
             gameObject.SetActive(true);
-            TopCard.gameObject.SetActive(true);
+            TopCard.GameObject.SetActive(true);
         }
 
         /// <summary>
@@ -90,15 +95,12 @@ namespace Canvas.Cards.Views
 
             HasDrop = false;
             HasStartDrag = true;
-            HasActivate = false;
 
             DraggableCardService.StartDragCard(CardObj);
 
-            TopCard.gameObject.SetActive(true);
+            TopCard.GameObject.SetActive(true);
             startTempPosition = transform.position;
-            var cardView = TopCard.GetComponent<CardView>();
-            if (cardView != null)
-                cardView.OnStartDragCard();
+            TopCard.OnStartDragCard();
         }
 
         /// <inheritdoc />
@@ -123,8 +125,8 @@ namespace Canvas.Cards.Views
         {
             HasStartDrag = false;
 
-            if (HasDrop)
-                return;
+            // if (HasDrop)
+            //     return;
 
             if (HasOutArea)
             {
@@ -134,8 +136,8 @@ namespace Canvas.Cards.Views
 
             HasSetInInventory = false;
 
-            if (!CanDraggable)
-                return;
+            // if (!CanDraggable)
+            //     return;
 
             EndDrag();
         }
@@ -147,14 +149,11 @@ namespace Canvas.Cards.Views
         {
             HasOutArea = false;
             SetPosition(startTempPosition);
-            var cardView = TopCard.GetComponent<CardView>();
-            if (cardView == null) 
-                return;
             HasSetInInventory = hasSetInInventory;
             if (hasSetInInventory)
-                cardView.HideCartShadow();
+                TopCard.HideCartShadow();
             else
-                cardView.ReturnDefaultCartShadow();
+                TopCard.ReturnDefaultCartShadow();
         }
 
         /// <summary>
@@ -162,27 +161,26 @@ namespace Canvas.Cards.Views
         /// </summary>
         public void OnDropCard()
         {
-            var cardView = TopCard.GetComponent<CardView>();
-            if (cardView == null) 
-                return;
             HasDrop = true;
             HasSetInInventory = true;
             TopCard.SetCardPosition(transform.position);
-            cardView.HideCartShadow();
+            TopCard.HideCartShadow();
         }
-        
+
+        /// <summary>
+        /// On end drag card
+        /// </summary>
         private void EndDrag()
         {
             DraggableCardService.EndDragCard(CardObj);
-            var cardView = TopCard.GetComponent<CardView>();
+            if (HasDrop) 
+                return;
             if (!HasOutArea)
                 CanDraggable = true;
-            if (cardView != null)
-            {
-                cardView.ReturnDefaultCartShadow();
-            }
+
+            TopCard.ReturnDefaultCartShadow();
         }
-        
+
         /// <summary>
         /// Get World position on plane
         /// </summary>
@@ -199,6 +197,9 @@ namespace Canvas.Cards.Views
             return ray.GetPoint(distance);
         }
 
+        /// <summary>
+        /// Zenject Factory for Instantiate
+        /// </summary>
         public class Factory : PlaceholderFactory<IBaseCard, DraggableView>
         {
         }

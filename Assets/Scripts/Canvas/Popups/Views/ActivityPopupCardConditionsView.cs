@@ -8,12 +8,17 @@ using UnityEngine;
 
 namespace Canvas.Popups.Views
 {
+    /// <summary>
+    /// Card conditions view for Activity popup
+    /// </summary>
     public class ActivityPopupCardConditionsView : MonoBehaviour
     {
         [SerializeField] private List<ActivityPopupDroppableView> droppableViews;
 
         private byte needCardsCount;
         private byte dropCardsCount;
+
+        public event Action AllConditionsDone; 
 
         private void Start()
         {
@@ -24,7 +29,7 @@ namespace Canvas.Popups.Views
                     dropCardsCount++;
                     if (dropCardsCount == needCardsCount)
                     {
-                        Debug.LogError("Show Start Activity");
+                        AllConditionsDone?.Invoke();
                     }
                 };
             }
