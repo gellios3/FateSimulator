@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using AbstractViews;
 using DG.Tweening;
 using Enums;
 using Serializable.Common;
@@ -11,7 +12,7 @@ namespace Canvas
     /// <summary>
     /// Color preset Image 
     /// </summary>
-    public class ColorsPresetImage : MonoBehaviour
+    public class ColorsPresetImage : BaseView
     {
         [SerializeField] private Image sourceImg;
         [SerializeField] private List<ColorPreset> presets;

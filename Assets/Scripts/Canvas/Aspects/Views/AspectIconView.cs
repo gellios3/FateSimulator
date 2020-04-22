@@ -1,4 +1,5 @@
-﻿using Canvas.Aspects.Services;
+﻿using AbstractViews;
+using Canvas.Aspects.Services;
 using Interfaces.Aspects;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,7 +7,7 @@ using Zenject;
 
 namespace Canvas.Aspects.Views
 {
-    public class AspectIconView : MonoBehaviour
+    public class AspectIconView : BaseView
     {
         [SerializeField] private Image aspectImg;
 

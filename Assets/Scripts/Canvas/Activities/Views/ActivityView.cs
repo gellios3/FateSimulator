@@ -16,7 +16,7 @@ namespace Canvas.Activities.Views
     /// <summary>
     /// Activity view
     /// </summary>
-    public class ActivityView : MonoBehaviour
+    public class ActivityView : BaseView
     {
         [SerializeField] private ActivityDroppableView droppableView;
 

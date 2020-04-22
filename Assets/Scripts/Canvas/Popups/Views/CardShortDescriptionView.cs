@@ -1,4 +1,5 @@
-﻿using Canvas.Aspects.Views;
+﻿using AbstractViews;
+using Canvas.Aspects.Views;
 using Canvas.Popups.Signals;
 using TMPro;
 using UnityEngine;
@@ -10,7 +11,7 @@ namespace Canvas.Popups.Views
     /// <summary>
     /// Card short description view
     /// </summary>
-    public class CardShortDescriptionView : MonoBehaviour
+    public class CardShortDescriptionView : BaseView
     {
         [SerializeField] private TextMeshProUGUI titleTxt;
         [SerializeField] private TextMeshProUGUI descriptionTxt;
@@ -23,7 +24,7 @@ namespace Canvas.Popups.Views
         [Inject]
         public void Construct(SignalBus signalBus)
         {
-            gameObject.SetActive(false);
+            Hide();
             SignalBus = signalBus;
             SignalBus.Subscribe<ShowCardPopupSignal>(ShowCardPopup);
         }
@@ -34,7 +35,7 @@ namespace Canvas.Popups.Views
         /// <param name="args"></param>
         private void ShowCardPopup(ShowCardPopupSignal args)
         {
-            gameObject.SetActive(true);
+            Show();
             var cardObj = args.BaseCard;
             titleTxt.text = cardObj.CardName;
             descriptionTxt.text = cardObj.ShortDescription;

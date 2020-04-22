@@ -1,10 +1,10 @@
-﻿using Canvas.Cards.Views;
-using UnityEngine;
+﻿using AbstractViews;
+using Canvas.Cards.Views;
 using UnityEngine.EventSystems;
 
 namespace Canvas
 {
-    public class NonDraggableAreaView : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    public class NonDraggableAreaView : BaseView, IPointerEnterHandler, IPointerExitHandler
     {
         private DraggableView tempDraggable;
 

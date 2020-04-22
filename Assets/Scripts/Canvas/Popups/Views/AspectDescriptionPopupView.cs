@@ -1,4 +1,5 @@
-﻿using Canvas.Popups.Signals;
+﻿using AbstractViews;
+using Canvas.Popups.Signals;
 using Interfaces.Aspects;
 using TMPro;
 using UnityEngine;
@@ -10,7 +11,7 @@ namespace Canvas.Popups.Views
     /// <summary>
     /// Aspect popup
     /// </summary>
-    public class AspectDescriptionPopupView : MonoBehaviour
+    public class AspectDescriptionPopupView : BaseView
     {
         [SerializeField] private Image icon;
         [SerializeField] private TextMeshProUGUI title;
@@ -23,21 +24,25 @@ namespace Canvas.Popups.Views
         [Inject]
         public void Construct(SignalBus signalBus)
         {
-            gameObject.SetActive(false);
+            Hide();
             SignalBus = signalBus;
-            SignalBus.Subscribe<ShowAspectPopupSignal>(ShowAspectPopup);
+            SignalBus.Subscribe<ShowAspectPopupSignal>(OnShowAspectPopup);
             
-            closeBtn.onClick.AddListener(() => gameObject.SetActive(false));
+            closeBtn.onClick.AddListener(Hide);
         }
 
-        private void ShowAspectPopup(ShowAspectPopupSignal signal)
+        /// <summary>
+        /// Show Aspect popup
+        /// </summary>
+        /// <param name="signal"></param>
+        private void OnShowAspectPopup(ShowAspectPopupSignal signal)
         {
             BaseAspect = signal.BaseAspectObj;
 
             title.text = BaseAspect.AspectName;
             description.text = BaseAspect.AspectDescription;
             icon.sprite = BaseAspect.AspectImg;
-            gameObject.SetActive(true);
+            Show();
         }
     }
 }

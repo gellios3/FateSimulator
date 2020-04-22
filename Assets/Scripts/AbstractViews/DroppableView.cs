@@ -11,7 +11,7 @@ namespace AbstractViews
     /// <summary>
     /// Visible card on the table
     /// </summary>
-    public class DroppableView : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
+    public class DroppableView : BaseView, IDropHandler, IPointerEnterHandler, IPointerExitHandler
     {
         /// <summary>
         /// On Card drop

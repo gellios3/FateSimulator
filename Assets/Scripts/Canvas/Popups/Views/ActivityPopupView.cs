@@ -1,5 +1,5 @@
-﻿using Canvas.Activities.Views;
-using Canvas.Popups.Signals;
+﻿using AbstractViews;
+using Canvas.Activities.Views;
 using Canvas.Popups.Signals.Activity;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,11 +10,12 @@ namespace Canvas.Popups.Views
     /// <summary>
     /// Activity popup view
     /// </summary>
-    public class ActivityPopupView : MonoBehaviour
+    public class ActivityPopupView : BaseView
     {
         [SerializeField] private ActivityPopupCardConditionsView conditionsView;
         [SerializeField] private Button closeBtn;
-        [SerializeField] private Button startActivityBtn;
+        [SerializeField] private CustomButton startActivityBtn;
+        [SerializeField] private ActivityTimerView activityTimer;
 
         private SignalBus SignalBus { get; set; }
 
@@ -26,9 +27,7 @@ namespace Canvas.Popups.Views
             SignalBus = signalBus;
             SignalBus.Subscribe<ShowActivityPopupSignal>(ShowActivityPopup);
             closeBtn.onClick.AddListener(OnClosePopup);
-            startActivityBtn.gameObject.SetActive(true);
             startActivityBtn.onClick.AddListener(OnStartActivity);
-
             conditionsView.AllConditionsDone += OnAllConditionsDone;
         }
 
@@ -37,7 +36,7 @@ namespace Canvas.Popups.Views
         /// </summary>
         private void OnStartActivity()
         {
-            gameObject.SetActive(false);
+            Hide();
         }
 
         /// <summary>
@@ -45,17 +44,26 @@ namespace Canvas.Popups.Views
         /// </summary>
         private void OnClosePopup()
         {
-            sourceActivityView.ReturnToNormalStatus(true);
             SignalBus.Fire(new CloseActivityPopupSignal());
-            gameObject.SetActive(false);
+            Hide();
         }
-        
+
+        /// <summary>
+        /// Hide popup
+        /// </summary>
+        public override void Hide()
+        {
+            base.Hide();
+            if (sourceActivityView != null)
+                sourceActivityView.ReturnToNormalStatus(true);
+        }
+
         /// <summary>
         /// On all conditions done
         /// </summary>
         private void OnAllConditionsDone()
         {
-            startActivityBtn.gameObject.SetActive(true);
+            startActivityBtn.Show();
         }
 
         /// <summary>
@@ -64,10 +72,14 @@ namespace Canvas.Popups.Views
         /// <param name="obj"></param>
         private void ShowActivityPopup(ShowActivityPopupSignal obj)
         {
-            gameObject.SetActive(true);
+            Show();
             sourceActivityView = obj.SourceActivity;
-            startActivityBtn.gameObject.SetActive(false);
+            startActivityBtn.Hide();
+            // Init conditions
             conditionsView.Init(sourceActivityView.FoundActivity, obj.StartActionCard);
+            // Init timer
+            activityTimer.Init(sourceActivityView.FoundActivity.ActivityDuration);
+            activityTimer.Hide();
         }
     }
 }

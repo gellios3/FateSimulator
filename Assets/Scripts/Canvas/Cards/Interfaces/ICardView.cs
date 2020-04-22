@@ -1,12 +1,11 @@
-﻿using Interfaces.Cards;
+﻿using Interfaces;
+using Interfaces.Cards;
 using UnityEngine;
 
 namespace Canvas.Cards.Interfaces
 {
-    public interface ICardView
+    public interface ICardView: IBaseView
     {
-        GameObject GameObject { get; }
-        
         IBaseCard BaseCard { get; }
         
         void SetCardPosition(Vector3 pos);

@@ -13,6 +13,10 @@ namespace Canvas.Aspects.Services
             SignalBus = signalBus;
         }
 
+        /// <summary>
+        /// Show popup
+        /// </summary>
+        /// <param name="baseAspect"></param>
         public void ShowPopup(IBaseAspect baseAspect)
         {
             SignalBus.Fire(new ShowAspectPopupSignal {BaseAspectObj = baseAspect});

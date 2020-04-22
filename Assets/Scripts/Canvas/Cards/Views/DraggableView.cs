@@ -1,7 +1,6 @@
 ﻿using AbstractViews;
 using Canvas.Cards.Interfaces;
 using Canvas.Cards.Services;
-using Canvas.Popups.Signals;
 using Interfaces.Cards;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -13,7 +12,7 @@ namespace Canvas.Cards.Views
     /// <summary>
     /// Not visible but draggable card on the table 
     /// </summary>
-    public class DraggableView : BaseItem, IBeginDragHandler, IDragHandler, IEndDragHandler
+    public class DraggableView : BaseView, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         #region Parameters
 
@@ -52,6 +51,11 @@ namespace Canvas.Cards.Views
             });
         }
 
+        /// <summary>
+        /// Init draggable
+        /// </summary>
+        /// <param name="topCard"></param>
+        /// <param name="cardObj"></param>
         public void Init(ICardView topCard, IBaseCard cardObj)
         {
             CardObj = cardObj;
@@ -61,16 +65,16 @@ namespace Canvas.Cards.Views
             DraggableCardService.AddCardView(TopCard);
         }
 
-        public void Hide()
+        public override void Hide()
         {
-            gameObject.SetActive(false);
-            TopCard.GameObject.SetActive(false);
+            base.Hide();
+            TopCard.Hide();
         }
 
-        public void Show()
+        public override void Show()
         {
-            gameObject.SetActive(true);
-            TopCard.GameObject.SetActive(true);
+            base.Show();
+            TopCard.Show();
         }
 
         /// <summary>
@@ -98,7 +102,7 @@ namespace Canvas.Cards.Views
 
             DraggableCardService.StartDragCard(CardObj);
 
-            TopCard.GameObject.SetActive(true);
+            TopCard.Show();
             startTempPosition = transform.position;
             TopCard.OnStartDragCard();
         }

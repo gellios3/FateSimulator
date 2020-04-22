@@ -2,7 +2,7 @@
 
 namespace AbstractViews
 {
-    public abstract class HandItemView : BaseItem, IPointerEnterHandler, IPointerExitHandler
+    public abstract class HandViewView : BaseView, IPointerEnterHandler, IPointerExitHandler
     {
 
         /// <summary>

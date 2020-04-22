@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using AbstractViews;
 using Canvas.Activities.Views;
 using Canvas.Cards.Views;
 using Interfaces.Activity;
@@ -11,7 +12,7 @@ namespace Canvas.Popups.Views
     /// <summary>
     /// Card conditions view for Activity popup
     /// </summary>
-    public class ActivityPopupCardConditionsView : MonoBehaviour
+    public class ActivityPopupCardConditionsView : BaseView
     {
         [SerializeField] private List<ActivityPopupDroppableView> droppableViews;
 

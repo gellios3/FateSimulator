@@ -1,4 +1,5 @@
-﻿using Interfaces.Cards;
+﻿using AbstractViews;
+using Interfaces.Cards;
 using UnityEngine;
 using Zenject;
 
@@ -7,7 +8,7 @@ namespace Canvas.Aspects.Views
     /// <summary>
     /// Aspect bar view
     /// </summary>
-    public class AspectsBarView : MonoBehaviour
+    public class AspectsBarView : BaseView
     {
         [Inject] private AspectsSpawner AspectsSpawner { get; }
         

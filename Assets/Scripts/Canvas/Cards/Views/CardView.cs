@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using AbstractViews;
 using Canvas.Cards.Interfaces;
 using Canvas.Cards.Services;
 using DG.Tweening;
@@ -16,7 +17,7 @@ namespace Canvas.Cards.Views
     /// <summary>
     /// Card View
     /// </summary>
-    public class CardView : MonoBehaviour, ICardView
+    public class CardView : BaseView, ICardView
     {
         #region Parameters
 

@@ -1,6 +1,5 @@
 ﻿using AbstractViews;
 using Canvas.Cards.Signals;
-using Canvas.Popups.Signals;
 using Canvas.Popups.Signals.Activity;
 using Canvas.Services;
 using Enums;
@@ -100,7 +99,7 @@ namespace Canvas.Activities.Views
         public void Init(ICardCondition cardConditionObj)
         {
             conditionObj = cardConditionObj;
-            gameObject.SetActive(true);
+            Show();
             title.text = cardConditionObj.Title;
 
             if (DropCardView == null)
