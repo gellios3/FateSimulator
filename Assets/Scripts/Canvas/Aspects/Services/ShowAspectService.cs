@@ -2,7 +2,7 @@
 using Interfaces.Aspects;
 using Zenject;
 
-namespace Canvas.Aspects.Servises
+namespace Canvas.Aspects.Services
 {
     public class ShowAspectService
     {

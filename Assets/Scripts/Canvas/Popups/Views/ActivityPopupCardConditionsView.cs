@@ -35,6 +35,11 @@ namespace Canvas.Popups.Views
             }
         }
 
+        /// <summary>
+        /// Init Card Conditions
+        /// </summary>
+        /// <param name="baseActivity"></param>
+        /// <param name="startActionCard"></param>
         public void Init(IBaseActivity baseActivity, DraggableView startActionCard)
         {
             var cardConditions = baseActivity.GetCardConditions();
@@ -50,7 +55,5 @@ namespace Canvas.Popups.Views
                 droppableViews[i].Init(cardConditions[i] as ICardCondition);
             }
         }
-        
-        
     }
 }

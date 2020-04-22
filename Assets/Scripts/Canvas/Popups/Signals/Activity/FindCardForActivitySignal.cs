@@ -1,6 +1,6 @@
 ﻿using Interfaces.Conditions.Cards;
 
-namespace Canvas.Popups.Signals
+namespace Canvas.Popups.Signals.Activity
 {
     public class FindCardForActivitySignal
     {

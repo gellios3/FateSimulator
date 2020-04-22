@@ -1,6 +1,7 @@
-﻿using Canvas.Aspects.Servises;
+﻿using Canvas.Aspects.Services;
 using Canvas.Cards.Signals;
 using Canvas.Popups.Signals;
+using Canvas.Popups.Signals.Activity;
 using Canvas.Services;
 using Zenject;
 
@@ -16,16 +17,26 @@ namespace Canvas
         {
             SignalBusInstaller.Install(Container);
 
+            InitActivitySignals();
+
             Container.DeclareSignal<ShowCardPopupSignal>(); 
-            Container.DeclareSignal<ShowAspectPopupSignal>(); 
-            Container.DeclareSignal<ShowActivityPopupSignal>(); 
-            Container.DeclareSignal<FindCardForActivitySignal>(); 
+            Container.DeclareSignal<ShowAspectPopupSignal>();
             Container.DeclareSignal<StartDragCardSignal>();
             Container.DeclareSignal<EndDragCardSignal>();
-            Container.DeclareSignal<CloseActivityPopupSignal>();
-            
+
             Container.Bind<ShowAspectService>().AsSingle();
             Container.Bind<ConditionsService>().AsSingle();
+        }
+
+        /// <summary>
+        /// Init Activity signals
+        /// </summary>
+        private void InitActivitySignals()
+        {
+            Container.DeclareSignal<ShowActivityPopupSignal>(); 
+            Container.DeclareSignal<FindCardForActivitySignal>(); 
+            Container.DeclareSignal<CloseActivityPopupSignal>();  
+            Container.DeclareSignal<StartActivitySignal>();
         }
     }
 }

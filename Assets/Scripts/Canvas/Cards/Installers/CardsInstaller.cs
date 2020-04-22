@@ -6,6 +6,9 @@ using Zenject;
 
 namespace Canvas.Cards.Installers
 {
+    /// <summary>
+    /// Card installer
+    /// </summary>
     public class CardsInstaller : MonoInstaller
     {
         [SerializeField] private GameObject cardPrefab;

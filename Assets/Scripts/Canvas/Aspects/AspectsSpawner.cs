@@ -5,6 +5,9 @@ using Zenject;
 
 namespace Canvas.Aspects
 {
+    /// <summary>
+    /// Aspects spawner
+    /// </summary>
     public class AspectsSpawner
     {
         [Inject] private Transform AspectParent { get; }
@@ -16,6 +19,10 @@ namespace Canvas.Aspects
             AspectIconFactory = aspectIconFactory;
         }
 
+        /// <summary>
+        /// Create aspects
+        /// </summary>
+        /// <param name="baseCard"></param>
         public void CreateAspects(IBaseCard baseCard)
         {
             foreach (var aspect in baseCard.AspectsList)

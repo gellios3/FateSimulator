@@ -1,6 +1,7 @@
 ﻿using AbstractViews;
 using Canvas.Cards.Signals;
 using Canvas.Popups.Signals;
+using Canvas.Popups.Signals.Activity;
 using Canvas.Services;
 using Enums;
 using Interfaces.Conditions.Cards;
@@ -108,6 +109,10 @@ namespace Canvas.Activities.Views
             DropCardView.SetPosition(transform.position);
         }
 
+        /// <summary>
+        /// On pointer down
+        /// </summary>
+        /// <param name="eventData"></param>
         public void OnPointerDown(PointerEventData eventData)
         {
             SignalBus.Fire(new FindCardForActivitySignal {Condition = conditionObj});

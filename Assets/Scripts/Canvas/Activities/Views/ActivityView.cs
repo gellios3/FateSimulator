@@ -2,6 +2,7 @@
 using Canvas.Activities.Services;
 using Canvas.Cards.Signals;
 using Canvas.Popups.Signals;
+using Canvas.Popups.Signals.Activity;
 using Enums;
 using Interfaces.Activity;
 using Interfaces.Cards;

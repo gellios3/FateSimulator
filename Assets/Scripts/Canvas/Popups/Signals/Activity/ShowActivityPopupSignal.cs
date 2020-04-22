@@ -1,7 +1,7 @@
 ﻿using Canvas.Activities.Views;
 using Canvas.Cards.Views;
 
-namespace Canvas.Popups.Signals
+namespace Canvas.Popups.Signals.Activity
 {
     public class ShowActivityPopupSignal
     {

@@ -67,6 +67,9 @@ namespace Canvas.Cards.Views
             );
         }
 
+        /// <summary>
+        /// Highlight card
+        /// </summary>
         public void HighlightCard()
         {
             const float animDuration = 0.5f;
@@ -74,6 +77,10 @@ namespace Canvas.Cards.Views
             transform.DOScale(1.1f, animDuration).onComplete += () => { transform.DOScale(1f, animDuration); };
         }
 
+        /// <summary>
+        /// Set card view
+        /// </summary>
+        /// <param name="cardObj"></param>
         public void SetCardView(IBaseCard cardObj)
         {
             iconImg.sprite = cardObj.CardIcon;
@@ -83,29 +90,45 @@ namespace Canvas.Cards.Views
             title.text = cardObj.CardName;
         }
 
+        /// <summary>
+        /// On start drag card
+        /// </summary>
         public void OnStartDragCard()
         {
             transform.SetAsLastSibling();
             SetDragCartShadow();
         }
 
+        /// <summary>
+        /// Set card position
+        /// </summary>
+        /// <param name="pos"></param>
         public void SetCardPosition(Vector3 pos)
         {
             transform.position = pos;
         }
 
+        /// <summary>
+        /// Return default cart shadow
+        /// </summary>
         public void ReturnDefaultCartShadow()
         {
             mask.transform.localPosition = new Vector3(defaultMask.x, defaultMask.y, defaultMask.z);
             mask.sizeDelta = defaultSizeDelta;
         }
 
+        /// <summary>
+        /// Hide cart shadow
+        /// </summary>
         public void HideCartShadow()
         {
             mask.localPosition = Vector3.zero;
             mask.sizeDelta = GetComponent<RectTransform>().sizeDelta;
         }
 
+        /// <summary>
+        /// Set drag cart shadow
+        /// </summary>
         private void SetDragCartShadow()
         {
             mask.sizeDelta = defaultSizeDelta;

@@ -6,6 +6,9 @@ using Zenject;
 
 namespace Canvas.Cards
 {
+    /// <summary>
+    /// Card draggable spawner
+    /// </summary>
     public class CardDraggableSpawner : IInitializable
     {
         [Inject] private List<BaseCardObj> CardList { get; }

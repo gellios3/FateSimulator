@@ -13,6 +13,7 @@ namespace Interfaces.Activity
     {
         ushort Id { get; }
         string ActivityName { get; }
+        ushort ActivityDuration { get; }
         string ShortDescription { get; }
         ActivityType ActivityType { get; }
         Sprite ActivityIcon { get; }

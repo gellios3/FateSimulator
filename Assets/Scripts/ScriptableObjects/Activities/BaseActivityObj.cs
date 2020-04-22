@@ -1,15 +1,12 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using Enums;
 using Enums.Activities;
 using Interfaces.Activity;
-using Interfaces.Conditions.Cards;
 using ScriptableObjects.Cards;
 using ScriptableObjects.Conditions.Requires;
 using ScriptableObjects.Conditions.Results;
 using UnityEngine;
 
-namespace ScriptableObjects
+namespace ScriptableObjects.Activities
 {
     /// <summary>
     /// Base Activity Obj
@@ -28,7 +25,13 @@ namespace ScriptableObjects
         /// </summary>
         public string activityName;
         public string ActivityName => activityName;
-        
+
+        /// <summary>
+        /// Activity duration
+        /// </summary>
+        public ushort activityDuration;
+        public ushort ActivityDuration => activityDuration;
+
         /// <summary>
         /// Short description
         /// </summary>

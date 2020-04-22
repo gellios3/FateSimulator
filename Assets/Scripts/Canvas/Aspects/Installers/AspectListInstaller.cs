@@ -4,6 +4,9 @@ using Zenject;
 
 namespace Canvas.Aspects.Installers
 {
+    /// <summary>
+    /// Aspect list installer
+    /// </summary>
     public class AspectListInstaller : MonoInstaller
     {
         [SerializeField] private GameObject aspectPrefab;
