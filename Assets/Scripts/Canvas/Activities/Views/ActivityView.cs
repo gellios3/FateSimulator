@@ -1,14 +1,10 @@
 ﻿using AbstractViews;
 using Canvas.Activities.Services;
 using Canvas.Cards.Signals;
-using Canvas.Popups.Signals;
 using Canvas.Popups.Signals.Activity;
 using Enums;
 using Interfaces.Activity;
-using Interfaces.Cards;
-using ScriptableObjects.Conditions.Requires;
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
 namespace Canvas.Activities.Views
@@ -22,7 +18,7 @@ namespace Canvas.Activities.Views
 
         [SerializeField] private ColorsPresetImage borderImg;
 
-        [SerializeField] private GameObject timer;
+        [SerializeField] private ActivityTimerView timerView;
 
         public IBaseActivity FoundActivity { get; private set; }
 
@@ -38,7 +34,11 @@ namespace Canvas.Activities.Views
 
         private void Start()
         {
-            droppableView.OnCardDrop += () => { activityService.ShowPopup(droppableView.DropCardView, this); };
+            droppableView.CardDrop += () => { activityService.ShowPopup(droppableView.DropCardView, this); };
+            timerView.TimeFinish += () =>
+            {
+                Debug.Log("TimeFinish !!!");
+            };
         }
 
         /// <summary>
@@ -53,6 +53,17 @@ namespace Canvas.Activities.Views
             }
 
             borderImg.SetStatus(Status.Normal);
+        }
+
+        /// <summary>
+        /// Start activity
+        /// </summary>
+        /// <param name="duration"></param>
+        public void StartActivity(ushort duration)
+        {
+            borderImg.SetStatus(Status.Normal);
+            timerView.Init(duration);
+            timerView.Show();
         }
 
         /// <summary>

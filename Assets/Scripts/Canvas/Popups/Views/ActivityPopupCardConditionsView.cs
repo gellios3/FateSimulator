@@ -19,13 +19,13 @@ namespace Canvas.Popups.Views
         private byte needCardsCount;
         private byte dropCardsCount;
 
-        public event Action AllConditionsDone; 
+        public event Action AllConditionsDone;
 
         private void Start()
         {
             foreach (var droppableView in droppableViews)
             {
-                droppableView.OnCardDrop += () =>
+                droppableView.CardDrop += () =>
                 {
                     dropCardsCount++;
                     if (dropCardsCount == needCardsCount)
@@ -33,6 +33,20 @@ namespace Canvas.Popups.Views
                         AllConditionsDone?.Invoke();
                     }
                 };
+            }
+        }
+
+        /// <summary>
+        /// Hide drop cards
+        /// </summary>
+        public void HideDropCards()
+        {
+            foreach (var droppableView in droppableViews)
+            {
+                if (droppableView.DropCardView != null)
+                {
+                    droppableView.DropCardView.Hide();
+                }
             }
         }
 
@@ -45,7 +59,7 @@ namespace Canvas.Popups.Views
         {
             var cardConditions = baseActivity.GetCardConditions();
             needCardsCount = (byte) cardConditions.Count;
-            
+
             for (byte i = 0; i < needCardsCount; i++)
             {
                 if (i == 0)
@@ -53,6 +67,7 @@ namespace Canvas.Popups.Views
                     dropCardsCount = 1;
                     droppableViews[i].DropCardView = startActionCard;
                 }
+
                 droppableViews[i].Init(cardConditions[i] as ICardCondition);
             }
         }

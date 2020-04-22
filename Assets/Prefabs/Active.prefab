@@ -63,7 +63,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   droppableView: {fileID: 8809799192356252851}
   borderImg: {fileID: 4402496640146924816}
-  timer: {fileID: 338561878896875919}
+  timerView: {fileID: 819317136535736593}
 --- !u!1 &1268111881824379675
 GameObject:
   m_ObjectHideFlags: 0
@@ -483,12 +483,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 8176000166551225184}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &338561878896875919 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8485956978805381871, guid: 59342f7ea2dbedf49bedda042bee246e,
+--- !u!114 &819317136535736593 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8802338579155538545, guid: 59342f7ea2dbedf49bedda042bee246e,
     type: 3}
   m_PrefabInstance: {fileID: 8176000166551225184}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c018942b349b84856b8a155672a17466, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8618667141374153436
 PrefabInstance:
   m_ObjectHideFlags: 0

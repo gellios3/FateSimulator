@@ -1,6 +1,7 @@
 ﻿using AbstractViews;
 using Canvas.Activities.Views;
 using Canvas.Popups.Signals.Activity;
+using Interfaces.Activity;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -18,7 +19,7 @@ namespace Canvas.Popups.Views
         [SerializeField] private ActivityTimerView activityTimer;
 
         private SignalBus SignalBus { get; set; }
-
+        private IBaseActivity BaseActivity { get; set; }
         private ActivityView sourceActivityView;
 
         [Inject]
@@ -36,6 +37,9 @@ namespace Canvas.Popups.Views
         /// </summary>
         private void OnStartActivity()
         {
+            SignalBus.Fire(new StartActivitySignal {BaseActivity = BaseActivity});
+            conditionsView.HideDropCards();
+            sourceActivityView.StartActivity(BaseActivity.ActivityDuration);
             Hide();
         }
 
@@ -45,17 +49,8 @@ namespace Canvas.Popups.Views
         private void OnClosePopup()
         {
             SignalBus.Fire(new CloseActivityPopupSignal());
+            sourceActivityView.ReturnToNormalStatus(true);
             Hide();
-        }
-
-        /// <summary>
-        /// Hide popup
-        /// </summary>
-        public override void Hide()
-        {
-            base.Hide();
-            if (sourceActivityView != null)
-                sourceActivityView.ReturnToNormalStatus(true);
         }
 
         /// <summary>
@@ -75,10 +70,11 @@ namespace Canvas.Popups.Views
             Show();
             sourceActivityView = obj.SourceActivity;
             startActivityBtn.Hide();
+            BaseActivity = sourceActivityView.FoundActivity;
             // Init conditions
-            conditionsView.Init(sourceActivityView.FoundActivity, obj.StartActionCard);
+            conditionsView.Init(BaseActivity, obj.StartActionCard);
             // Init timer
-            activityTimer.Init(sourceActivityView.FoundActivity.ActivityDuration);
+            activityTimer.Init(BaseActivity.ActivityDuration);
             activityTimer.Hide();
         }
     }

@@ -16,7 +16,7 @@ namespace AbstractViews
         /// <summary>
         /// On Card drop
         /// </summary>
-        public event Action OnCardDrop;
+        public event Action CardDrop;
 
         [SerializeField] private Image bgImg;
 
@@ -46,7 +46,7 @@ namespace AbstractViews
             if (DropCardView == null)
                 return;
             DropCardView.transform.position = transform.position;
-            OnCardDrop?.Invoke();
+            CardDrop?.Invoke();
             DropCardView.OnDropCard();
         }
 

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 6
   activityName: Blacksmith Work
-  activityDuration: 60
+  activityDuration: 30
   shortDescription: Blacksmith Work sample description
   activityType: 0
   activityIcon: {fileID: 21300000, guid: bb277a22302f2314a965c889cb99a34f, type: 3}
