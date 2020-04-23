@@ -15,9 +15,9 @@ namespace Canvas.Cards
         [Inject] private Transform CardParent { get; }
         [Inject] private CardViewSpawner CardViewSpawner { get; }
 
-        private readonly DraggableView.Factory draggableCardFactory;
+        private readonly DraggableCardView.Factory draggableCardFactory;
 
-        public CardDraggableSpawner(DraggableView.Factory draggableCardFactory)
+        public CardDraggableSpawner(DraggableCardView.Factory draggableCardFactory)
         {
             this.draggableCardFactory = draggableCardFactory;
         }
@@ -27,12 +27,9 @@ namespace Canvas.Cards
             foreach (var cardObj in CardList)
             {
                 var cardGameObject = draggableCardFactory.Create(cardObj);
-                var transform = cardGameObject.transform;
-                transform.parent = CardParent;
-                transform.localPosition = new Vector3(cardObj.PosOnTable.x, cardObj.PosOnTable.y, -3);
-                transform.localRotation = Quaternion.identity;
+                cardGameObject.SetStartPos(new Vector3(cardObj.PosOnTable.x, cardObj.PosOnTable.y, -3), CardParent);
                 var topCard = CardViewSpawner.CreateViewCard(cardObj);
-                cardGameObject.Init(topCard,cardObj);
+                cardGameObject.Init(topCard, cardObj);
             }
         }
     }

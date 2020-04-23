@@ -1,5 +1,4 @@
-﻿using AbstractViews;
-using Canvas.Cards.Interfaces;
+﻿using Canvas.Cards.Interfaces;
 using Canvas.Cards.Services;
 using Interfaces.Cards;
 using UnityEngine;
@@ -12,17 +11,17 @@ namespace Canvas.Cards.Views
     /// <summary>
     /// Not visible but draggable card on the table 
     /// </summary>
-    public class DraggableView : BaseView, IBeginDragHandler, IDragHandler, IEndDragHandler
+    public class DraggableCardView : BaseDraggableCardView, IDraggableCardView
     {
         #region Parameters
 
-        public bool CanDraggable { private get; set; } = true;
+        private bool CanDraggable { get; set; } = true;
         private bool HasDrop { get; set; }
-        public bool HasOutArea { get; set; }
+        private bool HasOutArea { get; set; }
         private bool HasSetInInventory { get; set; }
         private bool HasStartDrag { get; set; }
 
-        public Vector3 startTempPosition;
+        private Vector3 startTempPosition;
 
         [SerializeField] private Button openPopupBtn;
 
@@ -30,7 +29,7 @@ namespace Canvas.Cards.Views
 
         private IBaseCard CardObj { get; set; }
 
-        [Inject] public DraggableCardService DraggableCardService { get; }
+        [Inject] private DraggableCardService DraggableCardService { get; }
 
         #endregion
 
@@ -65,6 +64,20 @@ namespace Canvas.Cards.Views
             DraggableCardService.AddCardView(TopCard);
         }
 
+        /// <summary>
+        /// Set out area
+        /// </summary>
+        /// <param name="value"></param>
+        public void SetOutArea(bool value)
+        {
+            HasOutArea = value;
+        }
+
+        public void SetDraggable(bool value)
+        {
+            CanDraggable = value;
+        }
+
         public override void Hide()
         {
             base.Hide();
@@ -87,12 +100,19 @@ namespace Canvas.Cards.Views
             TopCard.SetCardPosition(pos);
         }
 
-        /// <inheritdoc />
+        public void SetStartPos(Vector3 pos,Transform parent)
+        {
+            var tempTransform = transform;
+            tempTransform.parent = parent;
+            tempTransform.localPosition = pos;
+            tempTransform.localRotation = Quaternion.identity;
+        }
+        
         /// <summary>
         /// On begin drag
         /// </summary>
         /// <param name="eventData"></param>
-        public void OnBeginDrag(PointerEventData eventData)
+        public override void OnBeginDrag(PointerEventData eventData)
         {
             if (!CanDraggable)
                 return;
@@ -106,26 +126,24 @@ namespace Canvas.Cards.Views
             startTempPosition = transform.position;
             TopCard.OnStartDragCard();
         }
-
-        /// <inheritdoc />
+        
         /// <summary>
         /// On drag card
         /// </summary>
         /// <param name="eventData"></param>
-        public void OnDrag(PointerEventData eventData)
+        public override void OnDrag(PointerEventData eventData)
         {
             if (!CanDraggable || Camera.main == null)
                 return;
             var pos = GetWorldPositionOnPlane(eventData.position, -1);
             SetPosition(pos);
         }
-
-        /// <inheritdoc />
+        
         /// <summary>
         /// On End drag card
         /// </summary>
         /// <param name="eventData"></param>
-        public void OnEndDrag(PointerEventData eventData)
+        public override void OnEndDrag(PointerEventData eventData)
         {
             HasStartDrag = false;
 
@@ -177,7 +195,7 @@ namespace Canvas.Cards.Views
         private void EndDrag()
         {
             DraggableCardService.EndDragCard(CardObj);
-            if (HasDrop) 
+            if (HasDrop)
                 return;
             if (!HasOutArea)
                 CanDraggable = true;
@@ -204,7 +222,7 @@ namespace Canvas.Cards.Views
         /// <summary>
         /// Zenject Factory for Instantiate
         /// </summary>
-        public class Factory : PlaceholderFactory<IBaseCard, DraggableView>
+        public class Factory : PlaceholderFactory<IBaseCard, DraggableCardView>
         {
         }
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using AbstractViews;
 using Canvas.Activities.Views;
+using Canvas.Cards.Interfaces;
 using Canvas.Cards.Views;
 using Interfaces.Activity;
 using Interfaces.Conditions.Cards;
@@ -14,6 +15,9 @@ namespace Canvas.Popups.Views
     /// </summary>
     public class ActivityPopupCardConditionsView : BaseView
     {
+        /// <summary>
+        /// Droppable views
+        /// </summary>
         [SerializeField] private List<ActivityPopupDroppableView> droppableViews;
 
         private byte needCardsCount;
@@ -43,9 +47,9 @@ namespace Canvas.Popups.Views
         {
             foreach (var droppableView in droppableViews)
             {
-                if (droppableView.DropCardView != null)
+                if (droppableView.DropCardCardView != null)
                 {
-                    droppableView.DropCardView.Hide();
+                    droppableView.DropCardCardView.Hide();
                 }
             }
         }
@@ -55,7 +59,7 @@ namespace Canvas.Popups.Views
         /// </summary>
         /// <param name="baseActivity"></param>
         /// <param name="startActionCard"></param>
-        public void Init(IBaseActivity baseActivity, DraggableView startActionCard)
+        public void Init(IBaseActivity baseActivity, IDraggableCardView startActionCard)
         {
             var cardConditions = baseActivity.GetCardConditions();
             needCardsCount = (byte) cardConditions.Count;
@@ -65,7 +69,7 @@ namespace Canvas.Popups.Views
                 if (i == 0)
                 {
                     dropCardsCount = 1;
-                    droppableViews[i].DropCardView = startActionCard;
+                    droppableViews[i].DropCardCardView = startActionCard;
                 }
 
                 droppableViews[i].Init(cardConditions[i] as ICardCondition);

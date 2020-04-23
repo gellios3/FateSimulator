@@ -14,6 +14,8 @@ namespace Canvas.Activities.Views
     /// </summary>
     public class ActivityView : BaseView
     {
+        #region Parameters
+        
         [SerializeField] private ActivityDroppableView droppableView;
 
         [SerializeField] private ColorsPresetImage borderImg;
@@ -23,6 +25,7 @@ namespace Canvas.Activities.Views
         public IBaseActivity FoundActivity { get; private set; }
 
         [Inject] private ActivityService activityService;
+        #endregion
 
         [Inject]
         public void Construct(SignalBus signalBus)
@@ -34,11 +37,8 @@ namespace Canvas.Activities.Views
 
         private void Start()
         {
-            droppableView.CardDrop += () => { activityService.ShowPopup(droppableView.DropCardView, this); };
-            timerView.TimeFinish += () =>
-            {
-                Debug.Log("TimeFinish !!!");
-            };
+            droppableView.CardDrop += OnDropCard;
+            timerView.TimeFinish += OnTimerFinish;
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Canvas.Activities.Views
                 droppableView.ReturnDropCard();
             }
 
-            borderImg.SetStatus(Status.Normal);
+            SetStatus(Status.Normal);
         }
 
         /// <summary>
@@ -61,9 +61,35 @@ namespace Canvas.Activities.Views
         /// <param name="duration"></param>
         public void StartActivity(ushort duration)
         {
-            borderImg.SetStatus(Status.Normal);
+            SetStatus(Status.Normal);
             timerView.Init(duration);
             timerView.Show();
+        }
+
+        /// <summary>
+        /// Set status 
+        /// </summary>
+        /// <param name="status"></param>
+        private void SetStatus(Status status)
+        {
+            borderImg.SetStatus(status);
+            droppableView.SetStatus(status);
+        }
+
+        /// <summary>
+        /// On drop card
+        /// </summary>
+        private void OnDropCard()
+        {
+            activityService.ShowPopup(droppableView.DropCardCardView, this); 
+        }
+
+        /// <summary>
+        /// On timer finish
+        /// </summary>
+        private void OnTimerFinish()
+        {
+            timerView.Hide();
         }
 
         /// <summary>

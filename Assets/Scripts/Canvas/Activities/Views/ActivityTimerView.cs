@@ -6,13 +6,20 @@ using UnityEngine.UI.ProceduralImage;
 
 namespace Canvas.Activities.Views
 {
+    /// <summary>
+    /// Activity timer view
+    /// </summary>
     public class ActivityTimerView : BaseView
     {
+        #region Parameters
+
         [SerializeField] private ProceduralImage image;
         [SerializeField] private TextMeshProUGUI timeTxt;
         [SerializeField] private ushort time;
 
         public event Action TimeFinish;
+        
+        #endregion
 
         private void Start()
         {

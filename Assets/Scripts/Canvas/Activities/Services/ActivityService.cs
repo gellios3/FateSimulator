@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Canvas.Activities.Views;
+using Canvas.Cards.Interfaces;
 using Canvas.Cards.Models;
 using Canvas.Cards.Views;
 using Canvas.Popups.Signals;
@@ -14,6 +15,9 @@ using Zenject;
 
 namespace Canvas.Activities.Services
 {
+    /// <summary>
+    /// Activity service
+    /// </summary>
     public class ActivityService
     {
         [Inject] private List<BaseActivityObj> possibleActivities;
@@ -25,16 +29,26 @@ namespace Canvas.Activities.Services
             this.signalBus = signalBus;
         }
 
+        /// <summary>
+        /// Get activity card
+        /// </summary>
+        /// <param name="startActivityCard"></param>
+        /// <returns></returns>
         public IBaseActivity GetActivityByActivity(IBaseCard startActivityCard)
         {
             return possibleActivities.FirstOrDefault(obj => ReferenceEquals(obj.StartActivityCard, startActivityCard));
         }
 
-        public void ShowPopup(DraggableView draggableView, ActivityView activityView )
+        /// <summary>
+        /// Show popup
+        /// </summary>
+        /// <param name="draggableCardView"></param>
+        /// <param name="activityView"></param>
+        public void ShowPopup(IDraggableCardView draggableCardView, ActivityView activityView)
         {
             signalBus.Fire(new ShowActivityPopupSignal
             {
-                StartActionCard = draggableView,
+                StartActionCard = draggableCardView,
                 SourceActivity = activityView
             });
         }

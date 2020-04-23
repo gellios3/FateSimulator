@@ -13,6 +13,8 @@ namespace Canvas.Popups.Views
     /// </summary>
     public class ActivityPopupView : BaseView
     {
+        #region Parameters
+
         [SerializeField] private ActivityPopupCardConditionsView conditionsView;
         [SerializeField] private Button closeBtn;
         [SerializeField] private CustomButton startActivityBtn;
@@ -21,6 +23,8 @@ namespace Canvas.Popups.Views
         private SignalBus SignalBus { get; set; }
         private IBaseActivity BaseActivity { get; set; }
         private ActivityView sourceActivityView;
+
+        #endregion
 
         [Inject]
         public void Construct(SignalBus signalBus)

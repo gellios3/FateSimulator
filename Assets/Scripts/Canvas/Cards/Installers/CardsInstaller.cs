@@ -1,4 +1,5 @@
-﻿using Canvas.Cards.Services;
+﻿using Canvas.Cards.Interfaces;
+using Canvas.Cards.Services;
 using Canvas.Cards.Views;
 using Interfaces.Cards;
 using UnityEngine;
@@ -31,11 +32,8 @@ namespace Canvas.Cards.Installers
             
             Container.BindInstance(cardViewParent).AsTransient().WhenInjectedInto<CardViewSpawner>();
             Container.Bind<CardViewSpawner>().AsSingle();
-            
-            Container.Bind<DraggableView>().AsSingle();
-            Container.Bind<CardView>().AsSingle();
-            
-            Container.BindFactory<IBaseCard, DraggableView, DraggableView.Factory>().FromComponentInNewPrefab(cardPrefab);
+
+            Container.BindFactory<IBaseCard, DraggableCardView, DraggableCardView.Factory>().FromComponentInNewPrefab(cardPrefab);
             Container.BindFactory<IBaseCard, CardView, CardView.Factory>().FromComponentInNewPrefab(cardViewPrefab);
         }
     }

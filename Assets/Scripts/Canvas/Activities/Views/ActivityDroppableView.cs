@@ -3,17 +3,22 @@ using Enums;
 
 namespace Canvas.Activities.Views
 {
+    /// <summary>
+    /// Activity droppable view
+    /// </summary>
     public class ActivityDroppableView : DroppableView
     {
-
+        /// <summary>
+        /// Return drop card
+        /// </summary>
         public void ReturnDropCard( )
         {
-            if (DropCardView == null)
+            if (DropCardCardView == null)
                 return;
             borderImg.SetStatus(Status.Normal);
-            DropCardView.Show();
-            DropCardView.ReturnBack();
-            DropCardView = null;
+            DropCardCardView.Show();
+            DropCardCardView.ReturnBack();
+            DropCardCardView = null;
         }
     }
 }

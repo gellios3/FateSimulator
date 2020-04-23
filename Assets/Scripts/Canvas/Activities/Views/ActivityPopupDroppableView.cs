@@ -16,6 +16,8 @@ namespace Canvas.Activities.Views
     /// </summary>
     public class ActivityPopupDroppableView : DroppableView, IPointerDownHandler
     {
+        #region MyRegion
+
         [SerializeField] private TextMeshProUGUI title;
 
         [Inject] private ConditionsService ConditionsService { get; }
@@ -23,6 +25,8 @@ namespace Canvas.Activities.Views
         private ICardCondition conditionObj;
 
         private SignalBus SignalBus { get; set; }
+
+        #endregion
 
         [Inject]
         public void Construct(SignalBus signalBus)
@@ -39,11 +43,11 @@ namespace Canvas.Activities.Views
         /// <param name="obj"></param>
         private void OnCloseActivityPopup(CloseActivityPopupSignal obj)
         {
-            if (DropCardView == null)
+            if (DropCardCardView == null)
                 return;
-            DropCardView.CanDraggable = true;
-            DropCardView.ReturnBack();
-            DropCardView = null;
+            DropCardCardView.SetDraggable(true);
+            DropCardCardView.ReturnBack();
+            DropCardCardView = null;
             borderImg.SetStatus(Status.Normal);
         }
 
@@ -54,8 +58,7 @@ namespace Canvas.Activities.Views
         public override void OnDrop(PointerEventData eventData)
         {
             base.OnDrop(eventData);
-            if (DropCardView != null)
-                DropCardView.CanDraggable = false;
+            DropCardCardView?.SetDraggable(false);
         }
 
         /// <summary>
@@ -66,7 +69,7 @@ namespace Canvas.Activities.Views
         {
             if (conditionObj == null)
                 return;
-            if (DropCardView == null)
+            if (DropCardCardView == null)
                 SetDroppable(true);
             borderImg.SetStatus(Status.Normal);
         }
@@ -102,10 +105,10 @@ namespace Canvas.Activities.Views
             Show();
             title.text = cardConditionObj.Title;
 
-            if (DropCardView == null)
+            if (DropCardCardView == null)
                 return;
-            DropCardView.CanDraggable = false;
-            DropCardView.SetPosition(transform.position);
+            DropCardCardView.SetDraggable(false);
+            DropCardCardView.SetPosition(transform.position);
         }
 
         /// <summary>

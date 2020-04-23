@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46138877475f4b88ac8dd7d094158602, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  droppableView: {fileID: 8809799192356252851}
+  droppableView: {fileID: 1757070966896033619}
   borderImg: {fileID: 4402496640146924816}
   timerView: {fileID: 819317136535736593}
 --- !u!1 &1268111881824379675
@@ -640,9 +640,9 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 8618667141374153436}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8809799192356252851 stripped
+--- !u!114 &1757070966896033619 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 997857008698457711, guid: e388cd63f9f06024ba0c57765c6087cb,
+  m_CorrespondingSourceObject: {fileID: 8068751399632858511, guid: e388cd63f9f06024ba0c57765c6087cb,
     type: 3}
   m_PrefabInstance: {fileID: 8618667141374153436}
   m_PrefabAsset: {fileID: 0}
