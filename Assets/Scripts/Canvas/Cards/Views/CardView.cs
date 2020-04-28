@@ -30,7 +30,7 @@ namespace Canvas.Cards.Views
         [SerializeField] private ProceduralImage backgroundImg;
         [SerializeField] private TextMeshProUGUI title;
 
-        [SerializeField] private List<StatusAppearance> appearances;
+        // [SerializeField] private List<CardStatusPreset> appearances;
 
         [SerializeField] private ColorsPresetImage borderImg;
 
@@ -54,19 +54,18 @@ namespace Canvas.Cards.Views
         private void Start()
         {
             defaultSizeDelta = mask.sizeDelta;
-            CardAppearanceService.Init(appearances);
         }
 
-        // @TODO complete logic for card active inactive status 
-        public void SetExhaustionStatus()
-        {
-            var exhaustionAppear = CardAppearanceService.GetAppearance(CardStatus.Exhaustion);
-            currentStatus = CardStatus.Exhaustion;
-            backgroundImg.color = exhaustionAppear.color;
-            iconImg.color = new Color(
-                exhaustionAppear.color.r, exhaustionAppear.color.g, exhaustionAppear.color.b, 0.65f
-            );
-        }
+        // // @TODO complete logic for card active inactive status 
+        // public void SetExhaustionStatus()
+        // {
+        //     var exhaustionAppear = CardAppearanceService.GetAppearance(CardStatus.Distress);
+        //     currentStatus = CardStatus.Distress;
+        //     backgroundImg.color = exhaustionAppear.color;
+        //     iconImg.color = new Color(
+        //         exhaustionAppear.color.r, exhaustionAppear.color.g, exhaustionAppear.color.b, 0.65f
+        //     );
+        // }
 
         /// <summary>
         /// Highlight card
@@ -84,10 +83,10 @@ namespace Canvas.Cards.Views
         /// <param name="cardObj"></param>
         public void SetCardView(IBaseCard cardObj)
         {
+            CardAppearanceService.Init(cardObj.StatusPresets);
             iconImg.sprite = cardObj.CardIcon;
-            backgroundImg.color = cardObj.BackgroundColor;
+            backgroundImg.color = CardAppearanceService.GetAppearance(CardStatus.Normal).color;
             currentStatus = CardStatus.Normal;
-            CardAppearanceService.SetAppearance(CardStatus.Normal, cardObj.BackgroundColor);
             title.text = cardObj.CardName;
         }
 

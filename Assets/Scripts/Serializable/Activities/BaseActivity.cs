@@ -23,6 +23,7 @@ namespace Serializable.Activities
         public string ShortDescription { get; }
         public ActivityType ActivityType { get; }
         public Sprite ActivityIcon { get; }
+        public byte OptionalResultChance { get; }
         public BaseCardObj StartActivityCard { get; }
         public List<BaseConditionObj> RequiredList { get; }
         public List<BaseConditionObj> OptionalRequiresList { get; }
@@ -47,6 +48,7 @@ namespace Serializable.Activities
             OptionalRequiresList = baseActivity.OptionalRequiresList;
             ResultsList = baseActivity.ResultsList;
             OptionalResultsList = baseActivity.OptionalResultsList;
+            OptionalResultChance = baseActivity.OptionalResultChance;
         }
     }
 }

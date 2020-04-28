@@ -17,6 +17,7 @@ namespace Interfaces.Activity
         string ShortDescription { get; }
         ActivityType ActivityType { get; }
         Sprite ActivityIcon { get; }
+        byte OptionalResultChance { get; }
         BaseCardObj StartActivityCard { get; }
         List<BaseConditionObj> RequiredList { get; }
         List<BaseConditionObj> OptionalRequiresList { get; }

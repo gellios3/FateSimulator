@@ -49,7 +49,13 @@ namespace ScriptableObjects.Activities
         /// </summary>
         public Sprite activityIcon;
         public Sprite ActivityIcon => activityIcon;
-        
+
+        /// <summary>
+        /// Optional result chance
+        /// </summary>
+        public byte optionalResultChance;
+        public byte OptionalResultChance => optionalResultChance;
+
         /// <summary>
         /// Start base condition 
         /// </summary>

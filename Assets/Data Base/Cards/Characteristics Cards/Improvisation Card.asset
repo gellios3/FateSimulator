@@ -23,4 +23,8 @@ MonoBehaviour:
   aspectsList:
   - {fileID: 11400000, guid: 6ab0f85854b05144e8b21fb02663ef4c, type: 2}
   - {fileID: 11400000, guid: 723df385853e87443a9095db3cae654b, type: 2}
+  appearances:
+  - cardStatus: 0
+    duration: -1
+    color: {r: 0.7019608, g: 0.47058824, b: 1, a: 1}
   characteristicType: 2

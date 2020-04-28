@@ -24,6 +24,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f0f517d1a4dd1e5438383f5bbd12e767, type: 2}
   - {fileID: 11400000, guid: 98526055897f7324b8d3cf4f965fb2be, type: 2}
   - {fileID: 11400000, guid: 5ed1a47edfb6f3d47986b3dc7331cb29, type: 2}
+  appearances:
+  - cardStatus: 0
+    duration: -1
+    color: {r: 0.7647059, g: 0.54509807, b: 0.3647059, a: 1}
   level: 1
   routineSkillType: 3
   battleSkillType: 1

@@ -1,6 +1,8 @@
 ﻿using AbstractViews;
 using Canvas.Aspects.Views;
+using Canvas.Cards.Services;
 using Canvas.Popups.Signals;
+using Enums;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,6 +22,8 @@ namespace Canvas.Popups.Views
         [SerializeField] private AspectsBarView aspectsBarView;
 
         private SignalBus SignalBus { get; set; }
+        
+        [Inject] private CardAppearanceService CardAppearanceService { get; } 
 
         [Inject]
         public void Construct(SignalBus signalBus)
@@ -37,10 +41,11 @@ namespace Canvas.Popups.Views
         {
             Show();
             var cardObj = args.BaseCard;
+            CardAppearanceService.Init(cardObj.StatusPresets);
             titleTxt.text = cardObj.CardName;
             descriptionTxt.text = cardObj.ShortDescription;
             iconImg.sprite = cardObj.CardIcon;
-            iconBg.color = cardObj.BackgroundColor;
+            iconBg.color = CardAppearanceService.GetAppearance(CardStatus.Normal).color;
             aspectsBarView.SetAspectsBar(cardObj);
         }
     }

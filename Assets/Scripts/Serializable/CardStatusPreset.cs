@@ -5,9 +5,10 @@ using UnityEngine;
 namespace Serializable
 {
     [Serializable]
-    public class StatusAppearance
+    public class CardStatusPreset
     {
         public CardStatus cardStatus;
+        public short duration;
         public Color color;
     }
 }

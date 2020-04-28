@@ -3,7 +3,7 @@
     public enum CardStatus
     {
         Normal,
-        Exhaustion,
+        Distress,
         Broken,
         Buffed
     }

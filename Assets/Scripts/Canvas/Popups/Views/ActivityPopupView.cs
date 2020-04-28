@@ -43,6 +43,7 @@ namespace Canvas.Popups.Views
         private void ShowResultPopup()
         {
             Show();
+            
         }
 
         /// <summary>

@@ -11,9 +11,9 @@ namespace Canvas.Cards.Services
     /// </summary>
     public class CardAppearanceService
     {
-        private List<StatusAppearance> Appearances { get; set; } = new List<StatusAppearance>();
+        private List<CardStatusPreset> Appearances { get; set; } = new List<CardStatusPreset>();
 
-        public void Init(List<StatusAppearance> appearances)
+        public void Init(List<CardStatusPreset> appearances)
         {
             Appearances = appearances;
         }
@@ -23,7 +23,7 @@ namespace Canvas.Cards.Services
         /// </summary>
         /// <param name="status"></param>
         /// <returns></returns>
-        public StatusAppearance GetAppearance(CardStatus status)
+        public CardStatusPreset GetAppearance(CardStatus status)
         {
             return Appearances.FirstOrDefault(appearance => appearance.cardStatus == status);
         }
@@ -38,7 +38,7 @@ namespace Canvas.Cards.Services
             var find = GetAppearance(status);
             if (find == null)
             {
-                Appearances.Add(new StatusAppearance
+                Appearances.Add(new CardStatusPreset
                 {
                     cardStatus = status,
                     color = color

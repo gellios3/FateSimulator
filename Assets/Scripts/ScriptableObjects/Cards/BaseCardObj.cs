@@ -3,6 +3,7 @@ using Enums;
 using Interfaces.Aspects;
 using Interfaces.Cards;
 using ScriptableObjects.Aspects;
+using Serializable;
 using UnityEngine;
 
 namespace ScriptableObjects.Cards
@@ -48,13 +49,7 @@ namespace ScriptableObjects.Cards
         /// </summary>
         public byte level;
         public byte Level => level;
-        
-        /// <summary>
-        /// Background color
-        /// </summary>
-        public Color backgroundColor;
-        public Color BackgroundColor => backgroundColor;
-        
+
         /// <summary>
         /// Card icon
         /// </summary>
@@ -66,5 +61,11 @@ namespace ScriptableObjects.Cards
         /// </summary>
         public List<BaseAspectObj> aspectsList;
         public List<BaseAspectObj> AspectsList => aspectsList;
+        
+        /// <summary>
+        /// Card appearances list
+        /// </summary>
+        public List<CardStatusPreset> appearances;
+        public List<CardStatusPreset> StatusPresets => appearances;
     }
 }

@@ -18,6 +18,7 @@ MonoBehaviour:
   shortDescription: Blacksmith Work sample description
   activityType: 0
   activityIcon: {fileID: 21300000, guid: bb277a22302f2314a965c889cb99a34f, type: 3}
+  optionalResultChance: 40
   startActivityCard: {fileID: 11400000, guid: 94554ea81f66d714282feb0395499971, type: 2}
   requiredList:
   - {fileID: 11400000, guid: 49d40230ba0573c47adfeb72f8058b53, type: 2}
