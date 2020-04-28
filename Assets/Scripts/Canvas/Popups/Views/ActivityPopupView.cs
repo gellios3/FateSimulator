@@ -31,9 +31,18 @@ namespace Canvas.Popups.Views
         {
             SignalBus = signalBus;
             SignalBus.Subscribe<ShowActivityPopupSignal>(ShowActivityPopup);
+            SignalBus.Subscribe<ShowActivityResultSignal>(ShowResultPopup);
             closeBtn.onClick.AddListener(OnClosePopup);
             startActivityBtn.onClick.AddListener(OnStartActivity);
             conditionsView.AllConditionsDone += OnAllConditionsDone;
+        }
+
+        /// <summary>
+        /// Show result popup
+        /// </summary>
+        private void ShowResultPopup()
+        {
+            Show();
         }
 
         /// <summary>

@@ -15,7 +15,7 @@ namespace Canvas.Cards.Services
     public class DraggableCardService
     {
         private SignalBus SignalBus { get; }
-        private List<ICardView> CardViews { get; set; } = new List<ICardView>();
+        private List<ICardView> CardViews { get; } = new List<ICardView>();
         [Inject] private ConditionsService ConditionsService { get; }
 
         public DraggableCardService(SignalBus signalBus)

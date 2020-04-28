@@ -12,11 +12,11 @@ namespace Canvas.Aspects
     {
         [Inject] private Transform AspectParent { get; }
 
-        private readonly AspectIconView.Factory AspectIconFactory;
+        private readonly AspectIconView.Factory aspectIconFactory;
 
         public AspectsSpawner(AspectIconView.Factory aspectIconFactory)
         {
-            AspectIconFactory = aspectIconFactory;
+            this.aspectIconFactory = aspectIconFactory;
         }
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Canvas.Aspects
         {
             foreach (var aspect in baseCard.AspectsList)
             {
-                var aspectView = AspectIconFactory.Create();
+                var aspectView = aspectIconFactory.Create();
                 aspectView.SetAspect(aspect);
                 var transform = aspectView.transform;
                 transform.parent = AspectParent;

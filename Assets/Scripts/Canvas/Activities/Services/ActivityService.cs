@@ -52,5 +52,10 @@ namespace Canvas.Activities.Services
                 SourceActivity = activityView
             });
         }
+
+        public void ShowResultPopup()
+        {
+            signalBus.Fire(new ShowActivityResultSignal());
+        }
     }
 }

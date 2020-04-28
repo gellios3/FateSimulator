@@ -31,8 +31,7 @@ namespace Canvas.Activities.Views
         {
             time = duration;
         }
-
-        // Update is called once per frame
+        
         private void Update()
         {
             if (image.fillAmount < 1)

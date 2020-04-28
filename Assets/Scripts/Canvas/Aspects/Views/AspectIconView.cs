@@ -9,6 +9,8 @@ namespace Canvas.Aspects.Views
 {
     public class AspectIconView : BaseView
     {
+        #region MyRegion
+
         [SerializeField] private Image aspectImg;
 
         [SerializeField] private Button showAspectPopup;
@@ -16,12 +18,18 @@ namespace Canvas.Aspects.Views
         private IBaseAspect BaseAspectObj { get; set; }
 
         [Inject] private ShowAspectService ShowAspectService { get; }
+        
+        #endregion
 
         [Inject]
         public void Construct()
         {
         }
 
+        /// <summary>
+        /// Set aspect
+        /// </summary>
+        /// <param name="baseAspectObj"></param>
         public void SetAspect(IBaseAspect baseAspectObj)
         {
             BaseAspectObj = baseAspectObj;
@@ -32,7 +40,6 @@ namespace Canvas.Aspects.Views
             });
         }
         
-
         public class Factory : PlaceholderFactory<AspectIconView>
         {
         }

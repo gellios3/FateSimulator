@@ -4,6 +4,7 @@ using Zenject;
 
 namespace Canvas.Aspects.Services
 {
+    
     public class ShowAspectService
     {
         private SignalBus SignalBus { get; }

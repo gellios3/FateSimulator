@@ -22,6 +22,10 @@ namespace Canvas
             SetStatus(Status.Normal);
         }
 
+        /// <summary>
+        /// Set color status
+        /// </summary>
+        /// <param name="status"></param>
         public void SetStatus(Status status)
         {
             var normalColor = GetPreset(status);
@@ -29,11 +33,20 @@ namespace Canvas
                 sourceImg.color = normalColor.Value.color;
         }
 
+        /// <summary>
+        /// Get color preset
+        /// </summary>
+        /// <param name="status"></param>
+        /// <returns></returns>
         private ColorPreset? GetPreset(Status status)
         {
             return presets.FirstOrDefault(preset => preset.status == status);
         }
 
+        /// <summary>
+        /// Play highlight anim
+        /// </summary>
+        /// <param name="duration"></param>
         public void PlayHighlightAnim(float duration)
         {
             var highlight = GetPreset(Status.Highlighted);

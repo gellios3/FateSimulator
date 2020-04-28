@@ -11,12 +11,15 @@ namespace Canvas.Cards
     /// </summary>
     public class CardDraggableSpawner : IInitializable
     {
+        #region Parameters
+        
         [Inject] private List<BaseCardObj> CardList { get; }
         [Inject] private Transform CardParent { get; }
         [Inject] private CardViewSpawner CardViewSpawner { get; }
 
         private readonly DraggableCardView.Factory draggableCardFactory;
 
+        #endregion
         public CardDraggableSpawner(DraggableCardView.Factory draggableCardFactory)
         {
             this.draggableCardFactory = draggableCardFactory;

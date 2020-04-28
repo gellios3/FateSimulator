@@ -8,11 +8,11 @@ namespace Canvas.Cards
     /// <summary>
     /// Card view spawner
     /// </summary>
-    public class CardViewSpawner 
+    public class CardViewSpawner
     {
         private readonly CardView.Factory cardViewFactory;
         [Inject] private Transform CardParent { get; }
-        
+
         public CardViewSpawner(CardView.Factory cardViewFactory)
         {
             this.cardViewFactory = cardViewFactory;

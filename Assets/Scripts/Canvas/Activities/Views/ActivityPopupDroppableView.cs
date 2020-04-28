@@ -16,7 +16,7 @@ namespace Canvas.Activities.Views
     /// </summary>
     public class ActivityPopupDroppableView : DroppableView, IPointerDownHandler
     {
-        #region MyRegion
+        #region Parameters
 
         [SerializeField] private TextMeshProUGUI title;
 

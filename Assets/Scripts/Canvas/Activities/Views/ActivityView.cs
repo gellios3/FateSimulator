@@ -90,6 +90,7 @@ namespace Canvas.Activities.Views
         private void OnTimerFinish()
         {
             timerView.Hide();
+            activityService.ShowResultPopup();
         }
 
         /// <summary>
