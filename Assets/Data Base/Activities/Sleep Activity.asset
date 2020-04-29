@@ -12,11 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eea1b9588bf28b84eb3123452d42328b, type: 3}
   m_Name: Sleep Activity
   m_EditorClassIdentifier: 
-  id: 5
+  id: 32645
+  dataBase: {fileID: 11400000, guid: 46a29bcfb7c5d2941a21c795a07c9723, type: 2}
   activityName: Sleep
+  activityDuration: 0
   shortDescription: Sleep
   activityType: 6
   activityIcon: {fileID: 0}
+  optionalResultChance: 0
+  startActivityCard: {fileID: 0}
   requiredList:
   - {fileID: 11400000, guid: aa797e432b9b45f4ca82f12db665a0d5, type: 2}
   - {fileID: 11400000, guid: 55c3bb75fbe7f5f4eb4ccfb64620d0dd, type: 2}

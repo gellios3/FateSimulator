@@ -1,4 +1,5 @@
-﻿using Canvas.Cards.Interfaces;
+﻿using System;
+using Canvas.Cards.Interfaces;
 using Canvas.Cards.Services;
 using Interfaces.Cards;
 using UnityEngine;
@@ -26,17 +27,21 @@ namespace Canvas.Cards.Views
         [SerializeField] private Button openPopupBtn;
 
         private ICardView TopCard { get; set; }
-
         private IBaseCard CardObj { get; set; }
-
+        [Inject] private CommonCardService CommonCardService { get; }
         [Inject] private DraggableCardService DraggableCardService { get; }
+        public Action<bool> OnSetDraggable { get; private set; }
 
         #endregion
 
         [Inject]
-        public void Construct(IBaseCard cardObj)
+        public void Construct(IBaseCard cardObj, ICardView topCard)
         {
             CardObj = cardObj;
+            TopCard = topCard;
+
+            DraggableCardService.Init(TopCard, CardObj);
+            CommonCardService.AddCardView(TopCard);
         }
 
         private void Start()
@@ -45,23 +50,15 @@ namespace Canvas.Cards.Views
             {
                 if (!HasStartDrag)
                 {
-                    DraggableCardService.ShowPopup(CardObj);
+                    CommonCardService.ShowPopup(CardObj);
                 }
             });
-        }
 
-        /// <summary>
-        /// Init draggable
-        /// </summary>
-        /// <param name="topCard"></param>
-        /// <param name="cardObj"></param>
-        public void Init(ICardView topCard, IBaseCard cardObj)
-        {
-            CardObj = cardObj;
-            TopCard = topCard;
+            OnSetDraggable += DraggableCardService.SetDraggable;
+
+            // Init top card position
             TopCard.SetCardPosition(transform.position);
-            TopCard.SetCardView(cardObj);
-            DraggableCardService.AddCardView(TopCard);
+            TopCard.SetCardView(CardObj);
         }
 
         /// <summary>
@@ -100,14 +97,14 @@ namespace Canvas.Cards.Views
             TopCard.SetCardPosition(pos);
         }
 
-        public void SetStartPos(Vector3 pos,Transform parent)
+        public void SetStartPos(Vector3 pos, Transform parent)
         {
             var tempTransform = transform;
             tempTransform.parent = parent;
             tempTransform.localPosition = pos;
             tempTransform.localRotation = Quaternion.identity;
         }
-        
+
         /// <summary>
         /// On begin drag
         /// </summary>
@@ -120,13 +117,13 @@ namespace Canvas.Cards.Views
             HasDrop = false;
             HasStartDrag = true;
 
-            DraggableCardService.StartDragCard(CardObj);
+            CommonCardService.StartDragCard(CardObj);
 
             TopCard.Show();
             startTempPosition = transform.position;
             TopCard.OnStartDragCard();
         }
-        
+
         /// <summary>
         /// On drag card
         /// </summary>
@@ -138,7 +135,7 @@ namespace Canvas.Cards.Views
             var pos = GetWorldPositionOnPlane(eventData.position, -1);
             SetPosition(pos);
         }
-        
+
         /// <summary>
         /// On End drag card
         /// </summary>
@@ -194,7 +191,7 @@ namespace Canvas.Cards.Views
         /// </summary>
         private void EndDrag()
         {
-            DraggableCardService.EndDragCard(CardObj);
+            CommonCardService.EndDragCard(CardObj);
             if (HasDrop)
                 return;
             if (!HasOutArea)
@@ -222,7 +219,7 @@ namespace Canvas.Cards.Views
         /// <summary>
         /// Zenject Factory for Instantiate
         /// </summary>
-        public class Factory : PlaceholderFactory<IBaseCard, DraggableCardView>
+        public class Factory : PlaceholderFactory<IBaseCard, ICardView, DraggableCardView>
         {
         }
     }

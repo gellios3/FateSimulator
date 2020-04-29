@@ -2,15 +2,10 @@
 using System.Linq;
 using Canvas.Activities.Views;
 using Canvas.Cards.Interfaces;
-using Canvas.Cards.Models;
-using Canvas.Cards.Views;
-using Canvas.Popups.Signals;
 using Canvas.Popups.Signals.Activity;
 using Interfaces.Activity;
 using Interfaces.Cards;
-using ScriptableObjects;
 using ScriptableObjects.Activities;
-using UnityEngine;
 using Zenject;
 
 namespace Canvas.Activities.Services
@@ -53,6 +48,9 @@ namespace Canvas.Activities.Services
             });
         }
 
+        /// <summary>
+        /// Show result popup
+        /// </summary>
         public void ShowResultPopup()
         {
             signalBus.Fire(new ShowActivityResultSignal());

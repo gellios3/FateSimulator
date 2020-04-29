@@ -12,7 +12,7 @@ namespace Canvas.Cards
     public class CardDraggableSpawner : IInitializable
     {
         #region Parameters
-        
+
         [Inject] private List<BaseCardObj> CardList { get; }
         [Inject] private Transform CardParent { get; }
         [Inject] private CardViewSpawner CardViewSpawner { get; }
@@ -20,6 +20,7 @@ namespace Canvas.Cards
         private readonly DraggableCardView.Factory draggableCardFactory;
 
         #endregion
+
         public CardDraggableSpawner(DraggableCardView.Factory draggableCardFactory)
         {
             this.draggableCardFactory = draggableCardFactory;
@@ -29,10 +30,9 @@ namespace Canvas.Cards
         {
             foreach (var cardObj in CardList)
             {
-                var cardGameObject = draggableCardFactory.Create(cardObj);
-                cardGameObject.SetStartPos(new Vector3(cardObj.PosOnTable.x, cardObj.PosOnTable.y, -3), CardParent);
                 var topCard = CardViewSpawner.CreateViewCard(cardObj);
-                cardGameObject.Init(topCard, cardObj);
+                var cardGameObject = draggableCardFactory.Create(cardObj, topCard);
+                cardGameObject.SetStartPos(new Vector3(cardObj.PosOnTable.x, cardObj.PosOnTable.y, -3), CardParent);
             }
         }
     }

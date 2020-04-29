@@ -15,15 +15,19 @@ namespace Canvas.Popups.Views
     /// </summary>
     public class CardShortDescriptionView : BaseView
     {
+        #region Parameters
+
         [SerializeField] private TextMeshProUGUI titleTxt;
         [SerializeField] private TextMeshProUGUI descriptionTxt;
         [SerializeField] private Image iconBg;
         [SerializeField] private Image iconImg;
         [SerializeField] private AspectsBarView aspectsBarView;
-
-        private SignalBus SignalBus { get; set; }
         
-        [Inject] private CardAppearanceService CardAppearanceService { get; } 
+        private SignalBus SignalBus { get; set; }
+
+        [Inject] private CardAppearanceService CardAppearanceService { get; }
+
+        #endregion
 
         [Inject]
         public void Construct(SignalBus signalBus)

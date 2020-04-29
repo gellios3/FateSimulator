@@ -107,7 +107,7 @@ namespace Canvas.Activities.Views
 
             if (DropCardCardView == null)
                 return;
-            DropCardCardView.SetDraggable(false);
+            DropCardCardView.OnSetDraggable?.Invoke(false);
             DropCardCardView.SetPosition(transform.position);
         }
 

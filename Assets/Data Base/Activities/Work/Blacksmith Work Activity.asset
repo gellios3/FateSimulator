@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eea1b9588bf28b84eb3123452d42328b, type: 3}
   m_Name: Blacksmith Work Activity
   m_EditorClassIdentifier: 
-  id: 6
+  id: 32214
+  dataBase: {fileID: 11400000, guid: 46a29bcfb7c5d2941a21c795a07c9723, type: 2}
   activityName: Blacksmith Work
   activityDuration: 7
   shortDescription: Blacksmith Work sample description

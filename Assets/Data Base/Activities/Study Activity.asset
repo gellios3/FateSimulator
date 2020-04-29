@@ -12,11 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eea1b9588bf28b84eb3123452d42328b, type: 3}
   m_Name: Study Activity
   m_EditorClassIdentifier: 
-  id: 1
+  id: 14660
+  dataBase: {fileID: 11400000, guid: 46a29bcfb7c5d2941a21c795a07c9723, type: 2}
   activityName: Study Activity
+  activityDuration: 0
   shortDescription: Study Activity
   activityType: 2
   activityIcon: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  optionalResultChance: 0
+  startActivityCard: {fileID: 0}
   requiredList:
   - {fileID: 11400000, guid: 7329284566b4c1742855b78c4562eb58, type: 2}
   - {fileID: 11400000, guid: 74470126658d4ae42b00f5dc1fa01de2, type: 2}

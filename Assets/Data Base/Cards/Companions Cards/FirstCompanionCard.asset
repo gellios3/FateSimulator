@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebc23fad1d8f4c01971122307a68017f, type: 3}
   m_Name: FirstCompanionCard
   m_EditorClassIdentifier: 
-  id: 0
+  id: 34326
+  dataBase: {fileID: 11400000, guid: 46a29bcfb7c5d2941a21c795a07c9723, type: 2}
+  posOnTable: {x: 0, y: 0}
   cardName: FirstCompanionCard
   shortDescription: FirstCompanionCard
   type: 1
+  level: 0
   cardIcon: {fileID: 0}
   aspectsList:
   - {fileID: 11400000, guid: 889df1da218df724782e5dc72aad5b28, type: 2}
@@ -23,4 +26,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 98526055897f7324b8d3cf4f965fb2be, type: 2}
   - {fileID: 11400000, guid: b48db97bfa9b84a4eaa89d62ffd07f40, type: 2}
   - {fileID: 11400000, guid: e251d724cca607e43b0d5ee8377fb4be, type: 2}
+  appearances: []
   personType: 1
+  personStatus: 0

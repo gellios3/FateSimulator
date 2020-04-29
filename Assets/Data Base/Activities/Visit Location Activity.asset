@@ -12,11 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eea1b9588bf28b84eb3123452d42328b, type: 3}
   m_Name: Visit Location Activity
   m_EditorClassIdentifier: 
-  id: 0
+  id: 48498
+  dataBase: {fileID: 11400000, guid: 46a29bcfb7c5d2941a21c795a07c9723, type: 2}
   activityName: Visit Location
+  activityDuration: 0
   shortDescription: Visit Location Activity
   activityType: 0
   activityIcon: {fileID: 0}
+  optionalResultChance: 0
+  startActivityCard: {fileID: 0}
   requiredList:
   - {fileID: 11400000, guid: f61e8f86e437be44887921ceae1560c2, type: 2}
   - {fileID: 11400000, guid: cc9f053b23672224494eceb2a0be522f, type: 2}

@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc26f21f8c93442b9a498ca05f345f44, type: 3}
   m_Name: MeleeSkillCard
   m_EditorClassIdentifier: 
-  id: 0
+  id: 47914
+  dataBase: {fileID: 11400000, guid: 46a29bcfb7c5d2941a21c795a07c9723, type: 2}
   posOnTable: {x: -400, y: 400}
   cardName: Melee Skill Card
   shortDescription: Melee Skill Card
   type: 5
   level: 1
-  backgroundColor: {r: 0.764151, g: 0.5454418, b: 0.36405307, a: 1}
   cardIcon: {fileID: 21300000, guid: 932cbf418ed39754d942b3509b34d064, type: 3}
   aspectsList:
   - {fileID: 11400000, guid: f0f517d1a4dd1e5438383f5bbd12e767, type: 2}
@@ -28,6 +28,5 @@ MonoBehaviour:
   - cardStatus: 0
     duration: -1
     color: {r: 0.7647059, g: 0.54509807, b: 0.3647059, a: 1}
-  level: 1
   routineSkillType: 3
   battleSkillType: 1

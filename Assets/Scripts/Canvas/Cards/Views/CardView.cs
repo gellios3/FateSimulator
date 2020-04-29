@@ -1,11 +1,9 @@
-﻿using System.Collections.Generic;
-using AbstractViews;
+﻿using AbstractViews;
 using Canvas.Cards.Interfaces;
 using Canvas.Cards.Services;
 using DG.Tweening;
 using Enums;
 using Interfaces.Cards;
-using Serializable;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,23 +20,14 @@ namespace Canvas.Cards.Views
         #region Parameters
 
         [SerializeField] private RectTransform mask;
-
         [SerializeField] private Vector3 defaultMask;
         [SerializeField] private Vector3 dragMask;
-
         [SerializeField] private Image iconImg;
         [SerializeField] private ProceduralImage backgroundImg;
         [SerializeField] private TextMeshProUGUI title;
-
-        // [SerializeField] private List<CardStatusPreset> appearances;
-
         [SerializeField] private ColorsPresetImage borderImg;
 
-        [SerializeField] private CardStatus currentStatus;
-
-        public GameObject GameObject => gameObject;
         public IBaseCard BaseCard { get; private set; }
-
         [Inject] private CardAppearanceService CardAppearanceService { get; }
 
         private Vector2 defaultSizeDelta;
@@ -55,17 +44,6 @@ namespace Canvas.Cards.Views
         {
             defaultSizeDelta = mask.sizeDelta;
         }
-
-        // // @TODO complete logic for card active inactive status 
-        // public void SetExhaustionStatus()
-        // {
-        //     var exhaustionAppear = CardAppearanceService.GetAppearance(CardStatus.Distress);
-        //     currentStatus = CardStatus.Distress;
-        //     backgroundImg.color = exhaustionAppear.color;
-        //     iconImg.color = new Color(
-        //         exhaustionAppear.color.r, exhaustionAppear.color.g, exhaustionAppear.color.b, 0.65f
-        //     );
-        // }
 
         /// <summary>
         /// Highlight card
@@ -86,7 +64,6 @@ namespace Canvas.Cards.Views
             CardAppearanceService.Init(cardObj.StatusPresets);
             iconImg.sprite = cardObj.CardIcon;
             backgroundImg.color = CardAppearanceService.GetAppearance(CardStatus.Normal).color;
-            currentStatus = CardStatus.Normal;
             title.text = cardObj.CardName;
         }
 

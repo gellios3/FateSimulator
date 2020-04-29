@@ -12,12 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec7e253bddeb4e40a0ea8b280a5a49d7, type: 3}
   m_Name: QuestCard
   m_EditorClassIdentifier: 
-  id: 0
+  id: 62292
+  dataBase: {fileID: 11400000, guid: 46a29bcfb7c5d2941a21c795a07c9723, type: 2}
+  posOnTable: {x: 0, y: 0}
   cardName: QuestCard
   shortDescription: QuestCard
   type: 6
+  level: 0
   cardIcon: {fileID: 0}
   aspectsList: []
+  appearances: []
   activityType: 3
   fromPerson: {fileID: 11400000, guid: c5fff250fe1de314a88e33205f7c7069, type: 2}
   questCoordinate:

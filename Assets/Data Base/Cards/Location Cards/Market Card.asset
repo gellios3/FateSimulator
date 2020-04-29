@@ -12,13 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4aee0542d51417aa55d9c3422cd6b5d, type: 3}
   m_Name: Market Card
   m_EditorClassIdentifier: 
-  id: 0
+  id: 16516
+  dataBase: {fileID: 11400000, guid: 46a29bcfb7c5d2941a21c795a07c9723, type: 2}
+  posOnTable: {x: 0, y: 0}
   cardName: Market Card
   shortDescription: Market Card description
   type: 6
+  level: 0
   cardIcon: {fileID: 0}
   aspectsList:
   - {fileID: 11400000, guid: df6b137448c8ff840a2565753e6746da, type: 2}
   - {fileID: 11400000, guid: e23bcb3435ceb0940bbb4400ba00e833, type: 2}
+  appearances: []
   activityType: 7
   locationType: 2

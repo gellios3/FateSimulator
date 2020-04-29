@@ -1,78 +1,34 @@
-﻿using System.Collections.Generic;
-using Canvas.Cards.Interfaces;
-using Canvas.Cards.Signals;
-using Canvas.Popups.Signals;
-using Canvas.Popups.Signals.Activity;
-using Canvas.Services;
+﻿using Canvas.Cards.Interfaces;
 using Interfaces.Cards;
-using Zenject;
+using UnityEngine;
 
 namespace Canvas.Cards.Services
 {
-    /// <summary>
-    /// Draggable card service
-    /// </summary>
     public class DraggableCardService
     {
-        private SignalBus SignalBus { get; }
-        private List<ICardView> CardViews { get; } = new List<ICardView>();
-        [Inject] private ConditionsService ConditionsService { get; }
+        #region Parameters
 
-        public DraggableCardService(SignalBus signalBus)
+        private bool CanDraggable { get; set; } = true;
+        private bool HasDrop { get; set; }
+        private bool HasOutArea { get; set; }
+        private bool HasSetInInventory { get; set; }
+        private bool HasStartDrag { get; set; }
+        private Vector3 startTempPosition;
+        private ICardView TopCard { get; set; }
+
+        private IBaseCard CardObj { get; set; }
+
+        #endregion
+        
+        public void Init(ICardView topCard, IBaseCard cardObj)
         {
-            SignalBus = signalBus;
-            SignalBus.Subscribe<FindCardForActivitySignal>(TryFindCardForCondition);
+            CardObj = cardObj;
+            TopCard = topCard;
         }
-
-        /// <summary>
-        /// Try find card for canditions 
-        /// </summary>
-        /// <param name="obj"></param>
-        private void TryFindCardForCondition(FindCardForActivitySignal obj)
+        
+        public void SetDraggable(bool value)
         {
-            foreach (var cardView in CardViews)
-            {
-                if (ConditionsService.CheckCondition(obj.Condition, cardView.BaseCard))
-                {
-                    cardView.HighlightCard();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Add card view
-        /// </summary>
-        /// <param name="cardView"></param>
-        public void AddCardView(ICardView cardView)
-        {
-            CardViews.Add(cardView);
-        }
-
-        /// <summary>
-        /// Start drag card
-        /// </summary>
-        /// <param name="baseCard"></param>
-        public void StartDragCard(IBaseCard baseCard)
-        {
-            SignalBus.Fire(new StartDragCardSignal {BaseCard = baseCard});
-        }
-
-        /// <summary>
-        /// End drag card
-        /// </summary>
-        /// <param name="baseCard"></param>
-        public void EndDragCard(IBaseCard baseCard)
-        {
-            SignalBus.Fire(new EndDragCardSignal {BaseCard = baseCard});
-        }
-
-        /// <summary>
-        /// Show popup
-        /// </summary>
-        /// <param name="baseCard"></param>
-        public void ShowPopup(IBaseCard baseCard)
-        {
-            SignalBus.Fire(new ShowCardPopupSignal {BaseCard = baseCard});
+            CanDraggable = value;
         }
     }
 }
