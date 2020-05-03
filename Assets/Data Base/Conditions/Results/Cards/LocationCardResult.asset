@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab9bb85bb9784c179d114b73c99fa6a4, type: 3}
   m_Name: LocationCardResult
   m_EditorClassIdentifier: 
+  id: 54362
+  dataBase: {fileID: 11400000, guid: 46a29bcfb7c5d2941a21c795a07c9723, type: 2}
+  title: 
   level: 0
   percent: 0
   cardType: 8

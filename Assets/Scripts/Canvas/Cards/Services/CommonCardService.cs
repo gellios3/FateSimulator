@@ -30,20 +30,14 @@ namespace Canvas.Cards.Services
         }
 
         /// <summary>
-        /// Try find card for canditions 
+        /// Get draggable card by id
         /// </summary>
-        /// <param name="obj"></param>
-        private void TryFindCardForCondition(FindCardForActivitySignal obj)
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public IDraggableCardView GetDraggableCardById(ushort id)
         {
-            foreach (var cardView in CardViews)
-            {
-                if (ConditionsService.CheckCondition(obj.Condition, cardView.BaseCard))
-                {
-                    cardView.HighlightCard();
-                }
-            }
+            return DraggableCardViews.Find(view => view.CardId == id);
         }
-        
         
 
         /// <summary>
@@ -89,6 +83,21 @@ namespace Canvas.Cards.Services
         public void ShowPopup(IBaseCard baseCard)
         {
             SignalBus.Fire(new ShowCardPopupSignal {BaseCard = baseCard});
+        }
+        
+        /// <summary>
+        /// Try find card for canditions 
+        /// </summary>
+        /// <param name="obj"></param>
+        private void TryFindCardForCondition(FindCardForActivitySignal obj)
+        {
+            foreach (var cardView in CardViews)
+            {
+                if (ConditionsService.CheckCondition(obj.Condition, cardView.BaseCard))
+                {
+                    cardView.HighlightCard();
+                }
+            }
         }
     }
 }

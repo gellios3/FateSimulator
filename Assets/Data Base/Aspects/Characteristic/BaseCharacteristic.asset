@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a5f77a3cd5b4dbd920b1c050184aa15, type: 3}
   m_Name: BaseCharacteristic
   m_EditorClassIdentifier: 
-  id: 0
+  id: 58607
+  dataBase: {fileID: 11400000, guid: 46a29bcfb7c5d2941a21c795a07c9723, type: 2}
   aspectName: Base Characteristic
+  aspectDescription: 
   aspectImg: {fileID: 21300000, guid: 7dc1ae526e8080f498b4b30aec6dbcb0, type: 3}
   aspectType: 0

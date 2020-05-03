@@ -4,6 +4,8 @@
     {
         Card,
         Activity,
-        Aspect
+        Aspect,
+        Condition,
+        Result
     }
 }

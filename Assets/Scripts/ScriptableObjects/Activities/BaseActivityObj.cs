@@ -106,10 +106,14 @@ namespace ScriptableObjects.Activities
         /// <summary>
         /// Add card to database
         /// </summary>
-        protected override void AddCardToDatabase()
+        protected override void AddItemToDatabase()
         {
+            byte index = 0;
             while (true)
             {
+                if (index > 100)
+                    break;
+                index++;
                 id = (ushort) (Random.value * 100000f);
                 if (dataBase.IsUniqueId(id, GlobalType.Activity))
                 {

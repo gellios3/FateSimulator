@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df1c8e518bb04f879f34341563f51f07, type: 3}
   m_Name: CoordinateAspectRequire
   m_EditorClassIdentifier: 
+  id: 57749
+  dataBase: {fileID: 11400000, guid: 46a29bcfb7c5d2941a21c795a07c9723, type: 2}
+  level: 0
+  title: 
   aspectType: 5

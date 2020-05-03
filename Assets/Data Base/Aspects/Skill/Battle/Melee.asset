@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a7f702f47ba44f58aa0cd8fa9c8d9f5, type: 3}
   m_Name: Melee
   m_EditorClassIdentifier: 
-  id: 1
+  id: 18080
+  dataBase: {fileID: 11400000, guid: 46a29bcfb7c5d2941a21c795a07c9723, type: 2}
   aspectName: Melee
   aspectDescription: 
   aspectImg: {fileID: 21300000, guid: 3ae81557b9c86d747b92258f8ea5094f, type: 3}

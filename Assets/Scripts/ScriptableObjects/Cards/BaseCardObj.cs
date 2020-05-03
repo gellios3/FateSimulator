@@ -76,10 +76,14 @@ namespace ScriptableObjects.Cards
         public List<CardStatusPreset> StatusPresets => appearances;
 
 
-        protected override void AddCardToDatabase()
+        protected override void AddItemToDatabase()
         {
+            byte index = 0;
             while (true)
             {
+                if (index > 100)
+                    break;
+                index++;
                 id = (ushort) (Random.value * 100000f);
                 if (dataBase.IsUniqueId(id, GlobalType.Card))
                 {

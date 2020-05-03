@@ -16,21 +16,17 @@ namespace Canvas.Cards.Views
     {
         #region Parameters
 
-        private bool CanDraggable { get; set; } = true;
-        private bool HasDrop { get; set; }
-        private bool HasOutArea { get; set; }
-        private bool HasSetInInventory { get; set; }
-        private bool HasStartDrag { get; set; }
-
-        private Vector3 startTempPosition;
-
-        [SerializeField] private Button openPopupBtn;
+        public ushort CardId => CardObj.Id;
+        public Action<bool> OutArea { get; private set; }
+        public Action<bool> OnDropOnActivity { get; private set; }
 
         private ICardView TopCard { get; set; }
         private IBaseCard CardObj { get; set; }
+
+        [SerializeField] private Button openPopupBtn;
+
         [Inject] private CommonCardService CommonCardService { get; }
         [Inject] private DraggableCardService DraggableCardService { get; }
-        public Action<bool> OnSetDraggable { get; private set; }
 
         #endregion
 
@@ -40,40 +36,28 @@ namespace Canvas.Cards.Views
             CardObj = cardObj;
             TopCard = topCard;
 
-            DraggableCardService.Init(TopCard, CardObj);
             CommonCardService.AddCardView(TopCard);
+            CommonCardService.AddDraggableView(this);
+            DraggableCardService.Init(this);
         }
 
         private void Start()
         {
             openPopupBtn.onClick.AddListener(() =>
             {
-                if (!HasStartDrag)
+                if (!DraggableCardService.HasStartDrag)
                 {
                     CommonCardService.ShowPopup(CardObj);
                 }
             });
 
-            OnSetDraggable += DraggableCardService.SetDraggable;
-
+            OnDropOnActivity += DraggableCardService.OnDropOnActivity;
+            OutArea += DraggableCardService.SetOutArea;
             // Init top card position
             TopCard.SetCardPosition(transform.position);
             TopCard.SetCardView(CardObj);
         }
 
-        /// <summary>
-        /// Set out area
-        /// </summary>
-        /// <param name="value"></param>
-        public void SetOutArea(bool value)
-        {
-            HasOutArea = value;
-        }
-
-        public void SetDraggable(bool value)
-        {
-            CanDraggable = value;
-        }
 
         public override void Hide()
         {
@@ -97,6 +81,11 @@ namespace Canvas.Cards.Views
             TopCard.SetCardPosition(pos);
         }
 
+        /// <summary>
+        /// Set start position
+        /// </summary>
+        /// <param name="pos"></param>
+        /// <param name="parent"></param>
         public void SetStartPos(Vector3 pos, Transform parent)
         {
             var tempTransform = transform;
@@ -111,16 +100,13 @@ namespace Canvas.Cards.Views
         /// <param name="eventData"></param>
         public override void OnBeginDrag(PointerEventData eventData)
         {
-            if (!CanDraggable)
+            if (!DraggableCardService.CanBeginDrag())
                 return;
-
-            HasDrop = false;
-            HasStartDrag = true;
 
             CommonCardService.StartDragCard(CardObj);
 
             TopCard.Show();
-            startTempPosition = transform.position;
+            DraggableCardService.SetTempPos(transform.position);
             TopCard.OnStartDragCard();
         }
 
@@ -130,10 +116,7 @@ namespace Canvas.Cards.Views
         /// <param name="eventData"></param>
         public override void OnDrag(PointerEventData eventData)
         {
-            if (!CanDraggable || Camera.main == null)
-                return;
-            var pos = GetWorldPositionOnPlane(eventData.position, -1);
-            SetPosition(pos);
+            DraggableCardService.DragCard(eventData.position);
         }
 
         /// <summary>
@@ -142,22 +125,7 @@ namespace Canvas.Cards.Views
         /// <param name="eventData"></param>
         public override void OnEndDrag(PointerEventData eventData)
         {
-            HasStartDrag = false;
-
-            // if (HasDrop)
-            //     return;
-
-            if (HasOutArea)
-            {
-                ReturnBack(HasSetInInventory);
-                return;
-            }
-
-            HasSetInInventory = false;
-
-            // if (!CanDraggable)
-            //     return;
-
+            DraggableCardService.EndDrag();
             EndDrag();
         }
 
@@ -166,9 +134,8 @@ namespace Canvas.Cards.Views
         /// </summary>
         public void ReturnBack(bool hasSetInInventory = false)
         {
-            HasOutArea = false;
-            SetPosition(startTempPosition);
-            HasSetInInventory = hasSetInInventory;
+            DraggableCardService.ReturnBack(hasSetInInventory);
+            SetPosition(DraggableCardService.TempPosition);
             if (hasSetInInventory)
                 TopCard.HideCartShadow();
             else
@@ -180,8 +147,7 @@ namespace Canvas.Cards.Views
         /// </summary>
         public void OnDropCard()
         {
-            HasDrop = true;
-            HasSetInInventory = true;
+            DraggableCardService.DropCard();
             TopCard.SetCardPosition(transform.position);
             TopCard.HideCartShadow();
         }
@@ -192,28 +158,9 @@ namespace Canvas.Cards.Views
         private void EndDrag()
         {
             CommonCardService.EndDragCard(CardObj);
-            if (HasDrop)
+            if (!DraggableCardService.CanEndDrag())
                 return;
-            if (!HasOutArea)
-                CanDraggable = true;
-
             TopCard.ReturnDefaultCartShadow();
-        }
-
-        /// <summary>
-        /// Get World position on plane
-        /// </summary>
-        /// <param name="screenPosition"></param>
-        /// <param name="z"></param>
-        /// <returns></returns>
-        private static Vector3 GetWorldPositionOnPlane(Vector3 screenPosition, float z)
-        {
-            if (Camera.main == null)
-                return Vector3.zero;
-            var ray = Camera.main.ScreenPointToRay(screenPosition);
-            var xy = new Plane(Vector3.down, new Vector3(0, 0, z));
-            xy.Raycast(ray, out var distance);
-            return ray.GetPoint(distance);
         }
 
         /// <summary>

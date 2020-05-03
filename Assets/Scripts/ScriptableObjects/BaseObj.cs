@@ -6,23 +6,23 @@ namespace ScriptableObjects
     public abstract class BaseObj : ScriptableObject
     {
         public ushort id;
-        public AllCardsDataBase dataBase;
+        public AllItemsDataBase dataBase;
         
         public void Awake()
         {
             if (id != 0 || dataBase == null) 
                 return;
-            AddCardToDatabase();
+            AddItemToDatabase();
         }
 
         private void OnValidate()
         {
             if (id != 0 || dataBase == null) 
                 return;
-            AddCardToDatabase();
+            AddItemToDatabase();
         }
 
-        protected abstract void AddCardToDatabase();
+        protected abstract void AddItemToDatabase();
 
         private void OnDestroy()
         {

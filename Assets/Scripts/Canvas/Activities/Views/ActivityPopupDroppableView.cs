@@ -45,7 +45,7 @@ namespace Canvas.Activities.Views
         {
             if (DropCardCardView == null)
                 return;
-            DropCardCardView.SetDraggable(true);
+            DropCardCardView.OnDropOnActivity?.Invoke(false);
             DropCardCardView.ReturnBack();
             DropCardCardView = null;
             borderImg.SetStatus(Status.Normal);
@@ -58,7 +58,7 @@ namespace Canvas.Activities.Views
         public override void OnDrop(PointerEventData eventData)
         {
             base.OnDrop(eventData);
-            DropCardCardView?.SetDraggable(false);
+            DropCardCardView?.OnDropOnActivity?.Invoke(true);
         }
 
         /// <summary>
@@ -107,7 +107,7 @@ namespace Canvas.Activities.Views
 
             if (DropCardCardView == null)
                 return;
-            DropCardCardView.OnSetDraggable?.Invoke(false);
+            DropCardCardView?.OnDropOnActivity?.Invoke(true);
             DropCardCardView.SetPosition(transform.position);
         }
 

@@ -16,14 +16,15 @@ namespace Canvas
             var draggableView = eventData.pointerDrag.GetComponent<DraggableCardView>();
             if (draggableView == null)
                 return;
-            draggableView.OnSetDraggable?.Invoke(false);
-            draggableView.SetOutArea(true);
+            // draggableView.CanDraggable?.Invoke(false);
+            draggableView.OutArea?.Invoke(true);
             tempDraggableCard = draggableView;
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            tempDraggableCard?.OnSetDraggable?.Invoke(true);
+            tempDraggableCard?.OutArea?.Invoke(false);
+            // tempDraggableCard?.CanDraggable?.Invoke(true);
         }
     }
 }

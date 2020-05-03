@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 316f467a78504696ad17c5cd047a180e, type: 3}
   m_Name: PersonResult
   m_EditorClassIdentifier: 
+  id: 14541
+  dataBase: {fileID: 11400000, guid: 46a29bcfb7c5d2941a21c795a07c9723, type: 2}
+  title: 
   level: 0
   percent: 20
   cardType: 1

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1261f7781aaa42a48beab67546886faa, type: 3}
   m_Name: Knowledge
   m_EditorClassIdentifier: 
-  id: 2
+  id: 33888
+  dataBase: {fileID: 11400000, guid: 46a29bcfb7c5d2941a21c795a07c9723, type: 2}
   aspectName: Knowledge
   aspectDescription: 
   aspectImg: {fileID: 21300000, guid: 0278004276bef2043940de70a939db1c, type: 3}

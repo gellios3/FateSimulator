@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9432f060a024941a60db4871f3e4cf6, type: 3}
   m_Name: InformationAspect
   m_EditorClassIdentifier: 
-  id: 0
+  id: 12246
+  dataBase: {fileID: 11400000, guid: 46a29bcfb7c5d2941a21c795a07c9723, type: 2}
   aspectName: InformationAspect
   aspectDescription: 
   aspectImg: {fileID: 21300000, guid: e5d3dc369e16ea24083a2de5acfca75b, type: 3}

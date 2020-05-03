@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ad071d1c20f423eb1e15b6d39895e0f, type: 3}
   m_Name: Gold
   m_EditorClassIdentifier: 
-  id: 1
+  id: 47417
+  dataBase: {fileID: 11400000, guid: 46a29bcfb7c5d2941a21c795a07c9723, type: 2}
   aspectName: Gold
+  aspectDescription: 
   aspectImg: {fileID: 0}
   aspectType: 2
   resourceType: 1

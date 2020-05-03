@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c638af0f597e4291a8c3a49f349660ab, type: 3}
   m_Name: CoordinatesAspectObj
   m_EditorClassIdentifier: 
-  id: 0
+  id: 2261
+  dataBase: {fileID: 11400000, guid: 46a29bcfb7c5d2941a21c795a07c9723, type: 2}
   aspectName: CoordinatesAspectObj
   aspectDescription: 
   aspectImg: {fileID: 21300000, guid: b8733f87f9d57f94392861f81f237e9d, type: 3}

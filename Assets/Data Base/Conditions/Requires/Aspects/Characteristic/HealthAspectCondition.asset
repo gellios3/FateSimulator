@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5847b28beaab4502821080ef77b54a5f, type: 3}
   m_Name: HealthAspectCondition
   m_EditorClassIdentifier: 
+  id: 27471
+  dataBase: {fileID: 11400000, guid: 46a29bcfb7c5d2941a21c795a07c9723, type: 2}
   level: 0
+  title: 
   aspectType: 0
   characteristicType: 0

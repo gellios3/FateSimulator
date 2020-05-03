@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ac6820dace947e182711da373f926cd, type: 3}
   m_Name: Health Char Card Condition
   m_EditorClassIdentifier: 
+  id: 29078
+  dataBase: {fileID: 11400000, guid: 46a29bcfb7c5d2941a21c795a07c9723, type: 2}
   level: 0
   title: Health
   cardType: 0
