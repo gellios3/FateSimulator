@@ -82,7 +82,7 @@ namespace Canvas.Activities.Views
         private void OnDropCard()
         {
             CurrentActivity = activityService.GetActivityByStartCardId(droppableView.DropCardCardView.CardId);
-            activityService.ShowPopup(droppableView.DropCardCardView, CurrentActivity.Id);
+            activityService.ShowPopup(CurrentActivity.Id);
         }
 
         /// <summary>

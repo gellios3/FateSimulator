@@ -13,23 +13,27 @@ namespace Canvas.Services
         /// <summary>
         /// All items data base
         /// </summary>
-        [Inject] private AllItemsDataBase DataBase { get; }
-        
+        [Inject]
+        private AllItemsDataBase DataBase { get; }
+
         /// <summary>
         /// Check condition
         /// </summary>
-        /// <param name="conditionObj"></param>
+        /// <param name="conditionId"></param>
         /// <param name="checkedCardId"></param>
         /// <returns></returns>
-        public bool CheckCondition(ICardCondition conditionObj, ushort checkedCardId)
+        public bool CheckCondition(ushort conditionId, ushort checkedCardId)
         {
             var checkedCard = DataBase.GetCardById(checkedCardId);
+            var conditionObj = DataBase.GetConditionById(conditionId);
             switch (conditionObj)
             {
                 case ICharacteristicCardCondition charCondition when checkedCard is ICharacteristicCard charCard:
                     return charCondition.CharacteristicType == charCard.CharacteristicType;
+                case ICardCondition cardCondition:
+                    return cardCondition.CardType == checkedCard.Type;
                 default:
-                    return conditionObj.CardType == checkedCard.Type;
+                    return false;
             }
         }
     }

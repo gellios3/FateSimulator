@@ -12,25 +12,21 @@ namespace ScriptableObjects.Conditions.Requires
 
         public string title;
         public string Title => title;
-        protected override void AddItemToDatabase()
+        
+        protected override bool TryAddItemToDatabase()
         {
-            byte index = 0;
-            while (true)
+            if (!dataBase.IsUniqueId(id, GlobalType.Condition)) 
+                return false;
+            dataBase.allConditions.Add(this);
+            return true;
+        }
+        
+        protected override void RemoveItemFromDatabase()
+        {
+            var index = dataBase.allConditions.FindIndex(item => item.id == id);
+            if (index != -1)
             {
-                if (index > 100)
-                    break;
-                index++;
-                id = (ushort) (Random.value * 100000f);
-                if (dataBase.IsUniqueId(id, GlobalType.Condition))
-                {
-                    dataBase.allConditions.Add(this);
-                }
-                else
-                {
-                    continue;
-                }
-
-                break;
+                dataBase.allConditions.RemoveAt(index);
             }
         }
     }

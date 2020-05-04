@@ -11,9 +11,8 @@ namespace Interfaces.Cards
     /// <summary>
     /// Base card interface
     /// </summary>
-    public interface IBaseCard
+    public interface IBaseCard : IBaseObj
     {
-        ushort Id { get; }
         byte Level { get; }
         Vector2 PosOnTable { get; }
         string CardName { get; }

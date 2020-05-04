@@ -71,7 +71,7 @@ namespace ScriptableObjects
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public BaseConditionObj GetConditionObjById(ushort id)
+        public BaseConditionObj GetConditionById(ushort id)
         {
             var index = allConditions.FindIndex(obj => obj.id == id);
             return index != -1 ? allConditions[index] : null;

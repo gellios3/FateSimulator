@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Enums.Activities;
 using Interfaces.Activity;
-using Interfaces.Conditions.Cards;
+using ScriptableObjects;
 using ScriptableObjects.Cards;
 using ScriptableObjects.Conditions.Requires;
 using ScriptableObjects.Conditions.Results;
@@ -18,6 +17,8 @@ namespace Serializable.Activities
     public class BaseActivity : IBaseActivity
     {
         public ushort Id { get; }
+        
+        public AllItemsDataBase DataBase { get; }
         public string ActivityName { get; }
         public ushort ActivityDuration { get; }
         public string ShortDescription { get; }
@@ -38,6 +39,7 @@ namespace Serializable.Activities
         public BaseActivity(IBaseActivity baseActivity)
         {
             Id = baseActivity.Id;
+            DataBase = baseActivity.DataBase;
             ActivityName = baseActivity.ActivityName;
             ShortDescription = baseActivity.ShortDescription;
             ActivityDuration = baseActivity.ActivityDuration;

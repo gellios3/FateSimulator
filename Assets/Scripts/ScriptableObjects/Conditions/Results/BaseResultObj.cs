@@ -7,6 +7,7 @@ namespace ScriptableObjects.Conditions.Results
     [CreateAssetMenu(fileName = "BaseResultObj", menuName = "", order = 0)]
     public class BaseResultObj : BaseObj, IBaseResult
     {
+
         public string title;
         public string Title => title;
         
@@ -15,25 +16,21 @@ namespace ScriptableObjects.Conditions.Results
 
         public byte percent;
         public byte Percent => percent;
-        protected override void AddItemToDatabase()
+        
+        protected override bool TryAddItemToDatabase()
         {
-            byte index = 0;
-            while (true)
+            if (!dataBase.IsUniqueId(id, GlobalType.Result)) 
+                return false;
+            dataBase.allResults.Add(this);
+            return true;
+        }
+        
+        protected override void RemoveItemFromDatabase()
+        {
+            var index = dataBase.allResults.FindIndex(item => item.id == id);
+            if (index != -1)
             {
-                if (index > 100)
-                    break;
-                index++;
-                id = (ushort) (Random.value * 100000f);
-                if (dataBase.IsUniqueId(id, GlobalType.Result))
-                {
-                    dataBase.allResults.Add(this);
-                }
-                else
-                {
-                    continue;
-                }
-
-                break;
+                dataBase.allResults.RemoveAt(index);
             }
         }
     }

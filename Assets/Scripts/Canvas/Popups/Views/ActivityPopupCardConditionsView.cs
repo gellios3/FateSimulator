@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using AbstractViews;
 using Canvas.Activities.Views;
-using Canvas.Cards.Interfaces;
+using Canvas.Cards.Services;
 using Interfaces.Activity;
 using Interfaces.Conditions.Cards;
 using UnityEngine;
+using Zenject;
 
 namespace Canvas.Popups.Views
 {
@@ -14,13 +15,19 @@ namespace Canvas.Popups.Views
     /// </summary>
     public class ActivityPopupCardConditionsView : BaseView
     {
+        #region Parameters
+
         /// <summary>
         /// Droppable views
         /// </summary>
         [SerializeField] private List<ActivityPopupDroppableView> droppableViews;
 
+        [Inject] private CommonCardService CommonCardService { get; }
+
         private byte needCardsCount;
         private byte dropCardsCount;
+
+        #endregion
 
         public event Action AllConditionsDone;
 
@@ -54,8 +61,7 @@ namespace Canvas.Popups.Views
         /// Init Card Conditions
         /// </summary>
         /// <param name="baseActivity"></param>
-        /// <param name="startActionCard"></param>
-        public void Init(IBaseActivity baseActivity, IDraggableCardView startActionCard)
+        public void Init(IBaseActivity baseActivity)
         {
             var cardConditions = baseActivity.GetCardConditions();
             needCardsCount = (byte) cardConditions.Count;
@@ -65,7 +71,9 @@ namespace Canvas.Popups.Views
                 if (i == 0)
                 {
                     dropCardsCount = 1;
-                    droppableViews[i].DropCardCardView = startActionCard;
+                    droppableViews[i].DropCardCardView = CommonCardService.GetDraggableCardById(
+                        baseActivity.StartActivityCard.Id
+                    );
                 }
 
                 droppableViews[i].Init(cardConditions[i] as ICardCondition);

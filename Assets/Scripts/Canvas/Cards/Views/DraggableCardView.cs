@@ -47,7 +47,7 @@ namespace Canvas.Cards.Views
             {
                 if (!DraggableCardService.HasStartDrag)
                 {
-                    CommonCardService.ShowPopup(CardObj);
+                    CommonCardService.ShowPopup(CardId);
                 }
             });
 

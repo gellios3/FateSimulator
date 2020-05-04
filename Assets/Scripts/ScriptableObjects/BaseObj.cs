@@ -1,38 +1,54 @@
-﻿using UnityEngine;
+﻿using Interfaces;
+using UnityEngine;
 
 namespace ScriptableObjects
 {
     [CreateAssetMenu(fileName = "", menuName = "", order = 0)]
-    public abstract class BaseObj : ScriptableObject
+    public abstract class BaseObj : ScriptableObject, IBaseObj
     {
         public ushort id;
+        public ushort Id => id;
+        
         public AllItemsDataBase dataBase;
+        public AllItemsDataBase DataBase => dataBase;
         
         public void Awake()
         {
             if (id != 0 || dataBase == null) 
                 return;
-            AddItemToDatabase();
+            RecursiveAddItem();
         }
 
         private void OnValidate()
         {
             if (id != 0 || dataBase == null) 
                 return;
-            AddItemToDatabase();
+            RecursiveAddItem();
         }
 
-        protected abstract void AddItemToDatabase();
+        protected abstract bool TryAddItemToDatabase();
+        protected abstract void RemoveItemFromDatabase();
+
+        private void RecursiveAddItem()
+        {
+            byte index = 0;
+            while (true)
+            {
+                if (index > 100)
+                    break;
+                index++;
+                id = (ushort) (Random.value * 100000f);
+                if (!TryAddItemToDatabase())
+                    continue;
+                break;
+            }
+        }
 
         private void OnDestroy()
         {
             if (dataBase == null) 
                 return;
-            var index = dataBase.allCards.FindIndex(card => card.id == id);
-            if (index != -1)
-            {
-                dataBase.allCards.RemoveAt(index);
-            }
+            RemoveItemFromDatabase();
         }
     }
 }

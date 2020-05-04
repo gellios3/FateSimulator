@@ -79,10 +79,10 @@ namespace Canvas.Cards.Services
         /// <summary>
         /// Show popup
         /// </summary>
-        /// <param name="baseCard"></param>
-        public void ShowPopup(IBaseCard baseCard)
+        /// <param name="cardId"></param>
+        public void ShowPopup(ushort cardId)
         {
-            SignalBus.Fire(new ShowCardPopupSignal {BaseCard = baseCard});
+            SignalBus.Fire(new ShowCardPopupSignal {CardId = cardId});
         }
         
         /// <summary>
@@ -93,7 +93,7 @@ namespace Canvas.Cards.Services
         {
             foreach (var cardView in CardViews)
             {
-                if (ConditionsService.CheckCondition(obj.Condition, cardView.BaseCard.Id))
+                if (ConditionsService.CheckCondition(obj.ConditionId, cardView.BaseCard.Id))
                 {
                     cardView.HighlightCard();
                 }

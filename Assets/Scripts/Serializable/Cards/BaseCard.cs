@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Enums;
 using Interfaces.Aspects;
 using Interfaces.Cards;
+using ScriptableObjects;
 using ScriptableObjects.Aspects;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ namespace Serializable.Cards
     public class BaseCard : IBaseCard
     {
         public ushort Id { get; }
+        public AllItemsDataBase DataBase { get; }
         public byte Level { get; }
         public Vector2 PosOnTable { get; }
         public string CardName { get; }
@@ -24,6 +26,7 @@ namespace Serializable.Cards
         public BaseCard(IBaseCard cardObj)
         {
             Id = cardObj.Id;
+            DataBase = cardObj.DataBase;
             Level = cardObj.Level;
             CardName = cardObj.CardName;
             PosOnTable = cardObj.PosOnTable;

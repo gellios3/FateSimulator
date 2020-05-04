@@ -1,10 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Canvas.Cards.Interfaces;
-using Canvas.Popups.Signals.Activity;
+﻿using Canvas.Popups.Signals.Activity;
 using Interfaces.Activity;
 using ScriptableObjects;
-using ScriptableObjects.Activities;
 using Zenject;
 
 namespace Canvas.Activities.Services
@@ -14,15 +10,13 @@ namespace Canvas.Activities.Services
     /// </summary>
     public class ActivityService
     {
-        // [Inject] private List<BaseActivityObj> possibleActivities;
-
         [Inject] private AllItemsDataBase ItemsDataBase { get; }
 
-        private readonly SignalBus signalBus;
+        private SignalBus SignalBus { get; }
 
         public ActivityService(SignalBus signalBus)
         {
-            this.signalBus = signalBus;
+            SignalBus = signalBus;
         }
 
         /// <summary>
@@ -40,13 +34,11 @@ namespace Canvas.Activities.Services
         /// <summary>
         /// Show popup
         /// </summary>
-        /// <param name="draggableCardView"></param>
         /// <param name="activityId"></param>
-        public void ShowPopup(IDraggableCardView draggableCardView, ushort activityId)
+        public void ShowPopup(ushort activityId)
         {
-            signalBus.Fire(new ShowActivityPopupSignal
+            SignalBus.Fire(new ShowActivityPopupSignal
             {
-                StartActionCard = draggableCardView,
                 ActivityId = activityId
             });
         }
@@ -56,7 +48,7 @@ namespace Canvas.Activities.Services
         /// </summary>
         public void ShowResultPopup()
         {
-            signalBus.Fire(new ShowActivityResultSignal());
+            SignalBus.Fire(new ShowActivityResultSignal());
         }
     }
 }

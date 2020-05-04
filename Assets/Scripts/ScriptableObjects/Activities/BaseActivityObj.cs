@@ -16,11 +16,6 @@ namespace ScriptableObjects.Activities
     public class BaseActivityObj : BaseObj, IBaseActivity
     {
         /// <summary>
-        /// Id
-        /// </summary>
-        public ushort Id => id;
-
-        /// <summary>
         /// Activity name
         /// </summary>
         public string activityName;
@@ -103,28 +98,20 @@ namespace ScriptableObjects.Activities
             return RequiredList.FindAll(obj => obj is CardConditionObj);
         }
 
-        /// <summary>
-        /// Add card to database
-        /// </summary>
-        protected override void AddItemToDatabase()
+        protected override bool TryAddItemToDatabase()
         {
-            byte index = 0;
-            while (true)
-            {
-                if (index > 100)
-                    break;
-                index++;
-                id = (ushort) (Random.value * 100000f);
-                if (dataBase.IsUniqueId(id, GlobalType.Activity))
-                {
-                    dataBase.allActivities.Add(this);
-                }
-                else
-                {
-                    continue;
-                }
+            if (!dataBase.IsUniqueId(id, GlobalType.Activity))
+                return false;
+            dataBase.allActivities.Add(this);
+            return true;
+        }
 
-                break;
+        protected override void RemoveItemFromDatabase()
+        {
+            var index = dataBase.allActivities.FindIndex(item => item.id == id);
+            if (index != -1)
+            {
+                dataBase.allActivities.RemoveAt(index);
             }
         }
     }

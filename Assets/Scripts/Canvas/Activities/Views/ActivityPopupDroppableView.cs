@@ -82,7 +82,7 @@ namespace Canvas.Activities.Views
         {
             if (conditionObj == null)
                 return;
-            SetDroppable(ConditionsService.CheckCondition(conditionObj, obj.CardId));
+            SetDroppable(ConditionsService.CheckCondition(conditionObj.Id, obj.CardId));
             if (CanDropCard)
                 borderImg.SetStatus(Status.Highlighted);
         }
@@ -117,7 +117,7 @@ namespace Canvas.Activities.Views
         /// <param name="eventData"></param>
         public void OnPointerDown(PointerEventData eventData)
         {
-            SignalBus.Fire(new FindCardForActivitySignal {Condition = conditionObj});
+            SignalBus.Fire(new FindCardForActivitySignal {ConditionId = conditionObj.Id});
         }
     }
 }

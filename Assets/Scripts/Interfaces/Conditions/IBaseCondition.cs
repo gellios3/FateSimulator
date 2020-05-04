@@ -1,9 +1,8 @@
 ﻿namespace Interfaces.Conditions
 {
-    public interface IBaseCondition
+    public interface IBaseCondition : IBaseObj
     {
         string Title { get; }
-        
         byte Level { get; }
     }
 }

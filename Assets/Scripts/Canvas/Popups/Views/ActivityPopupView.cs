@@ -83,7 +83,7 @@ namespace Canvas.Popups.Views
             startActivityBtn.Hide();
             BaseActivity = AllItemsDataBase.GetActivityById(obj.ActivityId);
             // Init conditions
-            conditionsView.Init(BaseActivity, obj.StartActionCard);
+            conditionsView.Init(BaseActivity);
             // Init timer
             activityTimer.Init(BaseActivity.ActivityDuration);
             activityTimer.Hide();

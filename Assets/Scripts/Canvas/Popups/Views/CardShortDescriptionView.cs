@@ -3,6 +3,7 @@ using Canvas.Aspects.Views;
 using Canvas.Cards.Services;
 using Canvas.Popups.Signals;
 using Enums;
+using ScriptableObjects;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,10 +23,12 @@ namespace Canvas.Popups.Views
         [SerializeField] private Image iconBg;
         [SerializeField] private Image iconImg;
         [SerializeField] private AspectsBarView aspectsBarView;
-        
+
         private SignalBus SignalBus { get; set; }
 
         [Inject] private CardAppearanceService CardAppearanceService { get; }
+
+        [Inject] private AllItemsDataBase AllItemsDataBase { get; }
 
         #endregion
 
@@ -44,7 +47,7 @@ namespace Canvas.Popups.Views
         private void ShowCardPopup(ShowCardPopupSignal args)
         {
             Show();
-            var cardObj = args.BaseCard;
+            var cardObj = AllItemsDataBase.GetCardById(args.CardId);
             CardAppearanceService.Init(cardObj.StatusPresets);
             titleTxt.text = cardObj.CardName;
             descriptionTxt.text = cardObj.ShortDescription;
