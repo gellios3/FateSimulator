@@ -10,6 +10,9 @@ using UnityEngine;
 
 namespace ScriptableObjects
 {
+    /// <summary>
+    /// All items Data base
+    /// </summary>
     [CreateAssetMenu(fileName = "", menuName = "", order = 0)]
     public class AllItemsDataBase : ScriptableObject
     {
@@ -24,10 +27,10 @@ namespace ScriptableObjects
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public BaseCardObj GetCardObjById(ushort id)
+        public BaseCardObj GetCardById(ushort id)
         {
             var index = allCards.FindIndex(obj => obj.id == id);
-            return index == -1 ? allCards[index] : null;
+            return index != -1 ? allCards[index] : null;
         }
         
         /// <summary>
@@ -35,10 +38,10 @@ namespace ScriptableObjects
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public BaseActivityObj GetActiveObjById(ushort id)
+        public BaseActivityObj GetActivityById(ushort id)
         {
             var index = allActivities.FindIndex(obj => obj.id == id);
-            return index == -1 ? allActivities[index] : null;
+            return index != -1 ? allActivities[index] : null;
         } 
         
         /// <summary>
@@ -49,7 +52,7 @@ namespace ScriptableObjects
         public BaseAspectObj GetAspectObjById(ushort id)
         {
             var index = allAspects.FindIndex(obj => obj.id == id);
-            return index == -1 ? allAspects[index] : null;
+            return index != -1 ? allAspects[index] : null;
         }
         
         /// <summary>
@@ -60,7 +63,7 @@ namespace ScriptableObjects
         public BaseResultObj GetResultObjById(ushort id)
         {
             var index = allResults.FindIndex(obj => obj.id == id);
-            return index == -1 ? allResults[index] : null;
+            return index != -1 ? allResults[index] : null;
         } 
         
         /// <summary>
@@ -71,7 +74,7 @@ namespace ScriptableObjects
         public BaseConditionObj GetConditionObjById(ushort id)
         {
             var index = allConditions.FindIndex(obj => obj.id == id);
-            return index == -1 ? allConditions[index] : null;
+            return index != -1 ? allConditions[index] : null;
         }
         
         /// <summary>

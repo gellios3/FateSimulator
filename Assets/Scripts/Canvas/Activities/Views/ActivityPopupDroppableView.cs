@@ -82,7 +82,7 @@ namespace Canvas.Activities.Views
         {
             if (conditionObj == null)
                 return;
-            SetDroppable(ConditionsService.CheckCondition(conditionObj, obj.BaseCard));
+            SetDroppable(ConditionsService.CheckCondition(conditionObj, obj.CardId));
             if (CanDropCard)
                 borderImg.SetStatus(Status.Highlighted);
         }

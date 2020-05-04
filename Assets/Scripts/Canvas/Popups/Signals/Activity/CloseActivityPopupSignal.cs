@@ -2,5 +2,6 @@
 {
     public class CloseActivityPopupSignal
     {
+        public ushort ActivityId;
     }
 }

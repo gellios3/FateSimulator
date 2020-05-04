@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Canvas.Activities.Views;
 using Canvas.Cards.Interfaces;
 using Canvas.Popups.Signals.Activity;
 using Interfaces.Activity;
-using Interfaces.Cards;
+using ScriptableObjects;
 using ScriptableObjects.Activities;
 using Zenject;
 
@@ -15,7 +14,9 @@ namespace Canvas.Activities.Services
     /// </summary>
     public class ActivityService
     {
-        [Inject] private List<BaseActivityObj> possibleActivities;
+        // [Inject] private List<BaseActivityObj> possibleActivities;
+
+        [Inject] private AllItemsDataBase ItemsDataBase { get; }
 
         private readonly SignalBus signalBus;
 
@@ -27,24 +28,26 @@ namespace Canvas.Activities.Services
         /// <summary>
         /// Get activity card
         /// </summary>
-        /// <param name="startActivityCard"></param>
+        /// <param name="startActivityCardId"></param>
         /// <returns></returns>
-        public IBaseActivity GetActivityByActivity(IBaseCard startActivityCard)
+        public IBaseActivity GetActivityByStartCardId(ushort startActivityCardId)
         {
-            return possibleActivities.FirstOrDefault(obj => ReferenceEquals(obj.StartActivityCard, startActivityCard));
+            return ItemsDataBase.allActivities.Find(obj =>
+                obj.startActivityCard != null && obj.startActivityCard.Id == startActivityCardId
+            );
         }
 
         /// <summary>
         /// Show popup
         /// </summary>
         /// <param name="draggableCardView"></param>
-        /// <param name="activityView"></param>
-        public void ShowPopup(IDraggableCardView draggableCardView, ActivityView activityView)
+        /// <param name="activityId"></param>
+        public void ShowPopup(IDraggableCardView draggableCardView, ushort activityId)
         {
             signalBus.Fire(new ShowActivityPopupSignal
             {
                 StartActionCard = draggableCardView,
-                SourceActivity = activityView
+                ActivityId = activityId
             });
         }
 

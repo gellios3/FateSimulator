@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using AbstractViews;
 using Canvas.Activities.Views;
 using Canvas.Cards.Interfaces;
-using Canvas.Cards.Views;
 using Interfaces.Activity;
 using Interfaces.Conditions.Cards;
 using UnityEngine;
@@ -47,10 +46,7 @@ namespace Canvas.Popups.Views
         {
             foreach (var droppableView in droppableViews)
             {
-                if (droppableView.DropCardCardView != null)
-                {
-                    droppableView.DropCardCardView.Hide();
-                }
+                droppableView.DropCardCardView?.Hide();
             }
         }
 

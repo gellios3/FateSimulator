@@ -3,9 +3,13 @@ using UnityEngine;
 
 namespace Canvas.Cards.Services
 {
+    /// <summary>
+    /// Draggable card service
+    /// </summary>
     public class DraggableCardService
     {
         #region Parameters
+
         private bool CanDraggable { get; set; } = true;
         private bool HasDrop { get; set; }
         private bool HasOutArea { get; set; }
@@ -13,6 +17,7 @@ namespace Canvas.Cards.Services
         public bool HasStartDrag { get; private set; }
         public Vector3 TempPosition { get; private set; }
         private DraggableCardView SourceView { get; set; }
+
         #endregion
 
         public void Init(DraggableCardView draggable)
@@ -20,6 +25,10 @@ namespace Canvas.Cards.Services
             SourceView = draggable;
         }
 
+        /// <summary>
+        /// Can begin drag
+        /// </summary>
+        /// <returns></returns>
         public bool CanBeginDrag()
         {
             if (!CanDraggable)
@@ -29,6 +38,10 @@ namespace Canvas.Cards.Services
             return true;
         }
 
+        /// <summary>
+        /// Can end drag
+        /// </summary>
+        /// <returns></returns>
         public bool CanEndDrag()
         {
             if (HasDrop)
@@ -38,19 +51,29 @@ namespace Canvas.Cards.Services
             return true;
         }
 
+        /// <summary>
+        /// Drag card
+        /// </summary>
+        /// <param name="pos"></param>
         public void DragCard(Vector3 pos)
         {
             if (!(CanDraggable && Camera.main != null))
                 return;
             SourceView.SetPosition(GetWorldPositionOnPlane(pos, -1));
         }
-        
+
+        /// <summary>
+        /// Drop card
+        /// </summary>
         public void DropCard()
         {
             HasDrop = true;
             HasSetInInventory = true;
         }
 
+        /// <summary>
+        /// End drag
+        /// </summary>
         public void EndDrag()
         {
             HasStartDrag = false;
@@ -64,28 +87,44 @@ namespace Canvas.Cards.Services
             HasSetInInventory = false;
         }
 
+        /// <summary>
+        /// Drop on activity
+        /// </summary>
+        /// <param name="value"></param>
         public void OnDropOnActivity(bool value)
         {
             CanDraggable = !value;
         }
 
+        /// <summary>
+        /// Return back
+        /// </summary>
+        /// <param name="value"></param>
         public void ReturnBack(bool value)
         {
             HasOutArea = false;
             HasSetInInventory = value;
         }
-        
+
+        /// <summary>
+        /// Set out of draggable area
+        /// </summary>
+        /// <param name="value"></param>
         public void SetOutArea(bool value)
         {
             HasOutArea = value;
             CanDraggable = !value;
         }
-        
+
+        /// <summary>
+        /// Set temp position
+        /// </summary>
+        /// <param name="pos"></param>
         public void SetTempPos(Vector3 pos)
         {
             TempPosition = pos;
         }
-        
+
         /// <summary>
         /// Get World position on plane
         /// </summary>

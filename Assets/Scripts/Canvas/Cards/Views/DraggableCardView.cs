@@ -103,7 +103,7 @@ namespace Canvas.Cards.Views
             if (!DraggableCardService.CanBeginDrag())
                 return;
 
-            CommonCardService.StartDragCard(CardObj);
+            CommonCardService.StartDragCard(CardObj.Id);
 
             TopCard.Show();
             DraggableCardService.SetTempPos(transform.position);
@@ -157,7 +157,7 @@ namespace Canvas.Cards.Views
         /// </summary>
         private void EndDrag()
         {
-            CommonCardService.EndDragCard(CardObj);
+            CommonCardService.EndDragCard(CardObj.Id);
             if (!DraggableCardService.CanEndDrag())
                 return;
             TopCard.ReturnDefaultCartShadow();

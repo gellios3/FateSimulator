@@ -1,9 +1,7 @@
-﻿using Interfaces.Cards;
-
-namespace Canvas.Cards.Signals
+﻿namespace Canvas.Cards.Signals
 {
     public class StartDragCardSignal
     {
-        public IBaseCard BaseCard;
+        public ushort CardId;
     }
 }

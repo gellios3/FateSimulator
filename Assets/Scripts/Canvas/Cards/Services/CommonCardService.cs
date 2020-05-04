@@ -61,19 +61,19 @@ namespace Canvas.Cards.Services
         /// <summary>
         /// Start drag card
         /// </summary>
-        /// <param name="baseCard"></param>
-        public void StartDragCard(IBaseCard baseCard)
+        /// <param name="cardId"></param>
+        public void StartDragCard(ushort cardId)
         {
-            SignalBus.Fire(new StartDragCardSignal {BaseCard = baseCard});
+            SignalBus.Fire(new StartDragCardSignal {CardId = cardId});
         }
 
         /// <summary>
         /// End drag card
         /// </summary>
-        /// <param name="baseCard"></param>
-        public void EndDragCard(IBaseCard baseCard)
+        /// <param name="cardId"></param>
+        public void EndDragCard(ushort cardId)
         {
-            SignalBus.Fire(new EndDragCardSignal {BaseCard = baseCard});
+            SignalBus.Fire(new EndDragCardSignal {CardId = cardId});
         }
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace Canvas.Cards.Services
         {
             foreach (var cardView in CardViews)
             {
-                if (ConditionsService.CheckCondition(obj.Condition, cardView.BaseCard))
+                if (ConditionsService.CheckCondition(obj.Condition, cardView.BaseCard.Id))
                 {
                     cardView.HighlightCard();
                 }

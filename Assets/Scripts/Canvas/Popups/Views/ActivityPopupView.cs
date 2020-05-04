@@ -2,6 +2,7 @@
 using Canvas.Activities.Views;
 using Canvas.Popups.Signals.Activity;
 using Interfaces.Activity;
+using ScriptableObjects;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -22,7 +23,7 @@ namespace Canvas.Popups.Views
 
         private SignalBus SignalBus { get; set; }
         private IBaseActivity BaseActivity { get; set; }
-        private ActivityView sourceActivityView;
+        [Inject] private AllItemsDataBase AllItemsDataBase { get; }
 
         #endregion
 
@@ -43,7 +44,6 @@ namespace Canvas.Popups.Views
         private void ShowResultPopup()
         {
             Show();
-            
         }
 
         /// <summary>
@@ -51,9 +51,8 @@ namespace Canvas.Popups.Views
         /// </summary>
         private void OnStartActivity()
         {
-            SignalBus.Fire(new StartActivitySignal {BaseActivity = BaseActivity});
+            SignalBus.Fire(new StartActivitySignal {ActivityId = BaseActivity.Id});
             conditionsView.HideDropCards();
-            sourceActivityView.StartActivity(BaseActivity.ActivityDuration);
             Hide();
         }
 
@@ -62,8 +61,7 @@ namespace Canvas.Popups.Views
         /// </summary>
         private void OnClosePopup()
         {
-            SignalBus.Fire(new CloseActivityPopupSignal());
-            sourceActivityView.ReturnToNormalStatus(true);
+            SignalBus.Fire(new CloseActivityPopupSignal{ActivityId = BaseActivity.Id});
             Hide();
         }
 
@@ -82,9 +80,8 @@ namespace Canvas.Popups.Views
         private void ShowActivityPopup(ShowActivityPopupSignal obj)
         {
             Show();
-            sourceActivityView = obj.SourceActivity;
             startActivityBtn.Hide();
-            BaseActivity = sourceActivityView.FoundActivity;
+            BaseActivity = AllItemsDataBase.GetActivityById(obj.ActivityId);
             // Init conditions
             conditionsView.Init(BaseActivity, obj.StartActionCard);
             // Init timer
