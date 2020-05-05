@@ -1,11 +1,13 @@
 ﻿using System;
 using Canvas;
 using Canvas.Cards.Interfaces;
+using Canvas.Cards.Services;
 using Canvas.Cards.Views;
 using Enums;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Zenject;
 
 namespace AbstractViews
 {
@@ -17,17 +19,18 @@ namespace AbstractViews
         #region Parameters
 
         public event Action CardDrop;
-
         [SerializeField] private Image bgImg;
-
-        protected bool CanDropCard { get; private set; } = true;
-
-        public IDraggableCardView DropCardCardView { get; set; }
-
+        private bool CanDropCard { get; set; } = true;
+        public ushort DropCardId { get; set; }
         [SerializeField] protected ColorsPresetImage borderImg;
+        [Inject] private CardActionsService CardActionsService { get; }
 
         #endregion
 
+        /// <summary>
+        ///  Set droppable
+        /// </summary>
+        /// <param name="status"></param>
         public void SetDroppable(bool status)
         {
             CanDropCard = status;
@@ -50,15 +53,16 @@ namespace AbstractViews
         /// <param name="eventData"></param>
         public virtual void OnDrop(PointerEventData eventData)
         {
-            DropCardCardView = null;
+            DropCardId = 0;
             if (eventData.pointerDrag == null || !CanDropCard)
                 return;
-            DropCardCardView = eventData.pointerDrag.GetComponent<DraggableCardView>();
-            if (DropCardCardView == null)
+            var dropCardCardView = eventData.pointerDrag.GetComponent<DraggableCardView>();
+            if (dropCardCardView == null)
                 return;
-            DropCardCardView.SetPosition(transform.position);
+            DropCardId = dropCardCardView.CardId;
+            CardActionsService.SetCardPositionById(DropCardId, transform.position);
             CardDrop?.Invoke();
-            DropCardCardView.OnDropCard();
+            CardActionsService.OnDropById(DropCardId);
         }
 
         /// <inheritdoc />
@@ -71,7 +75,6 @@ namespace AbstractViews
             if (eventData.pointerDrag == null || !CanDropCard)
                 return;
             SetStatus(Status.Highlighted);
-            // Debug.LogError($"OnPointerEnter {eventData.pointerDrag}");   
         }
 
         /// <inheritdoc />
@@ -84,12 +87,12 @@ namespace AbstractViews
             if (eventData.pointerDrag == null || !CanDropCard)
                 return;
             SetStatus(Status.Normal);
-            var cardView = eventData.pointerDrag.GetComponent<DraggableCardView>();
-            if (cardView != null)
-            {
-                // cardView.CanDraggable = true;
-                // Debug.LogError($"OnPointerExit {eventData.pointerDrag}");
-            }
+            // var cardView = eventData.pointerDrag.GetComponent<DraggableCardView>();
+            // if (cardView != null)
+            // {
+            //     // cardView.CanDraggable = true;
+            //     // Debug.LogError($"OnPointerExit {eventData.pointerDrag}");
+            // }
         }
     }
 }

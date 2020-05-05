@@ -98,6 +98,10 @@ namespace ScriptableObjects.Activities
             return RequiredList.FindAll(obj => obj is CardConditionObj);
         }
 
+        /// <summary>
+        /// Try add item to database
+        /// </summary>
+        /// <returns></returns>
         protected override bool TryAddItemToDatabase()
         {
             if (!dataBase.IsUniqueId(id, GlobalType.Activity))
@@ -106,6 +110,9 @@ namespace ScriptableObjects.Activities
             return true;
         }
 
+        /// <summary>
+        /// Remove item from database on destroy 
+        /// </summary>
         protected override void RemoveItemFromDatabase()
         {
             var index = dataBase.allActivities.FindIndex(item => item.id == id);

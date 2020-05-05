@@ -11,10 +11,10 @@ namespace Canvas.Cards.Interfaces
     {
         ushort CardId { get; }
         Action<bool> OnDropOnActivity { get; }
-        Action<bool> OutArea { get; }
-        void SetPosition(Vector3 pos);
-        void OnDropCard();
-        void ReturnBack(bool hasSetInInventory = false);
-        void SetStartPos(Vector3 pos, Transform parent);
+        Action<bool> OnOutArea { get; }
+        Action<Vector3> OnSetPosition { get; }
+        Action OnDropCard { get; }
+        Action<bool> OnReturnBack { get; }
+        void HighlightCard();
     }
 }

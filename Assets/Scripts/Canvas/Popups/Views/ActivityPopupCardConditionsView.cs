@@ -21,8 +21,7 @@ namespace Canvas.Popups.Views
         /// Droppable views
         /// </summary>
         [SerializeField] private List<ActivityPopupDroppableView> droppableViews;
-
-        [Inject] private CommonCardService CommonCardService { get; }
+        [Inject] private CardActionsService CardActionsService { get; }
 
         private byte needCardsCount;
         private byte dropCardsCount;
@@ -53,7 +52,7 @@ namespace Canvas.Popups.Views
         {
             foreach (var droppableView in droppableViews)
             {
-                droppableView.DropCardCardView?.Hide();
+                CardActionsService.HideCardById(droppableView.DropCardId);
             }
         }
 
@@ -71,9 +70,7 @@ namespace Canvas.Popups.Views
                 if (i == 0)
                 {
                     dropCardsCount = 1;
-                    droppableViews[i].DropCardCardView = CommonCardService.GetDraggableCardById(
-                        baseActivity.StartActivityCard.Id
-                    );
+                    droppableViews[i].DropCardId = baseActivity.StartActivityCard.Id;
                 }
 
                 droppableViews[i].Init(cardConditions[i] as ICardCondition);

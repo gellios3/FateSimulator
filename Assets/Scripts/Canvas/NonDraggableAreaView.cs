@@ -1,13 +1,16 @@
 ﻿using AbstractViews;
-using Canvas.Cards.Interfaces;
+using Canvas.Cards.Services;
 using Canvas.Cards.Views;
 using UnityEngine.EventSystems;
+using Zenject;
 
 namespace Canvas
 {
     public class NonDraggableAreaView : BaseView, IPointerEnterHandler, IPointerExitHandler
     {
-        private IDraggableCardView tempDraggableCard;
+        private ushort tempCardId;
+
+        [Inject] private CardActionsService CardActionsService { get; }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
@@ -16,15 +19,13 @@ namespace Canvas
             var draggableView = eventData.pointerDrag.GetComponent<DraggableCardView>();
             if (draggableView == null)
                 return;
-            // draggableView.CanDraggable?.Invoke(false);
-            draggableView.OutArea?.Invoke(true);
-            tempDraggableCard = draggableView;
+            tempCardId = draggableView.CardId;
+            CardActionsService.OnOutAreaById(tempCardId, true);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            tempDraggableCard?.OutArea?.Invoke(false);
-            // tempDraggableCard?.CanDraggable?.Invoke(true);
+            CardActionsService.OnOutAreaById(tempCardId, false);
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using AbstractViews;
+using Canvas.Cards.Services;
 using Enums;
+using Zenject;
 
 namespace Canvas.Activities.Views
 {
@@ -8,17 +10,19 @@ namespace Canvas.Activities.Views
     /// </summary>
     public class ActivityDroppableView : DroppableView
     {
+        [Inject] private CardActionsService CardActionsService { get; }
+        
         /// <summary>
         /// Return drop card
         /// </summary>
         public void ReturnDropCard( )
         {
-            if (DropCardCardView == null)
+            if (DropCardId == 0)
                 return;
             borderImg.SetStatus(Status.Normal);
-            DropCardCardView.Show();
-            DropCardCardView.ReturnBack();
-            DropCardCardView = null;
+            CardActionsService.ShowCardById(DropCardId);
+            CardActionsService.ReturnBackById(DropCardId);
+            DropCardId = 0;
         }
     }
 }

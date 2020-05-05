@@ -1,5 +1,6 @@
 ﻿using Canvas.Cards.Views;
 using UnityEngine;
+using Zenject;
 
 namespace Canvas.Cards.Services
 {
@@ -16,13 +17,15 @@ namespace Canvas.Cards.Services
         private bool HasSetInInventory { get; set; }
         public bool HasStartDrag { get; private set; }
         public Vector3 TempPosition { get; private set; }
-        private DraggableCardView SourceView { get; set; }
+        private ushort CardId { get; set; }
+
+        [Inject] private CardActionsService CardActionsService { get; }
 
         #endregion
 
-        public void Init(DraggableCardView draggable)
+        public void Init(ushort draggableId)
         {
-            SourceView = draggable;
+            CardId = draggableId;
         }
 
         /// <summary>
@@ -59,7 +62,7 @@ namespace Canvas.Cards.Services
         {
             if (!(CanDraggable && Camera.main != null))
                 return;
-            SourceView.SetPosition(GetWorldPositionOnPlane(pos, -1));
+            CardActionsService.SetCardPositionById(CardId, GetWorldPositionOnPlane(pos, -1));
         }
 
         /// <summary>
@@ -68,7 +71,6 @@ namespace Canvas.Cards.Services
         public void DropCard()
         {
             HasDrop = true;
-            HasSetInInventory = true;
         }
 
         /// <summary>
@@ -80,7 +82,7 @@ namespace Canvas.Cards.Services
 
             if (HasOutArea)
             {
-                SourceView.ReturnBack(HasSetInInventory);
+                CardActionsService.ReturnBackById(CardId);
                 return;
             }
 

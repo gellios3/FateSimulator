@@ -17,14 +17,18 @@ namespace Canvas.Cards.Views
         #region Parameters
 
         public ushort CardId => CardObj.Id;
-        public Action<bool> OutArea { get; private set; }
+        public Action<bool> OnOutArea { get; private set; }
         public Action<bool> OnDropOnActivity { get; private set; }
+        public Action OnDropCard { get; private set; }
+        public Action<Vector3> OnSetPosition { get; private set; }
+        public Action<bool> OnReturnBack { get; private set; }
 
         private ICardView TopCard { get; set; }
         private IBaseCard CardObj { get; set; }
 
         [SerializeField] private Button openPopupBtn;
 
+        [Inject] private CardSignalsService CardSignalsService { get; }
         [Inject] private CommonCardService CommonCardService { get; }
         [Inject] private DraggableCardService DraggableCardService { get; }
 
@@ -35,10 +39,8 @@ namespace Canvas.Cards.Views
         {
             CardObj = cardObj;
             TopCard = topCard;
-
-            CommonCardService.AddCardView(TopCard);
-            CommonCardService.AddDraggableView(this);
-            DraggableCardService.Init(this);
+            CommonCardService.AddCardView(this);
+            DraggableCardService.Init(CardId);
         }
 
         private void Start()
@@ -47,12 +49,15 @@ namespace Canvas.Cards.Views
             {
                 if (!DraggableCardService.HasStartDrag)
                 {
-                    CommonCardService.ShowPopup(CardId);
+                    CardSignalsService.ShowPopup(CardId);
                 }
             });
 
             OnDropOnActivity += DraggableCardService.OnDropOnActivity;
-            OutArea += DraggableCardService.SetOutArea;
+            OnOutArea += DraggableCardService.SetOutArea;
+            OnSetPosition += SetPosition;
+            OnDropCard += DropCard;
+            OnReturnBack += ReturnBack;
             // Init top card position
             TopCard.SetCardPosition(transform.position);
             TopCard.SetCardView(CardObj);
@@ -71,11 +76,16 @@ namespace Canvas.Cards.Views
             TopCard.Show();
         }
 
+        public void HighlightCard()
+        {
+            TopCard.HighlightCard();
+        }
+
         /// <summary>
         /// Set card position 
         /// </summary>
         /// <param name="pos"></param>
-        public void SetPosition(Vector3 pos)
+        private void SetPosition(Vector3 pos)
         {
             transform.position = pos;
             TopCard.SetCardPosition(pos);
@@ -103,7 +113,7 @@ namespace Canvas.Cards.Views
             if (!DraggableCardService.CanBeginDrag())
                 return;
 
-            CommonCardService.StartDragCard(CardObj.Id);
+            CardSignalsService.StartDragCard(CardObj.Id);
 
             TopCard.Show();
             DraggableCardService.SetTempPos(transform.position);
@@ -132,7 +142,7 @@ namespace Canvas.Cards.Views
         /// <summary>
         /// Return card back
         /// </summary>
-        public void ReturnBack(bool hasSetInInventory = false)
+        private void ReturnBack(bool hasSetInInventory = false)
         {
             DraggableCardService.ReturnBack(hasSetInInventory);
             SetPosition(DraggableCardService.TempPosition);
@@ -145,7 +155,7 @@ namespace Canvas.Cards.Views
         /// <summary>
         /// On drop card
         /// </summary>
-        public void OnDropCard()
+        private void DropCard()
         {
             DraggableCardService.DropCard();
             TopCard.SetCardPosition(transform.position);
@@ -157,7 +167,7 @@ namespace Canvas.Cards.Views
         /// </summary>
         private void EndDrag()
         {
-            CommonCardService.EndDragCard(CardObj.Id);
+            CardSignalsService.EndDragCard(CardObj.Id);
             if (!DraggableCardService.CanEndDrag())
                 return;
             TopCard.ReturnDefaultCartShadow();

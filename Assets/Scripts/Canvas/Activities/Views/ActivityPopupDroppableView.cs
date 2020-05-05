@@ -1,4 +1,5 @@
 ﻿using AbstractViews;
+using Canvas.Cards.Services;
 using Canvas.Cards.Signals;
 using Canvas.Popups.Signals.Activity;
 using Canvas.Services;
@@ -21,6 +22,7 @@ namespace Canvas.Activities.Views
         [SerializeField] private TextMeshProUGUI title;
 
         [Inject] private ConditionsService ConditionsService { get; }
+        [Inject] private CardActionsService CardActionsService { get; }
 
         private ICardCondition conditionObj;
 
@@ -43,11 +45,11 @@ namespace Canvas.Activities.Views
         /// <param name="obj"></param>
         private void OnCloseActivityPopup(CloseActivityPopupSignal obj)
         {
-            if (DropCardCardView == null)
+            if (DropCardId == 0)
                 return;
-            DropCardCardView.OnDropOnActivity?.Invoke(false);
-            DropCardCardView.ReturnBack();
-            DropCardCardView = null;
+            CardActionsService.DropOnActivityById(DropCardId, false);
+            CardActionsService.ReturnBackById(DropCardId);
+            DropCardId = 0;
             borderImg.SetStatus(Status.Normal);
         }
 
@@ -58,7 +60,7 @@ namespace Canvas.Activities.Views
         public override void OnDrop(PointerEventData eventData)
         {
             base.OnDrop(eventData);
-            DropCardCardView?.OnDropOnActivity?.Invoke(true);
+            CardActionsService.DropOnActivityById(DropCardId, true);
         }
 
         /// <summary>
@@ -69,7 +71,7 @@ namespace Canvas.Activities.Views
         {
             if (conditionObj == null)
                 return;
-            if (DropCardCardView == null)
+            if (DropCardId == 0)
                 SetDroppable(true);
             borderImg.SetStatus(Status.Normal);
         }
@@ -82,8 +84,10 @@ namespace Canvas.Activities.Views
         {
             if (conditionObj == null)
                 return;
-            SetDroppable(ConditionsService.CheckCondition(conditionObj.Id, obj.CardId));
-            if (CanDropCard)
+
+            var canDrop = ConditionsService.CheckCondition(conditionObj.Id, obj.CardId);
+            SetDroppable(canDrop);
+            if (canDrop)
                 borderImg.SetStatus(Status.Highlighted);
         }
 
@@ -105,10 +109,10 @@ namespace Canvas.Activities.Views
             Show();
             title.text = cardConditionObj.Title;
 
-            if (DropCardCardView == null)
+            if (DropCardId == 0)
                 return;
-            DropCardCardView?.OnDropOnActivity?.Invoke(true);
-            DropCardCardView.SetPosition(transform.position);
+            CardActionsService.DropOnActivityById(DropCardId, true);
+            CardActionsService.SetCardPositionById(DropCardId, transform.position);
         }
 
         /// <summary>
