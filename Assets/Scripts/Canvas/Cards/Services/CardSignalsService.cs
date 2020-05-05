@@ -2,6 +2,7 @@
 using Canvas.Popups.Signals;
 using Canvas.Popups.Signals.Activity;
 using Canvas.Services;
+using ScriptableObjects;
 using Zenject;
 
 namespace Canvas.Cards.Services
@@ -14,10 +15,9 @@ namespace Canvas.Cards.Services
         #region Parameters
 
         private SignalBus SignalBus { get; }
-
         [Inject] private ConditionsService ConditionsService { get; }
-        
-        [Inject] private CommonCardService CommonCardService { get; }
+        [Inject] private AllItemsDataBase ItemsDataBase { get; }
+        [Inject] private CardActionsService CardActionsService { get; }
 
         #endregion
 
@@ -53,18 +53,18 @@ namespace Canvas.Cards.Services
         {
             SignalBus.Fire(new ShowCardPopupSignal {CardId = cardId});
         }
-        
+
         /// <summary>
         /// Try find card for Conditions
         /// </summary>
         /// <param name="obj"></param>
         private void TryFindCardForCondition(FindCardForActivitySignal obj)
         {
-            foreach (var view in CommonCardService.DraggableCardViews)
+            foreach (var cardObj in ItemsDataBase.allCards)
             {
-                if (ConditionsService.CheckCondition(obj.ConditionId, view.CardId))
+                if (ConditionsService.CheckCondition(obj.ConditionId, cardObj.Id))
                 {
-                    view.HighlightCard();
+                    CardActionsService.HighlightCardById(cardObj.Id);
                 }
             }
         }

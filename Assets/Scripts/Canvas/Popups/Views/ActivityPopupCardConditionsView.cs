@@ -16,10 +16,7 @@ namespace Canvas.Popups.Views
     public class ActivityPopupCardConditionsView : BaseView
     {
         #region Parameters
-
-        /// <summary>
-        /// Droppable views
-        /// </summary>
+        
         [SerializeField] private List<ActivityPopupDroppableView> droppableViews;
         [Inject] private CardActionsService CardActionsService { get; }
 

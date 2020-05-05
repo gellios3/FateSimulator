@@ -1,5 +1,4 @@
-﻿using Canvas.Cards.Views;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
 namespace Canvas.Cards.Services
@@ -17,16 +16,8 @@ namespace Canvas.Cards.Services
         private bool HasSetInInventory { get; set; }
         public bool HasStartDrag { get; private set; }
         public Vector3 TempPosition { get; private set; }
-        private ushort CardId { get; set; }
-
-        [Inject] private CardActionsService CardActionsService { get; }
 
         #endregion
-
-        public void Init(ushort draggableId)
-        {
-            CardId = draggableId;
-        }
 
         /// <summary>
         /// Can begin drag
@@ -57,12 +48,9 @@ namespace Canvas.Cards.Services
         /// <summary>
         /// Drag card
         /// </summary>
-        /// <param name="pos"></param>
-        public void DragCard(Vector3 pos)
+        public bool CanDragCard()
         {
-            if (!(CanDraggable && Camera.main != null))
-                return;
-            CardActionsService.SetCardPositionById(CardId, GetWorldPositionOnPlane(pos, -1));
+            return CanDraggable && Camera.main != null;
         }
 
         /// <summary>
@@ -76,17 +64,12 @@ namespace Canvas.Cards.Services
         /// <summary>
         /// End drag
         /// </summary>
-        public void EndDrag()
+        public bool HasOutDrag()
         {
             HasStartDrag = false;
+            return HasOutArea;
 
-            if (HasOutArea)
-            {
-                CardActionsService.ReturnBackById(CardId);
-                return;
-            }
-
-            HasSetInInventory = false;
+            // HasSetInInventory = false;
         }
 
         /// <summary>
@@ -133,7 +116,7 @@ namespace Canvas.Cards.Services
         /// <param name="screenPosition"></param>
         /// <param name="z"></param>
         /// <returns></returns>
-        private Vector3 GetWorldPositionOnPlane(Vector3 screenPosition, float z)
+        public Vector3 GetWorldPositionOnPlane(Vector3 screenPosition, float z)
         {
             if (Camera.main == null)
                 return Vector3.zero;

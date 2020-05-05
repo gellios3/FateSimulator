@@ -1,5 +1,4 @@
-﻿using System;
-using Canvas.Cards.Interfaces;
+﻿using Canvas.Cards.Interfaces;
 using Canvas.Cards.Services;
 using Interfaces.Cards;
 using UnityEngine;
@@ -12,17 +11,11 @@ namespace Canvas.Cards.Views
     /// <summary>
     /// Not visible but draggable card on the table 
     /// </summary>
-    public class DraggableCardView : BaseDraggableCardView, IDraggableCardView
+    public class DraggableCardView : BaseDraggableCardView
     {
         #region Parameters
 
-        public ushort CardId => CardObj.Id;
-        public Action<bool> OnOutArea { get; private set; }
-        public Action<bool> OnDropOnActivity { get; private set; }
-        public Action OnDropCard { get; private set; }
-        public Action<Vector3> OnSetPosition { get; private set; }
-        public Action<bool> OnReturnBack { get; private set; }
-
+        public override ushort CardId => CardObj.Id;
         private ICardView TopCard { get; set; }
         private IBaseCard CardObj { get; set; }
 
@@ -40,11 +33,11 @@ namespace Canvas.Cards.Views
             CardObj = cardObj;
             TopCard = topCard;
             CommonCardService.AddCardView(this);
-            DraggableCardService.Init(CardId);
         }
 
         private void Start()
         {
+            InitActions();
             openPopupBtn.onClick.AddListener(() =>
             {
                 if (!DraggableCardService.HasStartDrag)
@@ -53,16 +46,10 @@ namespace Canvas.Cards.Views
                 }
             });
 
-            OnDropOnActivity += DraggableCardService.OnDropOnActivity;
-            OnOutArea += DraggableCardService.SetOutArea;
-            OnSetPosition += SetPosition;
-            OnDropCard += DropCard;
-            OnReturnBack += ReturnBack;
             // Init top card position
             TopCard.SetCardPosition(transform.position);
             TopCard.SetCardView(CardObj);
         }
-
 
         public override void Hide()
         {
@@ -74,21 +61,6 @@ namespace Canvas.Cards.Views
         {
             base.Show();
             TopCard.Show();
-        }
-
-        public void HighlightCard()
-        {
-            TopCard.HighlightCard();
-        }
-
-        /// <summary>
-        /// Set card position 
-        /// </summary>
-        /// <param name="pos"></param>
-        private void SetPosition(Vector3 pos)
-        {
-            transform.position = pos;
-            TopCard.SetCardPosition(pos);
         }
 
         /// <summary>
@@ -103,6 +75,8 @@ namespace Canvas.Cards.Views
             tempTransform.localPosition = pos;
             tempTransform.localRotation = Quaternion.identity;
         }
+
+        #region Drag Events
 
         /// <summary>
         /// On begin drag
@@ -126,7 +100,8 @@ namespace Canvas.Cards.Views
         /// <param name="eventData"></param>
         public override void OnDrag(PointerEventData eventData)
         {
-            DraggableCardService.DragCard(eventData.position);
+            if (DraggableCardService.CanDragCard())
+                SetPosition(DraggableCardService.GetWorldPositionOnPlane(eventData.position, -1));
         }
 
         /// <summary>
@@ -135,14 +110,40 @@ namespace Canvas.Cards.Views
         /// <param name="eventData"></param>
         public override void OnEndDrag(PointerEventData eventData)
         {
-            DraggableCardService.EndDrag();
-            EndDrag();
+            if (DraggableCardService.HasOutDrag()) 
+                ReturnBack(false);
+            CardSignalsService.EndDragCard(CardObj.Id);
+            if (!DraggableCardService.CanEndDrag())
+                return;
+            TopCard.ReturnDefaultCartShadow();
+        }
+
+        #endregion
+
+        #region Action Methods
+
+        /// <summary>
+        /// Highlight card
+        /// </summary>
+        protected override void HighlightCard()
+        {
+            TopCard.HighlightCard();
+        }
+
+        /// <summary>
+        /// Set card position 
+        /// </summary>
+        /// <param name="pos"></param>
+        protected override void SetPosition(Vector3 pos)
+        {
+            transform.position = pos;
+            TopCard.SetCardPosition(pos);
         }
 
         /// <summary>
         /// Return card back
         /// </summary>
-        private void ReturnBack(bool hasSetInInventory = false)
+        protected override void ReturnBack(bool hasSetInInventory)
         {
             DraggableCardService.ReturnBack(hasSetInInventory);
             SetPosition(DraggableCardService.TempPosition);
@@ -155,23 +156,24 @@ namespace Canvas.Cards.Views
         /// <summary>
         /// On drop card
         /// </summary>
-        private void DropCard()
+        protected override void DropCard()
         {
             DraggableCardService.DropCard();
             TopCard.SetCardPosition(transform.position);
             TopCard.HideCartShadow();
         }
 
-        /// <summary>
-        /// On end drag card
-        /// </summary>
-        private void EndDrag()
+        protected override void SetDropOnActivity(bool value)
         {
-            CardSignalsService.EndDragCard(CardObj.Id);
-            if (!DraggableCardService.CanEndDrag())
-                return;
-            TopCard.ReturnDefaultCartShadow();
+            DraggableCardService.OnDropOnActivity(value);
         }
+
+        protected override void SetOutArea(bool value)
+        {
+            DraggableCardService.SetOutArea(value);
+        }
+
+        #endregion
 
         /// <summary>
         /// Zenject Factory for Instantiate

@@ -1,6 +1,5 @@
 ﻿using System;
 using Canvas;
-using Canvas.Cards.Interfaces;
 using Canvas.Cards.Services;
 using Canvas.Cards.Views;
 using Enums;
@@ -19,11 +18,13 @@ namespace AbstractViews
         #region Parameters
 
         public event Action CardDrop;
-        [SerializeField] private Image bgImg;
-        private bool CanDropCard { get; set; } = true;
         public ushort DropCardId { get; set; }
+
+        [SerializeField] private Image bgImg;
         [SerializeField] protected ColorsPresetImage borderImg;
+
         [Inject] private CardActionsService CardActionsService { get; }
+        private bool CanDropCard { get; set; } = true;
 
         #endregion
 
@@ -60,6 +61,7 @@ namespace AbstractViews
             if (dropCardCardView == null)
                 return;
             DropCardId = dropCardCardView.CardId;
+
             CardActionsService.SetCardPositionById(DropCardId, transform.position);
             CardDrop?.Invoke();
             CardActionsService.OnDropById(DropCardId);

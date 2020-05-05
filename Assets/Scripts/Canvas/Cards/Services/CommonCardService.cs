@@ -11,7 +11,7 @@ namespace Canvas.Cards.Services
         /// <summary>
         /// Draggable card View
         /// </summary>
-        public List<IDraggableCardView> DraggableCardViews { get; } = new List<IDraggableCardView>();
+        private List<IDraggableCardView> DraggableCardViews { get; } = new List<IDraggableCardView>();
         
         /// <summary>
         /// Get draggable card by id

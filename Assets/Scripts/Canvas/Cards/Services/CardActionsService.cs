@@ -79,6 +79,15 @@ namespace Canvas.Cards.Services
         }
 
         /// <summary>
+        /// Call highlight card by Id
+        /// </summary>
+        /// <param name="cardId"></param>
+        public void HighlightCardById(ushort cardId)
+        {
+            GetCardById(cardId)?.OnHighlight.Invoke();
+        }
+
+        /// <summary>
         /// Get card by Id
         /// </summary>
         /// <param name="cardId"></param>

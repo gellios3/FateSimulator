@@ -1,4 +1,7 @@
-﻿using AbstractViews;
+﻿using System;
+using AbstractViews;
+using Canvas.Cards.Interfaces;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace Canvas.Cards.Views
@@ -6,8 +9,47 @@ namespace Canvas.Cards.Views
     /// <summary>
     /// Base draggable cardView
     /// </summary>
-    public abstract class BaseDraggableCardView : BaseView, IBeginDragHandler, IDragHandler, IEndDragHandler
+    public abstract class BaseDraggableCardView : BaseView, IDraggableCardView, IBeginDragHandler, IDragHandler,
+        IEndDragHandler
     {
+        #region Actions
+
+        public abstract ushort CardId { get; }
+        public Action<bool> OnOutArea { get; private set; }
+        public Action<bool> OnDropOnActivity { get; private set; }
+        public Action OnDropCard { get; private set; }
+        public Action<Vector3> OnSetPosition { get; private set; }
+        public Action<bool> OnReturnBack { get; private set; }
+        public Action OnHighlight { get; private set; }
+
+        #endregion
+
+        protected void InitActions()
+        {
+            OnDropOnActivity += SetDropOnActivity;
+            OnOutArea += SetOutArea;
+            OnSetPosition += SetPosition;
+            OnDropCard += DropCard;
+            OnReturnBack += ReturnBack;
+            OnHighlight += HighlightCard;
+        }
+
+        #region Action Methods
+
+        protected abstract void SetDropOnActivity(bool value);
+
+        protected abstract void SetOutArea(bool value);
+
+        protected abstract void SetPosition(Vector3 obj);
+
+        protected abstract void DropCard();
+
+        protected abstract void ReturnBack(bool obj);
+
+        protected abstract void HighlightCard();
+
+        #endregion
+
         public abstract void OnBeginDrag(PointerEventData eventData);
 
         public abstract void OnDrag(PointerEventData eventData);

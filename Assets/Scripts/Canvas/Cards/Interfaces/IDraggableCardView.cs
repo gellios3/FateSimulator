@@ -15,6 +15,6 @@ namespace Canvas.Cards.Interfaces
         Action<Vector3> OnSetPosition { get; }
         Action OnDropCard { get; }
         Action<bool> OnReturnBack { get; }
-        void HighlightCard();
+        Action OnHighlight { get; }
     }
 }
