@@ -51,12 +51,18 @@ namespace Canvas.Cards.Views
             TopCard.SetCardView(CardObj);
         }
 
+        /// <summary>
+        /// Hide
+        /// </summary>
         public override void Hide()
         {
             base.Hide();
             TopCard.Hide();
         }
 
+        /// <summary>
+        /// Show
+        /// </summary>
         public override void Show()
         {
             base.Show();
@@ -163,11 +169,19 @@ namespace Canvas.Cards.Views
             TopCard.HideCartShadow();
         }
 
+        /// <summary>
+        /// Set drop on activity
+        /// </summary>
+        /// <param name="value"></param>
         protected override void SetDropOnActivity(bool value)
         {
             DraggableCardService.OnDropOnActivity(value);
         }
 
+        /// <summary>
+        /// Set out area
+        /// </summary>
+        /// <param name="value"></param>
         protected override void SetOutArea(bool value)
         {
             DraggableCardService.SetOutArea(value);

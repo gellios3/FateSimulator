@@ -1,4 +1,5 @@
-﻿using Canvas.Cards.Interfaces;
+﻿using System.Collections.Generic;
+using Canvas.Cards.Interfaces;
 using UnityEngine;
 using Zenject;
 
@@ -14,48 +15,48 @@ namespace Canvas.Cards.Services
         /// <summary>
         /// Hide card by Id
         /// </summary>
-        /// <param name="cardId"></param>
-        public void HideCardById(ushort cardId)
+        /// <param name="view"></param>
+        public void HideCardById(IDraggableCardView view)
         {
-            GetCardById(cardId)?.Hide();
+            view?.Hide();
         }
 
         /// <summary>
         /// Show card by Id
         /// </summary>
-        /// <param name="cardId"></param>
-        public void ShowCardById(ushort cardId)
+        /// <param name="view"></param>
+        public void ShowCard(IDraggableCardView view)
         {
-            GetCardById(cardId)?.Show();
+            view?.Show();
         }
 
         /// <summary>
         /// Call set card position by Id
         /// </summary>
-        /// <param name="cardId"></param>
+        /// <param name="view"></param>
         /// <param name="value"></param>
-        public void SetCardPositionById(ushort cardId, Vector3 value)
+        public void SetCardPosition(IDraggableCardView view, Vector3 value)
         {
-            GetCardById(cardId)?.OnSetPosition.Invoke(value);
+            view?.OnSetPosition.Invoke(value);
         }
 
         /// <summary>
         /// Call Drop card on Activity by Id 
         /// </summary>
-        /// <param name="cardId"></param>
+        /// <param name="view"></param>
         /// <param name="value"></param>
-        public void DropOnActivityById(ushort cardId, bool value)
+        public void DropOnActivity(IDraggableCardView view, bool value)
         {
-            GetCardById(cardId)?.OnDropOnActivity.Invoke(value);
+            view?.OnDropOnActivity.Invoke(value);
         }
 
         /// <summary>
         /// Call on drop by Id
         /// </summary>
-        /// <param name="cardId"></param>
-        public void OnDropById(ushort cardId)
+        /// <param name="view"></param>
+        public void CallOnDrop(IDraggableCardView view)
         {
-            GetCardById(cardId)?.OnDropCard.Invoke();
+            view?.OnDropCard.Invoke();
         }
 
         /// <summary>
@@ -71,21 +72,34 @@ namespace Canvas.Cards.Services
         /// <summary>
         /// Call return back on start position by Id 
         /// </summary>
-        /// <param name="cardId"></param>
+        /// <param name="view"></param>
         /// <param name="value"></param>
-        public void ReturnBackById(ushort cardId, bool value = false)
+        public void ReturnBack(IDraggableCardView view, bool value = false)
         {
-            GetCardById(cardId)?.OnReturnBack.Invoke(value);
+            view?.OnReturnBack.Invoke(value);
         }
 
         /// <summary>
         /// Call highlight card by Id
         /// </summary>
         /// <param name="cardId"></param>
-        public void HighlightCardById(ushort cardId)
+        public void HighlightAllCardsById(ushort cardId)
         {
-            GetCardById(cardId)?.OnHighlight.Invoke();
+            foreach (var cardView in GetAllCardsById(cardId))
+            {
+                cardView.OnHighlight.Invoke();
+            }
         }
+
+        /// <summary>
+        /// Get all cards by Id
+        /// </summary>
+        /// <param name="cardId"></param>
+        /// <returns></returns>
+        private IEnumerable<IDraggableCardView> GetAllCardsById(ushort cardId)
+        {
+            return CommonCardService.GetAllCardsById(cardId);
+        } 
 
         /// <summary>
         /// Get card by Id

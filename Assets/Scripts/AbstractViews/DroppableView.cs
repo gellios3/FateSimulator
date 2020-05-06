@@ -1,5 +1,6 @@
 ﻿using System;
 using Canvas;
+using Canvas.Cards.Interfaces;
 using Canvas.Cards.Services;
 using Canvas.Cards.Views;
 using Enums;
@@ -17,12 +18,13 @@ namespace AbstractViews
     {
         #region Parameters
 
-        public event Action CardDrop;
+        public event Action<IDraggableCardView> CardDrop;
         public ushort DropCardId { get; set; }
 
         [SerializeField] private Image bgImg;
         [SerializeField] protected ColorsPresetImage borderImg;
 
+        protected IDraggableCardView DropCardCardView; 
         [Inject] private CardActionsService CardActionsService { get; }
         private bool CanDropCard { get; set; } = true;
 
@@ -57,14 +59,11 @@ namespace AbstractViews
             DropCardId = 0;
             if (eventData.pointerDrag == null || !CanDropCard)
                 return;
-            var dropCardCardView = eventData.pointerDrag.GetComponent<DraggableCardView>();
-            if (dropCardCardView == null)
+            DropCardCardView = eventData.pointerDrag.GetComponent<DraggableCardView>();
+            if (DropCardCardView == null)
                 return;
-            DropCardId = dropCardCardView.CardId;
-
-            CardActionsService.SetCardPositionById(DropCardId, transform.position);
-            CardDrop?.Invoke();
-            CardActionsService.OnDropById(DropCardId);
+            DropCardId = DropCardCardView.CardId;
+            OnDrop();
         }
 
         /// <inheritdoc />
@@ -95,6 +94,13 @@ namespace AbstractViews
             //     // cardView.CanDraggable = true;
             //     // Debug.LogError($"OnPointerExit {eventData.pointerDrag}");
             // }
+        }
+
+        protected void OnDrop()
+        {
+            CardActionsService.SetCardPosition(DropCardCardView, transform.position);
+            CardDrop?.Invoke(DropCardCardView);
+            CardActionsService.CallOnDrop(DropCardCardView);
         }
     }
 }

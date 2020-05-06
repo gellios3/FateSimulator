@@ -23,11 +23,10 @@ namespace Canvas.Activities.Views
 
         [Inject] private ConditionsService ConditionsService { get; }
         [Inject] private CardActionsService CardActionsService { get; }
+        [Inject] private CommonCardService CommonCardService { get; }
 
         private ICardCondition conditionObj;
-
         private SignalBus SignalBus { get; set; }
-
         #endregion
 
         [Inject]
@@ -47,8 +46,8 @@ namespace Canvas.Activities.Views
         {
             if (DropCardId == 0)
                 return;
-            CardActionsService.DropOnActivityById(DropCardId, false);
-            CardActionsService.ReturnBackById(DropCardId);
+            CardActionsService.DropOnActivity(DropCardCardView, false);
+            CardActionsService.ReturnBack(DropCardCardView);
             DropCardId = 0;
             borderImg.SetStatus(Status.Normal);
         }
@@ -60,7 +59,7 @@ namespace Canvas.Activities.Views
         public override void OnDrop(PointerEventData eventData)
         {
             base.OnDrop(eventData);
-            CardActionsService.DropOnActivityById(DropCardId, true);
+            CardActionsService.DropOnActivity(DropCardCardView, true);
         }
 
         /// <summary>
@@ -111,8 +110,10 @@ namespace Canvas.Activities.Views
 
             if (DropCardId == 0)
                 return;
-            CardActionsService.DropOnActivityById(DropCardId, true);
-            CardActionsService.SetCardPositionById(DropCardId, transform.position);
+            DropCardCardView = CommonCardService.GetDraggableCardById(DropCardId);
+            CardActionsService.DropOnActivity(DropCardCardView, true);
+            CardActionsService.SetCardPosition(DropCardCardView, transform.position);
+            OnDrop();
         }
 
         /// <summary>

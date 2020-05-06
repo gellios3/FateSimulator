@@ -1,5 +1,6 @@
 ﻿using AbstractViews;
 using Canvas.Activities.Services;
+using Canvas.Cards.Interfaces;
 using Canvas.Cards.Signals;
 using Canvas.Popups.Signals.Activity;
 using Enums;
@@ -79,7 +80,7 @@ namespace Canvas.Activities.Views
         /// <summary>
         /// On drop card
         /// </summary>
-        private void OnDropCard()
+        private void OnDropCard(IDraggableCardView draggableCardView)
         {
             CurrentActivity = activityService.GetActivityByStartCardId(droppableView.DropCardId);
             activityService.ShowPopup(CurrentActivity.Id);

@@ -20,8 +20,8 @@ namespace Canvas.Activities.Views
             if (DropCardId == 0)
                 return;
             borderImg.SetStatus(Status.Normal);
-            CardActionsService.ShowCardById(DropCardId);
-            CardActionsService.ReturnBackById(DropCardId);
+            CardActionsService.ShowCard(DropCardCardView);
+            CardActionsService.ReturnBack(DropCardCardView);
             DropCardId = 0;
         }
     }

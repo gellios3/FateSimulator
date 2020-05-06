@@ -64,7 +64,7 @@ namespace Canvas.Cards.Services
             {
                 if (ConditionsService.CheckCondition(obj.ConditionId, cardObj.Id))
                 {
-                    CardActionsService.HighlightCardById(cardObj.Id);
+                    CardActionsService.HighlightAllCardsById(cardObj.Id);
                 }
             }
         }

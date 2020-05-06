@@ -24,6 +24,16 @@ namespace Canvas.Cards.Services
         }
 
         /// <summary>
+        /// Get all draggable cards by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public List<IDraggableCardView> GetAllCardsById(ushort id)
+        {
+            return id > 0 ? DraggableCardViews.FindAll(view => view.CardId == id) : null;
+        }
+
+        /// <summary>
         /// Add draggable view
         /// </summary>
         /// <param name="draggableCardView"></param>
