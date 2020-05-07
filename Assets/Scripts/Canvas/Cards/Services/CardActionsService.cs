@@ -10,13 +10,13 @@ namespace Canvas.Cards.Services
     /// </summary>
     public class CardActionsService
     {
-        [Inject] private CommonCardService CommonCardService { get; }
+        [Inject] private CardViewsService CardViewsService { get; }
 
         /// <summary>
         /// Hide card by Id
         /// </summary>
         /// <param name="view"></param>
-        public void HideCardById(IDraggableCardView view)
+        public void HideCard(IDraggableCardView view)
         {
             view?.Hide();
         }
@@ -98,7 +98,7 @@ namespace Canvas.Cards.Services
         /// <returns></returns>
         private IEnumerable<IDraggableCardView> GetAllCardsById(ushort cardId)
         {
-            return CommonCardService.GetAllCardsById(cardId);
+            return CardViewsService.GetAllCardsById(cardId);
         } 
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace Canvas.Cards.Services
         /// <returns></returns>
         private IDraggableCardView GetCardById(ushort cardId)
         {
-            return CommonCardService.GetDraggableCardById(cardId);
+            return CardViewsService.GetDraggableCardById(cardId);
         }
     }
 }

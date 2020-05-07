@@ -4,12 +4,12 @@ using Canvas.Cards.Interfaces;
 namespace Canvas.Cards.Services
 {
     /// <summary>
-    /// Common card service
+    /// Common card views service
     /// </summary>
-    public class CommonCardService
+    public class CardViewsService
     {
         /// <summary>
-        /// Draggable card View
+        /// Draggable card Views
         /// </summary>
         private List<IDraggableCardView> DraggableCardViews { get; } = new List<IDraggableCardView>();
         
@@ -28,7 +28,7 @@ namespace Canvas.Cards.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public List<IDraggableCardView> GetAllCardsById(ushort id)
+        public IEnumerable<IDraggableCardView> GetAllCardsById(ushort id)
         {
             return id > 0 ? DraggableCardViews.FindAll(view => view.CardId == id) : null;
         }

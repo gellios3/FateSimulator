@@ -25,9 +25,8 @@ namespace Canvas.Popups.Views
         [SerializeField] private AspectsBarView aspectsBarView;
 
         private SignalBus SignalBus { get; set; }
-
+        
         [Inject] private CardAppearanceService CardAppearanceService { get; }
-
         [Inject] private AllItemsDataBase AllItemsDataBase { get; }
 
         #endregion

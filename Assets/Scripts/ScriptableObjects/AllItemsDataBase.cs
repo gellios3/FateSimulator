@@ -49,7 +49,7 @@ namespace ScriptableObjects
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public BaseAspectObj GetAspectObjById(ushort id)
+        public BaseAspectObj GetAspectById(ushort id)
         {
             var index = allAspects.FindIndex(obj => obj.id == id);
             return index != -1 ? allAspects[index] : null;

@@ -36,7 +36,7 @@ namespace Canvas.Aspects.Views
             aspectImg.sprite = baseAspectObj.AspectImg;
             showAspectPopup.onClick.AddListener(() =>
             {
-                ShowAspectService.ShowPopup(BaseAspectObj);
+                ShowAspectService.ShowPopup(BaseAspectObj.Id);
             });
         }
         

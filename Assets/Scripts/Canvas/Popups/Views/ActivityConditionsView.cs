@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using AbstractViews;
 using Canvas.Activities.Views;
 using Canvas.Cards.Interfaces;
-using Canvas.Cards.Services;
 using Interfaces.Activity;
 using Interfaces.Conditions.Cards;
 using UnityEngine;
@@ -14,23 +13,21 @@ namespace Canvas.Popups.Views
     /// <summary>
     /// Card conditions view for Activity popup
     /// </summary>
-    public class ActivityPopupCardConditionsView : BaseView
+    public class ActivityConditionsView : BaseView
     {
         #region Parameters
 
         [SerializeField] private List<ActivityPopupDroppableView> droppableViews;
-        [Inject] private CardActionsService CardActionsService { get; }
-        [Inject] private CommonCardService CommonCardService { get; }
 
         private byte needCardsCount;
 
-        private readonly List<IDraggableCardView> dropCardViews = new List<IDraggableCardView>();
+        public List<IDraggableCardView> DropCardViews { get; } = new List<IDraggableCardView>();
+        public event Action AllConditionsDone;
 
         #endregion
 
-        public event Action AllConditionsDone;
-
-        private void Awake()
+        [Inject]
+        public void Construct()
         {
             foreach (var droppableView in droppableViews)
             {
@@ -40,8 +37,7 @@ namespace Canvas.Popups.Views
 
         private void OnDisable()
         {
-            dropCardViews.Clear();
-            Debug.LogError($"OnDisable {dropCardViews.Count}");
+            DropCardViews.Clear();
         }
 
         /// <summary>
@@ -49,21 +45,11 @@ namespace Canvas.Popups.Views
         /// </summary>
         private void OnCardDrop(IDraggableCardView draggableCardView)
         {
-            dropCardViews.Add(draggableCardView);
-            if (dropCardViews.Count == needCardsCount)
+            Debug.Log("OnCardDrop");
+            DropCardViews.Add(draggableCardView);
+            if (DropCardViews.Count == needCardsCount)
             {
                 AllConditionsDone?.Invoke();
-            }
-        }
-
-        /// <summary>
-        /// Hide drop cards
-        /// </summary>
-        public void HideDropCards()
-        {
-            foreach (var droppableView in dropCardViews)
-            {
-                CardActionsService.HideCardById(droppableView);
             }
         }
 
@@ -75,14 +61,12 @@ namespace Canvas.Popups.Views
         {
             var cardConditions = baseActivity.GetCardConditions();
             needCardsCount = (byte) cardConditions.Count;
-            
+
             for (byte i = 0; i < needCardsCount; i++)
             {
                 if (i == 0)
-                {
                     droppableViews[i].DropCardId = baseActivity.StartActivityCard.Id;
-                }
-
+                droppableViews[i].Show();
                 droppableViews[i].Init(cardConditions[i] as ICardCondition);
             }
         }

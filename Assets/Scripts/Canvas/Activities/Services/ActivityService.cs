@@ -11,6 +11,8 @@ namespace Canvas.Activities.Services
     public class ActivityService
     {
         [Inject] private AllItemsDataBase ItemsDataBase { get; }
+        
+        
 
         private SignalBus SignalBus { get; }
 
@@ -46,9 +48,9 @@ namespace Canvas.Activities.Services
         /// <summary>
         /// Show result popup
         /// </summary>
-        public void ShowResultPopup()
+        public void ShowResultPopup(ushort activityId)
         {
-            SignalBus.Fire(new ShowActivityResultSignal());
+            SignalBus.Fire(new ShowActivityResultSignal {ActivityId = activityId});
         }
     }
 }

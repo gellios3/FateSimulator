@@ -1,4 +1,5 @@
-﻿using AbstractViews;
+﻿using System;
+using AbstractViews;
 using Canvas.Activities.Views;
 using Canvas.Popups.Signals.Activity;
 using Interfaces.Activity;
@@ -16,7 +17,7 @@ namespace Canvas.Popups.Views
     {
         #region Parameters
 
-        [SerializeField] private ActivityPopupCardConditionsView conditionsView;
+        [SerializeField] private ActivityConditionsView conditionsView;
         [SerializeField] private Button closeBtn;
         [SerializeField] private CustomButton startActivityBtn;
         [SerializeField] private ActivityTimerView activityTimer;
@@ -41,8 +42,26 @@ namespace Canvas.Popups.Views
         /// <summary>
         /// Show result popup
         /// </summary>
-        private void ShowResultPopup()
+        private void ShowResultPopup(ShowActivityResultSignal obj)
         {
+            startActivityBtn.Hide();
+            BaseActivity = AllItemsDataBase.GetActivityById(obj.ActivityId);
+            Show();
+        }
+
+        /// <summary>
+        /// Show activity popup
+        /// </summary>
+        /// <param name="obj"></param>
+        private void ShowActivityPopup(ShowActivityPopupSignal obj)
+        {
+            startActivityBtn.Hide();
+            BaseActivity = AllItemsDataBase.GetActivityById(obj.ActivityId);
+            // Init conditions
+            conditionsView.Init(BaseActivity);
+            // Init timer
+            activityTimer.Init(BaseActivity.ActivityDuration);
+            activityTimer.Hide();
             Show();
         }
 
@@ -51,8 +70,11 @@ namespace Canvas.Popups.Views
         /// </summary>
         private void OnStartActivity()
         {
-            SignalBus.Fire(new StartActivitySignal {ActivityId = BaseActivity.Id});
-            conditionsView.HideDropCards();
+            SignalBus.Fire(new StartActivitySignal
+            {
+                ActivityId = BaseActivity.Id, 
+                DropCardViews = conditionsView.DropCardViews
+            });
             Hide();
         }
 
@@ -71,22 +93,6 @@ namespace Canvas.Popups.Views
         private void OnAllConditionsDone()
         {
             startActivityBtn.Show();
-        }
-
-        /// <summary>
-        /// Show activity popup
-        /// </summary>
-        /// <param name="obj"></param>
-        private void ShowActivityPopup(ShowActivityPopupSignal obj)
-        {
-            Show();
-            startActivityBtn.Hide();
-            BaseActivity = AllItemsDataBase.GetActivityById(obj.ActivityId);
-            // Init conditions
-            conditionsView.Init(BaseActivity);
-            // Init timer
-            activityTimer.Init(BaseActivity.ActivityDuration);
-            activityTimer.Hide();
         }
     }
 }

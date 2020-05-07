@@ -4,7 +4,9 @@ using Zenject;
 
 namespace Canvas.Aspects.Services
 {
-    
+    /// <summary>
+    /// Show aspect service
+    /// </summary>
     public class ShowAspectService
     {
         private SignalBus SignalBus { get; }
@@ -17,10 +19,10 @@ namespace Canvas.Aspects.Services
         /// <summary>
         /// Show popup
         /// </summary>
-        /// <param name="baseAspect"></param>
-        public void ShowPopup(IBaseAspect baseAspect)
+        /// <param name="aspectId"></param>
+        public void ShowPopup(ushort aspectId)
         {
-            SignalBus.Fire(new ShowAspectPopupSignal {BaseAspectObj = baseAspect});
+            SignalBus.Fire(new ShowAspectPopupSignal {AspectId = aspectId});
         }
     }
 }

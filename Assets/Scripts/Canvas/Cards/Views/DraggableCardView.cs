@@ -22,7 +22,7 @@ namespace Canvas.Cards.Views
         [SerializeField] private Button openPopupBtn;
 
         [Inject] private CardSignalsService CardSignalsService { get; }
-        [Inject] private CommonCardService CommonCardService { get; }
+        [Inject] private CardViewsService CardViewsService { get; }
         [Inject] private DraggableCardService DraggableCardService { get; }
 
         #endregion
@@ -32,7 +32,7 @@ namespace Canvas.Cards.Views
         {
             CardObj = cardObj;
             TopCard = topCard;
-            CommonCardService.AddCardView(this);
+            CardViewsService.AddCardView(this);
         }
 
         private void Start()

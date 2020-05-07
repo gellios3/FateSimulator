@@ -1,6 +1,7 @@
 ﻿using AbstractViews;
 using Canvas.Popups.Signals;
 using Interfaces.Aspects;
+using ScriptableObjects;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +14,8 @@ namespace Canvas.Popups.Views
     /// </summary>
     public class AspectDescriptionPopupView : BaseView
     {
+        #region Parameters
+        
         [SerializeField] private Image icon;
         [SerializeField] private TextMeshProUGUI title;
         [SerializeField] private TextMeshProUGUI description;
@@ -20,6 +23,9 @@ namespace Canvas.Popups.Views
 
         private IBaseAspect BaseAspect { get; set; }
         private SignalBus SignalBus { get; set; }
+        [Inject] private AllItemsDataBase AllItemsDataBase { get; }
+        
+        #endregion
 
         [Inject]
         public void Construct(SignalBus signalBus)
@@ -37,7 +43,7 @@ namespace Canvas.Popups.Views
         /// <param name="signal"></param>
         private void OnShowAspectPopup(ShowAspectPopupSignal signal)
         {
-            BaseAspect = signal.BaseAspectObj;
+            BaseAspect = AllItemsDataBase.GetAspectById(signal.AspectId);
 
             title.text = BaseAspect.AspectName;
             description.text = BaseAspect.AspectDescription;

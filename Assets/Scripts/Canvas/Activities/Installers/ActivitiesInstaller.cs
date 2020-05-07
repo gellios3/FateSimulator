@@ -11,6 +11,7 @@ namespace Canvas.Activities.Installers
         public override void InstallBindings()
         {
             Container.Bind<ActivityService>().AsSingle();
+            Container.Bind<ActivityViewsService>().AsSingle();
         }
 
     }

@@ -19,7 +19,7 @@ namespace Canvas.Cards.Installers
 
         public override void InstallBindings()
         {
-            Container.Bind<CommonCardService>().AsSingle(); 
+            Container.Bind<CardViewsService>().AsSingle(); 
             Container.Bind<CardSignalsService>().AsSingle();
             Container.Bind<CardActionsService>().AsSingle();
 

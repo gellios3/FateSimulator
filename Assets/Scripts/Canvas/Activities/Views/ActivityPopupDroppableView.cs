@@ -23,7 +23,7 @@ namespace Canvas.Activities.Views
 
         [Inject] private ConditionsService ConditionsService { get; }
         [Inject] private CardActionsService CardActionsService { get; }
-        [Inject] private CommonCardService CommonCardService { get; }
+        [Inject] private CardViewsService CardViewsService { get; }
 
         private ICardCondition conditionObj;
         private SignalBus SignalBus { get; set; }
@@ -105,12 +105,11 @@ namespace Canvas.Activities.Views
         public void Init(ICardCondition cardConditionObj)
         {
             conditionObj = cardConditionObj;
-            Show();
             title.text = cardConditionObj.Title;
 
             if (DropCardId == 0)
                 return;
-            DropCardCardView = CommonCardService.GetDraggableCardById(DropCardId);
+            DropCardCardView = CardViewsService.GetDraggableCardById(DropCardId);
             CardActionsService.DropOnActivity(DropCardCardView, true);
             CardActionsService.SetCardPosition(DropCardCardView, transform.position);
             OnDrop();

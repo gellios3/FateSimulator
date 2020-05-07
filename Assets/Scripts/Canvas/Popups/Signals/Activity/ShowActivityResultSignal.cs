@@ -2,6 +2,6 @@
 {
     public class ShowActivityResultSignal
     {
-        
+        public ushort ActivityId;
     }
 }
