@@ -1,5 +1,4 @@
-﻿using System;
-using AbstractViews;
+﻿using AbstractViews;
 using Canvas.Activities.Views;
 using Canvas.Popups.Signals.Activity;
 using Interfaces.Activity;
@@ -72,7 +71,6 @@ namespace Canvas.Popups.Views
         {
             SignalBus.Fire(new StartActivitySignal
             {
-                ActivityId = BaseActivity.Id,
                 DropCardViews = conditionsView.DropCardViews
             });
             Hide();

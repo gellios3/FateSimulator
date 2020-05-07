@@ -57,9 +57,6 @@ namespace Canvas.Services
                         if (workCardCondition.WorkType == workCard.WorkType)
                             return condition;
                         break;
-                    default:
-                        // Debug.LogError("Not found");
-                        break;
                 }
             }
 

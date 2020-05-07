@@ -30,7 +30,8 @@ namespace Canvas.Activities.Views
 
         private IBaseActivity CurrentActivity { get; set; }
 
-        [Inject] private ActivityService activityService;
+        [Inject] private ActivityService ActivityService { get; }
+        [Inject] private RunActivityService RunActivityService { get; }
         [Inject] private ActivityViewsService ActivityViewsService { get; }
         [Inject] private ConditionsService ConditionsService { get; }
 
@@ -43,6 +44,7 @@ namespace Canvas.Activities.Views
             signalBus.Subscribe<EndDragCardSignal>(OnEndDragCard);
 
             signalBus.Subscribe<ShowActivityPopupSignal>(OnShowActivityPopup);
+            signalBus.Subscribe<StartActivitySignal>(RunActivityService.OnRunCurrentActivity);
 
             droppableView.CardDrop += OnDropCard;
             timerView.TimeFinish += OnTimerFinish;
@@ -52,13 +54,20 @@ namespace Canvas.Activities.Views
             ActivityViewsService.AddActivityView(this);
         }
 
+        /// <summary>
+        /// On refresh activity
+        /// </summary>
         private void OnRefreshActivity()
         {
             droppableView.ReturnDropCard();
             SetStatus(Status.Normal);
+            RunActivityService.Refresh();
             CurrentActivity = null;
         }
 
+        /// <summary>
+        /// Run activity timer
+        /// </summary>
         private void OnRunTimer()
         {
             SetStatus(Status.Normal);
@@ -66,6 +75,9 @@ namespace Canvas.Activities.Views
             timerView.Show();
         }
 
+        /// <summary>
+        /// On show activity popup
+        /// </summary>
         private void OnShowActivityPopup()
         {
             SetStatus(Status.Normal);
@@ -89,8 +101,9 @@ namespace Canvas.Activities.Views
             var condition = ConditionsService.TryFindConditionByCardId(droppableView.DropCardId);
             if (condition == null)
                 return;
-            CurrentActivity = activityService.GetActivityByStartConditionId(condition.Id);
-            activityService.ShowPopup(CurrentActivity.Id, droppableView.DropCardId);
+            CurrentActivity = ActivityService.GetActivityByStartConditionId(condition.Id);
+            RunActivityService.Init(CurrentActivity.Id);
+            ActivityService.ShowPopup(CurrentActivity.Id, droppableView.DropCardId);
         }
 
         /// <summary>
@@ -99,7 +112,7 @@ namespace Canvas.Activities.Views
         private void OnTimerFinish()
         {
             timerView.Hide();
-            activityService.ShowResultPopup(CurrentActivity.Id);
+            RunActivityService.OnFinishActivity();
             CurrentActivity = null;
         }
 
@@ -121,7 +134,7 @@ namespace Canvas.Activities.Views
             var condition = ConditionsService.TryFindConditionByCardId(obj.CardId);
             if (condition == null)
                 return;
-            var foundActivityObj = activityService.GetActivityByStartConditionId(condition.Id);
+            var foundActivityObj = ActivityService.GetActivityByStartConditionId(condition.Id);
             if (foundActivityObj != null)
                 borderImg.SetStatus(Status.Highlighted);
             droppableView.SetDroppable(foundActivityObj != null);

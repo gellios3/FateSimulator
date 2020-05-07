@@ -9,14 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1fa4f8b431345c699733910886c3b9e, type: 3}
-  m_Name: Blacksmith Work Condition
+  m_Script: {fileID: 11500000, guid: 9f384bb173e64f0592468a228e70fce1, type: 3}
+  m_Name: LessonCardObj
   m_EditorClassIdentifier: 
-  id: 29163
-  dataBase: {fileID: 11400000, guid: 46a29bcfb7c5d2941a21c795a07c9723, type: 2}
+  id: 0
+  dataBase: {fileID: 0}
+  posOnTable: {x: 0, y: 0}
+  cardName: 
+  shortDescription: 
+  type: 0
   level: 0
-  title: Blacksmith Condition
-  cardType: 6
-  activityType: 0
-  onEndActivityStatus: 1
-  workType: 2
+  cardIcon: {fileID: 0}
+  aspectsList: []
+  appearances: []
+  lessonType: 0

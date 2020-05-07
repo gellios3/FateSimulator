@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Canvas.Activities.Interfaces;
-using Canvas.Cards.Services;
 using Canvas.Popups.Signals.Activity;
 using Zenject;
 
@@ -12,13 +11,10 @@ namespace Canvas.Activities.Services
         /// Draggable card Views
         /// </summary>
         private List<IActivityView> ActivityViews { get; } = new List<IActivityView>();
-        
-        [Inject] private CardActionsService CardActionsService { get; }
 
         [Inject]
         public void Construct(SignalBus signalBus)
         {
-            signalBus.Subscribe<StartActivitySignal>(OnRunCurrentActivity);
             signalBus.Subscribe<CloseActivityPopupSignal>(OnCloseActivityPopup);
         }
 
@@ -33,27 +29,11 @@ namespace Canvas.Activities.Services
         }
 
         /// <summary>
-        /// On run current activity
-        /// </summary>
-        /// <param name="obj"></param>
-        private void OnRunCurrentActivity(StartActivitySignal obj)
-        {
-            var activity = GetActivityViewById(obj.ActivityId);
-            if (activity == null)
-                return;
-            foreach (var cardView in obj.DropCardViews)
-            {
-                CardActionsService.HideCard(cardView);
-            }
-            activity.RunTimer.Invoke();
-        }
-
-        /// <summary>
         /// Get activity view by Id
         /// </summary>
         /// <param name="activityId"></param>
         /// <returns></returns>
-        private IActivityView GetActivityViewById(ushort activityId)
+        public IActivityView GetActivityViewById(ushort activityId)
         {
             return ActivityViews.Find(view => view.ActivityId == activityId);
         }

@@ -1,6 +1,4 @@
 ﻿using Canvas.Activities.Services;
-using Canvas.Activities.Views;
-using UnityEngine;
 using Zenject;
 
 namespace Canvas.Activities.Installers
@@ -12,6 +10,7 @@ namespace Canvas.Activities.Installers
         {
             Container.Bind<ActivityService>().AsSingle();
             Container.Bind<ActivityViewsService>().AsSingle();
+            Container.Bind<RunActivityService>().AsTransient();
         }
 
     }
