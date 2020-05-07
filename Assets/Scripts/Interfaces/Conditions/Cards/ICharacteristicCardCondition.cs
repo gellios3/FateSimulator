@@ -2,7 +2,7 @@
 
 namespace Interfaces.Conditions.Cards
 {
-    public interface ICharacteristicCardCondition : ICardCondition
+    public interface ICharacteristicCardCondition : IActivityCardCondition
     {
         CharacteristicType CharacteristicType { get; }
     }

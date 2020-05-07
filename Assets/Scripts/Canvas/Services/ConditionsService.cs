@@ -1,6 +1,8 @@
 ﻿using Interfaces.Cards;
+using Interfaces.Conditions;
 using Interfaces.Conditions.Cards;
 using ScriptableObjects;
+using UnityEngine;
 using Zenject;
 
 namespace Canvas.Services
@@ -35,6 +37,33 @@ namespace Canvas.Services
                 default:
                     return false;
             }
+        }
+
+        /// <summary>
+        /// Try find condition by card id
+        /// </summary>
+        /// <param name="cardId"></param>
+        /// <returns></returns>
+        public IBaseCondition TryFindConditionByCardId(ushort cardId)
+        {
+            var sourceCard = DataBase.GetCardById(cardId);
+            var allConditions = DataBase.allConditions;
+            
+            foreach (var condition in allConditions)
+            {
+                switch (condition)
+                {
+                    case IWorkCardCondition workCardCondition when sourceCard is IWorkCard workCard:
+                        if (workCardCondition.WorkType == workCard.WorkType)
+                            return condition;
+                        break;
+                    default:
+                        // Debug.LogError("Not found");
+                        break;
+                }
+            }
+
+            return null;
         }
     }
 }

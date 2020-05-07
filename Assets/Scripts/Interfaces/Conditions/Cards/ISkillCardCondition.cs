@@ -2,7 +2,7 @@
 
 namespace Interfaces.Conditions.Cards
 {
-    public interface ISkillCardCondition : ICardCondition
+    public interface ISkillCardCondition : IActivityCardCondition
     {
         RoutineSkillType RoutineSkillType { get; }
         

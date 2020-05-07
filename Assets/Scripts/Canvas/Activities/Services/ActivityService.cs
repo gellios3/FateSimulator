@@ -11,8 +11,6 @@ namespace Canvas.Activities.Services
     public class ActivityService
     {
         [Inject] private AllItemsDataBase ItemsDataBase { get; }
-        
-        
 
         private SignalBus SignalBus { get; }
 
@@ -22,14 +20,15 @@ namespace Canvas.Activities.Services
         }
 
         /// <summary>
-        /// Get activity card
+        /// Get Activity by condition Id
         /// </summary>
-        /// <param name="startActivityCardId"></param>
+        /// <param name="startConditionId"></param>
         /// <returns></returns>
-        public IBaseActivity GetActivityByStartCardId(ushort startActivityCardId)
+        public IBaseActivity GetActivityByStartConditionId(ushort startConditionId)
         {
+            var condition = ItemsDataBase.allConditions.Find(obj => obj.Id == startConditionId);
             return ItemsDataBase.allActivities.Find(obj =>
-                obj.startActivityCard != null && obj.startActivityCard.Id == startActivityCardId
+                obj.RequiredList.Find(conditionObj => conditionObj == condition) != null
             );
         }
 
@@ -37,11 +36,13 @@ namespace Canvas.Activities.Services
         /// Show popup
         /// </summary>
         /// <param name="activityId"></param>
-        public void ShowPopup(ushort activityId)
+        /// <param name="cardId"></param>
+        public void ShowPopup(ushort activityId, ushort cardId)
         {
             SignalBus.Fire(new ShowActivityPopupSignal
             {
-                ActivityId = activityId
+                ActivityId = activityId,
+                StartActivityCardId = cardId
             });
         }
 

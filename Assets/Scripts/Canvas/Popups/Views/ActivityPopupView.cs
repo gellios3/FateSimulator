@@ -58,7 +58,7 @@ namespace Canvas.Popups.Views
             startActivityBtn.Hide();
             BaseActivity = AllItemsDataBase.GetActivityById(obj.ActivityId);
             // Init conditions
-            conditionsView.Init(BaseActivity);
+            conditionsView.Init(BaseActivity, obj.StartActivityCardId);
             // Init timer
             activityTimer.Init(BaseActivity.ActivityDuration);
             activityTimer.Hide();
@@ -72,7 +72,7 @@ namespace Canvas.Popups.Views
         {
             SignalBus.Fire(new StartActivitySignal
             {
-                ActivityId = BaseActivity.Id, 
+                ActivityId = BaseActivity.Id,
                 DropCardViews = conditionsView.DropCardViews
             });
             Hide();
@@ -83,7 +83,7 @@ namespace Canvas.Popups.Views
         /// </summary>
         private void OnClosePopup()
         {
-            SignalBus.Fire(new CloseActivityPopupSignal{ActivityId = BaseActivity.Id});
+            SignalBus.Fire(new CloseActivityPopupSignal {ActivityId = BaseActivity.Id});
             Hide();
         }
 

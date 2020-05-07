@@ -17,7 +17,6 @@ namespace Serializable.Activities
     public class BaseActivity : IBaseActivity
     {
         public ushort Id { get; }
-        
         public AllItemsDataBase DataBase { get; }
         public string ActivityName { get; }
         public ushort ActivityDuration { get; }
@@ -25,7 +24,6 @@ namespace Serializable.Activities
         public ActivityType ActivityType { get; }
         public Sprite ActivityIcon { get; }
         public byte OptionalResultChance { get; }
-        public BaseCardObj StartActivityCard { get; }
         public List<BaseConditionObj> RequiredList { get; }
         public List<BaseConditionObj> OptionalRequiresList { get; }
         public List<BaseResultObj> ResultsList { get; }
@@ -45,7 +43,6 @@ namespace Serializable.Activities
             ActivityDuration = baseActivity.ActivityDuration;
             ActivityType = baseActivity.ActivityType;
             ActivityIcon = baseActivity.ActivityIcon;
-            StartActivityCard = baseActivity.StartActivityCard;
             RequiredList = baseActivity.RequiredList;
             OptionalRequiresList = baseActivity.OptionalRequiresList;
             ResultsList = baseActivity.ResultsList;

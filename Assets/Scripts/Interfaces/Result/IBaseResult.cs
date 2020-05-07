@@ -1,4 +1,6 @@
-﻿namespace Interfaces.Conditions
+﻿using Interfaces.Conditions;
+
+namespace Interfaces.Result
 {
     public interface IBaseResult: IBaseCondition
     {

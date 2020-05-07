@@ -19,3 +19,5 @@ MonoBehaviour:
   cardType: 5
   routineSkillType: 3
   battleSkillType: 1
+  activityType: 0
+  onEndActivityStatus: 0

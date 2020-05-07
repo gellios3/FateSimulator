@@ -18,3 +18,5 @@ MonoBehaviour:
   title: Health
   cardType: 0
   characteristicType: 0
+  activityType: 10
+  onEndActivityStatus: 1

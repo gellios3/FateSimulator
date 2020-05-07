@@ -27,4 +27,7 @@ MonoBehaviour:
   - cardStatus: 0
     duration: -1
     color: {r: 1, g: 0.4627451, b: 0.654902, a: 1}
+  - cardStatus: 1
+    duration: -1
+    color: {r: 1, g: 0.4627451, b: 0.654902, a: 1}
   characteristicType: 0

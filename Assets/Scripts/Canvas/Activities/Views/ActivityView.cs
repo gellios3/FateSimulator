@@ -3,9 +3,9 @@ using AbstractViews;
 using Canvas.Activities.Interfaces;
 using Canvas.Activities.Services;
 using Canvas.Cards.Interfaces;
-using Canvas.Cards.Services;
 using Canvas.Cards.Signals;
 using Canvas.Popups.Signals.Activity;
+using Canvas.Services;
 using Enums;
 using Interfaces.Activity;
 using UnityEngine;
@@ -19,8 +19,10 @@ namespace Canvas.Activities.Views
     public class ActivityView : BaseView, IActivityView
     {
         #region Parameters
+
         public ushort ActivityId => CurrentActivity?.Id ?? 0;
         public Action RunTimer { get; private set; }
+        public Action RefreshActivity { get; private set; }
 
         [SerializeField] private ActivityDroppableView droppableView;
         [SerializeField] private ColorsPresetImage borderImg;
@@ -30,6 +32,7 @@ namespace Canvas.Activities.Views
 
         [Inject] private ActivityService activityService;
         [Inject] private ActivityViewsService ActivityViewsService { get; }
+        [Inject] private ConditionsService ConditionsService { get; }
 
         #endregion
 
@@ -38,14 +41,22 @@ namespace Canvas.Activities.Views
         {
             signalBus.Subscribe<StartDragCardSignal>(OnStartDragCard);
             signalBus.Subscribe<EndDragCardSignal>(OnEndDragCard);
-            
+
             signalBus.Subscribe<ShowActivityPopupSignal>(OnShowActivityPopup);
-            signalBus.Subscribe<CloseActivityPopupSignal>(OnCloseActivityPopup);
 
             droppableView.CardDrop += OnDropCard;
             timerView.TimeFinish += OnTimerFinish;
+
             RunTimer += OnRunTimer;
+            RefreshActivity += OnRefreshActivity;
             ActivityViewsService.AddActivityView(this);
+        }
+
+        private void OnRefreshActivity()
+        {
+            droppableView.ReturnDropCard();
+            SetStatus(Status.Normal);
+            CurrentActivity = null;
         }
 
         private void OnRunTimer()
@@ -53,18 +64,6 @@ namespace Canvas.Activities.Views
             SetStatus(Status.Normal);
             timerView.Init(CurrentActivity.ActivityDuration);
             timerView.Show();
-        }
-
-        /// <summary>
-        /// Return activity to normal status
-        /// </summary>
-        private void OnCloseActivityPopup(CloseActivityPopupSignal obj)
-        {
-            if (CurrentActivity == null || obj.ActivityId != CurrentActivity.Id)
-                return;
-            droppableView.ReturnDropCard();
-            SetStatus(Status.Normal);
-            CurrentActivity = null;
         }
 
         private void OnShowActivityPopup()
@@ -87,8 +86,11 @@ namespace Canvas.Activities.Views
         /// </summary>
         private void OnDropCard(IDraggableCardView draggableCardView)
         {
-            CurrentActivity = activityService.GetActivityByStartCardId(droppableView.DropCardId);
-            activityService.ShowPopup(CurrentActivity.Id);
+            var condition = ConditionsService.TryFindConditionByCardId(droppableView.DropCardId);
+            if (condition == null)
+                return;
+            CurrentActivity = activityService.GetActivityByStartConditionId(condition.Id);
+            activityService.ShowPopup(CurrentActivity.Id, droppableView.DropCardId);
         }
 
         /// <summary>
@@ -116,7 +118,10 @@ namespace Canvas.Activities.Views
         /// <param name="obj"></param>
         private void OnStartDragCard(StartDragCardSignal obj)
         {
-            var foundActivityObj = activityService.GetActivityByStartCardId(obj.CardId);
+            var condition = ConditionsService.TryFindConditionByCardId(obj.CardId);
+            if (condition == null)
+                return;
+            var foundActivityObj = activityService.GetActivityByStartConditionId(condition.Id);
             if (foundActivityObj != null)
                 borderImg.SetStatus(Status.Highlighted);
             droppableView.SetDroppable(foundActivityObj != null);

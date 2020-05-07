@@ -11,6 +11,7 @@
         Sleep,
         VisitLocation,
         Conversation,
-        Journey
+        Journey,
+        Any
     }
 }

@@ -58,13 +58,6 @@ namespace ScriptableObjects.Activities
         public byte OptionalResultChance => optionalResultChance;
 
         /// <summary>
-        /// Start base condition 
-        /// </summary>
-        public BaseCardObj startActivityCard;
-
-        public BaseCardObj StartActivityCard => startActivityCard;
-
-        /// <summary>
         /// Required aspects or cards for start Activity
         /// </summary>
         public List<BaseConditionObj> requiredList;

@@ -1,5 +1,6 @@
 ﻿using Enums;
 using Interfaces.Conditions;
+using Interfaces.Result;
 using UnityEngine;
 
 namespace ScriptableObjects.Conditions.Results

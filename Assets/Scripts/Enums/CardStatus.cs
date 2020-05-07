@@ -5,6 +5,7 @@
         Normal,
         Distress,
         Broken,
-        Buffed
+        Buffed,
+        Death
     }
 }
