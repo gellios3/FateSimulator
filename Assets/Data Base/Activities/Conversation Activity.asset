@@ -12,11 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eea1b9588bf28b84eb3123452d42328b, type: 3}
   m_Name: Conversation Activity
   m_EditorClassIdentifier: 
-  id: 1
+  id: 7323
+  dataBase: {fileID: 11400000, guid: 46a29bcfb7c5d2941a21c795a07c9723, type: 2}
   activityName: Conversation
+  activityDuration: 0
   shortDescription: Conversation Activity
   activityType: 8
   activityIcon: {fileID: 0}
+  optionalResultChance: 0
+  startActivityCard: {fileID: 0}
   requiredList:
   - {fileID: 11400000, guid: 0e257144ff2433c44b9ca88f71024097, type: 2}
   - {fileID: 11400000, guid: cc9f053b23672224494eceb2a0be522f, type: 2}

@@ -7,13 +7,9 @@ namespace Interfaces.Aspects
     /// <summary>
     /// Interface for Base Aspect
     /// </summary>
-    public interface IBaseAspect
+    public interface IBaseAspect : IBaseObj
     {
-        /// <summary>
-        /// Aspect Id
-        /// </summary>
-        ushort Id { get; }
-        
+
         /// <summary>
         /// Aspect Name
         /// </summary>

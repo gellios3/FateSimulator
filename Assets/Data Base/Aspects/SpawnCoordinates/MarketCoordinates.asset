@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c638af0f597e4291a8c3a49f349660ab, type: 3}
   m_Name: MarketCoordinates
   m_EditorClassIdentifier: 
-  id: 0
+  id: 32727
+  dataBase: {fileID: 11400000, guid: 46a29bcfb7c5d2941a21c795a07c9723, type: 2}
   aspectName: CoordinatesAspectObj
+  aspectDescription: 
   aspectImg: {fileID: 0}
   aspectType: 5
   coordinate:

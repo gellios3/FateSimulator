@@ -9,5 +9,7 @@ namespace ScriptableObjects.Conditions.Requires
     {
         public CardType cardType;
         public CardType CardType => cardType;
+        
+        
     }
 }

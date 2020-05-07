@@ -1,4 +1,6 @@
-﻿using Enums.Aspects;
+﻿using Enums;
+using Enums.Activities;
+using Enums.Aspects;
 using Interfaces.Conditions.Cards;
 using UnityEngine;
 
@@ -9,5 +11,11 @@ namespace ScriptableObjects.Conditions.Requires.Cards
     {
         public CharacteristicType characteristicType;
         public CharacteristicType CharacteristicType => characteristicType;
+        
+        public ActivityType activityType = ActivityType.Any;
+        public ActivityType ActivityType => activityType;
+
+        public CardStatus onEndActivityStatus;
+        public CardStatus OnEndActivityStatus => onEndActivityStatus;
     }
 }

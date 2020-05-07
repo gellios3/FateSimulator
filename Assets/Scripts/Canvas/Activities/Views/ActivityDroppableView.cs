@@ -1,38 +1,28 @@
 ﻿using AbstractViews;
-using Canvas.Popups.Signals;
-using UnityEngine.EventSystems;
+using Canvas.Cards.Services;
+using Enums;
 using Zenject;
 
 namespace Canvas.Activities.Views
 {
+    /// <summary>
+    /// Activity droppable view
+    /// </summary>
     public class ActivityDroppableView : DroppableView
     {
-        private SignalBus SignalBus { get; set; }
-
-        [Inject]
-        public void Construct(SignalBus signalBus)
+        [Inject] private CardActionsService CardActionsService { get; }
+        
+        /// <summary>
+        /// Return drop card
+        /// </summary>
+        public void ReturnDropCard( )
         {
-            SignalBus = signalBus;
-            signalBus.Subscribe<CloseActivityPopupSignal>(OnReturnDropCard);
-        }
-
-        private void OnReturnDropCard()
-        {
-            if (DropCardView == null)
+            if (DropCardId == 0)
                 return;
-            DropCardView.Show();
-            DropCardView.ReturnBack();
-            DropCardView = null;
-        }
-
-
-        public override void OnDrop(PointerEventData eventData)
-        {
-            base.OnDrop(eventData);
-            if (DropCardView == null)
-                return;
-            DropCardView.HasActivate = true;
-            // DropCardView.Hide();
+            borderImg.SetStatus(Status.Normal);
+            CardActionsService.ShowCard(DropCardCardView);
+            CardActionsService.ReturnBack(DropCardCardView);
+            DropCardId = 0;
         }
     }
 }

@@ -6,11 +6,8 @@ using UnityEngine;
 namespace ScriptableObjects.Aspects
 {
     [CreateAssetMenu(fileName = "New Aspect Obj", menuName = "Create Aspect Obj", order = 0)]
-    public class BaseAspectObj : ScriptableObject, IBaseAspect
+    public class BaseAspectObj : BaseObj, IBaseAspect
     {
-        public ushort id;
-        public ushort Id => id;
-
         public string aspectName;
         public string AspectName => aspectName;
 
@@ -22,5 +19,22 @@ namespace ScriptableObjects.Aspects
 
         public AspectType aspectType;
         public AspectType AspectType => aspectType;
+        
+        protected override bool TryAddItemToDatabase()
+        {
+            if (!dataBase.IsUniqueId(id, GlobalType.Aspect)) 
+                return false;
+            dataBase.allAspects.Add(this);
+            return true;
+        }
+        
+        protected override void RemoveItemFromDatabase()
+        {
+            var index = dataBase.allAspects.FindIndex(item => item.id == id);
+            if (index != -1)
+            {
+                dataBase.allAspects.RemoveAt(index);
+            }
+        }
     }
 }

@@ -3,8 +3,9 @@
     public enum CardStatus
     {
         Normal,
-        Exhaustion,
+        Distress,
         Broken,
-        Buffed
+        Buffed,
+        Death
     }
 }

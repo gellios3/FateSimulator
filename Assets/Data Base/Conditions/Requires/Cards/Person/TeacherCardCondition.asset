@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 861860b438654548ba42204a00fa3464, type: 3}
   m_Name: TeacherCardCondition
   m_EditorClassIdentifier: 
+  id: 52603
+  dataBase: {fileID: 11400000, guid: 46a29bcfb7c5d2941a21c795a07c9723, type: 2}
   level: 0
+  title: 
   cardType: 1
   personType: 0

@@ -1,16 +1,21 @@
-﻿using System.Collections.Generic;
-using Interfaces.Aspects;
+﻿using AbstractViews;
 using Interfaces.Cards;
-using ScriptableObjects.Aspects;
 using UnityEngine;
 using Zenject;
 
 namespace Canvas.Aspects.Views
 {
-    public class AspectsBarView : MonoBehaviour
+    /// <summary>
+    /// Aspect bar view
+    /// </summary>
+    public class AspectsBarView : BaseView
     {
         [Inject] private AspectsSpawner AspectsSpawner { get; }
         
+        /// <summary>
+        /// Set aspects bar
+        /// </summary>
+        /// <param name="baseCard"></param>
         public void SetAspectsBar(IBaseCard baseCard)
         {
             for (var i = 0; i < transform.childCount; i++)

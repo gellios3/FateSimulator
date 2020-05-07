@@ -1,5 +1,7 @@
-﻿using Canvas.Popups.Signals;
+﻿using AbstractViews;
+using Canvas.Popups.Signals;
 using Interfaces.Aspects;
+using ScriptableObjects;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,36 +9,46 @@ using Zenject;
 
 namespace Canvas.Popups.Views
 {
-    public class AspectDescriptionPopupView : MonoBehaviour
+    /// <summary>
+    /// Aspect popup
+    /// </summary>
+    public class AspectDescriptionPopupView : BaseView
     {
-        private SignalBus SignalBus { get; set; }
-
+        #region Parameters
+        
         [SerializeField] private Image icon;
-
         [SerializeField] private TextMeshProUGUI title;
         [SerializeField] private TextMeshProUGUI description;
         [SerializeField] private Button closeBtn;
 
         private IBaseAspect BaseAspect { get; set; }
+        private SignalBus SignalBus { get; set; }
+        [Inject] private AllItemsDataBase AllItemsDataBase { get; }
+        
+        #endregion
 
         [Inject]
         public void Construct(SignalBus signalBus)
         {
-            gameObject.SetActive(false);
+            Hide();
             SignalBus = signalBus;
-            SignalBus.Subscribe<ShowAspectPopupSignal>(ShowAspectPopup);
+            SignalBus.Subscribe<ShowAspectPopupSignal>(OnShowAspectPopup);
             
-            closeBtn.onClick.AddListener(() => gameObject.SetActive(false));
+            closeBtn.onClick.AddListener(Hide);
         }
 
-        private void ShowAspectPopup(ShowAspectPopupSignal signal)
+        /// <summary>
+        /// Show Aspect popup
+        /// </summary>
+        /// <param name="signal"></param>
+        private void OnShowAspectPopup(ShowAspectPopupSignal signal)
         {
-            BaseAspect = signal.BaseAspectObj;
+            BaseAspect = AllItemsDataBase.GetAspectById(signal.AspectId);
 
             title.text = BaseAspect.AspectName;
             description.text = BaseAspect.AspectDescription;
             icon.sprite = BaseAspect.AspectImg;
-            gameObject.SetActive(true);
+            Show();
         }
     }
 }

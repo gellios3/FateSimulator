@@ -1,32 +1,129 @@
-﻿using Canvas.Cards.Signals;
-using Canvas.Popups.Signals;
-using Interfaces.Cards;
+﻿using UnityEngine;
 using Zenject;
 
 namespace Canvas.Cards.Services
 {
+    /// <summary>
+    /// Draggable card service
+    /// </summary>
     public class DraggableCardService
     {
-        private SignalBus SignalBus { get; }
+        #region Parameters
 
-        public DraggableCardService(SignalBus signalBus)
+        private bool CanDraggable { get; set; } = true;
+        private bool HasDrop { get; set; }
+        private bool HasOutArea { get; set; }
+        private bool HasSetInInventory { get; set; }
+        public bool HasStartDrag { get; private set; }
+        public Vector3 TempPosition { get; private set; }
+
+        #endregion
+
+        /// <summary>
+        /// Can begin drag
+        /// </summary>
+        /// <returns></returns>
+        public bool CanBeginDrag()
         {
-            SignalBus = signalBus;
+            if (!CanDraggable)
+                return false;
+            HasDrop = false;
+            HasStartDrag = true;
+            return true;
         }
 
-        public void StartDragCard(IBaseCard baseCard)
+        /// <summary>
+        /// Can end drag
+        /// </summary>
+        /// <returns></returns>
+        public bool CanEndDrag()
         {
-            SignalBus.Fire(new OnStartDragCardSignal {BaseCard = baseCard});
-        } 
-        
-        public void EndDragCard(IBaseCard baseCard)
-        {
-            SignalBus.Fire(new OnEndDragCardSignal {BaseCard = baseCard});
+            if (HasDrop)
+                return false;
+            if (!HasOutArea)
+                CanDraggable = true;
+            return true;
         }
 
-        public void ShowPopup(IBaseCard baseCard)
+        /// <summary>
+        /// Drag card
+        /// </summary>
+        public bool CanDragCard()
         {
-            SignalBus.Fire(new ShowCardPopupSignal {BaseCard = baseCard});
+            return CanDraggable && Camera.main != null;
+        }
+
+        /// <summary>
+        /// Drop card
+        /// </summary>
+        public void DropCard()
+        {
+            HasDrop = true;
+        }
+
+        /// <summary>
+        /// End drag
+        /// </summary>
+        public bool HasOutDrag()
+        {
+            HasStartDrag = false;
+            return HasOutArea;
+
+            // HasSetInInventory = false;
+        }
+
+        /// <summary>
+        /// Drop on activity
+        /// </summary>
+        /// <param name="value"></param>
+        public void OnDropOnActivity(bool value)
+        {
+            CanDraggable = !value;
+        }
+
+        /// <summary>
+        /// Return back
+        /// </summary>
+        /// <param name="value"></param>
+        public void ReturnBack(bool value)
+        {
+            HasOutArea = false;
+            HasSetInInventory = value;
+        }
+
+        /// <summary>
+        /// Set out of draggable area
+        /// </summary>
+        /// <param name="value"></param>
+        public void SetOutArea(bool value)
+        {
+            HasOutArea = value;
+            CanDraggable = !value;
+        }
+
+        /// <summary>
+        /// Set temp position
+        /// </summary>
+        /// <param name="pos"></param>
+        public void SetTempPos(Vector3 pos)
+        {
+            TempPosition = pos;
+        }
+
+        /// <summary>
+        /// Get World position on plane
+        /// </summary>
+        /// <param name="screenPosition"></param>
+        /// <param name="z"></param>
+        /// <returns></returns>
+        public Vector3 GetWorldPositionOnPlane(Vector3 screenPosition, float z)
+        {
+            if (Camera.main == null)
+                return Vector3.zero;
+            var ray = Camera.main.ScreenPointToRay(screenPosition);
+            var xy = new Plane(Vector3.down, new Vector3(0, 0, z));
+            xy.Raycast(ray, out var distance);
+            return ray.GetPoint(distance);
         }
     }
 }

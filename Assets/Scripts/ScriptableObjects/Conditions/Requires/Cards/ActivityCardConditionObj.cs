@@ -1,4 +1,5 @@
-﻿using Enums.Activities;
+﻿using Enums;
+using Enums.Activities;
 using Interfaces.Conditions.Cards;
 using UnityEngine;
 
@@ -10,5 +11,9 @@ namespace ScriptableObjects.Conditions.Requires.Cards
     {
         public ActivityType activityType;
         public ActivityType ActivityType => activityType;
+
+
+        public CardStatus onEndActivityStatus;
+        public CardStatus OnEndActivityStatus => onEndActivityStatus;
     }
 }

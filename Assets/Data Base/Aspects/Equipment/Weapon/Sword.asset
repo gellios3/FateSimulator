@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76bb77880b9c4a6e8a7ed96e7409b3ae, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
-  id: 1
+  id: 27910
+  dataBase: {fileID: 11400000, guid: 46a29bcfb7c5d2941a21c795a07c9723, type: 2}
   aspectName: Base Sword
+  aspectDescription: 
   aspectImg: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   aspectType: 4
   equipmentType: 3

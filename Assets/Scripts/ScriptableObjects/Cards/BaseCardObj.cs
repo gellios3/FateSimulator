@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Enums;
-using Interfaces.Aspects;
 using Interfaces.Cards;
 using ScriptableObjects.Aspects;
+using Serializable;
 using UnityEngine;
 
 namespace ScriptableObjects.Cards
@@ -11,13 +11,8 @@ namespace ScriptableObjects.Cards
     /// Base Card Obj
     /// </summary>
     [CreateAssetMenu(fileName = "New Card Obj", menuName = "Cards/Create Card Obj", order = 0)]
-    public class BaseCardObj : ScriptableObject, IBaseCard
+    public class BaseCardObj : BaseObj, IBaseCard
     {
-        /// <summary>
-        /// Card Id
-        /// </summary>
-        public ushort id;
-        public ushort Id => id;
 
         /// <summary>
         /// Position on table
@@ -30,7 +25,7 @@ namespace ScriptableObjects.Cards
         /// </summary>
         public string cardName;
         public string CardName => cardName;
-        
+
         /// <summary>
         /// Short Description
         /// </summary>
@@ -48,23 +43,40 @@ namespace ScriptableObjects.Cards
         /// </summary>
         public byte level;
         public byte Level => level;
-        
-        /// <summary>
-        /// Background color
-        /// </summary>
-        public Color backgroundColor;
-        public Color BackgroundColor => backgroundColor;
-        
+
         /// <summary>
         /// Card icon
         /// </summary>
         public Sprite cardIcon;
         public Sprite CardIcon => cardIcon;
-        
+
         /// <summary>
         /// List of spects
         /// </summary>
         public List<BaseAspectObj> aspectsList;
         public List<BaseAspectObj> AspectsList => aspectsList;
+
+        /// <summary>
+        /// Card appearances list
+        /// </summary>
+        public List<CardStatusPreset> appearances;
+        public List<CardStatusPreset> StatusPresets => appearances;
+        
+        protected override bool TryAddItemToDatabase()
+        {
+            if (!dataBase.IsUniqueId(id, GlobalType.Card)) 
+                return false;
+            dataBase.allCards.Add(this);
+            return true;
+        }
+
+        protected override void RemoveItemFromDatabase()
+        {
+            var index = dataBase.allCards.FindIndex(card => card.id == id);
+            if (index != -1)
+            {
+                dataBase.allCards.RemoveAt(index);
+            }
+        }
     }
 }

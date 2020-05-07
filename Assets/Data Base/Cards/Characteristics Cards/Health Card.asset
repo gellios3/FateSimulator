@@ -12,15 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3615902913c44e728d0194d3f27854de, type: 3}
   m_Name: Health Card
   m_EditorClassIdentifier: 
-  id: 0
+  id: 26700
+  dataBase: {fileID: 11400000, guid: 46a29bcfb7c5d2941a21c795a07c9723, type: 2}
   posOnTable: {x: -263.7, y: 251}
   cardName: Health Card
   shortDescription: Health Card
   type: 0
   level: 0
-  backgroundColor: {r: 1, g: 0.46099997, b: 0.65308213, a: 1}
   cardIcon: {fileID: 21300000, guid: 7b82bfbdcbe832844a2879e408bf4876, type: 3}
   aspectsList:
   - {fileID: 11400000, guid: 6ab0f85854b05144e8b21fb02663ef4c, type: 2}
   - {fileID: 11400000, guid: f0f517d1a4dd1e5438383f5bbd12e767, type: 2}
+  appearances:
+  - cardStatus: 0
+    duration: -1
+    color: {r: 1, g: 0.4627451, b: 0.654902, a: 1}
+  - cardStatus: 1
+    duration: -1
+    color: {r: 1, g: 0.4627451, b: 0.654902, a: 1}
   characteristicType: 0

@@ -1,40 +1,57 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Canvas.Activities.Views;
-using Canvas.Cards.Models;
-using Canvas.Cards.Views;
-using Canvas.Popups.Signals;
+﻿using Canvas.Popups.Signals.Activity;
 using Interfaces.Activity;
-using Interfaces.Cards;
 using ScriptableObjects;
-using UnityEngine;
 using Zenject;
 
 namespace Canvas.Activities.Services
 {
+    /// <summary>
+    /// Activity service
+    /// </summary>
     public class ActivityService
     {
-        [Inject] private List<BaseActivityObj> possibleActivities;
+        [Inject] private AllItemsDataBase ItemsDataBase { get; }
 
-        private readonly SignalBus signalBus;
+        private SignalBus SignalBus { get; }
 
         public ActivityService(SignalBus signalBus)
         {
-            this.signalBus = signalBus;
+            SignalBus = signalBus;
         }
 
-        public IBaseActivity GetActivityByActivity(IBaseCard startActivityCard)
+        /// <summary>
+        /// Get Activity by condition Id
+        /// </summary>
+        /// <param name="startConditionId"></param>
+        /// <returns></returns>
+        public IBaseActivity GetActivityByStartConditionId(ushort startConditionId)
         {
-            return possibleActivities.FirstOrDefault(obj => ReferenceEquals(obj.StartActivityCard, startActivityCard));
+            var condition = ItemsDataBase.allConditions.Find(obj => obj.Id == startConditionId);
+            return ItemsDataBase.allActivities.Find(obj =>
+                obj.RequiredList.Find(conditionObj => conditionObj == condition) != null
+            );
         }
 
-        public void ShowPopup(DraggableView draggableView, ActivityView activityView )
+        /// <summary>
+        /// Show popup
+        /// </summary>
+        /// <param name="activityId"></param>
+        /// <param name="cardId"></param>
+        public void ShowPopup(ushort activityId, ushort cardId)
         {
-            signalBus.Fire(new ShowActivityPopupSignal
+            SignalBus.Fire(new ShowActivityPopupSignal
             {
-                StartActionCard = draggableView,
-                SourceActivity = activityView
+                ActivityId = activityId,
+                StartActivityCardId = cardId
             });
+        }
+
+        /// <summary>
+        /// Show result popup
+        /// </summary>
+        public void ShowResultPopup(ushort activityId)
+        {
+            SignalBus.Fire(new ShowActivityResultSignal {ActivityId = activityId});
         }
     }
 }

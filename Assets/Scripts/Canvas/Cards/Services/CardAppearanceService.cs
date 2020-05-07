@@ -2,35 +2,29 @@
 using System.Linq;
 using Enums;
 using Serializable;
-using UnityEngine;
 
 namespace Canvas.Cards.Services
 {
+    /// <summary>
+    /// Card appearance service
+    /// </summary>
     public class CardAppearanceService
     {
-        private List<StatusAppearance> Appearances { get; set; } = new List<StatusAppearance>();
+        private List<CardStatusPreset> Appearances { get; set; } = new List<CardStatusPreset>();
 
-        public void Init(List<StatusAppearance> appearances)
+        public void Init(List<CardStatusPreset> appearances)
         {
             Appearances = appearances;
         }
         
-        public StatusAppearance GetAppearance(CardStatus status)
+        /// <summary>
+        /// Get appearance
+        /// </summary>
+        /// <param name="status"></param>
+        /// <returns></returns>
+        public CardStatusPreset GetAppearance(CardStatus status)
         {
             return Appearances.FirstOrDefault(appearance => appearance.cardStatus == status);
-        }
-        
-        public void SetAppearance(CardStatus status, Color color)
-        {
-            var find = GetAppearance(status);
-            if (find == null)
-            {
-                Appearances.Add(new StatusAppearance() {cardStatus = status, color = color});
-            }
-            else
-            {
-                find.color = color;
-            }
         }
     }
 }

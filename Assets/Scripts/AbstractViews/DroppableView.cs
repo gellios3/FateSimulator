@@ -1,37 +1,54 @@
 ﻿using System;
 using Canvas;
-using Canvas.Cards.Models;
+using Canvas.Cards.Interfaces;
+using Canvas.Cards.Services;
 using Canvas.Cards.Views;
 using Enums;
-using Interfaces.Cards;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using UnityEngine.UI.ProceduralImage;
+using Zenject;
 
 namespace AbstractViews
 {
-    public class DroppableView : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
+    /// <summary>
+    /// Visible card on the table
+    /// </summary>
+    public class DroppableView : BaseView, IDropHandler, IPointerEnterHandler, IPointerExitHandler
     {
-        /// <summary>
-        /// On Card drop
-        /// </summary>
-        public event Action OnCardDrop;
+        #region Parameters
+
+        public event Action<IDraggableCardView> CardDrop;
+        public ushort DropCardId { get; set; }
 
         [SerializeField] private Image bgImg;
+        [SerializeField] protected ColorsPresetImage borderImg;
 
-        public bool CanDropCard { get; private set; } = true;
-        
-        public DraggableView DropCardView { get; protected set; }
+        protected IDraggableCardView DropCardCardView; 
+        [Inject] private CardActionsService CardActionsService { get; }
+        private bool CanDropCard { get; set; } = true;
 
-        [SerializeField] private ColorsPresetImage borderImg;
+        #endregion
 
+        /// <summary>
+        ///  Set droppable
+        /// </summary>
+        /// <param name="status"></param>
         public void SetDroppable(bool status)
         {
             CanDropCard = status;
             bgImg.raycastTarget = status;
         }
-        
+
+        /// <summary>
+        /// Set status for border
+        /// </summary>
+        /// <param name="status"></param>
+        public void SetStatus(Status status)
+        {
+            borderImg.SetStatus(status);
+        }
+
         /// <inheritdoc />
         /// <summary>
         /// On drop 
@@ -39,15 +56,14 @@ namespace AbstractViews
         /// <param name="eventData"></param>
         public virtual void OnDrop(PointerEventData eventData)
         {
-            DropCardView = null;
+            DropCardId = 0;
             if (eventData.pointerDrag == null || !CanDropCard)
                 return;
-            DropCardView = eventData.pointerDrag.GetComponent<DraggableView>();
-            if (DropCardView == null)
+            DropCardCardView = eventData.pointerDrag.GetComponent<DraggableCardView>();
+            if (DropCardCardView == null)
                 return;
-            DropCardView.transform.position = transform.position;
-            OnCardDrop?.Invoke();
-            DropCardView.OnDropCard();
+            DropCardId = DropCardCardView.CardId;
+            OnDrop();
         }
 
         /// <inheritdoc />
@@ -59,8 +75,7 @@ namespace AbstractViews
         {
             if (eventData.pointerDrag == null || !CanDropCard)
                 return;
-            borderImg.SetStatus(Status.Highlighted);
-            // Debug.LogError($"OnPointerEnter {eventData.pointerDrag}");   
+            SetStatus(Status.Highlighted);
         }
 
         /// <inheritdoc />
@@ -72,13 +87,20 @@ namespace AbstractViews
         {
             if (eventData.pointerDrag == null || !CanDropCard)
                 return;
-            borderImg.SetStatus(Status.Normal);
-            var cardView = eventData.pointerDrag.GetComponent<DraggableView>();
-            if (cardView != null)
-            {
-                // cardView.CanDraggable = true;
-                // Debug.LogError($"OnPointerExit {eventData.pointerDrag}");
-            }
+            SetStatus(Status.Normal);
+            // var cardView = eventData.pointerDrag.GetComponent<DraggableCardView>();
+            // if (cardView != null)
+            // {
+            //     // cardView.CanDraggable = true;
+            //     // Debug.LogError($"OnPointerExit {eventData.pointerDrag}");
+            // }
+        }
+
+        protected void OnDrop()
+        {
+            CardActionsService.SetCardPosition(DropCardCardView, transform.position);
+            CardDrop?.Invoke(DropCardCardView);
+            CardActionsService.CallOnDrop(DropCardCardView);
         }
     }
 }
