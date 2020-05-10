@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using Serializable;
+﻿using Serializable;
 
 namespace Interfaces.Cards
 {
     public interface IResourceCard: IBaseCard
     {
-        List<ResourceObj> ResourcesList { get; }
+        ResourceObj Resource { get; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AbstractViews;
+using Canvas.Activities.Services;
 using Canvas.Activities.Views;
 using Canvas.Popups.Signals.Activity;
 using Interfaces.Activity;
@@ -23,7 +24,7 @@ namespace Canvas.Popups.Views
 
         private SignalBus SignalBus { get; set; }
         private IBaseActivity BaseActivity { get; set; }
-        [Inject] private AllItemsDataBase AllItemsDataBase { get; }
+        [Inject] private ActivityService ActivityService { get; }
 
         #endregion
 
@@ -44,7 +45,7 @@ namespace Canvas.Popups.Views
         private void ShowResultPopup(ShowActivityResultSignal obj)
         {
             startActivityBtn.Hide();
-            BaseActivity = AllItemsDataBase.GetActivityById(obj.ActivityId);
+            BaseActivity = ActivityService.GetActivityById(obj.ActivityId);
             Show();
         }
 
@@ -55,7 +56,7 @@ namespace Canvas.Popups.Views
         private void ShowActivityPopup(ShowActivityPopupSignal obj)
         {
             startActivityBtn.Hide();
-            BaseActivity = AllItemsDataBase.GetActivityById(obj.ActivityId);
+            BaseActivity = ActivityService.GetActivityById(obj.ActivityId);
             // Init conditions
             conditionsView.Init(BaseActivity, obj.StartActivityCardId);
             // Init timer

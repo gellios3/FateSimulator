@@ -7,11 +7,11 @@ namespace Serializable.Cards
     [Serializable]
     public class ResourceCard: BaseCard, IResourceCard
     {
-        public List<ResourceObj> ResourcesList { get; }
+        public ResourceObj Resource { get; }
         
         public ResourceCard(IResourceCard cardObj) : base(cardObj)
         {
-            ResourcesList = cardObj.ResourcesList;
+            Resource = cardObj.Resource;
         }
     }
 }

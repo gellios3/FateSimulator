@@ -2,7 +2,6 @@
 using Interfaces.Conditions;
 using Interfaces.Conditions.Cards;
 using ScriptableObjects;
-using UnityEngine;
 using Zenject;
 
 namespace Canvas.Services
@@ -48,7 +47,7 @@ namespace Canvas.Services
         {
             var sourceCard = DataBase.GetCardById(cardId);
             var allConditions = DataBase.allConditions;
-            
+
             foreach (var condition in allConditions)
             {
                 switch (condition)

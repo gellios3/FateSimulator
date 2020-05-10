@@ -27,6 +27,7 @@ namespace Canvas
 
             Container.Bind<ShowAspectService>().AsSingle();
             Container.Bind<ConditionsService>().AsSingle();
+            Container.Bind<ResultsService>().AsSingle();
         }
 
         /// <summary>
@@ -38,6 +39,7 @@ namespace Canvas
             Container.DeclareSignal<FindCardForActivitySignal>(); 
             Container.DeclareSignal<CloseActivityPopupSignal>();  
             Container.DeclareSignal<StartActivitySignal>();
+            Container.DeclareSignal<CreateResultCardsForActivitySignal>();
         }
     }
 }

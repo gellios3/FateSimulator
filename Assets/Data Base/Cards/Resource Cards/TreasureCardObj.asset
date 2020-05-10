@@ -22,10 +22,7 @@ MonoBehaviour:
   cardIcon: {fileID: 0}
   aspectsList: []
   appearances: []
-  resourcesList:
-  - resourceType: 1
-    moneyType: 2
+  resource:
+    resourceType: 1
+    moneyType: 1
     resourceValue: 1
-  - resourceType: 1
-    moneyType: 3
-    resourceValue: 10

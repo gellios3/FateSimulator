@@ -2,7 +2,10 @@
 using System.Linq;
 using Canvas.Cards.Interfaces;
 using Canvas.Cards.Services;
+using Canvas.Cards.Signals;
 using Canvas.Popups.Signals.Activity;
+using Canvas.Services;
+using Interfaces.Cards;
 using UnityEngine;
 using Zenject;
 
@@ -16,8 +19,15 @@ namespace Canvas.Activities.Services
         [Inject] private ActivityViewsService ActivityViewsService { get; }
         [Inject] private CardActionsService CardActionsService { get; }
         [Inject] private ActivityService ActivityService { get; }
+        [Inject] private ResultsService ResultsService { get; }
         private List<IDraggableCardView> RunCardViews { get; set; } = new List<IDraggableCardView>();
         private ushort RunActivityId { get; set; }
+        private SignalBus SignalBus { get; }
+
+        public RunActivityService(SignalBus signalBus)
+        {
+            SignalBus = signalBus;
+        }
 
         public void Init(ushort activityId)
         {
@@ -40,6 +50,21 @@ namespace Canvas.Activities.Services
             {
                 CardActionsService.ShowCard(cardView);
             }
+
+            var activity = ActivityService.GetActivityById(RunActivityId);
+            var resultCards = new List<IBaseCard>();
+            foreach (var resultObj in activity.ResultsList)
+            {
+                var findCard = ResultsService.TryFindCardByResultObj(resultObj);
+                if (findCard != null)
+                {
+                    resultCards.Add(findCard);
+                }
+            }
+
+            Debug.LogError($"OnFinishActivity {resultCards.Count}");
+
+            SignalBus.Fire(new CreateResultCardsForActivitySignal() {ResultList = resultCards});
         }
 
         /// <summary>
@@ -61,5 +86,7 @@ namespace Canvas.Activities.Services
 
             activity.RunTimer.Invoke();
         }
+
+        // private void TryConvert
     }
 }

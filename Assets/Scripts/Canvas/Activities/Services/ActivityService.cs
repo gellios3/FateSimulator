@@ -20,6 +20,16 @@ namespace Canvas.Activities.Services
         }
 
         /// <summary>
+        /// Get activity by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public IBaseActivity GetActivityById(ushort id)
+        {
+            return ItemsDataBase.GetActivityById(id);
+        }
+
+        /// <summary>
         /// Get Activity by condition Id
         /// </summary>
         /// <param name="startConditionId"></param>
