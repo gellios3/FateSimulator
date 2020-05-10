@@ -9,15 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ad071d1c20f423eb1e15b6d39895e0f, type: 3}
-  m_Name: Gold
+  m_Script: {fileID: 11500000, guid: b53119390e284acf91d74afe68df66a6, type: 3}
+  m_Name: Bronze Money
   m_EditorClassIdentifier: 
-  id: 47417
+  id: 20182
   dataBase: {fileID: 11400000, guid: 46a29bcfb7c5d2941a21c795a07c9723, type: 2}
-  aspectName: Gold
+  aspectName: Bronze
   aspectDescription: 
   aspectImg: {fileID: 0}
-  aspectType: 2
-  resourceType: 1
-  moneyType: 1
-  resourceValue: 1
+  aspectType: 0
+  resourceType: 0
+  moneyType: 3

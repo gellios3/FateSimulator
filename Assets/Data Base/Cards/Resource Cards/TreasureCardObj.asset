@@ -20,7 +20,8 @@ MonoBehaviour:
   type: 2
   level: 0
   cardIcon: {fileID: 0}
-  aspectsList: []
+  aspectsList:
+  - {fileID: 11400000, guid: 7819f31673a19504ba4e47248eb653a7, type: 2}
   appearances: []
   resource:
     resourceType: 1

@@ -1,8 +1,8 @@
 ﻿using Enums.Aspects;
-using Interfaces.Aspects;
+using Interfaces.Aspects.Resource;
 using UnityEngine;
 
-namespace ScriptableObjects.Aspects
+namespace ScriptableObjects.Aspects.Resource
 {
     /// <summary>
     /// Resource Aspect
@@ -16,16 +16,6 @@ namespace ScriptableObjects.Aspects
         public ResourceType resourceType;
         public ResourceType ResourceType => resourceType;
        
-        /// <summary>
-        /// Money type
-        /// </summary>
-        public MoneyType moneyType;
-        public MoneyType MoneyType => moneyType;
-        
-        /// <summary>
-        /// Resource Value
-        /// </summary>
-        public ushort resourceValue;
-        public ushort ResourceValue => resourceValue;
+
     }
 }

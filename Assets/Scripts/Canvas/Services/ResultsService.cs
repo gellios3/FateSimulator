@@ -16,7 +16,7 @@ namespace Canvas.Services
         /// </summary>
         [Inject]
         private AllItemsDataBase DataBase { get; }
-        
+
         /// <summary>
         /// Try find card by result obj
         /// </summary>
@@ -28,12 +28,15 @@ namespace Canvas.Services
             {
                 switch (cardObj)
                 {
-                    case IResourceCard resourceCard when sourceResult is IResourceResult result:
-                        if (resourceCard.Resource.resourceType == result.ResourceType)
+                    case IResourceCard resourceCard when sourceResult is IMoneyResult result:
+                        if (resourceCard.Resource.resourceType == result.ResourceType &&
+                            resourceCard.Resource.moneyType == result.MoneyType &&
+                            resourceCard.Resource.resourceValue == result.Value)
                             return cardObj;
                         break;
                 }
             }
+
             return null;
         }
     }

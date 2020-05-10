@@ -1,6 +1,6 @@
 ﻿using Enums.Aspects;
 
-namespace Interfaces.Aspects
+namespace Interfaces.Aspects.Resource
 {
     /// <summary>
     /// Interface for Resource Aspect
@@ -11,15 +11,5 @@ namespace Interfaces.Aspects
         /// Resource type
         /// </summary>
         ResourceType ResourceType { get; }
-        
-        /// <summary>
-        /// Money type
-        /// </summary>
-        MoneyType MoneyType { get; }
-        
-        /// <summary>
-        /// Resource value
-        /// </summary>
-        ushort ResourceValue { get; }
     }
 }
