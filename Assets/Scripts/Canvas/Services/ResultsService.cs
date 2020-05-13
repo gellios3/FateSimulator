@@ -28,10 +28,10 @@ namespace Canvas.Services
             {
                 switch (cardObj)
                 {
-                    case IResourceCard resourceCard when sourceResult is IMoneyResult result:
-                        if (resourceCard.Resource.resourceType == result.ResourceType &&
-                            resourceCard.Resource.moneyType == result.MoneyType &&
-                            resourceCard.Resource.resourceValue == result.Value)
+                    case IMoneyCard resourceCard when sourceResult is IMoneyResult result:
+                        if (resourceCard.ResourceType == result.ResourceType &&
+                            resourceCard.MoneyType == result.MoneyType &&
+                            resourceCard.ResourceValue == result.Value)
                             return cardObj;
                         break;
                 }

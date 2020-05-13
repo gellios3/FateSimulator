@@ -9,18 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f41d5535b28b4034af6ec927ee85ac44, type: 3}
-  m_Name: ProviantCardObj
+  m_Script: {fileID: 11500000, guid: a478a505a0184e3d9476571e1be13c78, type: 3}
+  m_Name: Gold Card Obj
   m_EditorClassIdentifier: 
-  id: 63216
-  dataBase: {fileID: 11400000, guid: 46a29bcfb7c5d2941a21c795a07c9723, type: 2}
+  id: 0
+  dataBase: {fileID: 0}
   posOnTable: {x: 0, y: 0}
-  cardName: Proviant
-  shortDescription: ProviantCardObj
-  type: 2
+  cardName: 
+  shortDescription: 
+  type: 0
   level: 0
   cardIcon: {fileID: 0}
   aspectsList: []
   appearances: []
-  resourceType: 0
+  resourceType: 1
   resourceValue: 1
+  moneyType: 1

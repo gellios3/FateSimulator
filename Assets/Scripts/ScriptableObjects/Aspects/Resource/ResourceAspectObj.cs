@@ -16,6 +16,5 @@ namespace ScriptableObjects.Aspects.Resource
         public ResourceType resourceType;
         public ResourceType ResourceType => resourceType;
        
-
     }
 }

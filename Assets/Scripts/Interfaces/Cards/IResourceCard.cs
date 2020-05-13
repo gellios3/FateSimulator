@@ -1,9 +1,10 @@
-﻿using Serializable;
+﻿using Enums.Aspects;
 
 namespace Interfaces.Cards
 {
-    public interface IResourceCard: IBaseCard
+    public interface IResourceCard : IBaseCard
     {
-        ResourceObj Resource { get; }
+        ResourceType ResourceType { get; }
+        ushort ResourceValue { get; }
     }
 }

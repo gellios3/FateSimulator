@@ -32,7 +32,7 @@ namespace ScriptableObjects
             var index = allCards.FindIndex(obj => obj.id == id);
             return index != -1 ? allCards[index] : null;
         }
-        
+
         /// <summary>
         /// Get Activity by id
         /// </summary>
@@ -42,8 +42,8 @@ namespace ScriptableObjects
         {
             var index = allActivities.FindIndex(obj => obj.id == id);
             return index != -1 ? allActivities[index] : null;
-        } 
-        
+        }
+
         /// <summary>
         /// Get Aspect by id
         /// </summary>
@@ -54,7 +54,7 @@ namespace ScriptableObjects
             var index = allAspects.FindIndex(obj => obj.id == id);
             return index != -1 ? allAspects[index] : null;
         }
-        
+
         /// <summary>
         /// Get Condition by id
         /// </summary>
@@ -64,8 +64,8 @@ namespace ScriptableObjects
         {
             var index = allResults.FindIndex(obj => obj.id == id);
             return index != -1 ? allResults[index] : null;
-        } 
-        
+        }
+
         /// <summary>
         /// Get Condition by id
         /// </summary>
@@ -76,7 +76,7 @@ namespace ScriptableObjects
             var index = allConditions.FindIndex(obj => obj.id == id);
             return index != -1 ? allConditions[index] : null;
         }
-        
+
         /// <summary>
         /// Check if Id is Unique in current list
         /// </summary>
@@ -89,20 +89,18 @@ namespace ScriptableObjects
             switch (type)
             {
                 case GlobalType.Card:
-                    return allCards.FindIndex(obj => obj.id == id) == -1;
+                    return allCards.FindIndex(obj => obj != null && obj.id == id) == -1;
                 case GlobalType.Activity:
-                    return allActivities.FindIndex(obj => obj.id == id) == -1;
+                    return allActivities.FindIndex(obj => obj != null && obj.id == id) == -1;
                 case GlobalType.Aspect:
-                    return allAspects.FindIndex(obj => obj.id == id) == -1;
+                    return allAspects.FindIndex(obj => obj != null && obj.id == id) == -1;
                 case GlobalType.Condition:
-                    return allConditions.FindIndex(obj => obj.id == id) == -1;
+                    return allConditions.FindIndex(obj => obj != null && obj.id == id) == -1;
                 case GlobalType.Result:
-                    return allResults.FindIndex(obj => obj.id == id) == -1;
+                    return allResults.FindIndex(obj => obj != null && obj.id == id) == -1;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
         }
-        
-        
     }
 }
