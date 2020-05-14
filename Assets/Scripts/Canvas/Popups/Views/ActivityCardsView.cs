@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using AbstractViews;
 using Canvas.Activities.Views;
+using Canvas.Cards;
 using Canvas.Cards.Interfaces;
+using Canvas.Cards.Signals;
 using Interfaces.Activity;
 using Interfaces.Conditions.Cards;
 using UnityEngine;
@@ -13,7 +15,7 @@ namespace Canvas.Popups.Views
     /// <summary>
     /// Card conditions view for Activity popup
     /// </summary>
-    public class ActivityConditionsView : BaseView
+    public class ActivityCardsView : BaseView
     {
         #region Parameters
 
@@ -23,15 +25,31 @@ namespace Canvas.Popups.Views
         [SerializeField] private List<ActivityPopupDroppableView> droppableViews;
 
         private byte needCardsCount;
+        
+        [Inject] private CardDraggableSpawner Spawner { get; }
 
         #endregion
 
         [Inject]
-        public void Construct()
+        public void Construct(SignalBus signalBus)
         {
+            signalBus.Subscribe<CreateResultCardsForActivitySignal>(CreateResultCards);
             foreach (var droppableView in droppableViews)
             {
                 droppableView.CardDrop += OnCardDrop;
+            }
+        }
+
+        /// <summary>
+        /// Create result cards
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        private void CreateResultCards(CreateResultCardsForActivitySignal obj)
+        {
+            foreach (var baseCard in obj.ResultList)
+            {
+                Spawner.CreateResultCard(baseCard);
             }
         }
 

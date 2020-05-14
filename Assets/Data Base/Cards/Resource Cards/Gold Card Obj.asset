@@ -12,16 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a478a505a0184e3d9476571e1be13c78, type: 3}
   m_Name: Gold Card Obj
   m_EditorClassIdentifier: 
-  id: 0
-  dataBase: {fileID: 0}
+  id: 21801
+  dataBase: {fileID: 11400000, guid: 46a29bcfb7c5d2941a21c795a07c9723, type: 2}
   posOnTable: {x: 0, y: 0}
-  cardName: 
-  shortDescription: 
-  type: 0
+  cardName: Gold Card
+  shortDescription: Gold Card
+  type: 2
   level: 0
-  cardIcon: {fileID: 0}
-  aspectsList: []
-  appearances: []
+  cardIcon: {fileID: 21300000, guid: 253f0622faca3c848b8ac6ae587f2b2c, type: 3}
+  aspectsList:
+  - {fileID: 11400000, guid: 8c98c5250112b694091a45e3d7aad4bb, type: 2}
+  - {fileID: 11400000, guid: 3b3aebffcc3d1f347a5097cd88736bee, type: 2}
+  appearances:
+  - cardStatus: 0
+    duration: 0
+    color: {r: 0.92941177, g: 0.74509805, b: 0.19215687, a: 1}
   resourceType: 1
   resourceValue: 1
   moneyType: 1

@@ -1,4 +1,5 @@
-﻿using Interfaces.Cards;
+﻿using Enums;
+using Interfaces.Cards;
 using Interfaces.Result.Cards;
 using ScriptableObjects;
 using ScriptableObjects.Conditions.Results;
@@ -32,6 +33,12 @@ namespace Canvas.Services
                         if (resourceCard.ResourceType == result.ResourceType &&
                             resourceCard.MoneyType == result.MoneyType &&
                             resourceCard.ResourceValue == result.Value)
+                            return cardObj;
+                        break;
+                    case ILessonCard lessonCard when sourceResult is ILessonResult result:
+                        if (lessonCard.Type == CardType.Lesson &&
+                            lessonCard.LessonType == result.LessonType &&
+                            lessonCard.Level == result.Level)
                             return cardObj;
                         break;
                 }

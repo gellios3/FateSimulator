@@ -63,7 +63,9 @@ namespace Canvas.Cards.Views
         {
             CardAppearanceService.Init(cardObj.StatusPresets);
             iconImg.sprite = cardObj.CardIcon;
-            backgroundImg.color = CardAppearanceService.GetAppearance(CardStatus.Normal).color;
+            var appearance = CardAppearanceService.GetAppearance(CardStatus.Normal);
+            if (appearance != null)
+                backgroundImg.color = appearance.color;
             title.text = cardObj.CardName;
         }
 

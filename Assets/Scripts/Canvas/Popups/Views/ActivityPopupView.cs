@@ -1,6 +1,7 @@
 ﻿using AbstractViews;
 using Canvas.Activities.Services;
 using Canvas.Activities.Views;
+using Canvas.Cards.Signals;
 using Canvas.Popups.Signals.Activity;
 using Interfaces.Activity;
 using ScriptableObjects;
@@ -17,7 +18,7 @@ namespace Canvas.Popups.Views
     {
         #region Parameters
 
-        [SerializeField] private ActivityConditionsView conditionsView;
+        [SerializeField] private ActivityCardsView cardsView;
         [SerializeField] private Button closeBtn;
         [SerializeField] private CustomButton startActivityBtn;
         [SerializeField] private ActivityTimerView activityTimer;
@@ -36,7 +37,7 @@ namespace Canvas.Popups.Views
             SignalBus.Subscribe<ShowActivityResultSignal>(ShowResultPopup);
             closeBtn.onClick.AddListener(OnClosePopup);
             startActivityBtn.onClick.AddListener(OnStartActivity);
-            conditionsView.AllConditionsDone += OnAllConditionsDone;
+            cardsView.AllConditionsDone += OnAllCardsDone;
         }
 
         /// <summary>
@@ -58,7 +59,7 @@ namespace Canvas.Popups.Views
             startActivityBtn.Hide();
             BaseActivity = ActivityService.GetActivityById(obj.ActivityId);
             // Init conditions
-            conditionsView.Init(BaseActivity, obj.StartActivityCardId);
+            cardsView.Init(BaseActivity, obj.StartActivityCardId);
             // Init timer
             activityTimer.Init(BaseActivity.ActivityDuration);
             activityTimer.Hide();
@@ -72,7 +73,7 @@ namespace Canvas.Popups.Views
         {
             SignalBus.Fire(new StartActivitySignal
             {
-                DropCardViews = conditionsView.DropCardViews
+                DropCardViews = cardsView.DropCardViews
             });
             Hide();
         }
@@ -89,7 +90,7 @@ namespace Canvas.Popups.Views
         /// <summary>
         /// On all conditions done
         /// </summary>
-        private void OnAllConditionsDone()
+        private void OnAllCardsDone()
         {
             startActivityBtn.Show();
         }

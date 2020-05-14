@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Canvas.Cards.Views;
+using Interfaces.Cards;
 using ScriptableObjects.Cards;
 using UnityEngine;
 using Zenject;
@@ -34,6 +35,17 @@ namespace Canvas.Cards
                 var cardGameObject = draggableCardFactory.Create(cardObj, topCard);
                 cardGameObject.SetStartPos(new Vector3(cardObj.PosOnTable.x, cardObj.PosOnTable.y, -3), CardParent);
             }
+        }
+
+        /// <summary>
+        /// Create result cards
+        /// </summary>
+        /// <param name="baseCard"></param>
+        public void CreateResultCard(IBaseCard baseCard)
+        {
+            var topCard = CardViewSpawner.CreateViewCard(baseCard);
+            var cardGameObject = draggableCardFactory.Create(baseCard, topCard);
+            cardGameObject.SetStartPos(new Vector3(baseCard.PosOnTable.x, baseCard.PosOnTable.y, -3), CardParent);
         }
     }
 }

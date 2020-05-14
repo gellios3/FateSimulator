@@ -62,6 +62,15 @@ namespace Canvas.Activities.Services
                 }
             }
 
+            foreach (var resultObj in activity.OptionalResultsList)
+            {
+                var findCard = ResultsService.TryFindCardByResultObj(resultObj);
+                if (findCard != null)
+                {
+                    resultCards.Add(findCard);
+                } 
+            }
+
             Debug.LogError($"OnFinishActivity {resultCards.Count}");
 
             SignalBus.Fire(new CreateResultCardsForActivitySignal() {ResultList = resultCards});

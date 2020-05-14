@@ -575,7 +575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2705e62eb6e74f78a0a0f7dc6d40c88b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  conditionsView: {fileID: 5460897185379974482}
+  cardsView: {fileID: 5460897185379974482}
   closeBtn: {fileID: 7947121126938000383}
   startActivityBtn: {fileID: 2388615560132785251}
   activityTimer: {fileID: 6258709155142667608}
