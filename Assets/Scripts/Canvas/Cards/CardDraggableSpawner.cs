@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Canvas.Cards.Interfaces;
 using Canvas.Cards.Views;
 using Interfaces.Cards;
 using ScriptableObjects.Cards;
@@ -41,11 +42,12 @@ namespace Canvas.Cards
         /// Create result cards
         /// </summary>
         /// <param name="baseCard"></param>
-        public void CreateResultCard(IBaseCard baseCard)
+        public ICardView CreateResultCard(IBaseCard baseCard)
         {
             var topCard = CardViewSpawner.CreateViewCard(baseCard);
             var cardGameObject = draggableCardFactory.Create(baseCard, topCard);
             cardGameObject.SetStartPos(new Vector3(baseCard.PosOnTable.x, baseCard.PosOnTable.y, -3), CardParent);
+            return topCard;
         }
     }
 }

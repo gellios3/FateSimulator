@@ -1,6 +1,8 @@
 ﻿using AbstractViews;
 using Canvas.Cards.Interfaces;
 using Canvas.Cards.Services;
+using Canvas.Cards.Signals;
+using Canvas.Common;
 using DG.Tweening;
 using Enums;
 using Interfaces.Cards;
@@ -26,6 +28,7 @@ namespace Canvas.Cards.Views
         [SerializeField] private ProceduralImage backgroundImg;
         [SerializeField] private TextMeshProUGUI title;
         [SerializeField] private ColorsPresetImage borderImg;
+        [SerializeField] private TimerView cardTimer;
 
         public IBaseCard BaseCard { get; private set; }
         [Inject] private CardAppearanceService CardAppearanceService { get; }
@@ -38,11 +41,31 @@ namespace Canvas.Cards.Views
         public void Construct(IBaseCard cardObj)
         {
             BaseCard = cardObj;
+            cardTimer.TimeFinish += OnTimerFinish;
         }
-
+        
         private void Start()
         {
             defaultSizeDelta = mask.sizeDelta;
+        }
+
+        /// <summary>
+        /// On end Timer
+        /// </summary>
+        private void OnTimerFinish()
+        {
+            cardTimer.Hide();
+        }
+
+        /// <summary>
+        /// Start Card timer
+        /// </summary>
+        /// <param name="duration"></param>
+        public void StartCardTimer(ushort duration)
+        {
+            Debug.LogError($"StartCardTimer {duration}");
+            cardTimer.Init(duration);
+            cardTimer.Show();
         }
 
         /// <summary>

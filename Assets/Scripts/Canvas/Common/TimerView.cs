@@ -4,12 +4,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI.ProceduralImage;
 
-namespace Canvas.Activities.Views
+namespace Canvas.Common
 {
     /// <summary>
     /// Activity timer view
     /// </summary>
-    public class ActivityTimerView : BaseView
+    public class TimerView : BaseView
     {
         #region Parameters
 

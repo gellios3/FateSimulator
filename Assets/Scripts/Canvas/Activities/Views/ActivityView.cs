@@ -4,6 +4,7 @@ using Canvas.Activities.Interfaces;
 using Canvas.Activities.Services;
 using Canvas.Cards.Interfaces;
 using Canvas.Cards.Signals;
+using Canvas.Common;
 using Canvas.Popups.Signals.Activity;
 using Canvas.Services;
 using Enums;
@@ -26,7 +27,7 @@ namespace Canvas.Activities.Views
 
         [SerializeField] private ActivityDroppableView droppableView;
         [SerializeField] private ColorsPresetImage borderImg;
-        [SerializeField] private ActivityTimerView timerView;
+        [SerializeField] private TimerView timerView;
 
         private IBaseActivity CurrentActivity { get; set; }
 

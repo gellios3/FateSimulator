@@ -14,6 +14,7 @@ namespace Canvas.Cards.Interfaces
         void HideCartShadow();
         void ReturnDefaultCartShadow();
         void HighlightCard();
+        void StartCardTimer(ushort duration);
 
     }
 }

@@ -5,6 +5,7 @@ using Canvas.Cards.Services;
 using Canvas.Cards.Signals;
 using Canvas.Popups.Signals.Activity;
 using Canvas.Services;
+using Enums;
 using Interfaces.Cards;
 using UnityEngine;
 using Zenject;
@@ -46,10 +47,8 @@ namespace Canvas.Activities.Services
         public void OnFinishActivity()
         {
             ActivityService.ShowResultPopup(RunActivityId);
-            foreach (var cardView in RunCardViews)
-            {
-                CardActionsService.ShowCard(cardView);
-            }
+            ShowDroppedCards();
+            SetStatusToDroppedCards(CardStatus.Distress);
 
             var activity = ActivityService.GetActivityById(RunActivityId);
             var resultCards = new List<IBaseCard>();
@@ -68,7 +67,7 @@ namespace Canvas.Activities.Services
                 if (findCard != null)
                 {
                     resultCards.Add(findCard);
-                } 
+                }
             }
 
             Debug.LogError($"OnFinishActivity {resultCards.Count}");
@@ -88,14 +87,42 @@ namespace Canvas.Activities.Services
             if (activity == null)
                 return;
             RunCardViews = obj.DropCardViews.ToList();
+            HideDroppedCards();
+            activity.RunTimer.Invoke();
+        }
+
+        /// <summary>
+        /// Set status to Dropped cards
+        /// </summary>
+        /// <param name="status"></param>
+        private void SetStatusToDroppedCards(CardStatus status)
+        {
+            foreach (var cardView in RunCardViews)
+            {
+                cardView.OnChangeStatus.Invoke(status);
+            }
+        }
+
+        /// <summary>
+        /// Show dropped cards
+        /// </summary>
+        private void ShowDroppedCards()
+        {
+            foreach (var cardView in RunCardViews)
+            {
+                CardActionsService.ShowCard(cardView);
+            }
+        }
+
+        /// <summary>
+        /// Hide dropped cards
+        /// </summary>
+        private void HideDroppedCards()
+        {
             foreach (var cardView in RunCardViews)
             {
                 CardActionsService.HideCard(cardView);
             }
-
-            activity.RunTimer.Invoke();
         }
-
-        // private void TryConvert
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Enums;
 using Interfaces;
 using UnityEngine;
 
@@ -16,5 +17,6 @@ namespace Canvas.Cards.Interfaces
         Action OnDropCard { get; }
         Action<bool> OnReturnBack { get; }
         Action OnHighlight { get; }
+        Action<CardStatus> OnChangeStatus { get; }
     }
 }

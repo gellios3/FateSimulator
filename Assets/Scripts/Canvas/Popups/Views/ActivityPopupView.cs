@@ -2,6 +2,7 @@
 using Canvas.Activities.Services;
 using Canvas.Activities.Views;
 using Canvas.Cards.Signals;
+using Canvas.Common;
 using Canvas.Popups.Signals.Activity;
 using Interfaces.Activity;
 using ScriptableObjects;
@@ -21,7 +22,7 @@ namespace Canvas.Popups.Views
         [SerializeField] private ActivityCardsView cardsView;
         [SerializeField] private Button closeBtn;
         [SerializeField] private CustomButton startActivityBtn;
-        [SerializeField] private ActivityTimerView activityTimer;
+        [SerializeField] private TimerView activityTimer;
 
         private SignalBus SignalBus { get; set; }
         private IBaseActivity BaseActivity { get; set; }

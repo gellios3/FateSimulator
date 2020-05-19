@@ -21,12 +21,14 @@ namespace Canvas.Popups.Views
 
         public event Action AllConditionsDone;
         public List<IDraggableCardView> DropCardViews { get; } = new List<IDraggableCardView>();
-        
+
         [SerializeField] private List<ActivityPopupDroppableView> droppableViews;
 
         private byte needCardsCount;
-        
+
         [Inject] private CardDraggableSpawner Spawner { get; }
+
+        private readonly List<ICardView> resultViews = new List<ICardView>();
 
         #endregion
 
@@ -49,7 +51,7 @@ namespace Canvas.Popups.Views
         {
             foreach (var baseCard in obj.ResultList)
             {
-                Spawner.CreateResultCard(baseCard);
+                resultViews.Add(Spawner.CreateResultCard(baseCard));
             }
         }
 

@@ -1,5 +1,6 @@
 ﻿using Canvas.Cards.Interfaces;
 using Canvas.Cards.Services;
+using Enums;
 using Interfaces.Cards;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -167,6 +168,11 @@ namespace Canvas.Cards.Views
             DraggableCardService.DropCard();
             TopCard.SetCardPosition(transform.position);
             TopCard.HideCartShadow();
+        }
+
+        protected override void ChangeCardStatus(CardStatus obj)
+        {
+            TopCard.StartCardTimer(10);
         }
 
         /// <summary>

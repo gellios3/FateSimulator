@@ -1,6 +1,7 @@
 ﻿using System;
 using AbstractViews;
 using Canvas.Cards.Interfaces;
+using Enums;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -21,6 +22,7 @@ namespace Canvas.Cards.Views
         public Action<Vector3> OnSetPosition { get; private set; }
         public Action<bool> OnReturnBack { get; private set; }
         public Action OnHighlight { get; private set; }
+        public Action<CardStatus> OnChangeStatus { get; private set; }
 
         #endregion
 
@@ -32,9 +34,12 @@ namespace Canvas.Cards.Views
             OnDropCard += DropCard;
             OnReturnBack += ReturnBack;
             OnHighlight += HighlightCard;
+            OnChangeStatus += ChangeCardStatus;
         }
-
+        
         #region Action Methods
+        
+        protected abstract void ChangeCardStatus(CardStatus obj);
 
         protected abstract void SetDropOnActivity(bool value);
 
