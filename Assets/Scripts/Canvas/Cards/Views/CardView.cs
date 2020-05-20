@@ -1,11 +1,11 @@
 ﻿using AbstractViews;
 using Canvas.Cards.Interfaces;
 using Canvas.Cards.Services;
-using Canvas.Cards.Signals;
 using Canvas.Common;
 using DG.Tweening;
 using Enums;
 using Interfaces.Cards;
+using Serializable;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -31,9 +31,9 @@ namespace Canvas.Cards.Views
         [SerializeField] private TimerView cardTimer;
 
         public IBaseCard BaseCard { get; private set; }
-        [Inject] private CardAppearanceService CardAppearanceService { get; }
 
         private Vector2 defaultSizeDelta;
+        private CardStatusPreset currentStatusPreset;
 
         #endregion
 
@@ -42,10 +42,6 @@ namespace Canvas.Cards.Views
         {
             BaseCard = cardObj;
             cardTimer.TimeFinish += OnTimerFinish;
-        }
-        
-        private void Start()
-        {
             defaultSizeDelta = mask.sizeDelta;
         }
 
@@ -60,12 +56,21 @@ namespace Canvas.Cards.Views
         /// <summary>
         /// Start Card timer
         /// </summary>
-        /// <param name="duration"></param>
-        public void StartCardTimer(ushort duration)
+        /// <param name="preset"></param>
+        public void InitCardTimer(CardStatusPreset preset)
         {
-            Debug.LogError($"StartCardTimer {duration}");
-            cardTimer.Init(duration);
+            SetStatusPreset(preset);
+            cardTimer.Init(preset.duration);
+            StartCardTimer();
+        }
+
+        /// <summary>
+        /// Start card timer
+        /// </summary>
+        public void StartCardTimer()
+        {
             cardTimer.Show();
+            SetCardView(currentStatusPreset);
         }
 
         /// <summary>
@@ -81,15 +86,13 @@ namespace Canvas.Cards.Views
         /// <summary>
         /// Set card view
         /// </summary>
-        /// <param name="cardObj"></param>
-        public void SetCardView(IBaseCard cardObj)
+        /// <param name="preset"></param>
+        public void SetCardView(CardStatusPreset preset)
         {
-            CardAppearanceService.Init(cardObj.StatusPresets);
-            iconImg.sprite = cardObj.CardIcon;
-            var appearance = CardAppearanceService.GetAppearance(CardStatus.Normal);
-            if (appearance != null)
-                backgroundImg.color = appearance.color;
-            title.text = cardObj.CardName;
+            SetStatusPreset(preset);
+            iconImg.sprite = BaseCard.CardIcon;
+            ColorHelper.SetImgColor(backgroundImg, preset.color);
+            title.text = BaseCard.CardName;
         }
 
         /// <summary>
@@ -135,6 +138,11 @@ namespace Canvas.Cards.Views
         {
             mask.sizeDelta = defaultSizeDelta;
             mask.transform.localPosition = new Vector3(dragMask.x, dragMask.y, dragMask.z);
+        }
+
+        private void SetStatusPreset(CardStatusPreset preset)
+        {
+            currentStatusPreset = preset;
         }
 
         public class Factory : PlaceholderFactory<IBaseCard, CardView>

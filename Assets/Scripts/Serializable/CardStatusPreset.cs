@@ -8,7 +8,7 @@ namespace Serializable
     public class CardStatusPreset
     {
         public CardStatus cardStatus;
-        public short duration;
+        public ushort duration;
         public Color color;
     }
 }

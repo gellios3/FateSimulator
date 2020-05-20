@@ -25,6 +25,7 @@ namespace Canvas.Cards.Views
         [Inject] private CardSignalsService CardSignalsService { get; }
         [Inject] private CardViewsService CardViewsService { get; }
         [Inject] private DraggableCardService DraggableCardService { get; }
+        [Inject] private CardAppearanceService CardAppearanceService { get; }
 
         #endregion
 
@@ -34,10 +35,8 @@ namespace Canvas.Cards.Views
             CardObj = cardObj;
             TopCard = topCard;
             CardViewsService.AddCardView(this);
-        }
+            CardAppearanceService.Init(cardObj.StatusPresets);
 
-        private void Start()
-        {
             InitActions();
             openPopupBtn.onClick.AddListener(() =>
             {
@@ -46,10 +45,13 @@ namespace Canvas.Cards.Views
                     CardSignalsService.ShowPopup(CardId);
                 }
             });
+        }
 
+        private void Start()
+        {
             // Init top card position
             TopCard.SetCardPosition(transform.position);
-            TopCard.SetCardView(CardObj);
+            TopCard.SetCardView(CardAppearanceService.GetAppearance(CardStatus.Normal));
         }
 
         /// <summary>
@@ -117,7 +119,7 @@ namespace Canvas.Cards.Views
         /// <param name="eventData"></param>
         public override void OnEndDrag(PointerEventData eventData)
         {
-            if (DraggableCardService.HasOutDrag()) 
+            if (DraggableCardService.HasOutDrag())
                 ReturnBack(false);
             CardSignalsService.EndDragCard(CardObj.Id);
             if (!DraggableCardService.CanEndDrag())
@@ -170,9 +172,15 @@ namespace Canvas.Cards.Views
             TopCard.HideCartShadow();
         }
 
-        protected override void ChangeCardStatus(CardStatus obj)
+        /// <summary>
+        /// Change card status
+        /// </summary>
+        /// <param name="status"></param>
+        protected override void ChangeCardStatus(CardStatus status)
         {
-            TopCard.StartCardTimer(10);
+            var appearance = CardAppearanceService.GetAppearance(status);
+            if (appearance != null)
+                TopCard.InitCardTimer(appearance);
         }
 
         /// <summary>
