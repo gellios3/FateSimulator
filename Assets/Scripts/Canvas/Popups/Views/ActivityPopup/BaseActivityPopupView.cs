@@ -1,28 +1,23 @@
 ﻿using AbstractViews;
 using Canvas.Activities.Services;
-using Canvas.Activities.Views;
-using Canvas.Cards.Signals;
-using Canvas.Common;
 using Canvas.Popups.Signals.Activity;
 using Interfaces.Activity;
-using ScriptableObjects;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace Canvas.Popups.Views
+namespace Canvas.Popups.Views.ActivityPopup
 {
     /// <summary>
     /// Activity popup view
     /// </summary>
-    public class ActivityPopupView : BaseView
+    public class BaseActivityPopupView : BaseView
     {
         #region Parameters
 
-        [SerializeField] private ActivityCardsView cardsView;
+        [SerializeField] private ActivitiesPanelView cardsPanel;
         [SerializeField] private Button closeBtn;
         [SerializeField] private CustomButton startActivityBtn;
-        [SerializeField] private TimerView activityTimer;
 
         private SignalBus SignalBus { get; set; }
         private IBaseActivity BaseActivity { get; set; }
@@ -38,7 +33,6 @@ namespace Canvas.Popups.Views
             SignalBus.Subscribe<ShowActivityResultSignal>(ShowResultPopup);
             closeBtn.onClick.AddListener(OnClosePopup);
             startActivityBtn.onClick.AddListener(OnStartActivity);
-            cardsView.AllConditionsDone += OnAllCardsDone;
         }
 
         /// <summary>
@@ -46,7 +40,7 @@ namespace Canvas.Popups.Views
         /// </summary>
         private void ShowResultPopup(ShowActivityResultSignal obj)
         {
-            startActivityBtn.Hide();
+            cardsPanel.ShowResultCards();
             BaseActivity = ActivityService.GetActivityById(obj.ActivityId);
             Show();
         }
@@ -59,11 +53,8 @@ namespace Canvas.Popups.Views
         {
             startActivityBtn.Hide();
             BaseActivity = ActivityService.GetActivityById(obj.ActivityId);
-            // Init conditions
-            cardsView.Init(BaseActivity, obj.StartActivityCardId);
-            // Init timer
-            activityTimer.Init(BaseActivity.ActivityDuration);
-            activityTimer.Hide();
+            cardsPanel.Init(BaseActivity, obj.StartActivityCardId, startActivityBtn);
+            cardsPanel.ShowStartActivityCards();
             Show();
         }
 
@@ -72,10 +63,7 @@ namespace Canvas.Popups.Views
         /// </summary>
         private void OnStartActivity()
         {
-            SignalBus.Fire(new StartActivitySignal
-            {
-                DropCardViews = cardsView.DropCardViews
-            });
+            cardsPanel.OnStartActivity();
             Hide();
         }
 
@@ -86,14 +74,6 @@ namespace Canvas.Popups.Views
         {
             SignalBus.Fire(new CloseActivityPopupSignal {ActivityId = BaseActivity.Id});
             Hide();
-        }
-
-        /// <summary>
-        /// On all conditions done
-        /// </summary>
-        private void OnAllCardsDone()
-        {
-            startActivityBtn.Show();
         }
     }
 }

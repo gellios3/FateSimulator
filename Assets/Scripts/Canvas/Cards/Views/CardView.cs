@@ -1,6 +1,6 @@
-﻿using AbstractViews;
+﻿using System;
+using AbstractViews;
 using Canvas.Cards.Interfaces;
-using Canvas.Cards.Services;
 using Canvas.Common;
 using DG.Tweening;
 using Enums;
@@ -21,6 +21,9 @@ namespace Canvas.Cards.Views
     {
         #region Parameters
 
+        public IBaseCard BaseCard { get; private set; }
+        public Action<CardStatus> TimerFinish { get; set; }
+
         [SerializeField] private RectTransform mask;
         [SerializeField] private Vector3 defaultMask;
         [SerializeField] private Vector3 dragMask;
@@ -29,8 +32,6 @@ namespace Canvas.Cards.Views
         [SerializeField] private TextMeshProUGUI title;
         [SerializeField] private ColorsPresetImage borderImg;
         [SerializeField] private TimerView cardTimer;
-
-        public IBaseCard BaseCard { get; private set; }
 
         private Vector2 defaultSizeDelta;
         private CardStatusPreset currentStatusPreset;
@@ -45,13 +46,7 @@ namespace Canvas.Cards.Views
             defaultSizeDelta = mask.sizeDelta;
         }
 
-        /// <summary>
-        /// On end Timer
-        /// </summary>
-        private void OnTimerFinish()
-        {
-            cardTimer.Hide();
-        }
+        #region Card timer
 
         /// <summary>
         /// Start Card timer
@@ -64,14 +59,30 @@ namespace Canvas.Cards.Views
             StartCardTimer();
         }
 
+        public void HideTimer()
+        {
+            cardTimer.Hide();
+        }
+
         /// <summary>
         /// Start card timer
         /// </summary>
-        public void StartCardTimer()
+        private void StartCardTimer()
         {
             cardTimer.Show();
             SetCardView(currentStatusPreset);
         }
+        
+
+        /// <summary>
+        /// On end Timer
+        /// </summary>
+        private void OnTimerFinish()
+        {
+            TimerFinish?.Invoke(currentStatusPreset.cardStatus);
+        }
+
+        #endregion
 
         /// <summary>
         /// Highlight card

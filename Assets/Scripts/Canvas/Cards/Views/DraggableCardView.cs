@@ -45,6 +45,8 @@ namespace Canvas.Cards.Views
                     CardSignalsService.ShowPopup(CardId);
                 }
             });
+
+            TopCard.TimerFinish += OnCardTimerFinish;
         }
 
         private void Start()
@@ -202,6 +204,29 @@ namespace Canvas.Cards.Views
         }
 
         #endregion
+        
+        /// <summary>
+        /// On card timer finish
+        /// </summary>
+        /// <param name="finishStatus"></param>
+        protected override void OnCardTimerFinish(CardStatus finishStatus)
+        {
+            // @todo finish timer status logic 
+            switch (finishStatus)
+            {
+                case CardStatus.Broken:
+                    Debug.Log("CardTimerFinish Broken !!!");
+                    break;
+                case CardStatus.Death:
+                    Hide();
+                    Debug.Log("CardTimerFinish Death !!!");
+                    break;
+                default:
+                    TopCard.SetCardView(CardAppearanceService.GetAppearance(CardStatus.Normal));
+                    TopCard.HideTimer();
+                    break;
+            }
+        }
 
         /// <summary>
         /// Zenject Factory for Instantiate

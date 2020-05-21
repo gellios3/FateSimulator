@@ -10,12 +10,12 @@ using Interfaces.Conditions.Cards;
 using UnityEngine;
 using Zenject;
 
-namespace Canvas.Popups.Views
+namespace Canvas.Popups.Views.ActivityPopup
 {
     /// <summary>
     /// Card conditions view for Activity popup
     /// </summary>
-    public class ActivityCardsView : BaseView
+    public class StartActivityCardsView : BaseView
     {
         #region Parameters
 
@@ -26,32 +26,14 @@ namespace Canvas.Popups.Views
 
         private byte needCardsCount;
 
-        [Inject] private CardDraggableSpawner Spawner { get; }
-
-        private readonly List<ICardView> resultViews = new List<ICardView>();
-
         #endregion
 
         [Inject]
-        public void Construct(SignalBus signalBus)
+        public void Construct()
         {
-            signalBus.Subscribe<CreateResultCardsForActivitySignal>(CreateResultCards);
             foreach (var droppableView in droppableViews)
             {
                 droppableView.CardDrop += OnCardDrop;
-            }
-        }
-
-        /// <summary>
-        /// Create result cards
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <exception cref="NotImplementedException"></exception>
-        private void CreateResultCards(CreateResultCardsForActivitySignal obj)
-        {
-            foreach (var baseCard in obj.ResultList)
-            {
-                resultViews.Add(Spawner.CreateResultCard(baseCard));
             }
         }
 

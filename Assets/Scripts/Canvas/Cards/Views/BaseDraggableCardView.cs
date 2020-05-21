@@ -52,6 +52,7 @@ namespace Canvas.Cards.Views
         protected abstract void ReturnBack(bool obj);
 
         protected abstract void HighlightCard();
+        protected abstract void OnCardTimerFinish(CardStatus status);
 
         #endregion
 
