@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using AbstractViews;
 using Canvas.Activities.Interfaces;
 using Canvas.Activities.Services;
@@ -45,7 +47,7 @@ namespace Canvas.Activities.Views
             signalBus.Subscribe<EndDragCardSignal>(OnEndDragCard);
 
             signalBus.Subscribe<ShowActivityPopupSignal>(OnShowActivityPopup);
-            signalBus.Subscribe<StartActivitySignal>(RunActivityService.OnRunCurrentActivity);
+            signalBus.Subscribe<StartActivitySignal>(OnRunCurrentActivity);
 
             droppableView.CardDrop += OnDropCard;
             timerView.TimeFinish += OnTimerFinish;
@@ -53,6 +55,21 @@ namespace Canvas.Activities.Views
             RunTimer += OnRunTimer;
             RefreshActivity += OnRefreshActivity;
             ActivityViewsService.AddActivityView(this);
+        }
+
+        /// <summary>
+        /// On run current activity
+        /// </summary>
+        /// <param name="obj"></param>
+        private void OnRunCurrentActivity(StartActivitySignal obj)
+        {
+            if (CurrentActivity == null)
+                return;
+            var activity = ActivityViewsService.GetActivityViewById(CurrentActivity.Id);
+            if (activity == null)
+                return;
+            RunActivityService.Init(obj.DropCardViews.ToList());
+            activity.RunTimer.Invoke();
         }
 
         /// <summary>
@@ -103,7 +120,6 @@ namespace Canvas.Activities.Views
             if (condition == null)
                 return;
             CurrentActivity = ActivityService.GetActivityByStartConditionId(condition.Id);
-            RunActivityService.Init(CurrentActivity.Id);
             ActivityService.ShowPopup(CurrentActivity.Id, droppableView.DropCardId);
         }
 
@@ -113,7 +129,7 @@ namespace Canvas.Activities.Views
         private void OnTimerFinish()
         {
             timerView.Hide();
-            RunActivityService.OnFinishActivity();
+            RunActivityService.OnFinishActivity(CurrentActivity.Id);
             CurrentActivity = null;
         }
 

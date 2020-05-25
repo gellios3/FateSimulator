@@ -17,7 +17,6 @@ namespace Canvas.Cards.Views
         #region Parameters
 
         public override ushort CardId => CardObj.Id;
-        private ICardView TopCard { get; set; }
         private IBaseCard CardObj { get; set; }
 
         [SerializeField] private Button openPopupBtn;

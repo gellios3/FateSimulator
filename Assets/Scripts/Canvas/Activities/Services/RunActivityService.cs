@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Canvas.Cards.Interfaces;
 using Canvas.Cards.Services;
 using Canvas.Cards.Signals;
-using Canvas.Popups.Signals.Activity;
 using Canvas.Services;
 using Enums;
 using Interfaces.Cards;
@@ -21,8 +19,8 @@ namespace Canvas.Activities.Services
         [Inject] private CardActionsService CardActionsService { get; }
         [Inject] private ActivityService ActivityService { get; }
         [Inject] private ResultsService ResultsService { get; }
+        private List<IBaseCard> ResultCards { get; set; } = new List<IBaseCard>();
         private List<IDraggableCardView> RunCardViews { get; set; } = new List<IDraggableCardView>();
-        private ushort RunActivityId { get; set; }
         private SignalBus SignalBus { get; }
 
         public RunActivityService(SignalBus signalBus)
@@ -30,34 +28,46 @@ namespace Canvas.Activities.Services
             SignalBus = signalBus;
         }
 
-        public void Init(ushort activityId)
+        public void Init(List<IDraggableCardView> runCardViews)
         {
-            RunActivityId = activityId;
+            RunCardViews = runCardViews;
+            HideDroppedCards();
         }
 
         public void Refresh()
         {
-            RunActivityId = 0;
             RunCardViews.Clear();
+        }
+
+        /// <summary>
+        /// Hide dropped cards
+        /// </summary>
+        private void HideDroppedCards()
+        {
+            foreach (var cardView in RunCardViews)
+            {
+                CardActionsService.HideCard(cardView);
+            }
         }
 
         /// <summary>
         /// On Finish activity
         /// </summary>
-        public void OnFinishActivity()
+        public void OnFinishActivity(ushort runActivityId)
         {
-            ActivityService.ShowResultPopup(RunActivityId);
+            ActivityService.ShowResultPopup(runActivityId);
             ShowDroppedCards();
             SetStatusToDroppedCards(CardStatus.Distress);
 
-            var activity = ActivityService.GetActivityById(RunActivityId);
-            var resultCards = new List<IBaseCard>();
+            var activity = ActivityService.GetActivityById(runActivityId);
+            ResultCards = new List<IBaseCard>();
+
             foreach (var resultObj in activity.ResultsList)
             {
                 var findCard = ResultsService.TryFindCardByResultObj(resultObj);
                 if (findCard != null)
                 {
-                    resultCards.Add(findCard);
+                    ResultCards.Add(findCard);
                 }
             }
 
@@ -66,29 +76,15 @@ namespace Canvas.Activities.Services
                 var findCard = ResultsService.TryFindCardByResultObj(resultObj);
                 if (findCard != null)
                 {
-                    resultCards.Add(findCard);
+                    ResultCards.Add(findCard);
                 }
             }
-
-            Debug.LogError($"OnFinishActivity {resultCards.Count}");
-
-            SignalBus.Fire(new CreateResultCardsForActivitySignal() {ResultList = resultCards});
-        }
-
-        /// <summary>
-        /// On run current activity
-        /// </summary>
-        /// <param name="obj"></param>
-        public void OnRunCurrentActivity(StartActivitySignal obj)
-        {
-            if (RunActivityId == 0)
-                return;
-            var activity = ActivityViewsService.GetActivityViewById(RunActivityId);
-            if (activity == null)
-                return;
-            RunCardViews = obj.DropCardViews.ToList();
-            HideDroppedCards();
-            activity.RunTimer.Invoke();
+            
+            SignalBus.Fire(new CreateResultCardsForActivitySignal
+            {
+                RunCardViews = RunCardViews,
+                ResultList = ResultCards
+            });
         }
 
         /// <summary>
@@ -111,17 +107,6 @@ namespace Canvas.Activities.Services
             foreach (var cardView in RunCardViews)
             {
                 CardActionsService.ShowCard(cardView);
-            }
-        }
-
-        /// <summary>
-        /// Hide dropped cards
-        /// </summary>
-        private void HideDroppedCards()
-        {
-            foreach (var cardView in RunCardViews)
-            {
-                CardActionsService.HideCard(cardView);
             }
         }
     }

@@ -11,6 +11,7 @@ namespace Canvas.Cards.Interfaces
     public interface IDraggableCardView : IBaseView
     {
         ushort CardId { get; }
+        ICardView TopCard { get; }
         Action<bool> OnDropOnActivity { get; }
         Action<bool> OnOutArea { get; }
         Action<Vector3> OnSetPosition { get; }

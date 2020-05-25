@@ -16,6 +16,7 @@ namespace Canvas.Cards.Views
         #region Actions
 
         public abstract ushort CardId { get; }
+        public ICardView TopCard { get; protected set; }
         public Action<bool> OnOutArea { get; private set; }
         public Action<bool> OnDropOnActivity { get; private set; }
         public Action OnDropCard { get; private set; }

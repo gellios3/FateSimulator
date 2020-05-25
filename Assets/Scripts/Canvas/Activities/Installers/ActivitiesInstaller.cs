@@ -10,7 +10,7 @@ namespace Canvas.Activities.Installers
         {
             Container.Bind<ActivityService>().AsSingle();
             Container.Bind<ActivityViewsService>().AsSingle();
-            Container.Bind<RunActivityService>().AsTransient();
+            Container.Bind<RunActivityService>().AsSingle();
         }
 
     }
