@@ -1,4 +1,6 @@
-﻿using AbstractViews;
+﻿using System.Runtime.InteropServices;
+using AbstractViews;
+using Canvas.Activities.Services;
 using Canvas.Cards.Services;
 using Canvas.Cards.Signals;
 using Canvas.Popups.Signals.Activity;
@@ -24,6 +26,8 @@ namespace Canvas.Activities.Views
         [Inject] private ConditionsService ConditionsService { get; }
         [Inject] private CardActionsService CardActionsService { get; }
         [Inject] private CardViewsService CardViewsService { get; }
+        
+        [Inject] private RunActivityService RunActivityService { get; }
 
         private ICardCondition conditionObj;
         private SignalBus SignalBus { get; set; }
@@ -46,6 +50,10 @@ namespace Canvas.Activities.Views
         {
             if (DropCardId == 0)
                 return;
+            
+            if (obj.ActivityStatus == ActivityStatus.Finish)
+                RunActivityService.SetStatusToDroppedCards(CardStatus.Distress);
+            
             CardActionsService.DropOnActivity(DropCardCardView, false);
             CardActionsService.ReturnBack(DropCardCardView);
             DropCardId = 0;

@@ -8,13 +8,14 @@ using Zenject;
 
 namespace Canvas.Popups.Views.ActivityPopup
 {
+    /// <summary>
+    /// Result cards for end activity 
+    /// </summary>
     public class ResultActivityCardsView : BaseView
     {
         [SerializeField] private List<Transform> droppableViews;
-
         [Inject] private CardDraggableSpawner Spawner { get; }
-
-        private readonly List<IDraggableCardView> resultViews = new List<IDraggableCardView>();
+        private List<IDraggableCardView> ResultViews { get; } = new List<IDraggableCardView>();
 
         [Inject]
         public void Construct(SignalBus signalBus)
@@ -28,25 +29,29 @@ namespace Canvas.Popups.Views.ActivityPopup
         /// <param name="obj"></param>
         private void CreateResultCards(CreateResultCardsForActivitySignal obj)
         {
-            Debug.Log($"CreateResultCards {obj.RunCardViews.Count} {obj.ResultList.Count}");
             foreach (var cardView in obj.RunCardViews)
             {
-                resultViews.Add(cardView);
+                ResultViews.Add(cardView);
             }
 
             foreach (var baseCard in obj.ResultList)
             {
                 var resultCard = Spawner.CreateResultCard(baseCard);
-                resultViews.Add(resultCard);
+                ResultViews.Add(resultCard);
             }
 
+            Invoke(nameof(SetPosForResultCards), 0.05f);
+        }
+
+        /// <summary>
+        /// Set new positions for result cards
+        /// </summary>
+        private void SetPosForResultCards()
+        {
             for (var i = 0; i < droppableViews.Count; i++)
             {
-                if (i < resultViews.Count)
-                {
-                    Debug.Log($"pos {droppableViews[i].position}");
-                    resultViews[i].OnSetPosition.Invoke(droppableViews[i].position);
-                }
+                if (i < ResultViews.Count)
+                    ResultViews[i].OnSetPosition.Invoke(droppableViews[i].position);
             }
         }
     }

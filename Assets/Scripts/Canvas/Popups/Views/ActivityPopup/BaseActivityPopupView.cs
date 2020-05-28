@@ -1,6 +1,7 @@
 ﻿using AbstractViews;
 using Canvas.Activities.Services;
 using Canvas.Popups.Signals.Activity;
+using Enums;
 using Interfaces.Activity;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,6 +23,8 @@ namespace Canvas.Popups.Views.ActivityPopup
         private SignalBus SignalBus { get; set; }
         private IBaseActivity BaseActivity { get; set; }
         [Inject] private ActivityService ActivityService { get; }
+        
+        [SerializeField] private ActivityStatus activityStatus = ActivityStatus.Inactive;
 
         #endregion
 
@@ -40,6 +43,7 @@ namespace Canvas.Popups.Views.ActivityPopup
         /// </summary>
         private void ShowResultPopup(ShowActivityResultSignal obj)
         {
+            activityStatus = ActivityStatus.Finish;
             cardsPanel.ShowResultCards();
             BaseActivity = ActivityService.GetActivityById(obj.ActivityId);
             Show();
@@ -51,6 +55,7 @@ namespace Canvas.Popups.Views.ActivityPopup
         /// <param name="obj"></param>
         private void ShowActivityPopup(ShowActivityPopupSignal obj)
         {
+            activityStatus = ActivityStatus.Prepare;
             startActivityBtn.Hide();
             BaseActivity = ActivityService.GetActivityById(obj.ActivityId);
             cardsPanel.Init(BaseActivity, obj.StartActivityCardId, startActivityBtn);
@@ -63,6 +68,7 @@ namespace Canvas.Popups.Views.ActivityPopup
         /// </summary>
         private void OnStartActivity()
         {
+            activityStatus = ActivityStatus.Run;
             cardsPanel.OnStartActivity();
             Hide();
         }
@@ -72,7 +78,12 @@ namespace Canvas.Popups.Views.ActivityPopup
         /// </summary>
         private void OnClosePopup()
         {
-            SignalBus.Fire(new CloseActivityPopupSignal {ActivityId = BaseActivity.Id});
+            Debug.LogError($"CurrentActivityStatus: {activityStatus}");
+            SignalBus.Fire(new CloseActivityPopupSignal
+            {
+                ActivityId = BaseActivity.Id, 
+                ActivityStatus = activityStatus
+            });
             Hide();
         }
     }

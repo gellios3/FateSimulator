@@ -57,7 +57,7 @@ namespace Canvas.Activities.Services
         {
             ActivityService.ShowResultPopup(runActivityId);
             ShowDroppedCards();
-            SetStatusToDroppedCards(CardStatus.Distress);
+            // SetStatusToDroppedCards(CardStatus.Distress);
 
             var activity = ActivityService.GetActivityById(runActivityId);
             ResultCards = new List<IBaseCard>();
@@ -91,7 +91,7 @@ namespace Canvas.Activities.Services
         /// Set status to Dropped cards
         /// </summary>
         /// <param name="status"></param>
-        private void SetStatusToDroppedCards(CardStatus status)
+        public void SetStatusToDroppedCards(CardStatus status)
         {
             foreach (var cardView in RunCardViews)
             {

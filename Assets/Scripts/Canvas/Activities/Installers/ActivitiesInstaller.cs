@@ -8,7 +8,7 @@ namespace Canvas.Activities.Installers
 
         public override void InstallBindings()
         {
-            Container.Bind<ActivityService>().AsSingle();
+            Container.Bind<ActivityService>().AsTransient();
             Container.Bind<ActivityViewsService>().AsSingle();
             Container.Bind<RunActivityService>().AsSingle();
         }
