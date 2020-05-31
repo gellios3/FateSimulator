@@ -26,7 +26,7 @@ namespace AbstractViews
 
         protected IDraggableCardView DropCardCardView; 
         [Inject] private CardActionsService CardActionsService { get; }
-        private bool CanDropCard { get; set; } = true;
+        protected bool CanDropCard { get; private set; } = true;
 
         #endregion
 

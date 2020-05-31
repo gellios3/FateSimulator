@@ -11,6 +11,7 @@ namespace Canvas.Cards.Interfaces
     {
         IBaseCard BaseCard { get; }
         Action<CardStatus> TimerFinish { get; set; }
+        CardStatusPreset CurrentStatus { get; }
         void SetCardPosition(Vector3 pos);
         void SetCardView(CardStatusPreset preset);
         void OnStartDragCard();
@@ -19,6 +20,7 @@ namespace Canvas.Cards.Interfaces
         void HighlightCard();
         void InitCardTimer(CardStatusPreset duration);
         void HideTimer();
+        void SetStatusPreset(CardStatusPreset preset);
 
     }
 }

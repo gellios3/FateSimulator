@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using Canvas.Cards.Interfaces;
+using Canvas.Common;
+using Enums;
 using UnityEngine;
 using Zenject;
 
@@ -87,7 +89,8 @@ namespace Canvas.Cards.Services
         {
             foreach (var cardView in GetAllCardsById(cardId))
             {
-                cardView.OnHighlight.Invoke();
+                if (StatusHelper.IsUseableStatus(cardView.TopCard.CurrentStatus.cardStatus))
+                    cardView.OnHighlight.Invoke();
             }
         }
 
@@ -99,7 +102,7 @@ namespace Canvas.Cards.Services
         private IEnumerable<IDraggableCardView> GetAllCardsById(ushort cardId)
         {
             return CardViewsService.GetAllCardsById(cardId);
-        } 
+        }
 
         /// <summary>
         /// Get card by Id

@@ -17,7 +17,7 @@ namespace Canvas.Cards.Services
         {
             Appearances = appearances;
         }
-        
+
         /// <summary>
         /// Get appearance
         /// </summary>

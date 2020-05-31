@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using AbstractViews;
 using Canvas.Activities.Interfaces;
 using Canvas.Activities.Services;
 using Canvas.Cards.Interfaces;
+using Canvas.Cards.Services;
 using Canvas.Cards.Signals;
 using Canvas.Common;
 using Canvas.Popups.Signals.Activity;
@@ -37,6 +37,7 @@ namespace Canvas.Activities.Views
         [Inject] private RunActivityService RunActivityService { get; }
         [Inject] private ActivityViewsService ActivityViewsService { get; }
         [Inject] private ConditionsService ConditionsService { get; }
+        [Inject] private CardViewsService CardViewsService { get; }
 
         #endregion
 
@@ -148,13 +149,21 @@ namespace Canvas.Activities.Views
         /// <param name="obj"></param>
         private void OnStartDragCard(StartDragCardSignal obj)
         {
-            var condition = ConditionsService.TryFindConditionByCardId(obj.CardId);
+            var condition = ConditionsService.TryFindConditionByCardId(obj.DraggableCardView.CardId);
             if (condition == null)
+            {
+                droppableView.SetDroppable(false);
                 return;
-            var foundActivityObj = ActivityService.GetActivityByStartConditionId(condition.Id);
-            if (foundActivityObj != null)
+            }
+
+            var canDrop = StatusHelper.IsUseableStatus(obj.DraggableCardView.TopCard.CurrentStatus.cardStatus) &&
+                          ActivityService.GetActivityByStartConditionId(condition.Id) != null;
+            if (canDrop)
+            {
                 borderImg.SetStatus(Status.Highlighted);
-            droppableView.SetDroppable(foundActivityObj != null);
+            }
+
+            droppableView.SetDroppable(canDrop);
         }
     }
 }

@@ -1,7 +1,9 @@
-﻿namespace Canvas.Cards.Signals
+﻿using Canvas.Cards.Interfaces;
+
+namespace Canvas.Cards.Signals
 {
     public class StartDragCardSignal
     {
-        public ushort CardId;
+        public IDraggableCardView DraggableCardView;
     }
 }

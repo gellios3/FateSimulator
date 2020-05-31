@@ -18,9 +18,8 @@ namespace Canvas.Cards.Views
 
         public override ushort CardId => CardObj.Id;
         private IBaseCard CardObj { get; set; }
-
+        
         [SerializeField] private Button openPopupBtn;
-
         [Inject] private CardSignalsService CardSignalsService { get; }
         [Inject] private CardViewsService CardViewsService { get; }
         [Inject] private DraggableCardService DraggableCardService { get; }
@@ -97,7 +96,7 @@ namespace Canvas.Cards.Views
             if (!DraggableCardService.CanBeginDrag())
                 return;
 
-            CardSignalsService.StartDragCard(CardObj.Id);
+            CardSignalsService.StartDragCard(this);
 
             TopCard.Show();
             DraggableCardService.SetTempPos(transform.position);
@@ -180,8 +179,10 @@ namespace Canvas.Cards.Views
         protected override void ChangeCardStatus(CardStatus status)
         {
             var appearance = CardAppearanceService.GetAppearance(status);
-            if (appearance != null)
-                TopCard.InitCardTimer(appearance);
+            if (appearance == null)
+                return;
+            TopCard.SetStatusPreset(appearance);
+            TopCard.InitCardTimer(appearance);
         }
 
         /// <summary>

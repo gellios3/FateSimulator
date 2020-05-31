@@ -1,8 +1,8 @@
-﻿using System.Runtime.InteropServices;
-using AbstractViews;
+﻿using AbstractViews;
 using Canvas.Activities.Services;
 using Canvas.Cards.Services;
 using Canvas.Cards.Signals;
+using Canvas.Common;
 using Canvas.Popups.Signals.Activity;
 using Canvas.Services;
 using Enums;
@@ -26,11 +26,11 @@ namespace Canvas.Activities.Views
         [Inject] private ConditionsService ConditionsService { get; }
         [Inject] private CardActionsService CardActionsService { get; }
         [Inject] private CardViewsService CardViewsService { get; }
-        
         [Inject] private RunActivityService RunActivityService { get; }
 
         private ICardCondition conditionObj;
         private SignalBus SignalBus { get; set; }
+
         #endregion
 
         [Inject]
@@ -50,10 +50,10 @@ namespace Canvas.Activities.Views
         {
             if (DropCardId == 0)
                 return;
-            
+
             if (obj.ActivityStatus == ActivityStatus.Finish)
                 RunActivityService.SetStatusToDroppedCards(CardStatus.Distress);
-            
+
             CardActionsService.DropOnActivity(DropCardCardView, false);
             CardActionsService.ReturnBack(DropCardCardView);
             DropCardId = 0;
@@ -91,8 +91,8 @@ namespace Canvas.Activities.Views
         {
             if (conditionObj == null)
                 return;
-
-            var canDrop = ConditionsService.CheckCondition(conditionObj.Id, obj.CardId);
+            var canDrop = ConditionsService.CheckCondition(conditionObj.Id, obj.DraggableCardView.CardId) &&
+                          StatusHelper.IsUseableStatus(obj.DraggableCardView.TopCard.CurrentStatus.cardStatus);
             SetDroppable(canDrop);
             if (canDrop)
                 borderImg.SetStatus(Status.Highlighted);

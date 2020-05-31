@@ -1,4 +1,5 @@
-﻿using Canvas.Cards.Signals;
+﻿using Canvas.Cards.Interfaces;
+using Canvas.Cards.Signals;
 using Canvas.Popups.Signals;
 using Canvas.Popups.Signals.Activity;
 using Canvas.Services;
@@ -30,10 +31,10 @@ namespace Canvas.Cards.Services
         /// <summary>
         /// Start drag card
         /// </summary>
-        /// <param name="cardId"></param>
-        public void StartDragCard(ushort cardId)
+        /// <param name="draggableCard"></param>
+        public void StartDragCard(IDraggableCardView draggableCard)
         {
-            SignalBus.Fire(new StartDragCardSignal {CardId = cardId});
+            SignalBus.Fire(new StartDragCardSignal {DraggableCardView = draggableCard});
         }
 
         /// <summary>

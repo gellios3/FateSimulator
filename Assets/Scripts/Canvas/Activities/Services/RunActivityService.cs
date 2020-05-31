@@ -5,7 +5,6 @@ using Canvas.Cards.Signals;
 using Canvas.Services;
 using Enums;
 using Interfaces.Cards;
-using UnityEngine;
 using Zenject;
 
 namespace Canvas.Activities.Services
@@ -57,7 +56,6 @@ namespace Canvas.Activities.Services
         {
             ActivityService.ShowResultPopup(runActivityId);
             ShowDroppedCards();
-            // SetStatusToDroppedCards(CardStatus.Distress);
 
             var activity = ActivityService.GetActivityById(runActivityId);
             ResultCards = new List<IBaseCard>();

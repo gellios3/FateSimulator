@@ -19,10 +19,15 @@ namespace Canvas.Cards.Views
     /// </summary>
     public class CardView : BaseView, ICardView
     {
-        #region Parameters
+        #region Punlic Parameters
 
         public IBaseCard BaseCard { get; private set; }
         public Action<CardStatus> TimerFinish { get; set; }
+        public CardStatusPreset CurrentStatus { get; private set; }
+
+        #endregion
+
+        #region Parameters
 
         [SerializeField] private RectTransform mask;
         [SerializeField] private Vector3 defaultMask;
@@ -34,7 +39,6 @@ namespace Canvas.Cards.Views
         [SerializeField] private TimerView cardTimer;
 
         private Vector2 defaultSizeDelta;
-        private CardStatusPreset currentStatusPreset;
 
         #endregion
 
@@ -54,7 +58,6 @@ namespace Canvas.Cards.Views
         /// <param name="preset"></param>
         public void InitCardTimer(CardStatusPreset preset)
         {
-            SetStatusPreset(preset);
             cardTimer.Init(preset.duration);
             StartCardTimer();
         }
@@ -70,16 +73,15 @@ namespace Canvas.Cards.Views
         private void StartCardTimer()
         {
             cardTimer.Show();
-            SetCardView(currentStatusPreset);
+            SetCardView(CurrentStatus);
         }
-        
 
         /// <summary>
         /// On end Timer
         /// </summary>
         private void OnTimerFinish()
         {
-            TimerFinish?.Invoke(currentStatusPreset.cardStatus);
+            TimerFinish?.Invoke(CurrentStatus.cardStatus);
         }
 
         #endregion
@@ -151,9 +153,9 @@ namespace Canvas.Cards.Views
             mask.transform.localPosition = new Vector3(dragMask.x, dragMask.y, dragMask.z);
         }
 
-        private void SetStatusPreset(CardStatusPreset preset)
+        public void SetStatusPreset(CardStatusPreset preset)
         {
-            currentStatusPreset = preset;
+            CurrentStatus = preset;
         }
 
         public class Factory : PlaceholderFactory<IBaseCard, CardView>
