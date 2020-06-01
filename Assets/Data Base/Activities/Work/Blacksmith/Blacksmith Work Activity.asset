@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 32214
   dataBase: {fileID: 11400000, guid: 46a29bcfb7c5d2941a21c795a07c9723, type: 2}
   activityName: Blacksmith Work
-  activityDuration: 7
+  activityDuration: 5
   shortDescription: Blacksmith Work sample description
   activityType: 0
   activityIcon: {fileID: 21300000, guid: bb277a22302f2314a965c889cb99a34f, type: 3}

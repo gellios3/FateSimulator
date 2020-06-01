@@ -28,7 +28,7 @@ MonoBehaviour:
     duration: 10
     color: {r: 0.582, g: 0.582, b: 0.582, a: 0.9019608}
   - cardStatus: 0
-    duration: -1
+    duration: 65535
     color: {r: 0.6392157, g: 0.5921569, b: 1, a: 1}
   workType: 2
   requireSkill: {fileID: 11400000, guid: 904eb6eaa6f4ee2459d201742c8d54dd, type: 2}
