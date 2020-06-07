@@ -18,8 +18,5 @@ namespace ScriptableObjects.Conditions.Requires.Cards
 
         public ActivityType activityType;
         public ActivityType ActivityType => activityType;
-
-        public CardStatus onEndActivityStatus;
-        public CardStatus OnEndActivityStatus => onEndActivityStatus;
     }
 }

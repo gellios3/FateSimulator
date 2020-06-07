@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using Canvas.Cards.Interfaces;
 using Canvas.Cards.Services;
-using Canvas.Cards.Signals;
 using Canvas.Services;
 using Enums;
+using Interfaces.Activity;
 using Interfaces.Cards;
+using UnityEngine;
 using Zenject;
 
 namespace Canvas.Activities.Services
@@ -14,28 +15,16 @@ namespace Canvas.Activities.Services
     /// </summary>
     public class RunActivityService
     {
-        [Inject] private ActivityViewsService ActivityViewsService { get; }
         [Inject] private CardActionsService CardActionsService { get; }
-        [Inject] private ActivityService ActivityService { get; }
         [Inject] private ResultsService ResultsService { get; }
+        [Inject] private ActivityViewsService ActivityViewsService { get; }
         private List<IBaseCard> ResultCards { get; set; } = new List<IBaseCard>();
         private List<IDraggableCardView> RunCardViews { get; set; } = new List<IDraggableCardView>();
-        private SignalBus SignalBus { get; }
-
-        public RunActivityService(SignalBus signalBus)
-        {
-            SignalBus = signalBus;
-        }
 
         public void Init(List<IDraggableCardView> runCardViews)
         {
             RunCardViews = runCardViews;
             HideDroppedCards();
-        }
-
-        public void Refresh()
-        {
-            RunCardViews.Clear();
         }
 
         /// <summary>
@@ -52,13 +41,11 @@ namespace Canvas.Activities.Services
         /// <summary>
         /// On Finish activity
         /// </summary>
-        public void OnFinishActivity(ushort runActivityId)
+        public void OnFinishActivity(int index, IBaseActivity activity)
         {
-            ActivityService.ShowResultPopup(runActivityId);
             ShowDroppedCards();
-
-            var activity = ActivityService.GetActivityById(runActivityId);
             ResultCards = new List<IBaseCard>();
+            var activityPopup = ActivityViewsService.GetActivityPopupByIndex(index);
 
             foreach (var resultObj in activity.ResultsList)
             {
@@ -68,7 +55,6 @@ namespace Canvas.Activities.Services
                     ResultCards.Add(findCard);
                 }
             }
-
             foreach (var resultObj in activity.OptionalResultsList)
             {
                 var findCard = ResultsService.TryFindCardByResultObj(resultObj);
@@ -77,12 +63,9 @@ namespace Canvas.Activities.Services
                     ResultCards.Add(findCard);
                 }
             }
-            
-            SignalBus.Fire(new CreateResultCardsForActivitySignal
-            {
-                RunCardViews = RunCardViews,
-                ResultList = ResultCards
-            });
+
+            Debug.LogError($"RunCardViews {RunCardViews.Count} ResultCards {ResultCards.Count}");
+            activityPopup.ShowResultPopup(activity, RunCardViews, ResultCards);
         }
 
         /// <summary>

@@ -8,6 +8,5 @@ namespace Interfaces.Conditions.Cards
     {
         ActivityType ActivityType { get; }
         
-        CardStatus OnEndActivityStatus { get; }
     }
 }

@@ -5,6 +5,7 @@ using Canvas.Activities.Views;
 using Canvas.Cards;
 using Canvas.Cards.Interfaces;
 using Canvas.Cards.Signals;
+using Enums;
 using Interfaces.Activity;
 using Interfaces.Conditions.Cards;
 using UnityEngine;
@@ -56,6 +57,14 @@ namespace Canvas.Popups.Views.ActivityPopup
 
                 droppableViews[i].Show();
                 droppableViews[i].Init(cardConditions[i] as ICardCondition);
+            }
+        }
+
+        public void OnClosePopup(ActivityStatus status)
+        {
+            foreach (var droppableView in droppableViews)
+            {
+                droppableView.OnCloseActivityPopup(status);
             }
         }
 

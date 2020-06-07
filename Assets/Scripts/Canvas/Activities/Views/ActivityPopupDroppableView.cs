@@ -39,19 +39,18 @@ namespace Canvas.Activities.Views
             SignalBus = signalBus;
             SignalBus.Subscribe<StartDragCardSignal>(OnStartDragCard);
             SignalBus.Subscribe<EndDragCardSignal>(OnEndDragCard);
-            SignalBus.Subscribe<CloseActivityPopupSignal>(OnCloseActivityPopup);
         }
 
         /// <summary>
         /// On close popup 
         /// </summary>
-        /// <param name="obj"></param>
-        private void OnCloseActivityPopup(CloseActivityPopupSignal obj)
+        /// <param name="status"></param>
+        public void OnCloseActivityPopup(ActivityStatus status)
         {
             if (DropCardId == 0)
                 return;
 
-            if (obj.ActivityStatus == ActivityStatus.Finish)
+            if (status == ActivityStatus.Finish)
                 RunActivityService.SetStatusToDroppedCards(CardStatus.Distress);
 
             CardActionsService.DropOnActivity(DropCardCardView, false);

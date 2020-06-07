@@ -12,12 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42a800837264427aac871fe154050a75, type: 3}
   m_Name: Paper Work Skill Card Condition
   m_EditorClassIdentifier: 
-  id: 0
-  dataBase: {fileID: 0}
+  id: 55847
+  dataBase: {fileID: 11400000, guid: 46a29bcfb7c5d2941a21c795a07c9723, type: 2}
   level: 0
-  title: 
-  cardType: 0
-  routineSkillType: 0
+  title: Paper work skill
+  cardType: 5
+  routineSkillType: 1
   battleSkillType: 0
   activityType: 0
-  onEndActivityStatus: 0

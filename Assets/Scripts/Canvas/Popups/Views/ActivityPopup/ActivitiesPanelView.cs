@@ -1,6 +1,11 @@
-﻿using AbstractViews;
+﻿using System.Collections.Generic;
+using AbstractViews;
+using Canvas.Activities.Interfaces;
+using Canvas.Cards.Interfaces;
 using Canvas.Popups.Signals.Activity;
+using Enums;
 using Interfaces.Activity;
+using Interfaces.Cards;
 using UnityEngine;
 using Zenject;
 
@@ -9,7 +14,7 @@ namespace Canvas.Popups.Views.ActivityPopup
     /// <summary>
     /// Activities panel view
     /// </summary>
-    public class ActivitiesPanelView : MonoBehaviour
+    public class ActivitiesPanelView : BaseView
     {
         [SerializeField] private StartActivityCardsView startActivityCardsView;
         [SerializeField] private ResultActivityCardsView resultActivityCardsView;
@@ -35,7 +40,12 @@ namespace Canvas.Popups.Views.ActivityPopup
             StartActivityBtn = customButton;
             startActivityCardsView.Init(baseActivity, cardId);
         }
-        
+
+        public void OnClosePopup(ActivityStatus status)
+        {
+            startActivityCardsView.OnClosePopup(status);
+        }
+
         /// <summary>
         /// On all conditions done
         /// </summary>
@@ -43,16 +53,13 @@ namespace Canvas.Popups.Views.ActivityPopup
         {
             StartActivityBtn.Show();
         }
-        
+
         /// <summary>
         /// On start activity
         /// </summary>
-        public void OnStartActivity()
+        public void OnStartActivity(IActivityView activityView)
         {
-            SignalBus.Fire(new StartActivitySignal
-            {
-                DropCardViews = startActivityCardsView.DropCardViews
-            });
+            activityView.RunActivity(startActivityCardsView.DropCardViews);
         }
 
         /// <summary>
@@ -67,12 +74,12 @@ namespace Canvas.Popups.Views.ActivityPopup
         /// <summary>
         /// Show result cards
         /// </summary>
-        public void ShowResultCards()
+        public void ShowResultCards(IEnumerable<IDraggableCardView> runCardViews, IEnumerable<IBaseCard> resultList)
         {
             startActivityCardsView.Hide();
             resultActivityCardsView.Show();
             StartActivityBtn.Hide();
+            resultActivityCardsView.CreateResultCards(runCardViews, resultList);
         }
-        
     }
 }

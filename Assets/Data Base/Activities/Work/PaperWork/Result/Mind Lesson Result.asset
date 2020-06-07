@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 370b13c9b6e44f628f4c611f98d2ffba, type: 3}
   m_Name: Mind Lesson Result
   m_EditorClassIdentifier: 
-  id: 0
-  dataBase: {fileID: 0}
-  title: 
+  id: 357
+  dataBase: {fileID: 11400000, guid: 46a29bcfb7c5d2941a21c795a07c9723, type: 2}
+  title: Mind Lesson result
   level: 0
-  percent: 0
+  percent: 50
   lessonType: 0

@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using AbstractViews;
 using Canvas.Activities.Interfaces;
 using Canvas.Activities.Services;
 using Canvas.Cards.Interfaces;
-using Canvas.Cards.Services;
 using Canvas.Cards.Signals;
 using Canvas.Common;
 using Canvas.Popups.Signals.Activity;
@@ -24,8 +24,8 @@ namespace Canvas.Activities.Views
         #region Parameters
 
         public ushort ActivityId => CurrentActivity?.Id ?? 0;
+        public ushort StartActivityCardId { get; private set; }
         public Action RunTimer { get; private set; }
-        public Action RefreshActivity { get; private set; }
 
         [SerializeField] private ActivityDroppableView droppableView;
         [SerializeField] private ColorsPresetImage borderImg;
@@ -34,10 +34,7 @@ namespace Canvas.Activities.Views
         private IBaseActivity CurrentActivity { get; set; }
 
         [Inject] private ActivityService ActivityService { get; }
-        [Inject] private RunActivityService RunActivityService { get; }
-        [Inject] private ActivityViewsService ActivityViewsService { get; }
         [Inject] private ConditionsService ConditionsService { get; }
-        [Inject] private CardViewsService CardViewsService { get; }
 
         #endregion
 
@@ -47,40 +44,30 @@ namespace Canvas.Activities.Views
             signalBus.Subscribe<StartDragCardSignal>(OnStartDragCard);
             signalBus.Subscribe<EndDragCardSignal>(OnEndDragCard);
 
-            signalBus.Subscribe<ShowActivityPopupSignal>(OnShowActivityPopup);
-            signalBus.Subscribe<StartActivitySignal>(OnRunCurrentActivity);
-
             droppableView.CardDrop += OnDropCard;
             timerView.TimeFinish += OnTimerFinish;
 
             RunTimer += OnRunTimer;
-            RefreshActivity += OnRefreshActivity;
-            ActivityViewsService.AddActivityView(this);
         }
 
         /// <summary>
         /// On run current activity
         /// </summary>
-        /// <param name="obj"></param>
-        private void OnRunCurrentActivity(StartActivitySignal obj)
+        /// <param name="dropCardViews"></param>
+        public void RunActivity(IEnumerable<IDraggableCardView> dropCardViews)
         {
             if (CurrentActivity == null)
                 return;
-            var activity = ActivityViewsService.GetActivityViewById(CurrentActivity.Id);
-            if (activity == null)
-                return;
-            RunActivityService.Init(obj.DropCardViews.ToList());
-            activity.RunTimer.Invoke();
+            ActivityService.RunActivity(CurrentActivity.Id, dropCardViews.ToList());
         }
 
         /// <summary>
         /// On refresh activity
         /// </summary>
-        private void OnRefreshActivity()
+        public void RefreshActivity()
         {
             droppableView.ReturnDropCard();
             SetStatus(Status.Normal);
-            RunActivityService.Refresh();
             CurrentActivity = null;
         }
 
@@ -92,14 +79,6 @@ namespace Canvas.Activities.Views
             SetStatus(Status.Normal);
             timerView.Init(CurrentActivity.ActivityDuration);
             timerView.Show();
-        }
-
-        /// <summary>
-        /// On show activity popup
-        /// </summary>
-        private void OnShowActivityPopup()
-        {
-            SetStatus(Status.Normal);
         }
 
         /// <summary>
@@ -121,7 +100,9 @@ namespace Canvas.Activities.Views
             if (condition == null)
                 return;
             CurrentActivity = ActivityService.GetActivityByStartConditionId(condition.Id);
-            ActivityService.ShowPopup(CurrentActivity.Id, droppableView.DropCardId);
+            StartActivityCardId = droppableView.DropCardId;
+            ActivityService.ShowPopup(transform.GetSiblingIndex(), CurrentActivity.Id, droppableView.DropCardId);
+            SetStatus(Status.Normal);
         }
 
         /// <summary>
@@ -130,7 +111,8 @@ namespace Canvas.Activities.Views
         private void OnTimerFinish()
         {
             timerView.Hide();
-            RunActivityService.OnFinishActivity(CurrentActivity.Id);
+            ActivityService.OnTimerFinish(transform.GetSiblingIndex(), CurrentActivity.Id);
+
             CurrentActivity = null;
         }
 

@@ -3,7 +3,7 @@ using Interfaces.Cards;
 using UnityEngine;
 using Zenject;
 
-namespace Canvas.Cards
+namespace Canvas.Cards.Spawners
 {
     /// <summary>
     /// Card view spawner

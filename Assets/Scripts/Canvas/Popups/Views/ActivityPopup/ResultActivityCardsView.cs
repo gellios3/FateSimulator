@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using AbstractViews;
-using Canvas.Cards;
 using Canvas.Cards.Interfaces;
-using Canvas.Cards.Signals;
+using Canvas.Cards.Spawners;
+using Interfaces.Cards;
 using UnityEngine;
 using Zenject;
 
@@ -17,24 +17,19 @@ namespace Canvas.Popups.Views.ActivityPopup
         [Inject] private CardDraggableSpawner Spawner { get; }
         private List<IDraggableCardView> ResultViews { get; } = new List<IDraggableCardView>();
 
-        [Inject]
-        public void Construct(SignalBus signalBus)
-        {
-            signalBus.Subscribe<CreateResultCardsForActivitySignal>(CreateResultCards);
-        }
-
         /// <summary>
         /// Create result cards
         /// </summary>
-        /// <param name="obj"></param>
-        private void CreateResultCards(CreateResultCardsForActivitySignal obj)
+        /// <param name="runCardViews"></param>
+        /// <param name="resultList"></param>
+        public void CreateResultCards(IEnumerable<IDraggableCardView> runCardViews, IEnumerable<IBaseCard> resultList)
         {
-            foreach (var cardView in obj.RunCardViews)
+            foreach (var cardView in runCardViews)
             {
                 ResultViews.Add(cardView);
             }
 
-            foreach (var baseCard in obj.ResultList)
+            foreach (var baseCard in resultList)
             {
                 var resultCard = Spawner.CreateResultCard(baseCard);
                 ResultViews.Add(resultCard);

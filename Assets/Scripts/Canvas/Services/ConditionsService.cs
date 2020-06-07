@@ -2,6 +2,7 @@
 using Interfaces.Conditions;
 using Interfaces.Conditions.Cards;
 using ScriptableObjects;
+using UnityEngine;
 using Zenject;
 
 namespace Canvas.Services
@@ -29,10 +30,13 @@ namespace Canvas.Services
             var conditionObj = DataBase.GetConditionById(conditionId);
             switch (conditionObj)
             {
+                // try find Characteristic Card by Condition
                 case ICharacteristicCardCondition charCondition when checkedCard is ICharacteristicCard charCard:
                     return charCondition.CharacteristicType == charCard.CharacteristicType;
-                case ICardCondition cardCondition:
-                    return cardCondition.CardType == checkedCard.Type;
+                // try find skill card by condition
+                case ISkillCardCondition skillCardCondition when checkedCard is ISkillCard skillCard: 
+                    return skillCardCondition.RoutineSkillType == skillCard.RoutineSkillType &&
+                           skillCardCondition.BattleSkillType == skillCard.BattleSkillType;
                 default:
                     return false;
             }

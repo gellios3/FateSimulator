@@ -9,25 +9,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3615902913c44e728d0194d3f27854de, type: 3}
-  m_Name: Knowledge Card
+  m_Script: {fileID: 11500000, guid: bc26f21f8c93442b9a498ca05f345f44, type: 3}
+  m_Name: Mind Skill Card
   m_EditorClassIdentifier: 
-  id: 29508
+  id: 14401
   dataBase: {fileID: 11400000, guid: 46a29bcfb7c5d2941a21c795a07c9723, type: 2}
   posOnTable: {x: 0, y: 0}
-  cardName: Knowledge Card
-  shortDescription: Knowledge Card
-  type: 0
-  level: 0
-  cardIcon: {fileID: 21300000, guid: 565d04f6d77598a4c921517814adb74a, type: 3}
+  cardName: Mind Skill Card
+  shortDescription: 
+  type: 5
+  level: 1
+  cardIcon: {fileID: 21300000, guid: 0278004276bef2043940de70a939db1c, type: 3}
   aspectsList:
-  - {fileID: 11400000, guid: 6ab0f85854b05144e8b21fb02663ef4c, type: 2}
   - {fileID: 11400000, guid: 242d8420be4522a44aa08e2d6811235f, type: 2}
+  - {fileID: 11400000, guid: bcc0e4424a06db641bc8623bdf9aae20, type: 2}
   appearances:
   - cardStatus: 0
-    duration: 65535
-    color: {r: 0.2784314, g: 0.7921569, b: 1, a: 1}
+    duration: 0
+    color: {r: 1, g: 0.375, b: 0.88235295, a: 1}
   - cardStatus: 1
-    duration: 10
-    color: {r: 0.2784314, g: 0.7921569, b: 1, a: 1}
-  characteristicType: 1
+    duration: 0
+    color: {r: 0.611, g: 0.259675, b: 0.54408103, a: 1}
+  routineSkillType: 1
+  battleSkillType: 0

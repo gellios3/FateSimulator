@@ -1,5 +1,6 @@
 ﻿using Canvas.Cards.Interfaces;
 using Canvas.Cards.Services;
+using Canvas.Cards.Spawners;
 using Canvas.Cards.Views;
 using Interfaces.Cards;
 using UnityEngine;

@@ -23,7 +23,6 @@ namespace Canvas
             Container.DeclareSignal<ShowAspectPopupSignal>();
             Container.DeclareSignal<StartDragCardSignal>();
             Container.DeclareSignal<EndDragCardSignal>();
-            Container.DeclareSignal<ShowActivityResultSignal>();
 
             Container.Bind<ShowAspectService>().AsSingle();
             Container.Bind<ConditionsService>().AsSingle();
@@ -35,11 +34,7 @@ namespace Canvas
         /// </summary>
         private void InitActivitySignals()
         {
-            Container.DeclareSignal<ShowActivityPopupSignal>(); 
-            Container.DeclareSignal<FindCardForActivitySignal>(); 
-            Container.DeclareSignal<CloseActivityPopupSignal>();  
-            Container.DeclareSignal<StartActivitySignal>();
-            Container.DeclareSignal<CreateResultCardsForActivitySignal>();
+            Container.DeclareSignal<FindCardForActivitySignal>();
         }
     }
 }

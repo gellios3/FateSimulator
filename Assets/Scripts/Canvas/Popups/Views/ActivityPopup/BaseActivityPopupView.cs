@@ -1,8 +1,11 @@
-﻿using AbstractViews;
-using Canvas.Activities.Services;
-using Canvas.Popups.Signals.Activity;
+﻿using System.Collections.Generic;
+using AbstractViews;
+using Canvas.Activities.Interfaces;
+using Canvas.Cards.Interfaces;
+using Canvas.Popups.Interfaces;
 using Enums;
 using Interfaces.Activity;
+using Interfaces.Cards;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -12,54 +15,71 @@ namespace Canvas.Popups.Views.ActivityPopup
     /// <summary>
     /// Activity popup view
     /// </summary>
-    public class BaseActivityPopupView : BaseView
+    public class BaseActivityPopupView : BaseView, IActivityPopupView
     {
         #region Parameters
 
-        [SerializeField] private ActivitiesPanelView cardsPanel;
+        [SerializeField] private ActivitiesPanelView activitiesPanelView;
+        [SerializeField] private ActivityDescriptionPopupView descriptionPopupView;
+
         [SerializeField] private Button closeBtn;
         [SerializeField] private CustomButton startActivityBtn;
-
-        private SignalBus SignalBus { get; set; }
-        private IBaseActivity BaseActivity { get; set; }
-        [Inject] private ActivityService ActivityService { get; }
-        
         [SerializeField] private ActivityStatus activityStatus = ActivityStatus.Inactive;
+        
+        private IBaseActivity BaseActivity { get; set; }
+        private IActivityView ActivityView { get; set; }
 
         #endregion
 
         [Inject]
-        public void Construct(SignalBus signalBus)
+        public void Construct(IActivityView activityView)
         {
-            SignalBus = signalBus;
-            SignalBus.Subscribe<ShowActivityPopupSignal>(ShowActivityPopup);
-            SignalBus.Subscribe<ShowActivityResultSignal>(ShowResultPopup);
+            ActivityView = activityView;
             closeBtn.onClick.AddListener(OnClosePopup);
             startActivityBtn.onClick.AddListener(OnStartActivity);
+        }
+
+        public override void Show()
+        {
+            base.Show();
+            activitiesPanelView.Show();
+            descriptionPopupView.Show();
+        }
+
+        public override void Hide()
+        {
+            base.Hide();
+            activitiesPanelView.Hide();
+            descriptionPopupView.Hide();
         }
 
         /// <summary>
         /// Show result popup
         /// </summary>
-        private void ShowResultPopup(ShowActivityResultSignal obj)
+        /// <param name="baseActivity"></param>
+        /// <param name="runCardViews"></param>
+        /// <param name="resultList"></param>
+        public void ShowResultPopup(IBaseActivity baseActivity, IEnumerable<IDraggableCardView> runCardViews,
+            IEnumerable<IBaseCard> resultList)
         {
             activityStatus = ActivityStatus.Finish;
-            cardsPanel.ShowResultCards();
-            BaseActivity = ActivityService.GetActivityById(obj.ActivityId);
+            activitiesPanelView.ShowResultCards(runCardViews, resultList);
+            BaseActivity = baseActivity;
             Show();
         }
 
         /// <summary>
         /// Show activity popup
         /// </summary>
-        /// <param name="obj"></param>
-        private void ShowActivityPopup(ShowActivityPopupSignal obj)
+        /// <param name="baseActivity"></param>
+        /// <param name="cardId"></param>
+        public void ShowActivityPopup(IBaseActivity baseActivity, ushort cardId)
         {
             activityStatus = ActivityStatus.Prepare;
             startActivityBtn.Hide();
-            BaseActivity = ActivityService.GetActivityById(obj.ActivityId);
-            cardsPanel.Init(BaseActivity, obj.StartActivityCardId, startActivityBtn);
-            cardsPanel.ShowStartActivityCards();
+            BaseActivity = baseActivity;
+            activitiesPanelView.Init(BaseActivity, cardId, startActivityBtn);
+            activitiesPanelView.ShowStartActivityCards();
             Show();
         }
 
@@ -69,7 +89,7 @@ namespace Canvas.Popups.Views.ActivityPopup
         private void OnStartActivity()
         {
             activityStatus = ActivityStatus.Run;
-            cardsPanel.OnStartActivity();
+            activitiesPanelView.OnStartActivity(ActivityView);
             Hide();
         }
 
@@ -78,13 +98,16 @@ namespace Canvas.Popups.Views.ActivityPopup
         /// </summary>
         private void OnClosePopup()
         {
-            Debug.LogError($"CurrentActivityStatus: {activityStatus}");
-            SignalBus.Fire(new CloseActivityPopupSignal
-            {
-                ActivityId = BaseActivity.Id, 
-                ActivityStatus = activityStatus
-            });
+            activitiesPanelView.OnClosePopup(activityStatus);
+            ActivityView.RefreshActivity();
             Hide();
+        }
+
+        /// <summary>
+        /// Zenject Factory for Instantiate
+        /// </summary>
+        public class Factory : PlaceholderFactory<IActivityView, BaseActivityPopupView>
+        {
         }
     }
 }

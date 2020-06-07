@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
-using Canvas.Cards.Interfaces;
 using Canvas.Cards.Views;
 using Interfaces.Cards;
 using ScriptableObjects.Cards;
 using UnityEngine;
 using Zenject;
 
-namespace Canvas.Cards
+namespace Canvas.Cards.Spawners
 {
     /// <summary>
     /// Card draggable spawner
