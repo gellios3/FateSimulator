@@ -19,15 +19,7 @@ namespace Canvas.Activities.Services
 
         [Inject] private RunActivityService RunActivityService { get; }
 
-        /// <summary>
-        /// Get activity by id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public IBaseActivity GetActivityById(ushort id)
-        {
-            return ItemsDataBase.GetActivityById(id);
-        }
+       
 
         /// <summary>
         /// Get Activity by condition Id
@@ -72,12 +64,23 @@ namespace Canvas.Activities.Services
         public void OnFinishActivity()
         {
             RunActivityService.SetStatusToDroppedCards(CardStatus.Distress);
+            RunActivityService.Reset();
         }
 
         public void OnTimerFinish(int index, ushort activityId)
         {
             var activity = GetActivityById(activityId);
             RunActivityService.OnFinishActivity(index,activity);
+        }
+        
+        /// <summary>
+        /// Get activity by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        private IBaseActivity GetActivityById(ushort id)
+        {
+            return ItemsDataBase.GetActivityById(id);
         }
     }
 }

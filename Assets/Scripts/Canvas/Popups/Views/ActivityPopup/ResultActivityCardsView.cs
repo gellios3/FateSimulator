@@ -24,6 +24,8 @@ namespace Canvas.Popups.Views.ActivityPopup
         /// <param name="resultList"></param>
         public void CreateResultCards(IEnumerable<IDraggableCardView> runCardViews, IEnumerable<IBaseCard> resultList)
         {
+            ResultViews.Clear();
+            
             foreach (var cardView in runCardViews)
             {
                 ResultViews.Add(cardView);

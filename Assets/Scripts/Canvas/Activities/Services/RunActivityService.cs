@@ -27,6 +27,12 @@ namespace Canvas.Activities.Services
             HideDroppedCards();
         }
 
+        public void Reset()
+        {
+            ResultCards.Clear();
+            RunCardViews.Clear();
+        }
+
         /// <summary>
         /// Hide dropped cards
         /// </summary>
