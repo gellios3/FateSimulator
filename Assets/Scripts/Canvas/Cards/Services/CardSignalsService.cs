@@ -2,8 +2,8 @@
 using Canvas.Cards.Signals;
 using Canvas.Popups.Signals;
 using Canvas.Popups.Signals.Activity;
-using Canvas.Services;
 using ScriptableObjects;
+using Services;
 using Zenject;
 
 namespace Canvas.Cards.Services

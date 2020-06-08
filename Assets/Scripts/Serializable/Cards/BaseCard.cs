@@ -15,7 +15,6 @@ namespace Serializable.Cards
         public ushort Id { get; }
         public AllItemsDataBase DataBase { get; }
         public byte Level { get; }
-        public Vector2 PosOnTable { get; }
         public string CardName { get; }
         public string ShortDescription { get; }
         public CardType Type { get; }
@@ -29,7 +28,6 @@ namespace Serializable.Cards
             DataBase = cardObj.DataBase;
             Level = cardObj.Level;
             CardName = cardObj.CardName;
-            PosOnTable = cardObj.PosOnTable;
             ShortDescription = cardObj.ShortDescription;
             Type = cardObj.Type;
             CardIcon = cardObj.CardIcon;

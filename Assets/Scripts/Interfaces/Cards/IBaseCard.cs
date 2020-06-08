@@ -14,7 +14,6 @@ namespace Interfaces.Cards
     public interface IBaseCard : IBaseObj
     {
         byte Level { get; }
-        Vector2 PosOnTable { get; }
         string CardName { get; }
         string ShortDescription { get; }
         CardType Type { get; }

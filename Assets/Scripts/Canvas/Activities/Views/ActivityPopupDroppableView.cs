@@ -4,9 +4,9 @@ using Canvas.Cards.Services;
 using Canvas.Cards.Signals;
 using Canvas.Common;
 using Canvas.Popups.Signals.Activity;
-using Canvas.Services;
 using Enums;
 using Interfaces.Conditions.Cards;
+using Services;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -26,7 +26,6 @@ namespace Canvas.Activities.Views
         [Inject] private ConditionsService ConditionsService { get; }
         [Inject] private CardActionsService CardActionsService { get; }
         [Inject] private CardViewsService CardViewsService { get; }
-        [Inject] private RunActivityService RunActivityService { get; }
 
         private ICardCondition conditionObj;
         private SignalBus SignalBus { get; set; }
@@ -44,15 +43,10 @@ namespace Canvas.Activities.Views
         /// <summary>
         /// On close popup 
         /// </summary>
-        /// <param name="status"></param>
-        public void OnCloseActivityPopup(ActivityStatus status)
+        public void OnCloseActivityPopup()
         {
             if (DropCardId == 0)
                 return;
-
-            if (status == ActivityStatus.Finish)
-                RunActivityService.SetStatusToDroppedCards(CardStatus.Distress);
-
             CardActionsService.DropOnActivity(DropCardCardView, false);
             CardActionsService.ReturnBack(DropCardCardView);
             DropCardId = 0;

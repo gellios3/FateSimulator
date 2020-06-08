@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Canvas.Cards.Views;
 using Interfaces.Cards;
-using ScriptableObjects.Cards;
 using UnityEngine;
 using Zenject;
 
@@ -14,7 +13,7 @@ namespace Canvas.Cards.Spawners
     {
         #region Parameters
 
-        [Inject] private List<BaseCardObj> CardList { get; }
+        [Inject] private List<ICardData> CardList { get; }
         [Inject] private Transform CardParent { get; }
         [Inject] private CardViewSpawner CardViewSpawner { get; }
 
@@ -31,9 +30,9 @@ namespace Canvas.Cards.Spawners
         {
             foreach (var cardObj in CardList)
             {
-                var topCard = CardViewSpawner.CreateViewCard(cardObj);
-                var cardGameObject = draggableCardFactory.Create(cardObj, topCard);
-                cardGameObject.SetStartPos(new Vector3(cardObj.PosOnTable.x, cardObj.PosOnTable.y, -3), CardParent);
+                var topCard = CardViewSpawner.CreateViewCard(cardObj.BaseCard);
+                var cardGameObject = draggableCardFactory.Create(cardObj.BaseCard, topCard);
+                cardGameObject.SetStartPos(new Vector3(0, 0, -3), CardParent);
             }
         }
 
@@ -45,7 +44,7 @@ namespace Canvas.Cards.Spawners
         {
             var topCard = CardViewSpawner.CreateViewCard(baseCard);
             var cardGameObject = draggableCardFactory.Create(baseCard, topCard);
-            cardGameObject.SetStartPos(new Vector3(baseCard.PosOnTable.x, baseCard.PosOnTable.y, -3), CardParent);
+            cardGameObject.SetStartPos(new Vector3(0, 0, -3), CardParent);
             return cardGameObject;
         }
     }

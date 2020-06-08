@@ -8,9 +8,9 @@ using Canvas.Cards.Interfaces;
 using Canvas.Cards.Signals;
 using Canvas.Common;
 using Canvas.Popups.Signals.Activity;
-using Canvas.Services;
 using Enums;
 using Interfaces.Activity;
+using Services;
 using UnityEngine;
 using Zenject;
 
@@ -69,6 +69,11 @@ namespace Canvas.Activities.Views
             droppableView.ReturnDropCard();
             SetStatus(Status.Normal);
             CurrentActivity = null;
+        }
+
+        public void OnFinishActivity()
+        {
+            ActivityService.OnFinishActivity();
         }
 
         /// <summary>

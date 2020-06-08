@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using Interfaces;
-using ScriptableObjects.Cards;
+using Interfaces.Cards;
+using Serializable;
+using Serializable.Cards;
 using UnityEngine;
 using Zenject;
 
@@ -12,12 +14,18 @@ namespace ScriptableObjects
     [CreateAssetMenu(fileName = "SaveGameObj", menuName = "", order = 0)]
     public class GameSaveObj : ScriptableObjectInstaller<GameSaveObj>, ISaveGameObj
     {
+
         /// <summary>
-        /// Active card list
+        /// Card data list
         /// </summary>
-        public List<BaseCardObj> cardList;
-        public List<BaseCardObj> CardList => cardList;
-        
+        public List<CardData> cardDataList;
+        public List<ICardData> CardDataList { get; private set; } 
+
+        /// <summary>
+        /// Party members
+        /// </summary>
+        public List<PartyMember> partyMembers;
+        public List<IPartyMember> PartyMembers { get; private set; } 
         /// <summary>
         /// All Items Data Base
         /// </summary>
@@ -29,7 +37,10 @@ namespace ScriptableObjects
         /// </summary>
         public override void InstallBindings()
         {
-            Container.BindInstance(CardList).IfNotBound();
+            CardDataList = new List<ICardData>(cardDataList);
+            PartyMembers = new List<IPartyMember>(partyMembers);
+            
+            Container.BindInstance(CardDataList).IfNotBound();
             Container.BindInstance(DataBase).IfNotBound();
         }
     }

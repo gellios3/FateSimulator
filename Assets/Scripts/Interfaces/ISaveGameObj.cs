@@ -1,13 +1,17 @@
 ﻿using System.Collections.Generic;
+using Interfaces.Cards;
 using ScriptableObjects;
 using ScriptableObjects.Cards;
+using Serializable;
 
 namespace Interfaces
 {
     public interface ISaveGameObj
     {
-        List<BaseCardObj> CardList { get; }
-        
         AllItemsDataBase DataBase { get; }
+        
+        List<ICardData> CardDataList { get; }
+        
+        List<IPartyMember> PartyMembers { get; }
     }
 }

@@ -5,7 +5,7 @@ using ScriptableObjects;
 using ScriptableObjects.Conditions.Results;
 using Zenject;
 
-namespace Canvas.Services
+namespace Services
 {
     /// <summary>
     /// Results service

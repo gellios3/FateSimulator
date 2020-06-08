@@ -2,10 +2,9 @@
 using Interfaces.Conditions;
 using Interfaces.Conditions.Cards;
 using ScriptableObjects;
-using UnityEngine;
 using Zenject;
 
-namespace Canvas.Services
+namespace Services
 {
     /// <summary>
     /// Conditions service

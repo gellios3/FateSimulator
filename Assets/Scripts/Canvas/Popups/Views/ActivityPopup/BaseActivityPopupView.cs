@@ -99,6 +99,8 @@ namespace Canvas.Popups.Views.ActivityPopup
         private void OnClosePopup()
         {
             activitiesPanelView.OnClosePopup(activityStatus);
+            if(activityStatus == ActivityStatus.Finish)
+                ActivityView.OnFinishActivity();
             ActivityView.RefreshActivity();
             Hide();
         }

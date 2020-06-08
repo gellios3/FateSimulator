@@ -13,13 +13,6 @@ namespace ScriptableObjects.Cards
     [CreateAssetMenu(fileName = "New Card Obj", menuName = "Cards/Create Card Obj", order = 0)]
     public class BaseCardObj : BaseObj, IBaseCard
     {
-
-        /// <summary>
-        /// Position on table
-        /// </summary>
-        public Vector2 posOnTable;
-        public Vector2 PosOnTable => posOnTable;
-
         /// <summary>
         /// Card name
         /// </summary>

@@ -12,5 +12,6 @@ namespace Canvas.Activities.Interfaces
         Action RunTimer { get; }
         void RunActivity(IEnumerable<IDraggableCardView> dropCardViews);
         void RefreshActivity();
+        void OnFinishActivity();
     }
 }

@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using Canvas.Cards.Interfaces;
 using Canvas.Cards.Services;
-using Canvas.Services;
 using Enums;
 using Interfaces.Activity;
 using Interfaces.Cards;
+using Services;
 using UnityEngine;
 using Zenject;
 
@@ -63,8 +63,7 @@ namespace Canvas.Activities.Services
                     ResultCards.Add(findCard);
                 }
             }
-
-            Debug.LogError($"RunCardViews {RunCardViews.Count} ResultCards {ResultCards.Count}");
+            
             activityPopup.ShowResultPopup(activity, RunCardViews, ResultCards);
         }
 

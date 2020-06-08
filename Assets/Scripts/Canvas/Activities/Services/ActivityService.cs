@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using Canvas.Cards.Interfaces;
+using Enums;
 using Interfaces.Activity;
 using ScriptableObjects;
+using UnityEngine;
 using Zenject;
 
 namespace Canvas.Activities.Services
@@ -65,6 +67,11 @@ namespace Canvas.Activities.Services
                 return;
             RunActivityService.Init(dropCardViews);
             activity.RunTimer.Invoke();
+        }
+
+        public void OnFinishActivity()
+        {
+            RunActivityService.SetStatusToDroppedCards(CardStatus.Distress);
         }
 
         public void OnTimerFinish(int index, ushort activityId)

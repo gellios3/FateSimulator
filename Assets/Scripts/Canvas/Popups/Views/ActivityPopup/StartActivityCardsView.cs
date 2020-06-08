@@ -64,7 +64,7 @@ namespace Canvas.Popups.Views.ActivityPopup
         {
             foreach (var droppableView in droppableViews)
             {
-                droppableView.OnCloseActivityPopup(status);
+                droppableView.OnCloseActivityPopup();
             }
         }
 
