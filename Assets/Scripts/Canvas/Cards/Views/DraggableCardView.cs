@@ -16,9 +16,6 @@ namespace Canvas.Cards.Views
     {
         #region Parameters
 
-        public override ushort CardId => CardObj.Id;
-        private IBaseCard CardObj { get; set; }
-        
         [SerializeField] private Button openPopupBtn;
         [Inject] private CardSignalsService CardSignalsService { get; }
         [Inject] private CardViewsService CardViewsService { get; }
@@ -28,19 +25,19 @@ namespace Canvas.Cards.Views
         #endregion
 
         [Inject]
-        public void Construct(IBaseCard cardObj, ICardView topCard)
+        public void Construct(ICardData cardData, ICardView topCard)
         {
-            CardObj = cardObj;
+            CardData = cardData;
             TopCard = topCard;
             CardViewsService.AddCardView(this);
-            CardAppearanceService.Init(cardObj.StatusPresets);
+            CardAppearanceService.Init(cardData.BaseCard.StatusPresets);
 
             InitActions();
             openPopupBtn.onClick.AddListener(() =>
             {
                 if (!DraggableCardService.HasStartDrag)
                 {
-                    CardSignalsService.ShowPopup(CardId);
+                    CardSignalsService.ShowPopup(CardData.BaseCard.Id);
                 }
             });
 
@@ -70,19 +67,6 @@ namespace Canvas.Cards.Views
         {
             base.Show();
             TopCard.Show();
-        }
-
-        /// <summary>
-        /// Set start position
-        /// </summary>
-        /// <param name="pos"></param>
-        /// <param name="parent"></param>
-        public void SetStartPos(Vector3 pos, Transform parent)
-        {
-            var tempTransform = transform;
-            tempTransform.parent = parent;
-            tempTransform.localPosition = pos;
-            tempTransform.localRotation = Quaternion.identity;
         }
 
         #region Drag Events
@@ -121,7 +105,7 @@ namespace Canvas.Cards.Views
         {
             if (DraggableCardService.HasOutDrag())
                 ReturnBack(false);
-            CardSignalsService.EndDragCard(CardObj.Id);
+            CardSignalsService.EndDragCard(CardData.BaseCard.Id);
             if (!DraggableCardService.CanEndDrag())
                 return;
             TopCard.ReturnDefaultCartShadow();
@@ -209,7 +193,7 @@ namespace Canvas.Cards.Views
         /// On card timer finish
         /// </summary>
         /// <param name="finishStatus"></param>
-        protected override void OnCardTimerFinish(CardStatus finishStatus)
+        private void OnCardTimerFinish(CardStatus finishStatus)
         {
             // @todo finish timer status logic 
             switch (finishStatus)
@@ -231,7 +215,7 @@ namespace Canvas.Cards.Views
         /// <summary>
         /// Zenject Factory for Instantiate
         /// </summary>
-        public class Factory : PlaceholderFactory<IBaseCard, ICardView, DraggableCardView>
+        public class Factory : PlaceholderFactory<ICardData, ICardView, DraggableCardView>
         {
         }
     }

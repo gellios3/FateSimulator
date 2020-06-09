@@ -38,9 +38,9 @@ namespace Canvas.Cards.Installers
             Container.BindInstance(cardViewParent).AsTransient().WhenInjectedInto<CardViewSpawner>();
             Container.Bind<CardViewSpawner>().AsSingle();
 
-            Container.BindFactory<IBaseCard, ICardView, DraggableCardView, DraggableCardView.Factory>()
+            Container.BindFactory<ICardData, ICardView, DraggableCardView, DraggableCardView.Factory>()
                 .FromComponentInNewPrefab(cardPrefab);
-            Container.BindFactory<IBaseCard, CardView, CardView.Factory>().FromComponentInNewPrefab(cardViewPrefab);
+            Container.BindFactory<ICardData, CardView, CardView.Factory>().FromComponentInNewPrefab(cardViewPrefab);
         }
     }
 }

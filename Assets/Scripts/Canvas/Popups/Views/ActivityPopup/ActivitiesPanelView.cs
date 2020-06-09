@@ -74,7 +74,7 @@ namespace Canvas.Popups.Views.ActivityPopup
         /// <summary>
         /// Show result cards
         /// </summary>
-        public void ShowResultCards(IEnumerable<IDraggableCardView> runCardViews, IEnumerable<IBaseCard> resultList)
+        public void ShowResultCards(IEnumerable<IDraggableCardView> runCardViews, IEnumerable<ICardData> resultList)
         {
             startActivityCardsView.Hide();
             resultActivityCardsView.Show();

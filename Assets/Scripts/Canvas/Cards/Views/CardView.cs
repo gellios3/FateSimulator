@@ -20,8 +20,7 @@ namespace Canvas.Cards.Views
     public class CardView : BaseView, ICardView
     {
         #region Punlic Parameters
-
-        public IBaseCard BaseCard { get; private set; }
+        private ICardData CardData { get; set; }
         public Action<CardStatus> TimerFinish { get; set; }
         public CardStatusPreset CurrentStatus { get; private set; }
 
@@ -35,7 +34,7 @@ namespace Canvas.Cards.Views
         [SerializeField] private Image iconImg;
         [SerializeField] private ProceduralImage backgroundImg;
         [SerializeField] private TextMeshProUGUI title;
-        [SerializeField] private ColorsPresetImage borderImg;
+        [SerializeField] private ColorsPresetImageView borderImg;
         [SerializeField] private TimerView cardTimer;
 
         private Vector2 defaultSizeDelta;
@@ -43,9 +42,9 @@ namespace Canvas.Cards.Views
         #endregion
 
         [Inject]
-        public void Construct(IBaseCard cardObj)
+        public void Construct(ICardData cardObj)
         {
-            BaseCard = cardObj;
+            CardData = cardObj;
             cardTimer.TimeFinish += OnTimerFinish;
             defaultSizeDelta = mask.sizeDelta;
         }
@@ -103,9 +102,9 @@ namespace Canvas.Cards.Views
         public void SetCardView(CardStatusPreset preset)
         {
             SetStatusPreset(preset);
-            iconImg.sprite = BaseCard.CardIcon;
+            iconImg.sprite = CardData.BaseCard.CardIcon;
             ColorHelper.SetImgColor(backgroundImg, preset.color);
-            title.text = BaseCard.CardName;
+            title.text = CardData.BaseCard.CardName;
         }
 
         /// <summary>
@@ -158,7 +157,7 @@ namespace Canvas.Cards.Views
             CurrentStatus = preset;
         }
 
-        public class Factory : PlaceholderFactory<IBaseCard, CardView>
+        public class Factory : PlaceholderFactory<ICardData, CardView>
         {
         }
     }

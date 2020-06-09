@@ -1,18 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using AbstractViews;
 using DG.Tweening;
 using Enums;
 using Serializable.Common;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Canvas
+namespace AbstractViews
 {
     /// <summary>
     /// Color preset Image 
     /// </summary>
-    public class ColorsPresetImage : BaseView
+    public class ColorsPresetImageView : BaseView
     {
         [SerializeField] private Image sourceImg;
         [SerializeField] private List<ColorPreset> presets;

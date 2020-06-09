@@ -20,7 +20,7 @@ namespace Canvas.Cards.Services
         /// <returns></returns>
         public IDraggableCardView GetDraggableCardById(ushort id)
         {
-            return id > 0 ? DraggableCardViews.Find(view => view.CardId == id) : null;
+            return id > 0 ? DraggableCardViews.Find(view => view.CardData.BaseCard.Id == id) : null;
         }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace Canvas.Cards.Services
         /// <returns></returns>
         public IEnumerable<IDraggableCardView> GetAllCardsById(ushort id)
         {
-            return id > 0 ? DraggableCardViews.FindAll(view => view.CardId == id) : null;
+            return id > 0 ? DraggableCardViews.FindAll(view => view.CardData.BaseCard.Id == id) : null;
         }
 
         /// <summary>

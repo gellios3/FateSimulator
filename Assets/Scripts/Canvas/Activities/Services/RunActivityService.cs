@@ -4,8 +4,9 @@ using Canvas.Cards.Services;
 using Enums;
 using Interfaces.Activity;
 using Interfaces.Cards;
+using ScriptableObjects.Cards;
+using Serializable.Cards;
 using Services;
-using UnityEngine;
 using Zenject;
 
 namespace Canvas.Activities.Services
@@ -18,7 +19,7 @@ namespace Canvas.Activities.Services
         [Inject] private CardActionsService CardActionsService { get; }
         [Inject] private ResultsService ResultsService { get; }
         [Inject] private ActivityViewsService ActivityViewsService { get; }
-        private List<IBaseCard> ResultCards { get; set; } = new List<IBaseCard>();
+        private List<ICardData> ResultCards { get; set; } = new List<ICardData>();
         private List<IDraggableCardView> RunCardViews { get; set; } = new List<IDraggableCardView>();
 
         public void Init(List<IDraggableCardView> runCardViews)
@@ -50,7 +51,7 @@ namespace Canvas.Activities.Services
         public void OnFinishActivity(int index, IBaseActivity activity)
         {
             ShowDroppedCards();
-            ResultCards = new List<IBaseCard>();
+            ResultCards = new List<ICardData>();
             var activityPopup = ActivityViewsService.GetActivityPopupByIndex(index);
 
             foreach (var resultObj in activity.ResultsList)
@@ -58,18 +59,25 @@ namespace Canvas.Activities.Services
                 var findCard = ResultsService.TryFindCardByResultObj(resultObj);
                 if (findCard != null)
                 {
-                    ResultCards.Add(findCard);
+                    ResultCards.Add(new CardData
+                    {
+                        baseCard = findCard as BaseCardObj
+                    });
                 }
             }
+
             foreach (var resultObj in activity.OptionalResultsList)
             {
                 var findCard = ResultsService.TryFindCardByResultObj(resultObj);
                 if (findCard != null)
                 {
-                    ResultCards.Add(findCard);
+                    ResultCards.Add(new CardData
+                    {
+                        baseCard = findCard as BaseCardObj
+                    });
                 }
             }
-            
+
             activityPopup.ShowResultPopup(activity, RunCardViews, ResultCards);
         }
 

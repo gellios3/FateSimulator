@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Canvas.Cards.Signals;
 using Canvas.Cards.Views;
 using Interfaces.Cards;
 using UnityEngine;
@@ -16,23 +17,32 @@ namespace Canvas.Cards.Spawners
         [Inject] private List<ICardData> CardList { get; }
         [Inject] private Transform CardParent { get; }
         [Inject] private CardViewSpawner CardViewSpawner { get; }
+        [Inject] private SignalBus SignalBus { get; }
 
         private readonly DraggableCardView.Factory draggableCardFactory;
 
         #endregion
+        
+        public void Initialize()
+        {
+            SignalBus.Subscribe<InstallDraggableCardsSignal>(InstallDraggableCards);
+        }
 
         public CardDraggableSpawner(DraggableCardView.Factory draggableCardFactory)
         {
             this.draggableCardFactory = draggableCardFactory;
         }
 
-        public void Initialize()
+        public void InstallDraggableCards()
         {
             foreach (var cardObj in CardList)
             {
-                var topCard = CardViewSpawner.CreateViewCard(cardObj.BaseCard);
-                var cardGameObject = draggableCardFactory.Create(cardObj.BaseCard, topCard);
-                cardGameObject.SetStartPos(new Vector3(0, 0, -3), CardParent);
+                var topCard = CardViewSpawner.CreateViewCard(cardObj);
+                var cardGameObject = draggableCardFactory.Create(cardObj, topCard);
+                var transform = cardGameObject.transform;
+                transform.parent = CardParent;
+                transform.localRotation = Quaternion.identity;
+                SignalBus.Fire(new SetCardToCommonInventorySignal {SourceView = cardGameObject});
             }
         }
 
@@ -40,12 +50,17 @@ namespace Canvas.Cards.Spawners
         /// Create result cards
         /// </summary>
         /// <param name="baseCard"></param>
-        public DraggableCardView CreateResultCard(IBaseCard baseCard)
+        public DraggableCardView CreateResultCard(ICardData baseCard)
         {
             var topCard = CardViewSpawner.CreateViewCard(baseCard);
             var cardGameObject = draggableCardFactory.Create(baseCard, topCard);
-            cardGameObject.SetStartPos(new Vector3(0, 0, -3), CardParent);
+            var transform = cardGameObject.transform;
+            transform.parent = CardParent;
+            transform.localRotation = Quaternion.identity;
+            SignalBus.Fire(new SetCardToCommonInventorySignal {SourceView = cardGameObject});
             return cardGameObject;
         }
+
+     
     }
 }

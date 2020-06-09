@@ -9,7 +9,6 @@ namespace Canvas.Cards.Interfaces
 {
     public interface ICardView: IBaseView
     {
-        IBaseCard BaseCard { get; }
         Action<CardStatus> TimerFinish { get; set; }
         CardStatusPreset CurrentStatus { get; }
         void SetCardPosition(Vector3 pos);

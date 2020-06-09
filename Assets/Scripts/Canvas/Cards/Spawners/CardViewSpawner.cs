@@ -23,7 +23,7 @@ namespace Canvas.Cards.Spawners
         /// </summary>
         /// <param name="cardObj"></param>
         /// <returns></returns>
-        public CardView CreateViewCard(IBaseCard cardObj)
+        public CardView CreateViewCard(ICardData cardObj)
         {
             var cardView = cardViewFactory.Create(cardObj);
             var transform = cardView.transform;

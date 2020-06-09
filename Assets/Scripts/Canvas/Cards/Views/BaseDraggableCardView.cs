@@ -2,6 +2,7 @@
 using AbstractViews;
 using Canvas.Cards.Interfaces;
 using Enums;
+using Interfaces.Cards;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -14,8 +15,7 @@ namespace Canvas.Cards.Views
         IEndDragHandler
     {
         #region Actions
-
-        public abstract ushort CardId { get; }
+        public ICardData CardData { get; protected set;}
         public ICardView TopCard { get; protected set; }
         public Action<bool> OnOutArea { get; private set; }
         public Action<bool> OnDropOnActivity { get; private set; }
@@ -53,7 +53,6 @@ namespace Canvas.Cards.Views
         protected abstract void ReturnBack(bool obj);
 
         protected abstract void HighlightCard();
-        protected abstract void OnCardTimerFinish(CardStatus status);
 
         #endregion
 

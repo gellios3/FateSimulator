@@ -13,10 +13,13 @@ namespace Serializable.Cards
 
         public InventoryType inventoryType;
         public InventoryType InventoryType => inventoryType;
-
-        public ushort inventoryIndex;
-        public ushort InventoryIndex => inventoryIndex;
         
+        public byte rowIndex;
+        public byte RowIndex => rowIndex;
+        
+        public byte colIndex;
+        public byte ColIndex => colIndex;
+
         public ushort ownerId;
         public ushort OwnerId => ownerId;
     }

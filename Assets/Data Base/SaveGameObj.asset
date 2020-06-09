@@ -15,35 +15,43 @@ MonoBehaviour:
   cardDataList:
   - baseCard: {fileID: 11400000, guid: caf4a21c8d88c394b843de757b7592dd, type: 2}
     inventoryType: 0
-    inventoryIndex: 0
+    rowIndex: 0
+    colIndex: 0
     ownerId: 0
   - baseCard: {fileID: 11400000, guid: ed869cac22ee7204da0081d33f9b2aec, type: 2}
     inventoryType: 0
-    inventoryIndex: 1
+    rowIndex: 0
+    colIndex: 1
     ownerId: 0
   - baseCard: {fileID: 11400000, guid: 05c2825b805cc444eb685fa8eee9d6d3, type: 2}
     inventoryType: 0
-    inventoryIndex: 2
+    rowIndex: 0
+    colIndex: 2
     ownerId: 0
   - baseCard: {fileID: 11400000, guid: 94554ea81f66d714282feb0395499971, type: 2}
     inventoryType: 0
-    inventoryIndex: 3
+    rowIndex: 0
+    colIndex: 3
     ownerId: 0
   - baseCard: {fileID: 11400000, guid: 904eb6eaa6f4ee2459d201742c8d54dd, type: 2}
     inventoryType: 0
-    inventoryIndex: 4
+    rowIndex: 0
+    colIndex: 4
     ownerId: 0
   - baseCard: {fileID: 11400000, guid: ed869cac22ee7204da0081d33f9b2aec, type: 2}
     inventoryType: 0
-    inventoryIndex: 5
+    rowIndex: 0
+    colIndex: 5
     ownerId: 0
   - baseCard: {fileID: 11400000, guid: c4fcc054fdc4911438c52f04e215f6b5, type: 2}
     inventoryType: 0
-    inventoryIndex: 6
+    rowIndex: 0
+    colIndex: 6
     ownerId: 0
   - baseCard: {fileID: 11400000, guid: 79b7907e1a15f1742a1bf6d0d51656bf, type: 2}
     inventoryType: 0
-    inventoryIndex: 7
+    rowIndex: 0
+    colIndex: 7
     ownerId: 0
   partyMembers:
   - id: 1

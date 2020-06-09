@@ -1,10 +1,9 @@
-﻿using AbstractViews;
-using Canvas.Cards.Services;
+﻿using Canvas.Cards.Services;
 using Canvas.Cards.Views;
 using UnityEngine.EventSystems;
 using Zenject;
 
-namespace Canvas
+namespace AbstractViews
 {
     public class NonDraggableAreaView : BaseView, IPointerEnterHandler, IPointerExitHandler
     {
@@ -19,7 +18,7 @@ namespace Canvas
             var draggableView = eventData.pointerDrag.GetComponent<DraggableCardView>();
             if (draggableView == null)
                 return;
-            tempCardId = draggableView.CardId;
+            tempCardId = draggableView.CardData.BaseCard.Id;
             CardActionsService.OnOutAreaById(tempCardId, true);
         }
 

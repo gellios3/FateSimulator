@@ -60,7 +60,7 @@ namespace Canvas.Popups.Views.ActivityPopup
         /// <param name="runCardViews"></param>
         /// <param name="resultList"></param>
         public void ShowResultPopup(IBaseActivity baseActivity, IEnumerable<IDraggableCardView> runCardViews,
-            IEnumerable<IBaseCard> resultList)
+            IEnumerable<ICardData> resultList)
         {
             activityStatus = ActivityStatus.Finish;
             activitiesPanelView.ShowResultCards(runCardViews, resultList);

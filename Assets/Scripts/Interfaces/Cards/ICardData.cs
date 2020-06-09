@@ -6,7 +6,8 @@ namespace Interfaces.Cards
     {
         IBaseCard BaseCard { get; }
         InventoryType InventoryType { get; }
-        ushort InventoryIndex { get; }
+        byte RowIndex { get; }
+        byte ColIndex { get; }
         ushort OwnerId { get; }
     }
 }

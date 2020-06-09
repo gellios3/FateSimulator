@@ -22,7 +22,7 @@ namespace AbstractViews
         public ushort DropCardId { get; set; }
 
         [SerializeField] private Image bgImg;
-        [SerializeField] protected ColorsPresetImage borderImg;
+        [SerializeField] protected ColorsPresetImageView borderImg;
 
         protected IDraggableCardView DropCardCardView; 
         [Inject] private CardActionsService CardActionsService { get; }
@@ -62,7 +62,7 @@ namespace AbstractViews
             DropCardCardView = eventData.pointerDrag.GetComponent<DraggableCardView>();
             if (DropCardCardView == null)
                 return;
-            DropCardId = DropCardCardView.CardId;
+            DropCardId = DropCardCardView.CardData.BaseCard.Id;
             OnDrop();
         }
 

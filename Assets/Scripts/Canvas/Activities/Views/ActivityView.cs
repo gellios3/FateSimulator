@@ -28,7 +28,7 @@ namespace Canvas.Activities.Views
         public Action RunTimer { get; private set; }
 
         [SerializeField] private ActivityDroppableView droppableView;
-        [SerializeField] private ColorsPresetImage borderImg;
+        [SerializeField] private ColorsPresetImageView borderImg;
         [SerializeField] private TimerView timerView;
 
         private IBaseActivity CurrentActivity { get; set; }
@@ -136,7 +136,7 @@ namespace Canvas.Activities.Views
         /// <param name="obj"></param>
         private void OnStartDragCard(StartDragCardSignal obj)
         {
-            var condition = ConditionsService.TryFindConditionByCardId(obj.DraggableCardView.CardId);
+            var condition = ConditionsService.TryFindConditionByCardId(obj.DraggableCardView.CardData.BaseCard.Id);
             if (condition == null)
             {
                 droppableView.SetDroppable(false);

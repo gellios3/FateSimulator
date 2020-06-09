@@ -1,6 +1,7 @@
 ﻿using System;
 using Enums;
 using Interfaces;
+using Interfaces.Cards;
 using UnityEngine;
 
 namespace Canvas.Cards.Interfaces
@@ -10,7 +11,7 @@ namespace Canvas.Cards.Interfaces
     /// </summary>
     public interface IDraggableCardView : IBaseView
     {
-        ushort CardId { get; }
+        ICardData CardData { get; }
         ICardView TopCard { get; }
         Action<bool> OnDropOnActivity { get; }
         Action<bool> OnOutArea { get; }

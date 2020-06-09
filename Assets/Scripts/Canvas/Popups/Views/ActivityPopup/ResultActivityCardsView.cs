@@ -22,7 +22,7 @@ namespace Canvas.Popups.Views.ActivityPopup
         /// </summary>
         /// <param name="runCardViews"></param>
         /// <param name="resultList"></param>
-        public void CreateResultCards(IEnumerable<IDraggableCardView> runCardViews, IEnumerable<IBaseCard> resultList)
+        public void CreateResultCards(IEnumerable<IDraggableCardView> runCardViews, IEnumerable<ICardData> resultList)
         {
             ResultViews.Clear();
             

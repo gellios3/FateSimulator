@@ -84,7 +84,7 @@ namespace Canvas.Activities.Views
         {
             if (conditionObj == null)
                 return;
-            var canDrop = ConditionsService.CheckCondition(conditionObj.Id, obj.DraggableCardView.CardId) &&
+            var canDrop = ConditionsService.CheckCondition(conditionObj.Id, obj.DraggableCardView.CardData.BaseCard.Id) &&
                           StatusHelper.IsUseableStatus(obj.DraggableCardView.TopCard.CurrentStatus.cardStatus);
             SetDroppable(canDrop);
             if (canDrop)

@@ -34,5 +34,7 @@ public class CommonGameInstaller : MonoInstaller
     private void InitActivitySignals()
     {
         Container.DeclareSignal<FindCardForActivitySignal>();
+        Container.DeclareSignal<SetCardToCommonInventorySignal>();
+        Container.DeclareSignal<InstallDraggableCardsSignal>();
     }
 }
