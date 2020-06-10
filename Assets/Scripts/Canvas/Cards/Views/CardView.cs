@@ -47,6 +47,7 @@ namespace Canvas.Cards.Views
             CardData = cardObj;
             cardTimer.TimeFinish += OnTimerFinish;
             defaultSizeDelta = mask.sizeDelta;
+            HideCartShadow();
         }
 
         #region Card timer

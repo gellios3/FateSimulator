@@ -59,10 +59,7 @@ namespace Canvas.Activities.Services
                 var findCard = ResultsService.TryFindCardByResultObj(resultObj);
                 if (findCard != null)
                 {
-                    ResultCards.Add(new CardData
-                    {
-                        baseCard = findCard as BaseCardObj
-                    });
+                    ResultCards.Add(new CardData {baseCard = findCard as BaseCardObj});
                 }
             }
 
@@ -71,10 +68,7 @@ namespace Canvas.Activities.Services
                 var findCard = ResultsService.TryFindCardByResultObj(resultObj);
                 if (findCard != null)
                 {
-                    ResultCards.Add(new CardData
-                    {
-                        baseCard = findCard as BaseCardObj
-                    });
+                    ResultCards.Add(new CardData {baseCard = findCard as BaseCardObj});
                 }
             }
 

@@ -1,9 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Dynamic;
 using Canvas.Cards.Signals;
 using Canvas.Inventory.Views;
-using Services;
-using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
@@ -38,10 +35,9 @@ namespace Canvas.Inventory.Services
         private void SetCommonCards(SetCardToCommonInventorySignal signal)
         {
             var sourceView = signal.SourceView;
-            var rowIndex = sourceView.CardData.RowIndex;
-            var colIndex = sourceView.CardData.ColIndex;
+            var rowIndex = sourceView.CardData.InventoryData.InventoryPos.RowIndex;
+            var colIndex = sourceView.CardData.InventoryData.InventoryPos.ColIndex;
             var position = InventoryViews[rowIndex][colIndex].transform.position;
-            Debug.LogError($"SetCommonCards {rowIndex} {colIndex} {position}");
             sourceView.OnSetPosition.Invoke(position);
         }
 

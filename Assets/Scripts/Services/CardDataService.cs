@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Canvas.Cards.Interfaces;
-using Canvas.Cards.Signals;
 using Enums;
 using Interfaces.Cards;
 using Zenject;
@@ -15,12 +14,9 @@ namespace Services
         
         public List<IDraggableCardView> CardViews { get; }
 
-
-        
-
         public IEnumerable<IDraggableCardView> GetCommonCards()
         {
-            return CardViews.FindAll(view => view.CardData.InventoryType == InventoryType.Common);
+            return CardViews.FindAll(view => view.CardData.InventoryData.InventoryType == InventoryType.Common);
         }
     }
 }
