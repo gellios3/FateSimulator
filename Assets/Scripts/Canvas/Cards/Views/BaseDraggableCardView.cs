@@ -21,7 +21,7 @@ namespace Canvas.Cards.Views
         public Action<bool> OnDropOnActivity { get; private set; }
         public Action OnDropCard { get; private set; }
         public Action<Vector3> OnSetPosition { get; private set; }
-        public Action<bool> OnReturnBack { get; private set; }
+        public Action OnReturnBack { get; private set; }
         public Action OnHighlight { get; private set; }
         public Action<CardStatus> OnChangeStatus { get; private set; }
 
@@ -41,25 +41,17 @@ namespace Canvas.Cards.Views
         #region Action Methods
         
         protected abstract void ChangeCardStatus(CardStatus obj);
-
         protected abstract void SetDropOnActivity(bool value);
-
         protected abstract void SetOutArea(bool value);
-
         protected abstract void SetPosition(Vector3 obj);
-
         protected abstract void DropCard();
-
-        protected abstract void ReturnBack(bool obj);
-
+        protected abstract void ReturnBack();
         protected abstract void HighlightCard();
 
         #endregion
 
         public abstract void OnBeginDrag(PointerEventData eventData);
-
         public abstract void OnDrag(PointerEventData eventData);
-
         public abstract void OnEndDrag(PointerEventData eventData);
     }
 }

@@ -17,7 +17,7 @@ namespace Canvas.Cards.Interfaces
         Action<bool> OnOutArea { get; }
         Action<Vector3> OnSetPosition { get; }
         Action OnDropCard { get; }
-        Action<bool> OnReturnBack { get; }
+        Action OnReturnBack { get; }
         Action OnHighlight { get; }
         Action<CardStatus> OnChangeStatus { get; }
     }

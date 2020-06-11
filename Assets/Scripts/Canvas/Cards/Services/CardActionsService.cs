@@ -76,9 +76,9 @@ namespace Canvas.Cards.Services
         /// </summary>
         /// <param name="view"></param>
         /// <param name="value"></param>
-        public void ReturnBack(IDraggableCardView view, bool value = false)
+        public void ReturnBack(IDraggableCardView view)
         {
-            view?.OnReturnBack.Invoke(value);
+            view?.OnReturnBack.Invoke();
         }
 
         /// <summary>
