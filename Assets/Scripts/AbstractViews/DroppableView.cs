@@ -1,5 +1,4 @@
 ﻿using System;
-using Canvas;
 using Canvas.Cards.Interfaces;
 using Canvas.Cards.Services;
 using Canvas.Cards.Views;
@@ -26,7 +25,7 @@ namespace AbstractViews
 
         protected IDraggableCardView DropCardCardView; 
         [Inject] private CardActionsService CardActionsService { get; }
-        protected bool CanDropCard { get; private set; } = true;
+        private bool CanDropCard { get; set; } = true;
 
         #endregion
 
@@ -37,7 +36,7 @@ namespace AbstractViews
         public void SetDroppable(bool status)
         {
             CanDropCard = status;
-            bgImg.raycastTarget = status;
+            // bgImg.raycastTarget = status;
         }
 
         /// <summary>

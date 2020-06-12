@@ -35,6 +35,8 @@ namespace Canvas.Inventory.Services
         private void SetCommonCards(SetCardToCommonInventorySignal signal)
         {
             var sourceView = signal.SourceView;
+            if (sourceView.CardData.InventoryData == null) 
+                return;
             var rowIndex = sourceView.CardData.InventoryData.InventoryPos.RowIndex;
             var colIndex = sourceView.CardData.InventoryData.InventoryPos.ColIndex;
             var position = InventoryViews[rowIndex][colIndex].transform.position;

@@ -42,6 +42,7 @@ namespace Canvas.Cards.Views
             });
 
             TopCard.TimerFinish += OnCardTimerFinish;
+            CardSignalsService.Init(CardData);
         }
 
         private void Start()
@@ -101,10 +102,10 @@ namespace Canvas.Cards.Views
         /// <param name="eventData"></param>
         public override void OnEndDrag(PointerEventData eventData)
         {
-            if (DraggableCardService.HasOutDrag() || !DraggableCardService.HasDrop) 
+            if (DraggableCardService.HasOutDrag() || !DraggableCardService.HasDrop)
                 ReturnBack();
             CardSignalsService.EndDragCard(CardData.BaseCard.Id);
-            if (!DraggableCardService.CanEndDrag()|| !DraggableCardService.HasDrop)
+            if (!DraggableCardService.CanEndDrag() || !DraggableCardService.HasDrop)
                 return;
             TopCard.ReturnDefaultCartShadow();
         }

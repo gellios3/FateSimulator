@@ -2,8 +2,10 @@
 using Canvas.Cards.Signals;
 using Canvas.Popups.Signals;
 using Canvas.Popups.Signals.Activity;
+using Interfaces.Cards;
 using ScriptableObjects;
 using Services;
+using UnityEngine;
 using Zenject;
 
 namespace Canvas.Cards.Services
@@ -20,12 +22,31 @@ namespace Canvas.Cards.Services
         [Inject] private AllItemsDataBase ItemsDataBase { get; }
         [Inject] private CardActionsService CardActionsService { get; }
 
+        private ICardData CurrentCardData { get; set; }
+
         #endregion
 
         public CardSignalsService(SignalBus signalBus)
         {
             SignalBus = signalBus;
             SignalBus.Subscribe<FindCardForActivitySignal>(TryFindCardForCondition);
+            SignalBus.Subscribe<TryFindStartActivityCardsSignal>(TryFindStartActivityCards);
+        }
+
+        public void Init(ICardData data)
+        {
+            CurrentCardData = data;
+        }
+
+        /// <summary>
+        /// Try find start activity cards
+        /// </summary>
+        private void TryFindStartActivityCards()
+        {
+            if (CurrentCardData.BaseCard is IWorkCard workCad)
+            {
+                CardActionsService.HighlightAllCardsById(workCad.Id);
+            }
         }
 
         /// <summary>

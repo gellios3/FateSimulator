@@ -21,7 +21,7 @@ namespace Canvas.Cards.Installers
         public override void InstallBindings()
         {
             Container.Bind<CardViewsService>().AsSingle(); 
-            Container.Bind<CardSignalsService>().AsSingle();
+            Container.Bind<CardSignalsService>().AsTransient().Lazy();
             Container.Bind<CardActionsService>().AsSingle();
 
             Container.Bind<CardAppearanceService>().AsTransient();
