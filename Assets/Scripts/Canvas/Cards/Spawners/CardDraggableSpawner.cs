@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using Canvas.Cards.Signals;
 using Canvas.Cards.Views;
+using Canvas.Inventory.Signals;
+using Enums;
 using Interfaces.Cards;
 using UnityEngine;
 using Zenject;
@@ -22,7 +24,7 @@ namespace Canvas.Cards.Spawners
         private readonly DraggableCardView.Factory draggableCardFactory;
 
         #endregion
-        
+
         public void Initialize()
         {
             SignalBus.Subscribe<InstallDraggableCardsSignal>(InstallDraggableCards);
@@ -33,7 +35,7 @@ namespace Canvas.Cards.Spawners
             this.draggableCardFactory = draggableCardFactory;
         }
 
-        public void InstallDraggableCards()
+        private void InstallDraggableCards()
         {
             foreach (var cardObj in CardList)
             {
@@ -42,7 +44,21 @@ namespace Canvas.Cards.Spawners
                 var transform = cardGameObject.transform;
                 transform.parent = CardParent;
                 transform.localRotation = Quaternion.identity;
-                SignalBus.Fire(new SetCardToCommonInventorySignal {SourceView = cardGameObject});
+
+                if (cardObj.InventoryData.InventoryType == InventoryType.Personal)
+                {
+                    SignalBus.Fire(new SetCardToPersonalInventorySignal
+                    {
+                        SourceView = cardGameObject, OwnerId = cardObj.InventoryData.OwnerId
+                    });
+                }
+                else
+                {
+                    SignalBus.Fire(new SetCardToCommonInventorySignal
+                    {
+                        SourceView = cardGameObject
+                    });
+                }
             }
         }
 
@@ -60,7 +76,5 @@ namespace Canvas.Cards.Spawners
             SignalBus.Fire(new SetCardToCommonInventorySignal {SourceView = cardGameObject});
             return cardGameObject;
         }
-
-     
     }
 }

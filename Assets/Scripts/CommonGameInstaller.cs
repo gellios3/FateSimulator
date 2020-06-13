@@ -1,5 +1,6 @@
 ﻿using Canvas.Aspects.Services;
 using Canvas.Cards.Signals;
+using Canvas.Inventory.Signals;
 using Canvas.Popups.Signals;
 using Canvas.Popups.Signals.Activity;
 using Services;
@@ -35,7 +36,8 @@ public class CommonGameInstaller : MonoInstaller
     {
         Container.DeclareSignal<FindCardForActivitySignal>();
         Container.DeclareSignal<TryFindStartActivityCardsSignal>();
-        Container.DeclareSignal<SetCardToCommonInventorySignal>();
+        Container.DeclareSignal<SetCardToCommonInventorySignal>(); 
+        Container.DeclareSignal<SetCardToPersonalInventorySignal>();
         Container.DeclareSignal<InstallDraggableCardsSignal>();
     }
 }

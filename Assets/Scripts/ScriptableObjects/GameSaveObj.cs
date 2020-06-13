@@ -42,6 +42,7 @@ namespace ScriptableObjects
             
             Container.BindInstance(CardDataList).IfNotBound();
             Container.BindInstance(DataBase).IfNotBound();
+            Container.BindInstance(PartyMembers).IfNotBound();
         }
     }
 }

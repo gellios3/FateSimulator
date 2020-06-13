@@ -38,16 +38,16 @@ MonoBehaviour:
     inventoryData:
       inventoryPos:
         rowIndex: 0
-        colIndex: 3
-      inventoryType: 0
-      ownerId: 0
+        colIndex: 0
+      inventoryType: 1
+      ownerId: 2
   - baseCard: {fileID: 11400000, guid: 904eb6eaa6f4ee2459d201742c8d54dd, type: 2}
     inventoryData:
       inventoryPos:
         rowIndex: 0
-        colIndex: 4
-      inventoryType: 0
-      ownerId: 0
+        colIndex: 1
+      inventoryType: 1
+      ownerId: 2
   - baseCard: {fileID: 11400000, guid: ed869cac22ee7204da0081d33f9b2aec, type: 2}
     inventoryData:
       inventoryPos:
@@ -58,17 +58,17 @@ MonoBehaviour:
   - baseCard: {fileID: 11400000, guid: c4fcc054fdc4911438c52f04e215f6b5, type: 2}
     inventoryData:
       inventoryPos:
-        rowIndex: 0
-        colIndex: 6
-      inventoryType: 0
-      ownerId: 0
+        rowIndex: 1
+        colIndex: 0
+      inventoryType: 1
+      ownerId: 1
   - baseCard: {fileID: 11400000, guid: 79b7907e1a15f1742a1bf6d0d51656bf, type: 2}
     inventoryData:
       inventoryPos:
         rowIndex: 0
-        colIndex: 7
-      inventoryType: 0
-      ownerId: 0
+        colIndex: 0
+      inventoryType: 1
+      ownerId: 1
   partyMembers:
   - id: 1
     name: Gell

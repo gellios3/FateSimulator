@@ -1,6 +1,6 @@
 ﻿using Canvas.Cards.Interfaces;
 
-namespace Canvas.Cards.Signals
+namespace Canvas.Inventory.Signals
 {
     public class SetCardToCommonInventorySignal
     {
