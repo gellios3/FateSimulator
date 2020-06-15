@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 namespace Canvas.Inventory.Services
 {
+    /// <summary>
+    /// Base inventory service
+    /// </summary>
     public abstract class BaseInventoryService
     {
         private Dictionary<byte, List<InventoryDroppableView>> InventoryViews { get; } =
@@ -22,6 +25,21 @@ namespace Canvas.Inventory.Services
             }
         }
 
+        public void SetDroppableStatusForInventory(bool hasDroppable)
+        {
+            foreach (var pair in InventoryViews)
+            {
+                foreach (var view in pair.Value)
+                {
+                    view.SetDroppable(hasDroppable);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Set card to Inventory
+        /// </summary>
+        /// <param name="sourceView"></param>
         protected void SetCardToInventory(IDraggableCardView sourceView)
         {
             if (sourceView.CardData.InventoryData == null || InventoryViews.Count <= 0) 

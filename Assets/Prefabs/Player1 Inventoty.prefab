@@ -377,6 +377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryGrid: {fileID: 2637361231649763748}
+  title: {fileID: 2214039892687292462}
 --- !u!1001 &2637361231290147986
 PrefabInstance:
   m_ObjectHideFlags: 0
