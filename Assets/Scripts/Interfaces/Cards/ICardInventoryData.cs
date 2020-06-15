@@ -6,6 +6,6 @@ namespace Interfaces.Cards
     {
         IInventoryPos InventoryPos { get; }
         InventoryType InventoryType { get; }
-        ushort OwnerId { get; }
+        ushort OwnerId { get; set; }
     }
 }

@@ -3,6 +3,6 @@
     public interface ICardData
     {
         IBaseCard BaseCard { get; }
-        ICardInventoryData InventoryData { get; }
+        ICardInventoryData InventoryData { get; set; }
     }
 }

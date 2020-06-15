@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Canvas.Cards.Interfaces;
 using Canvas.Inventory.Views;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Canvas.Inventory.Services

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Canvas.Cards.Interfaces;
 using Canvas.Cards.Signals;
 using Canvas.Cards.Views;
 using Canvas.Inventory.Signals;
@@ -44,21 +45,7 @@ namespace Canvas.Cards.Spawners
                 var transform = cardGameObject.transform;
                 transform.parent = CardParent;
                 transform.localRotation = Quaternion.identity;
-
-                if (cardObj.InventoryData.InventoryType == InventoryType.Personal)
-                {
-                    SignalBus.Fire(new SetCardToPersonalInventorySignal
-                    {
-                        SourceView = cardGameObject, OwnerId = cardObj.InventoryData.OwnerId
-                    });
-                }
-                else
-                {
-                    SignalBus.Fire(new SetCardToCommonInventorySignal
-                    {
-                        SourceView = cardGameObject
-                    });
-                }
+                SetToInventory(cardGameObject);
             }
         }
 
@@ -73,8 +60,22 @@ namespace Canvas.Cards.Spawners
             var transform = cardGameObject.transform;
             transform.parent = CardParent;
             transform.localRotation = Quaternion.identity;
-            SignalBus.Fire(new SetCardToCommonInventorySignal {SourceView = cardGameObject});
             return cardGameObject;
+        }
+
+        public void SetToInventory(IDraggableCardView cardGameObject)
+        {
+            if (cardGameObject.CardData.InventoryData.InventoryType == InventoryType.Personal)
+            {
+                SignalBus.Fire(new SetCardToPersonalInventorySignal
+                {
+                    SourceView = cardGameObject, OwnerId = cardGameObject.CardData.InventoryData.OwnerId
+                });
+            }
+            else
+            {
+                SignalBus.Fire(new SetCardToCommonInventorySignal {SourceView = cardGameObject});
+            }
         }
     }
 }

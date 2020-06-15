@@ -10,6 +10,6 @@ namespace Canvas.Popups.Interfaces
         void ShowResultPopup(IBaseActivity baseActivity, IEnumerable<IDraggableCardView> runCardViews,
             IEnumerable<ICardData> resultList);
 
-        void ShowActivityPopup(IBaseActivity baseActivity, ushort cardId);
+        void ShowActivityPopup(IBaseActivity baseActivity, ICardData cardId);
     }
 }

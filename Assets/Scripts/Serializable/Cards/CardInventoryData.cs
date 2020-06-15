@@ -14,6 +14,10 @@ namespace Serializable.Cards
         public InventoryType InventoryType => inventoryType;
 
         public ushort ownerId;
-        public ushort OwnerId => ownerId;
+        public ushort OwnerId
+        {
+            get => ownerId;
+            set => ownerId = value;
+        }
     }
 }

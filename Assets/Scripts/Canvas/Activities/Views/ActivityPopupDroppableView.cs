@@ -45,11 +45,11 @@ namespace Canvas.Activities.Views
         /// </summary>
         public void OnCloseActivityPopup()
         {
-            if (DropCardId == 0)
+            if (DropCard == null)
                 return;
             CardActionsService.DropOnActivity(DropCardCardView, false);
             CardActionsService.ReturnBack(DropCardCardView);
-            DropCardId = 0;
+            DropCard = null;
             borderImg.SetStatus(Status.Normal);
         }
 
@@ -71,7 +71,7 @@ namespace Canvas.Activities.Views
         {
             if (conditionObj == null)
                 return;
-            if (DropCardId == 0)
+            if (DropCard == null)
                 SetDroppable(true);
             borderImg.SetStatus(Status.Normal);
         }
@@ -108,9 +108,9 @@ namespace Canvas.Activities.Views
             conditionObj = cardConditionObj;
             title.text = cardConditionObj.Title;
 
-            if (DropCardId == 0)
+            if (DropCard == null)
                 return;
-            DropCardCardView = CardViewsService.GetDraggableCardById(DropCardId);
+            DropCardCardView = CardViewsService.GetDraggableCardById(DropCard.BaseCard.Id);
             CardActionsService.DropOnActivity(DropCardCardView, true);
             CardActionsService.SetCardPosition(DropCardCardView, transform.position);
             OnDrop();

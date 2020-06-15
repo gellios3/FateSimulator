@@ -11,6 +11,10 @@ namespace Serializable.Cards
         public IBaseCard BaseCard => baseCard;
 
         public CardInventoryData inventoryData;
-        public ICardInventoryData InventoryData => inventoryData;
+        public ICardInventoryData InventoryData
+        {
+            get => inventoryData;
+            set => inventoryData = value as CardInventoryData;
+        }
     }
 }

@@ -2,6 +2,7 @@
 using Canvas.Cards.Interfaces;
 using Enums;
 using Interfaces.Activity;
+using Interfaces.Cards;
 using ScriptableObjects;
 using UnityEngine;
 using Zenject;
@@ -40,11 +41,11 @@ namespace Canvas.Activities.Services
         /// <param name="index"></param>
         /// <param name="activityId"></param>
         /// <param name="cardId"></param>
-        public void ShowPopup(int index, ushort activityId, ushort cardId)
+        public void ShowPopup(int index, ushort activityId, ICardData cardData)
         {
             var activityPopup = ActivityViewsService.GetActivityPopupByIndex(index);
             var activity = GetActivityById(activityId);
-            activityPopup.ShowActivityPopup(activity, cardId);
+            activityPopup.ShowActivityPopup(activity, cardData);
         }
 
         /// <summary>

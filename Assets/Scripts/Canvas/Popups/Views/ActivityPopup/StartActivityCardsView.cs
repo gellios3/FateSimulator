@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using AbstractViews;
 using Canvas.Activities.Views;
-using Canvas.Cards;
 using Canvas.Cards.Interfaces;
-using Canvas.Cards.Signals;
 using Enums;
 using Interfaces.Activity;
+using Interfaces.Cards;
 using Interfaces.Conditions.Cards;
 using UnityEngine;
 using Zenject;
@@ -42,8 +41,8 @@ namespace Canvas.Popups.Views.ActivityPopup
         /// Init Card Conditions
         /// </summary>
         /// <param name="baseActivity"></param>
-        /// <param name="showActivityCardId"></param>
-        public void Init(IBaseActivity baseActivity, ushort showActivityCardId)
+        /// <param name="showActivityCard"></param>
+        public void Init(IBaseActivity baseActivity, ICardData showActivityCard)
         {
             var cardConditions = baseActivity.GetCardConditions();
             needCardsCount = (byte) cardConditions.Count;
@@ -52,7 +51,7 @@ namespace Canvas.Popups.Views.ActivityPopup
             {
                 if (i == 0)
                 {
-                    droppableViews[i].DropCardId = showActivityCardId;
+                    droppableViews[i].DropCard = showActivityCard;
                 }
 
                 droppableViews[i].Show();

@@ -25,6 +25,8 @@ namespace Canvas.Popups.Views.ActivityPopup
         [SerializeField] private Button closeBtn;
         [SerializeField] private CustomButton startActivityBtn;
         [SerializeField] private ActivityStatus activityStatus = ActivityStatus.Inactive;
+
+        private ushort OwnerId { get; set; }
         
         private IBaseActivity BaseActivity { get; set; }
         private IActivityView ActivityView { get; set; }
@@ -63,7 +65,7 @@ namespace Canvas.Popups.Views.ActivityPopup
             IEnumerable<ICardData> resultList)
         {
             activityStatus = ActivityStatus.Finish;
-            activitiesPanelView.ShowResultCards(runCardViews, resultList);
+            activitiesPanelView.ShowResultCards(OwnerId,runCardViews, resultList);
             BaseActivity = baseActivity;
             Show();
         }
@@ -72,13 +74,14 @@ namespace Canvas.Popups.Views.ActivityPopup
         /// Show activity popup
         /// </summary>
         /// <param name="baseActivity"></param>
-        /// <param name="cardId"></param>
-        public void ShowActivityPopup(IBaseActivity baseActivity, ushort cardId)
+        /// <param name="cardData"></param>
+        public void ShowActivityPopup(IBaseActivity baseActivity, ICardData cardData)
         {
             activityStatus = ActivityStatus.Prepare;
             startActivityBtn.Hide();
             BaseActivity = baseActivity;
-            activitiesPanelView.Init(BaseActivity, cardId, startActivityBtn);
+            OwnerId = cardData.InventoryData.OwnerId;
+            activitiesPanelView.Init(BaseActivity, cardData, startActivityBtn);
             activitiesPanelView.ShowStartActivityCards();
             Show();
         }

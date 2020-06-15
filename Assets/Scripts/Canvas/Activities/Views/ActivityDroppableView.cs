@@ -21,12 +21,12 @@ namespace Canvas.Activities.Views
         /// </summary>
         public void ReturnDropCard()
         {
-            if (DropCardId == 0)
+            if (DropCard == null)
                 return;
             borderImg.SetStatus(Status.Normal);
             CardActionsService.ShowCard(DropCardCardView);
             CardActionsService.ReturnBack(DropCardCardView);
-            DropCardId = 0;
+            DropCard = null;
         }
 
         public void OnPointerDown(PointerEventData eventData)

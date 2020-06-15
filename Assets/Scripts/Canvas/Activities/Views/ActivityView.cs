@@ -7,7 +7,6 @@ using Canvas.Activities.Services;
 using Canvas.Cards.Interfaces;
 using Canvas.Cards.Signals;
 using Canvas.Common;
-using Canvas.Popups.Signals.Activity;
 using Enums;
 using Interfaces.Activity;
 using Services;
@@ -24,7 +23,6 @@ namespace Canvas.Activities.Views
         #region Parameters
 
         public ushort ActivityId => CurrentActivity?.Id ?? 0;
-        public ushort StartActivityCardId { get; private set; }
         public Action RunTimer { get; private set; }
 
         [SerializeField] private ActivityDroppableView droppableView;
@@ -101,12 +99,11 @@ namespace Canvas.Activities.Views
         /// </summary>
         private void OnDropCard(IDraggableCardView draggableCardView)
         {
-            var condition = ConditionsService.TryFindConditionByCardId(droppableView.DropCardId);
+            var condition = ConditionsService.TryFindConditionByCardId(droppableView.DropCard.BaseCard.Id);
             if (condition == null)
                 return;
             CurrentActivity = ActivityService.GetActivityByStartConditionId(condition.Id);
-            StartActivityCardId = droppableView.DropCardId;
-            ActivityService.ShowPopup(transform.GetSiblingIndex(), CurrentActivity.Id, droppableView.DropCardId);
+            ActivityService.ShowPopup(transform.GetSiblingIndex(), CurrentActivity.Id, droppableView.DropCard);
             SetStatus(Status.Normal);
         }
 

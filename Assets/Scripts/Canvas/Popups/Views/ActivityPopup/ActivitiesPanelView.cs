@@ -33,17 +33,22 @@ namespace Canvas.Popups.Views.ActivityPopup
         /// Init
         /// </summary>
         /// <param name="baseActivity"></param>
-        /// <param name="cardId"></param>
+        /// <param name="card"></param>
         /// <param name="customButton"></param>
-        public void Init(IBaseActivity baseActivity, ushort cardId, CustomButton customButton)
+        public void Init(IBaseActivity baseActivity, ICardData card, CustomButton customButton)
         {
             StartActivityBtn = customButton;
-            startActivityCardsView.Init(baseActivity, cardId);
+            startActivityCardsView.Init(baseActivity, card);
         }
 
         public void OnClosePopup(ActivityStatus status)
         {
+            Debug.LogError($"OnClosePopup {status}");
             startActivityCardsView.OnClosePopup(status);
+            if (status == ActivityStatus.Finish)
+            {
+                resultActivityCardsView.ReturnAllCardToInventory();
+            }
         }
 
         /// <summary>
@@ -74,12 +79,13 @@ namespace Canvas.Popups.Views.ActivityPopup
         /// <summary>
         /// Show result cards
         /// </summary>
-        public void ShowResultCards(IEnumerable<IDraggableCardView> runCardViews, IEnumerable<ICardData> resultList)
+        public void ShowResultCards(ushort ownerId, IEnumerable<IDraggableCardView> runCardViews,
+            IEnumerable<ICardData> resultList)
         {
             startActivityCardsView.Hide();
             resultActivityCardsView.Show();
             StartActivityBtn.Hide();
-            resultActivityCardsView.CreateResultCards(runCardViews, resultList);
+            resultActivityCardsView.CreateResultCards(ownerId, runCardViews, resultList);
         }
     }
 }
