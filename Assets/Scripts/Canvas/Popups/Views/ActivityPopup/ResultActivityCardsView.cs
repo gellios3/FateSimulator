@@ -37,9 +37,8 @@ namespace Canvas.Popups.Views.ActivityPopup
 
             foreach (var baseCard in resultList)
             {
-                baseCard.InventoryData = new CardInventoryData()
+                baseCard.InventoryData = new CardInventoryData
                 {
-                    inventoryPos = new InventoryPos {colIndex = 0, rowIndex = 0},
                     inventoryType = InventoryType.Personal,
                     OwnerId = ownerId
                 };
@@ -50,6 +49,9 @@ namespace Canvas.Popups.Views.ActivityPopup
             Invoke(nameof(SetPosForResultCards), 0.05f);
         }
 
+        /// <summary>
+        /// Return all card to inventory 
+        /// </summary>
         public void ReturnAllCardToInventory()
         {
             foreach (var draggableCardView in ResultViews)
