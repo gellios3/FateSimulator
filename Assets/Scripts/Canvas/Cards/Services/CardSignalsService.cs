@@ -1,11 +1,12 @@
-﻿using Canvas.Cards.Interfaces;
+﻿using Canvas.Activities.Services;
+using Canvas.Cards.Interfaces;
 using Canvas.Cards.Signals;
+using Canvas.Inventory.Services;
 using Canvas.Popups.Signals;
 using Canvas.Popups.Signals.Activity;
 using Interfaces.Cards;
 using ScriptableObjects;
 using Services;
-using UnityEngine;
 using Zenject;
 
 namespace Canvas.Cards.Services
@@ -21,6 +22,7 @@ namespace Canvas.Cards.Services
         [Inject] private ConditionsService ConditionsService { get; }
         [Inject] private AllItemsDataBase ItemsDataBase { get; }
         [Inject] private CardActionsService CardActionsService { get; }
+        [Inject] private OwnersService OwnersService { get; }
 
         private ICardData CurrentCardData { get; set; }
 
@@ -43,9 +45,12 @@ namespace Canvas.Cards.Services
         /// </summary>
         private void TryFindStartActivityCards()
         {
+            if (OwnersService.HasRunOwner(CurrentCardData.InventoryData.OwnerId))
+                return;
+            
             if (CurrentCardData.BaseCard is IWorkCard workCad)
             {
-                CardActionsService.HighlightAllCardsById(workCad.Id);
+                CardActionsService.HighlightAllCardsById(workCad.Id, CurrentCardData.InventoryData.OwnerId);
             }
         }
 
@@ -86,7 +91,7 @@ namespace Canvas.Cards.Services
             {
                 if (ConditionsService.CheckCondition(obj.ConditionId, cardObj.Id))
                 {
-                    CardActionsService.HighlightAllCardsById(cardObj.Id);
+                    CardActionsService.HighlightAllCardsById(cardObj.Id, obj.OwnerId);
                 }
             }
         }

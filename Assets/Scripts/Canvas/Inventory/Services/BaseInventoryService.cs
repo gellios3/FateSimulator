@@ -54,7 +54,6 @@ namespace Canvas.Inventory.Services
         {
             if (sourceView.CardData.InventoryData == null || InventoryViews.Count <= 0)
                 return;
-            Debug.LogError($"Values.Count {GridSize.Item1} Keys.Count {GridSize.Item2}");
             var inventoryPos = sourceView.CardData.InventoryData.InventoryPos ?? TryFoundFreeInventoryPos();
             var rowIndex = inventoryPos.RowIndex;
             var colIndex = inventoryPos.ColIndex;
@@ -64,19 +63,22 @@ namespace Canvas.Inventory.Services
             sourceView.OnSetPosition.Invoke(position);
         }
 
+        /// <summary>
+        /// Try found free inventory pos
+        /// </summary>
+        /// <returns></returns>
         private IInventoryPos TryFoundFreeInventoryPos()
         {
-            for (byte i = 0; i < GridSize.Item1; i++)
+            for (byte i = 0; i < GridSize.Item2; i++)
             {
-                for (byte j = 0; j < GridSize.Item2; j++)
+                for (byte j = 0; j < GridSize.Item1; j++)
                 {
-                    if (!HasFillThisPos(i, j))
+                    if (!HasFillThisPos(j, i))
                     {
-                        Debug.LogError($"Founded row: {i} col: {j}");
                         return new InventoryPos
                         {
-                            rowIndex = i,
-                            colIndex = j
+                            rowIndex = j,
+                            colIndex = i
                         };
                     }
                 }

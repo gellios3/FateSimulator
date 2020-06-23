@@ -55,7 +55,7 @@ namespace Canvas.Popups.Views.ActivityPopup
                 }
 
                 droppableViews[i].Show();
-                droppableViews[i].Init(cardConditions[i] as ICardCondition);
+                droppableViews[i].Init(cardConditions[i] as ICardCondition, showActivityCard.InventoryData.OwnerId);
             }
         }
 

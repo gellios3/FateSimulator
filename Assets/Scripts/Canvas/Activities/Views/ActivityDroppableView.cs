@@ -15,6 +15,7 @@ namespace Canvas.Activities.Views
         [Inject] private CardActionsService CardActionsService { get; }
 
         [Inject] private SignalBus SignalBus { get; }
+        
 
         /// <summary>
         /// Return drop card

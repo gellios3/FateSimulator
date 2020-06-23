@@ -2,9 +2,8 @@
 using AbstractViews;
 using Canvas.Cards.Interfaces;
 using Canvas.Cards.Spawners;
-using Enums;
+using Canvas.Inventory.Services;
 using Interfaces.Cards;
-using Serializable.Cards;
 using UnityEngine;
 using Zenject;
 
@@ -18,6 +17,7 @@ namespace Canvas.Popups.Views.ActivityPopup
         [SerializeField] private List<Transform> droppableViews;
         [Inject] private CardDraggableSpawner Spawner { get; }
         private List<IDraggableCardView> ResultViews { get; } = new List<IDraggableCardView>();
+        [Inject] private InventoryDataService InventoryDataService { get; }
 
         /// <summary>
         /// Create result cards
@@ -37,11 +37,7 @@ namespace Canvas.Popups.Views.ActivityPopup
 
             foreach (var baseCard in resultList)
             {
-                baseCard.InventoryData = new CardInventoryData
-                {
-                    inventoryType = InventoryType.Personal,
-                    OwnerId = ownerId
-                };
+                baseCard.InventoryData = InventoryDataService.GetInventoryDataForCard(baseCard, ownerId);
                 var resultCard = Spawner.CreateResultCard(baseCard);
                 ResultViews.Add(resultCard);
             }

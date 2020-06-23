@@ -1,5 +1,6 @@
 ﻿using Canvas.Aspects.Services;
 using Canvas.Cards.Signals;
+using Canvas.Inventory.Services;
 using Canvas.Inventory.Signals;
 using Canvas.Popups.Signals;
 using Canvas.Popups.Signals.Activity;
@@ -27,6 +28,8 @@ public class CommonGameInstaller : MonoInstaller
         Container.Bind<ConditionsService>().AsSingle();
         Container.Bind<ResultsService>().AsSingle();
         Container.Bind<CardDataService>().AsSingle().Lazy();
+        Container.Bind<InventoryDataService>().AsSingle();
+        Container.Bind<OwnersService>().AsSingle();
     }
 
     /// <summary>

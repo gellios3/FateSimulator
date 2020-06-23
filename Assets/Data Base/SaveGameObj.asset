@@ -69,6 +69,20 @@ MonoBehaviour:
         colIndex: 0
       inventoryType: 1
       ownerId: 1
+  - baseCard: {fileID: 11400000, guid: c4fcc054fdc4911438c52f04e215f6b5, type: 2}
+    inventoryData:
+      inventoryPos:
+        rowIndex: 2
+        colIndex: 0
+      inventoryType: 1
+      ownerId: 2
+  - baseCard: {fileID: 11400000, guid: 79b7907e1a15f1742a1bf6d0d51656bf, type: 2}
+    inventoryData:
+      inventoryPos:
+        rowIndex: 3
+        colIndex: 0
+      inventoryType: 1
+      ownerId: 2
   partyMembers:
   - id: 1
     name: Gell

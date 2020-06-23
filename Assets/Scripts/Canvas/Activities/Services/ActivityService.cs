@@ -39,12 +39,11 @@ namespace Canvas.Activities.Services
         /// Show popup
         /// </summary>
         /// <param name="index"></param>
-        /// <param name="activityId"></param>
-        /// <param name="cardId"></param>
-        public void ShowPopup(int index, ushort activityId, ICardData cardData)
+        /// <param name="activity"></param>
+        /// <param name="cardData"></param>
+        public void ShowPopup(int index, IBaseActivity activity, ICardData cardData)
         {
             var activityPopup = ActivityViewsService.GetActivityPopupByIndex(index);
-            var activity = GetActivityById(activityId);
             activityPopup.ShowActivityPopup(activity, cardData);
         }
 

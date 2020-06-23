@@ -7,6 +7,7 @@ using Canvas.Activities.Services;
 using Canvas.Cards.Interfaces;
 using Canvas.Cards.Signals;
 using Canvas.Common;
+using Canvas.Inventory.Services;
 using Enums;
 using Interfaces.Activity;
 using Services;
@@ -31,7 +32,12 @@ namespace Canvas.Activities.Views
 
         private IBaseActivity CurrentActivity { get; set; }
 
+        private ushort RunOwnerId { get; set; }
+
         [Inject] private ActivityService ActivityService { get; }
+
+        [Inject] private OwnersService OwnersService { get; }
+
         [Inject] private ConditionsService ConditionsService { get; }
 
         #endregion
@@ -56,6 +62,8 @@ namespace Canvas.Activities.Views
         {
             if (CurrentActivity == null)
                 return;
+            RunOwnerId = droppableView.DropCard.InventoryData.OwnerId;
+            OwnersService.AddRunOwner(RunOwnerId);
             ActivityService.RunActivity(CurrentActivity.Id, dropCardViews.ToList());
         }
 
@@ -103,7 +111,7 @@ namespace Canvas.Activities.Views
             if (condition == null)
                 return;
             CurrentActivity = ActivityService.GetActivityByStartConditionId(condition.Id);
-            ActivityService.ShowPopup(transform.GetSiblingIndex(), CurrentActivity.Id, droppableView.DropCard);
+            ActivityService.ShowPopup(transform.GetSiblingIndex(), CurrentActivity, droppableView.DropCard);
             SetStatus(Status.Normal);
         }
 
@@ -114,7 +122,8 @@ namespace Canvas.Activities.Views
         {
             timerView.Hide();
             ActivityService.OnTimerFinish(transform.GetSiblingIndex(), CurrentActivity.Id);
-
+            OwnersService.RemoveRunOwner(RunOwnerId);
+            RunOwnerId = 0;
             CurrentActivity = null;
         }
 
@@ -133,6 +142,9 @@ namespace Canvas.Activities.Views
         /// <param name="obj"></param>
         private void OnStartDragCard(StartDragCardSignal obj)
         {
+            if (OwnersService.HasRunOwner(obj.DraggableCardView.CardData.InventoryData.OwnerId))
+                return;
+            
             var condition = ConditionsService.TryFindConditionByCardId(obj.DraggableCardView.CardData.BaseCard.Id);
             if (condition == null)
             {

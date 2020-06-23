@@ -1,8 +1,8 @@
 ﻿using AbstractViews;
-using Canvas.Activities.Services;
 using Canvas.Cards.Services;
 using Canvas.Cards.Signals;
 using Canvas.Common;
+using Canvas.Inventory.Services;
 using Canvas.Popups.Signals.Activity;
 using Enums;
 using Interfaces.Conditions.Cards;
@@ -26,9 +26,12 @@ namespace Canvas.Activities.Views
         [Inject] private ConditionsService ConditionsService { get; }
         [Inject] private CardActionsService CardActionsService { get; }
         [Inject] private CardViewsService CardViewsService { get; }
+        
+        [Inject] private InventoryDataService InventoryDataService { get; }
 
         private ICardCondition conditionObj;
         private SignalBus SignalBus { get; set; }
+        private ushort OwnerId { get; set; }
 
         #endregion
 
@@ -84,8 +87,9 @@ namespace Canvas.Activities.Views
         {
             if (conditionObj == null)
                 return;
-            var canDrop = ConditionsService.CheckCondition(conditionObj.Id, obj.DraggableCardView.CardData.BaseCard.Id) &&
-                          StatusHelper.IsUseableStatus(obj.DraggableCardView.TopCard.CurrentStatus.cardStatus);
+            var canDrop =
+                ConditionsService.CheckCondition(conditionObj.Id, obj.DraggableCardView.CardData.BaseCard.Id) &&
+                StatusHelper.IsUseableStatus(obj.DraggableCardView.TopCard.CurrentStatus.cardStatus);
             SetDroppable(canDrop);
             if (canDrop)
                 borderImg.SetStatus(Status.Highlighted);
@@ -103,14 +107,16 @@ namespace Canvas.Activities.Views
         /// Init popup
         /// </summary>
         /// <param name="cardConditionObj"></param>
-        public void Init(ICardCondition cardConditionObj)
+        /// <param name="ownerId"></param>
+        public void Init(ICardCondition cardConditionObj, ushort ownerId)
         {
             conditionObj = cardConditionObj;
             title.text = cardConditionObj.Title;
-
+            var inventoryType = InventoryDataService.GetInventoryTypeByCardType(conditionObj.CardType);
+            OwnerId = inventoryType == InventoryType.Personal ? ownerId : (ushort) 0;
             if (DropCard == null)
                 return;
-            DropCardCardView = CardViewsService.GetDraggableCardById(DropCard.BaseCard.Id);
+            DropCardCardView = CardViewsService.GetDraggableCardById(DropCard.BaseCard.Id, OwnerId);
             CardActionsService.DropOnActivity(DropCardCardView, true);
             CardActionsService.SetCardPosition(DropCardCardView, transform.position);
             OnDrop();
@@ -122,7 +128,7 @@ namespace Canvas.Activities.Views
         /// <param name="eventData"></param>
         public void OnPointerDown(PointerEventData eventData)
         {
-            SignalBus.Fire(new FindCardForActivitySignal {ConditionId = conditionObj.Id});
+            SignalBus.Fire(new FindCardForActivitySignal(conditionObj.Id, OwnerId));
         }
     }
 }
