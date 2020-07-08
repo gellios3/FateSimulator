@@ -13,9 +13,9 @@ namespace Interfaces.Cards
     /// </summary>
     public interface IBaseCard : IBaseObj
     {
-        byte Level { get; }
         string CardName { get; }
         string ShortDescription { get; }
+        ushort MaxStackCount { get; }
         CardType Type { get; }
         Sprite CardIcon { get; }
         List<BaseAspectObj> AspectsList { get; }

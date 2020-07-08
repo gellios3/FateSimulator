@@ -26,6 +26,12 @@ namespace ScriptableObjects.Cards
         public string ShortDescription => shortDescription;
 
         /// <summary>
+        /// Max stack count
+        /// </summary>
+        public ushort maxStackCount;
+        public ushort MaxStackCount => maxStackCount;
+
+        /// <summary>
         /// Card type
         /// </summary>
         public CardType type;
@@ -54,6 +60,7 @@ namespace ScriptableObjects.Cards
         /// </summary>
         public List<CardStatusPreset> appearances;
         public List<CardStatusPreset> StatusPresets => appearances;
+        
         
         protected override bool TryAddItemToDatabase()
         {

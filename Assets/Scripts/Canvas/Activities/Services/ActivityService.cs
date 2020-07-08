@@ -20,8 +20,7 @@ namespace Canvas.Activities.Services
 
         [Inject] private RunActivityService RunActivityService { get; }
 
-       
-
+        
         /// <summary>
         /// Get Activity by condition Id
         /// </summary>
