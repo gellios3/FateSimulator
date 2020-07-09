@@ -24,6 +24,7 @@ namespace Canvas.Cards.Views
         private ICardData CardData { get; set; }
         public Action<CardStatus> TimerFinish { get; set; }
         public CardStatusPreset CurrentStatus { get; private set; }
+        public StackCountView CountView => stackCountView;
 
         #endregion
 
@@ -37,6 +38,7 @@ namespace Canvas.Cards.Views
         [SerializeField] private TextMeshProUGUI title;
         [SerializeField] private ColorsPresetImageView borderImg;
         [SerializeField] private TimerView cardTimer;
+        [SerializeField] private StackCountView stackCountView;
 
         private readonly List<Vector2> defaultSizeDelta = new List<Vector2>();
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using Canvas.Cards.Views;
 using Enums;
 using Interfaces;
 using Interfaces.Cards;
@@ -11,6 +12,7 @@ namespace Canvas.Cards.Interfaces
     {
         Action<CardStatus> TimerFinish { get; set; }
         CardStatusPreset CurrentStatus { get; }
+        StackCountView CountView { get; }
         void SetCardPosition(Vector3 pos);
         void SetCardView(CardStatusPreset preset);
         void OnStartDragCard();

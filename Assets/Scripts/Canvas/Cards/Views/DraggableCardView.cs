@@ -17,6 +17,7 @@ namespace Canvas.Cards.Views
         #region Parameters
 
         [SerializeField] private Button openPopupBtn;
+        [SerializeField] private DroppableCardView droppableCardView;
         [Inject] private CardSignalsService CardSignalsService { get; }
         [Inject] private CardViewsService CardViewsService { get; }
         [Inject] private DraggableCardService DraggableCardService { get; }
@@ -29,6 +30,7 @@ namespace Canvas.Cards.Views
         {
             CardData = cardData;
             TopCard = topCard;
+            droppableCardView.Init(cardData, topCard.CountView);
             CardViewsService.AddCardView(this);
             CardAppearanceService.Init(cardData.BaseCard.StatusPresets);
 
@@ -80,6 +82,7 @@ namespace Canvas.Cards.Views
         {
             if (!DraggableCardService.CanBeginDrag())
                 return;
+            transform.SetSiblingIndex(0);
             CardSignalsService.StartDragCard(this);
             TopCard.Show();
             DraggableCardService.SetTempPos(transform.position);
