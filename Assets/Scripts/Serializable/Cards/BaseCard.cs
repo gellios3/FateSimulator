@@ -14,10 +14,9 @@ namespace Serializable.Cards
     {
         public ushort Id { get; }
         public AllItemsDataBase DataBase { get; }
-        public byte Level { get; }
-        public Vector2 PosOnTable { get; }
         public string CardName { get; }
         public string ShortDescription { get; }
+        public ushort MaxStackCount { get; }
         public CardType Type { get; }
         public Sprite CardIcon { get; }
         public List<BaseAspectObj> AspectsList { get; }
@@ -27,9 +26,8 @@ namespace Serializable.Cards
         {
             Id = cardObj.Id;
             DataBase = cardObj.DataBase;
-            Level = cardObj.Level;
             CardName = cardObj.CardName;
-            PosOnTable = cardObj.PosOnTable;
+            MaxStackCount = cardObj.MaxStackCount;
             ShortDescription = cardObj.ShortDescription;
             Type = cardObj.Type;
             CardIcon = cardObj.CardIcon;

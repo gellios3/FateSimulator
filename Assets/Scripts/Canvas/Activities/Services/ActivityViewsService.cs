@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using Canvas.Activities.Interfaces;
-using Canvas.Cards.Services;
+using Canvas.Popups.Interfaces;
 using Canvas.Popups.Signals.Activity;
+using Canvas.Popups.Views.ActivityPopup;
 using Zenject;
 
 namespace Canvas.Activities.Services
@@ -11,60 +12,37 @@ namespace Canvas.Activities.Services
         /// <summary>
         /// Draggable card Views
         /// </summary>
-        private List<IActivityView> ActivityViews { get; } = new List<IActivityView>();
-        
-        [Inject] private CardActionsService CardActionsService { get; }
-
-        [Inject]
-        public void Construct(SignalBus signalBus)
-        {
-            signalBus.Subscribe<StartActivitySignal>(OnRunCurrentActivity);
-            signalBus.Subscribe<CloseActivityPopupSignal>(OnCloseActivityPopup);
-        }
-
-        /// <summary>
-        /// On close activity popup
-        /// </summary>
-        /// <param name="obj"></param>
-        private void OnCloseActivityPopup(CloseActivityPopupSignal obj)
-        {
-            var activity = GetActivityViewById(obj.ActivityId);
-            activity?.RefreshActivity();
-        }
-
-        /// <summary>
-        /// On run current activity
-        /// </summary>
-        /// <param name="obj"></param>
-        private void OnRunCurrentActivity(StartActivitySignal obj)
-        {
-            var activity = GetActivityViewById(obj.ActivityId);
-            if (activity == null)
-                return;
-            foreach (var cardView in obj.DropCardViews)
-            {
-                CardActionsService.HideCard(cardView);
-            }
-            activity.RunTimer.Invoke();
-        }
+        private List<(IActivityView, IActivityPopupView)> ActivityViews { get; } =
+            new List<(IActivityView, IActivityPopupView)>();
 
         /// <summary>
         /// Get activity view by Id
         /// </summary>
         /// <param name="activityId"></param>
         /// <returns></returns>
-        private IActivityView GetActivityViewById(ushort activityId)
+        public IActivityView GetActivityViewById(ushort activityId)
         {
-            return ActivityViews.Find(view => view.ActivityId == activityId);
+            return ActivityViews.Find(view => view.Item1.ActivityId == activityId).Item1;
+        }
+
+        /// <summary>
+        /// Get Activity popup by Index
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public IActivityPopupView GetActivityPopupByIndex(int index)
+        {
+            return ActivityViews[index].Item2;
         }
 
         /// <summary>
         /// Add draggable view
         /// </summary>
         /// <param name="activityView"></param>
-        public void AddActivityView(IActivityView activityView)
+        /// <param name="popupView"></param>
+        public void AddActivityView(IActivityView activityView, BaseActivityPopupView popupView)
         {
-            ActivityViews.Add(activityView);
+            ActivityViews.Add((activityView, popupView));
         }
     }
 }

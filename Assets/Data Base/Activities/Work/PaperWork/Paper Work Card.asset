@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d30053bf69b84ac380de16672d0f1256, type: 3}
+  m_Name: Paper Work Card
+  m_EditorClassIdentifier: 
+  id: 33539
+  dataBase: {fileID: 11400000, guid: 46a29bcfb7c5d2941a21c795a07c9723, type: 2}
+  posOnTable: {x: 0, y: 0}
+  cardName: Paper Work Card
+  shortDescription: Paper Work Card
+  type: 6
+  level: 0
+  cardIcon: {fileID: 21300000, guid: 3a505dacc5dde3842b47c6e1363ea880, type: 3}
+  aspectsList: []
+  appearances:
+  - cardStatus: 0
+    duration: 0
+    color: {r: 0, g: 0.63397163, b: 0.7607843, a: 1}
+  - cardStatus: 1
+    duration: 10
+    color: {r: 0.24341202, g: 0.5445216, b: 0.60400003, a: 1}
+  workType: 1
+  requireSkill: {fileID: 11400000, guid: 79b7907e1a15f1742a1bf6d0d51656bf, type: 2}

@@ -19,7 +19,7 @@ namespace ScriptableObjects.Activities
         /// Activity name
         /// </summary>
         public string activityName;
-
+        
         public string ActivityName => activityName;
 
         /// <summary>

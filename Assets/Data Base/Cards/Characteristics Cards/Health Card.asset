@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 26700
   dataBase: {fileID: 11400000, guid: 46a29bcfb7c5d2941a21c795a07c9723, type: 2}
-  posOnTable: {x: -263.7, y: 251}
   cardName: Health Card
   shortDescription: Health Card
+  maxStackCount: 5
   type: 0
   level: 0
   cardIcon: {fileID: 21300000, guid: 7b82bfbdcbe832844a2879e408bf4876, type: 3}
@@ -25,9 +25,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f0f517d1a4dd1e5438383f5bbd12e767, type: 2}
   appearances:
   - cardStatus: 0
-    duration: -1
+    duration: 65535
     color: {r: 1, g: 0.4627451, b: 0.654902, a: 1}
   - cardStatus: 1
-    duration: -1
+    duration: 60
     color: {r: 1, g: 0.4627451, b: 0.654902, a: 1}
   characteristicType: 0

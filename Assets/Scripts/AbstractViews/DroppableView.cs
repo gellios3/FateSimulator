@@ -1,9 +1,9 @@
 ﻿using System;
-using Canvas;
 using Canvas.Cards.Interfaces;
 using Canvas.Cards.Services;
 using Canvas.Cards.Views;
 using Enums;
+using Interfaces.Cards;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -19,10 +19,10 @@ namespace AbstractViews
         #region Parameters
 
         public event Action<IDraggableCardView> CardDrop;
-        public ushort DropCardId { get; set; }
+        public ICardData DropCard { get; set; }
 
         [SerializeField] private Image bgImg;
-        [SerializeField] protected ColorsPresetImage borderImg;
+        [SerializeField] protected ColorsPresetImageView borderImg;
 
         protected IDraggableCardView DropCardCardView; 
         [Inject] private CardActionsService CardActionsService { get; }
@@ -37,7 +37,7 @@ namespace AbstractViews
         public void SetDroppable(bool status)
         {
             CanDropCard = status;
-            bgImg.raycastTarget = status;
+            // bgImg.raycastTarget = status;
         }
 
         /// <summary>
@@ -56,13 +56,13 @@ namespace AbstractViews
         /// <param name="eventData"></param>
         public virtual void OnDrop(PointerEventData eventData)
         {
-            DropCardId = 0;
+            DropCard = null;
             if (eventData.pointerDrag == null || !CanDropCard)
                 return;
             DropCardCardView = eventData.pointerDrag.GetComponent<DraggableCardView>();
             if (DropCardCardView == null)
                 return;
-            DropCardId = DropCardCardView.CardId;
+            DropCard = DropCardCardView.CardData;
             OnDrop();
         }
 

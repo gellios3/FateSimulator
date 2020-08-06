@@ -1,8 +1,12 @@
-﻿using Canvas.Cards.Signals;
+﻿using Canvas.Activities.Services;
+using Canvas.Cards.Interfaces;
+using Canvas.Cards.Signals;
+using Canvas.Inventory.Services;
 using Canvas.Popups.Signals;
 using Canvas.Popups.Signals.Activity;
-using Canvas.Services;
+using Interfaces.Cards;
 using ScriptableObjects;
+using Services;
 using Zenject;
 
 namespace Canvas.Cards.Services
@@ -18,6 +22,9 @@ namespace Canvas.Cards.Services
         [Inject] private ConditionsService ConditionsService { get; }
         [Inject] private AllItemsDataBase ItemsDataBase { get; }
         [Inject] private CardActionsService CardActionsService { get; }
+        [Inject] private OwnersService OwnersService { get; }
+
+        private ICardData CurrentCardData { get; set; }
 
         #endregion
 
@@ -25,15 +32,35 @@ namespace Canvas.Cards.Services
         {
             SignalBus = signalBus;
             SignalBus.Subscribe<FindCardForActivitySignal>(TryFindCardForCondition);
+            SignalBus.Subscribe<TryFindStartActivityCardsSignal>(TryFindStartActivityCards);
+        }
+
+        public void Init(ICardData data)
+        {
+            CurrentCardData = data;
+        }
+
+        /// <summary>
+        /// Try find start activity cards
+        /// </summary>
+        private void TryFindStartActivityCards()
+        {
+            if (OwnersService.HasRunOwner(CurrentCardData.InventoryData.OwnerId))
+                return;
+            
+            if (CurrentCardData.BaseCard is IWorkCard workCad)
+            {
+                CardActionsService.HighlightAllCardsById(workCad.Id, CurrentCardData.InventoryData.OwnerId);
+            }
         }
 
         /// <summary>
         /// Start drag card
         /// </summary>
-        /// <param name="cardId"></param>
-        public void StartDragCard(ushort cardId)
+        /// <param name="draggableCard"></param>
+        public void StartDragCard(IDraggableCardView draggableCard)
         {
-            SignalBus.Fire(new StartDragCardSignal {CardId = cardId});
+            SignalBus.Fire(new StartDragCardSignal {DraggableCardView = draggableCard});
         }
 
         /// <summary>
@@ -64,7 +91,7 @@ namespace Canvas.Cards.Services
             {
                 if (ConditionsService.CheckCondition(obj.ConditionId, cardObj.Id))
                 {
-                    CardActionsService.HighlightAllCardsById(cardObj.Id);
+                    CardActionsService.HighlightAllCardsById(cardObj.Id, obj.OwnerId);
                 }
             }
         }

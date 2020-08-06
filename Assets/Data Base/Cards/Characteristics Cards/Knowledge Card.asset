@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 29508
   dataBase: {fileID: 11400000, guid: 46a29bcfb7c5d2941a21c795a07c9723, type: 2}
-  posOnTable: {x: -368, y: 251}
+  posOnTable: {x: 0, y: 0}
   cardName: Knowledge Card
   shortDescription: Knowledge Card
   type: 0
@@ -25,6 +25,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 242d8420be4522a44aa08e2d6811235f, type: 2}
   appearances:
   - cardStatus: 0
-    duration: -1
+    duration: 65535
+    color: {r: 0.2784314, g: 0.7921569, b: 1, a: 1}
+  - cardStatus: 1
+    duration: 10
     color: {r: 0.2784314, g: 0.7921569, b: 1, a: 1}
   characteristicType: 1

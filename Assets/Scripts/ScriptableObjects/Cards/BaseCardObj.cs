@@ -13,13 +13,6 @@ namespace ScriptableObjects.Cards
     [CreateAssetMenu(fileName = "New Card Obj", menuName = "Cards/Create Card Obj", order = 0)]
     public class BaseCardObj : BaseObj, IBaseCard
     {
-
-        /// <summary>
-        /// Position on table
-        /// </summary>
-        public Vector2 posOnTable;
-        public Vector2 PosOnTable => posOnTable;
-
         /// <summary>
         /// Card name
         /// </summary>
@@ -31,6 +24,12 @@ namespace ScriptableObjects.Cards
         /// </summary>
         public string shortDescription;
         public string ShortDescription => shortDescription;
+
+        /// <summary>
+        /// Max stack count
+        /// </summary>
+        public ushort maxStackCount;
+        public ushort MaxStackCount => maxStackCount;
 
         /// <summary>
         /// Card type
@@ -61,6 +60,7 @@ namespace ScriptableObjects.Cards
         /// </summary>
         public List<CardStatusPreset> appearances;
         public List<CardStatusPreset> StatusPresets => appearances;
+        
         
         protected override bool TryAddItemToDatabase()
         {

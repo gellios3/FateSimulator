@@ -12,11 +12,91 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 775d0940cd854df689aa1c444666e024, type: 3}
   m_Name: SaveGameObj
   m_EditorClassIdentifier: 
-  cardList:
-  - {fileID: 11400000, guid: caf4a21c8d88c394b843de757b7592dd, type: 2}
-  - {fileID: 11400000, guid: ed869cac22ee7204da0081d33f9b2aec, type: 2}
-  - {fileID: 11400000, guid: 05c2825b805cc444eb685fa8eee9d6d3, type: 2}
-  - {fileID: 11400000, guid: 94554ea81f66d714282feb0395499971, type: 2}
-  - {fileID: 11400000, guid: 904eb6eaa6f4ee2459d201742c8d54dd, type: 2}
-  - {fileID: 11400000, guid: ed869cac22ee7204da0081d33f9b2aec, type: 2}
+  cardDataList:
+  - baseCard: {fileID: 11400000, guid: caf4a21c8d88c394b843de757b7592dd, type: 2}
+    inventoryData:
+      inventoryPos:
+        rowIndex: 0
+        colIndex: 0
+      inventoryType: 0
+      ownerId: 0
+  - baseCard: {fileID: 11400000, guid: ed869cac22ee7204da0081d33f9b2aec, type: 2}
+    inventoryData:
+      inventoryPos:
+        rowIndex: 0
+        colIndex: 1
+      inventoryType: 0
+      ownerId: 0
+  - baseCard: {fileID: 11400000, guid: 05c2825b805cc444eb685fa8eee9d6d3, type: 2}
+    inventoryData:
+      inventoryPos:
+        rowIndex: 0
+        colIndex: 2
+      inventoryType: 0
+      ownerId: 0
+  - baseCard: {fileID: 11400000, guid: 94554ea81f66d714282feb0395499971, type: 2}
+    inventoryData:
+      inventoryPos:
+        rowIndex: 0
+        colIndex: 0
+      inventoryType: 1
+      ownerId: 2
+  - baseCard: {fileID: 11400000, guid: 904eb6eaa6f4ee2459d201742c8d54dd, type: 2}
+    inventoryData:
+      inventoryPos:
+        rowIndex: 0
+        colIndex: 1
+      inventoryType: 1
+      ownerId: 2
+  - baseCard: {fileID: 11400000, guid: ed869cac22ee7204da0081d33f9b2aec, type: 2}
+    inventoryData:
+      inventoryPos:
+        rowIndex: 0
+        colIndex: 5
+      inventoryType: 0
+      ownerId: 0
+  - baseCard: {fileID: 11400000, guid: c4fcc054fdc4911438c52f04e215f6b5, type: 2}
+    inventoryData:
+      inventoryPos:
+        rowIndex: 1
+        colIndex: 0
+      inventoryType: 1
+      ownerId: 1
+  - baseCard: {fileID: 11400000, guid: 79b7907e1a15f1742a1bf6d0d51656bf, type: 2}
+    inventoryData:
+      inventoryPos:
+        rowIndex: 0
+        colIndex: 0
+      inventoryType: 1
+      ownerId: 1
+  - baseCard: {fileID: 11400000, guid: c4fcc054fdc4911438c52f04e215f6b5, type: 2}
+    inventoryData:
+      inventoryPos:
+        rowIndex: 2
+        colIndex: 0
+      inventoryType: 1
+      ownerId: 2
+  - baseCard: {fileID: 11400000, guid: 79b7907e1a15f1742a1bf6d0d51656bf, type: 2}
+    inventoryData:
+      inventoryPos:
+        rowIndex: 3
+        colIndex: 0
+      inventoryType: 1
+      ownerId: 2
+  partyMembers:
+  - id: 1
+    name: Gell
+    level: 1
+    hp: 20
+    xp: 0
+  - id: 2
+    name: Gellios3
+    level: 2
+    hp: 40
+    xp: 0
+  - id: 3
+    name: wert
+    level: 2
+    hp: 40
+    xp: 0
   dataBase: {fileID: 11400000, guid: 46a29bcfb7c5d2941a21c795a07c9723, type: 2}

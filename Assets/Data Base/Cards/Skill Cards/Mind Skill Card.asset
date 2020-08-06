@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc26f21f8c93442b9a498ca05f345f44, type: 3}
+  m_Name: Mind Skill Card
+  m_EditorClassIdentifier: 
+  id: 14401
+  dataBase: {fileID: 11400000, guid: 46a29bcfb7c5d2941a21c795a07c9723, type: 2}
+  posOnTable: {x: 0, y: 0}
+  cardName: Mind Skill Card
+  shortDescription: 
+  type: 5
+  level: 1
+  cardIcon: {fileID: 21300000, guid: 0278004276bef2043940de70a939db1c, type: 3}
+  aspectsList:
+  - {fileID: 11400000, guid: 242d8420be4522a44aa08e2d6811235f, type: 2}
+  - {fileID: 11400000, guid: bcc0e4424a06db641bc8623bdf9aae20, type: 2}
+  appearances:
+  - cardStatus: 0
+    duration: 0
+    color: {r: 1, g: 0.375, b: 0.88235295, a: 1}
+  - cardStatus: 1
+    duration: 0
+    color: {r: 0.611, g: 0.259675, b: 0.54408103, a: 1}
+  routineSkillType: 1
+  battleSkillType: 0

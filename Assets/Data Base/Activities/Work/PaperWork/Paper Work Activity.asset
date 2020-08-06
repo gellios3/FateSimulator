@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eea1b9588bf28b84eb3123452d42328b, type: 3}
+  m_Name: Paper Work Activity
+  m_EditorClassIdentifier: 
+  id: 3525
+  dataBase: {fileID: 11400000, guid: 46a29bcfb7c5d2941a21c795a07c9723, type: 2}
+  activityName: Paper Work Activity
+  activityDuration: 30
+  shortDescription: Paper Work Activity
+  activityType: 0
+  activityIcon: {fileID: 21300000, guid: 3a505dacc5dde3842b47c6e1363ea880, type: 3}
+  optionalResultChance: 50
+  requiredList:
+  - {fileID: 11400000, guid: 61f44b2c617ba574781ca3dc6f74a64f, type: 2}
+  - {fileID: 11400000, guid: 8a3704732efa0cd488870c20517c8c28, type: 2}
+  - {fileID: 11400000, guid: 85fd0694b5c57af4187f15f5684c42a8, type: 2}
+  optionalRequiresList: []
+  resultsList:
+  - {fileID: 11400000, guid: 58679369a4f18034582089d950cbf5b4, type: 2}
+  optionalResultsList:
+  - {fileID: 11400000, guid: cdcf879241778a9488e24edbd81d0436, type: 2}

@@ -1,13 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using AbstractViews;
 using Canvas.Activities.Interfaces;
 using Canvas.Activities.Services;
 using Canvas.Cards.Interfaces;
 using Canvas.Cards.Signals;
-using Canvas.Popups.Signals.Activity;
-using Canvas.Services;
+using Canvas.Common;
+using Canvas.Inventory.Services;
 using Enums;
 using Interfaces.Activity;
+using Services;
 using UnityEngine;
 using Zenject;
 
@@ -22,16 +25,19 @@ namespace Canvas.Activities.Views
 
         public ushort ActivityId => CurrentActivity?.Id ?? 0;
         public Action RunTimer { get; private set; }
-        public Action RefreshActivity { get; private set; }
 
         [SerializeField] private ActivityDroppableView droppableView;
-        [SerializeField] private ColorsPresetImage borderImg;
-        [SerializeField] private ActivityTimerView timerView;
+        [SerializeField] private ColorsPresetImageView borderImg;
+        [SerializeField] private TimerView timerView;
 
         private IBaseActivity CurrentActivity { get; set; }
 
-        [Inject] private ActivityService activityService;
-        [Inject] private ActivityViewsService ActivityViewsService { get; }
+        private ushort RunOwnerId { get; set; }
+
+        [Inject] private ActivityService ActivityService { get; }
+
+        [Inject] private OwnersService OwnersService { get; }
+
         [Inject] private ConditionsService ConditionsService { get; }
 
         #endregion
@@ -42,33 +48,48 @@ namespace Canvas.Activities.Views
             signalBus.Subscribe<StartDragCardSignal>(OnStartDragCard);
             signalBus.Subscribe<EndDragCardSignal>(OnEndDragCard);
 
-            signalBus.Subscribe<ShowActivityPopupSignal>(OnShowActivityPopup);
-
             droppableView.CardDrop += OnDropCard;
             timerView.TimeFinish += OnTimerFinish;
 
             RunTimer += OnRunTimer;
-            RefreshActivity += OnRefreshActivity;
-            ActivityViewsService.AddActivityView(this);
         }
 
-        private void OnRefreshActivity()
+        /// <summary>
+        /// On run current activity
+        /// </summary>
+        /// <param name="dropCardViews"></param>
+        public void RunActivity(IEnumerable<IDraggableCardView> dropCardViews)
+        {
+            if (CurrentActivity == null)
+                return;
+            RunOwnerId = droppableView.DropCard.InventoryData.OwnerId;
+            OwnersService.AddRunOwner(RunOwnerId);
+            ActivityService.RunActivity(CurrentActivity.Id, dropCardViews.ToList());
+        }
+
+        /// <summary>
+        /// On refresh activity
+        /// </summary>
+        public void RefreshActivity()
         {
             droppableView.ReturnDropCard();
             SetStatus(Status.Normal);
             CurrentActivity = null;
         }
 
+        public void OnFinishActivity()
+        {
+            ActivityService.OnFinishActivity();
+        }
+
+        /// <summary>
+        /// Run activity timer
+        /// </summary>
         private void OnRunTimer()
         {
             SetStatus(Status.Normal);
             timerView.Init(CurrentActivity.ActivityDuration);
             timerView.Show();
-        }
-
-        private void OnShowActivityPopup()
-        {
-            SetStatus(Status.Normal);
         }
 
         /// <summary>
@@ -86,11 +107,12 @@ namespace Canvas.Activities.Views
         /// </summary>
         private void OnDropCard(IDraggableCardView draggableCardView)
         {
-            var condition = ConditionsService.TryFindConditionByCardId(droppableView.DropCardId);
+            var condition = ConditionsService.TryFindConditionByCardId(droppableView.DropCard.BaseCard.Id);
             if (condition == null)
                 return;
-            CurrentActivity = activityService.GetActivityByStartConditionId(condition.Id);
-            activityService.ShowPopup(CurrentActivity.Id, droppableView.DropCardId);
+            CurrentActivity = ActivityService.GetActivityByStartConditionId(condition.Id);
+            ActivityService.ShowPopup(transform.GetSiblingIndex(), CurrentActivity, droppableView.DropCard);
+            SetStatus(Status.Normal);
         }
 
         /// <summary>
@@ -99,7 +121,9 @@ namespace Canvas.Activities.Views
         private void OnTimerFinish()
         {
             timerView.Hide();
-            activityService.ShowResultPopup(CurrentActivity.Id);
+            ActivityService.OnTimerFinish(transform.GetSiblingIndex(), CurrentActivity.Id);
+            OwnersService.RemoveRunOwner(RunOwnerId);
+            RunOwnerId = 0;
             CurrentActivity = null;
         }
 
@@ -118,13 +142,24 @@ namespace Canvas.Activities.Views
         /// <param name="obj"></param>
         private void OnStartDragCard(StartDragCardSignal obj)
         {
-            var condition = ConditionsService.TryFindConditionByCardId(obj.CardId);
-            if (condition == null)
+            if (OwnersService.HasRunOwner(obj.DraggableCardView.CardData.InventoryData.OwnerId))
                 return;
-            var foundActivityObj = activityService.GetActivityByStartConditionId(condition.Id);
-            if (foundActivityObj != null)
+            
+            var condition = ConditionsService.TryFindConditionByCardId(obj.DraggableCardView.CardData.BaseCard.Id);
+            if (condition == null)
+            {
+                droppableView.SetDroppable(false);
+                return;
+            }
+
+            var canDrop = StatusHelper.IsUseableStatus(obj.DraggableCardView.TopCard.CurrentStatus.cardStatus) &&
+                          ActivityService.GetActivityByStartConditionId(condition.Id) != null;
+            if (canDrop)
+            {
                 borderImg.SetStatus(Status.Highlighted);
-            droppableView.SetDroppable(foundActivityObj != null);
+            }
+
+            droppableView.SetDroppable(canDrop);
         }
     }
 }

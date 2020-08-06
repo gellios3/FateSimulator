@@ -9,5 +9,6 @@
         Subject,
         Skill,
         Activity,
+        Lesson
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Canvas.Cards.Interfaces;
 using Canvas.Cards.Services;
+using Enums;
 using Interfaces.Cards;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -15,40 +16,42 @@ namespace Canvas.Cards.Views
     {
         #region Parameters
 
-        public override ushort CardId => CardObj.Id;
-        private ICardView TopCard { get; set; }
-        private IBaseCard CardObj { get; set; }
-
         [SerializeField] private Button openPopupBtn;
-
+        [SerializeField] private DroppableCardView droppableCardView;
         [Inject] private CardSignalsService CardSignalsService { get; }
         [Inject] private CardViewsService CardViewsService { get; }
         [Inject] private DraggableCardService DraggableCardService { get; }
+        [Inject] private CardAppearanceService CardAppearanceService { get; }
 
         #endregion
 
         [Inject]
-        public void Construct(IBaseCard cardObj, ICardView topCard)
+        public void Construct(ICardData cardData, ICardView topCard)
         {
-            CardObj = cardObj;
+            CardData = cardData;
             TopCard = topCard;
+            droppableCardView.Init(cardData, topCard.CountView);
             CardViewsService.AddCardView(this);
-        }
+            CardAppearanceService.Init(cardData.BaseCard.StatusPresets);
 
-        private void Start()
-        {
             InitActions();
             openPopupBtn.onClick.AddListener(() =>
             {
                 if (!DraggableCardService.HasStartDrag)
                 {
-                    CardSignalsService.ShowPopup(CardId);
+                    CardSignalsService.ShowPopup(CardData.BaseCard.Id);
                 }
             });
 
+            TopCard.TimerFinish += OnCardTimerFinish;
+            CardSignalsService.Init(CardData);
+        }
+
+        private void Start()
+        {
             // Init top card position
             TopCard.SetCardPosition(transform.position);
-            TopCard.SetCardView(CardObj);
+            TopCard.SetCardView(CardAppearanceService.GetAppearance(CardStatus.Normal));
         }
 
         /// <summary>
@@ -69,19 +72,6 @@ namespace Canvas.Cards.Views
             TopCard.Show();
         }
 
-        /// <summary>
-        /// Set start position
-        /// </summary>
-        /// <param name="pos"></param>
-        /// <param name="parent"></param>
-        public void SetStartPos(Vector3 pos, Transform parent)
-        {
-            var tempTransform = transform;
-            tempTransform.parent = parent;
-            tempTransform.localPosition = pos;
-            tempTransform.localRotation = Quaternion.identity;
-        }
-
         #region Drag Events
 
         /// <summary>
@@ -92,9 +82,8 @@ namespace Canvas.Cards.Views
         {
             if (!DraggableCardService.CanBeginDrag())
                 return;
-
-            CardSignalsService.StartDragCard(CardObj.Id);
-
+            transform.SetSiblingIndex(0);
+            CardSignalsService.StartDragCard(this);
             TopCard.Show();
             DraggableCardService.SetTempPos(transform.position);
             TopCard.OnStartDragCard();
@@ -116,10 +105,10 @@ namespace Canvas.Cards.Views
         /// <param name="eventData"></param>
         public override void OnEndDrag(PointerEventData eventData)
         {
-            if (DraggableCardService.HasOutDrag()) 
-                ReturnBack(false);
-            CardSignalsService.EndDragCard(CardObj.Id);
-            if (!DraggableCardService.CanEndDrag())
+            if (DraggableCardService.HasOutDrag() || !DraggableCardService.HasDrop)
+                ReturnBack();
+            CardSignalsService.EndDragCard(CardData.BaseCard.Id);
+            if (!DraggableCardService.CanEndDrag() || !DraggableCardService.HasDrop)
                 return;
             TopCard.ReturnDefaultCartShadow();
         }
@@ -149,14 +138,11 @@ namespace Canvas.Cards.Views
         /// <summary>
         /// Return card back
         /// </summary>
-        protected override void ReturnBack(bool hasSetInInventory)
+        protected override void ReturnBack()
         {
-            DraggableCardService.ReturnBack(hasSetInInventory);
+            DraggableCardService.ReturnBack();
             SetPosition(DraggableCardService.TempPosition);
-            if (hasSetInInventory)
-                TopCard.HideCartShadow();
-            else
-                TopCard.ReturnDefaultCartShadow();
+            TopCard.HideCartShadow();
         }
 
         /// <summary>
@@ -167,6 +153,19 @@ namespace Canvas.Cards.Views
             DraggableCardService.DropCard();
             TopCard.SetCardPosition(transform.position);
             TopCard.HideCartShadow();
+        }
+
+        /// <summary>
+        /// Change card status
+        /// </summary>
+        /// <param name="status"></param>
+        protected override void ChangeCardStatus(CardStatus status)
+        {
+            var appearance = CardAppearanceService.GetAppearance(status);
+            if (appearance == null)
+                return;
+            TopCard.SetStatusPreset(appearance);
+            TopCard.InitCardTimer(appearance);
         }
 
         /// <summary>
@@ -190,9 +189,32 @@ namespace Canvas.Cards.Views
         #endregion
 
         /// <summary>
+        /// On card timer finish
+        /// </summary>
+        /// <param name="finishStatus"></param>
+        private void OnCardTimerFinish(CardStatus finishStatus)
+        {
+            // @todo finish timer status logic 
+            switch (finishStatus)
+            {
+                case CardStatus.Broken:
+                    Debug.Log("CardTimerFinish Broken !!!");
+                    break;
+                case CardStatus.Death:
+                    Hide();
+                    Debug.Log("CardTimerFinish Death !!!");
+                    break;
+                default:
+                    TopCard.SetCardView(CardAppearanceService.GetAppearance(CardStatus.Normal));
+                    TopCard.HideTimer();
+                    break;
+            }
+        }
+
+        /// <summary>
         /// Zenject Factory for Instantiate
         /// </summary>
-        public class Factory : PlaceholderFactory<IBaseCard, ICardView, DraggableCardView>
+        public class Factory : PlaceholderFactory<ICardData, ICardView, DraggableCardView>
         {
         }
     }

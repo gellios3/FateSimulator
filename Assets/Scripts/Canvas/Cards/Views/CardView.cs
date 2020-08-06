@@ -1,9 +1,12 @@
-﻿using AbstractViews;
+﻿using System;
+using System.Collections.Generic;
+using AbstractViews;
 using Canvas.Cards.Interfaces;
-using Canvas.Cards.Services;
+using Canvas.Common;
 using DG.Tweening;
 using Enums;
 using Interfaces.Cards;
+using Serializable;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,33 +20,78 @@ namespace Canvas.Cards.Views
     /// </summary>
     public class CardView : BaseView, ICardView
     {
+        #region Punlic Parameters
+        private ICardData CardData { get; set; }
+        public Action<CardStatus> TimerFinish { get; set; }
+        public CardStatusPreset CurrentStatus { get; private set; }
+        public StackCountView CountView => stackCountView;
+
+        #endregion
+
         #region Parameters
 
-        [SerializeField] private RectTransform mask;
+        [SerializeField] private List<RectTransform> masks;
         [SerializeField] private Vector3 defaultMask;
         [SerializeField] private Vector3 dragMask;
         [SerializeField] private Image iconImg;
         [SerializeField] private ProceduralImage backgroundImg;
         [SerializeField] private TextMeshProUGUI title;
-        [SerializeField] private ColorsPresetImage borderImg;
+        [SerializeField] private ColorsPresetImageView borderImg;
+        [SerializeField] private TimerView cardTimer;
+        [SerializeField] private StackCountView stackCountView;
 
-        public IBaseCard BaseCard { get; private set; }
-        [Inject] private CardAppearanceService CardAppearanceService { get; }
-
-        private Vector2 defaultSizeDelta;
+        private readonly List<Vector2> defaultSizeDelta = new List<Vector2>();
 
         #endregion
 
         [Inject]
-        public void Construct(IBaseCard cardObj)
+        public void Construct(ICardData cardObj)
         {
-            BaseCard = cardObj;
+            CardData = cardObj;
+            cardTimer.TimeFinish += OnTimerFinish;
+            foreach (var mask in masks)
+            {
+                defaultSizeDelta.Add(mask.sizeDelta);
+            }
+
+            HideCartShadow();
         }
 
-        private void Start()
+        #region Card timer
+
+        /// <summary>
+        /// Start Card timer
+        /// </summary>
+        /// <param name="preset"></param>
+        public void InitCardTimer(CardStatusPreset preset)
         {
-            defaultSizeDelta = mask.sizeDelta;
+            cardTimer.Init(preset.duration);
+            StartCardTimer();
         }
+
+        public void HideTimer()
+        {
+            cardTimer.Hide();
+        }
+
+        /// <summary>
+        /// Start card timer
+        /// </summary>
+        private void StartCardTimer()
+        {
+            cardTimer.Show();
+            SetCardView(CurrentStatus);
+        }
+
+        /// <summary>
+        /// On end Timer
+        /// </summary>
+        private void OnTimerFinish()
+        {
+            TimerFinish?.Invoke(CurrentStatus.cardStatus);
+        }
+
+        #endregion
 
         /// <summary>
         /// Highlight card
@@ -58,13 +106,13 @@ namespace Canvas.Cards.Views
         /// <summary>
         /// Set card view
         /// </summary>
-        /// <param name="cardObj"></param>
-        public void SetCardView(IBaseCard cardObj)
+        /// <param name="preset"></param>
+        public void SetCardView(CardStatusPreset preset)
         {
-            CardAppearanceService.Init(cardObj.StatusPresets);
-            iconImg.sprite = cardObj.CardIcon;
-            backgroundImg.color = CardAppearanceService.GetAppearance(CardStatus.Normal).color;
-            title.text = cardObj.CardName;
+            SetStatusPreset(preset);
+            iconImg.sprite = CardData.BaseCard.CardIcon;
+            ColorHelper.SetImgColor(backgroundImg, preset.color);
+            title.text = CardData.BaseCard.CardName;
         }
 
         /// <summary>
@@ -90,8 +138,12 @@ namespace Canvas.Cards.Views
         /// </summary>
         public void ReturnDefaultCartShadow()
         {
-            mask.transform.localPosition = new Vector3(defaultMask.x, defaultMask.y, defaultMask.z);
-            mask.sizeDelta = defaultSizeDelta;
+            for (var i = 0; i < masks.Count; i++)
+            {
+                var mask = masks[i];
+                mask.transform.localPosition = new Vector3(defaultMask.x, defaultMask.y, defaultMask.z);
+                mask.sizeDelta = defaultSizeDelta[i];
+            }
         }
 
         /// <summary>
@@ -99,8 +151,11 @@ namespace Canvas.Cards.Views
         /// </summary>
         public void HideCartShadow()
         {
-            mask.localPosition = Vector3.zero;
-            mask.sizeDelta = GetComponent<RectTransform>().sizeDelta;
+            foreach (var mask in masks)
+            {
+                mask.localPosition = Vector3.zero;
+                mask.sizeDelta = mask.parent.GetComponent<RectTransform>().sizeDelta;
+            }
         }
 
         /// <summary>
@@ -108,11 +163,20 @@ namespace Canvas.Cards.Views
         /// </summary>
         private void SetDragCartShadow()
         {
-            mask.sizeDelta = defaultSizeDelta;
-            mask.transform.localPosition = new Vector3(dragMask.x, dragMask.y, dragMask.z);
+            for (var i = 0; i < masks.Count; i++)
+            {
+                var mask = masks[i];
+                mask.sizeDelta = defaultSizeDelta[i];
+                mask.transform.localPosition = new Vector3(dragMask.x, dragMask.y, dragMask.z);
+            }
         }
 
-        public class Factory : PlaceholderFactory<IBaseCard, CardView>
+        public void SetStatusPreset(CardStatusPreset preset)
+        {
+            CurrentStatus = preset;
+        }
+
+        public class Factory : PlaceholderFactory<ICardData, CardView>
         {
         }
     }

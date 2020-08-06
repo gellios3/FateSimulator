@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1fa4f8b431345c699733910886c3b9e, type: 3}
-  m_Name: Blacksmith Condition
+  m_Name: Blacksmith Work Condition
   m_EditorClassIdentifier: 
   id: 29163
   dataBase: {fileID: 11400000, guid: 46a29bcfb7c5d2941a21c795a07c9723, type: 2}

@@ -11,9 +11,8 @@ namespace Canvas.Cards.Services
         #region Parameters
 
         private bool CanDraggable { get; set; } = true;
-        private bool HasDrop { get; set; }
+        public bool HasDrop { get; private set; }
         private bool HasOutArea { get; set; }
-        private bool HasSetInInventory { get; set; }
         public bool HasStartDrag { get; private set; }
         public Vector3 TempPosition { get; private set; }
 
@@ -68,8 +67,6 @@ namespace Canvas.Cards.Services
         {
             HasStartDrag = false;
             return HasOutArea;
-
-            // HasSetInInventory = false;
         }
 
         /// <summary>
@@ -84,11 +81,9 @@ namespace Canvas.Cards.Services
         /// <summary>
         /// Return back
         /// </summary>
-        /// <param name="value"></param>
-        public void ReturnBack(bool value)
+        public void ReturnBack()
         {
             HasOutArea = false;
-            HasSetInInventory = value;
         }
 
         /// <summary>

@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using Serializable;
+﻿using Enums.Aspects;
 
 namespace Interfaces.Cards
 {
-    public interface IResourceCard: IBaseCard
+    public interface IResourceCard : IBaseCard
     {
-        List<ResourceObj> ResourcesList { get; }
+        ResourceType ResourceType { get; }
+        ushort ResourceValue { get; }
     }
 }

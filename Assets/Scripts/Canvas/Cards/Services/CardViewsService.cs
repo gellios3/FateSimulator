@@ -12,25 +12,34 @@ namespace Canvas.Cards.Services
         /// Draggable card Views
         /// </summary>
         private List<IDraggableCardView> DraggableCardViews { get; } = new List<IDraggableCardView>();
-        
+
         /// <summary>
         /// Get draggable card by id
         /// </summary>
         /// <param name="id"></param>
+        /// <param name="ownerId"></param>
         /// <returns></returns>
-        public IDraggableCardView GetDraggableCardById(ushort id)
+        public IDraggableCardView GetDraggableCardById(ushort id, ushort ownerId)
         {
-            return id > 0 ? DraggableCardViews.Find(view => view.CardId == id) : null;
+            return id > 0
+                ? DraggableCardViews.Find(view =>
+                    view.CardData.BaseCard.Id == id && view.CardData.InventoryData.OwnerId == ownerId)
+                : null;
         }
 
         /// <summary>
         /// Get all draggable cards by Id
         /// </summary>
         /// <param name="id"></param>
+        /// <param name="ownerId"></param>
         /// <returns></returns>
-        public IEnumerable<IDraggableCardView> GetAllCardsById(ushort id)
+        public IEnumerable<IDraggableCardView> GetAllCardsById(ushort id, ushort ownerId)
         {
-            return id > 0 ? DraggableCardViews.FindAll(view => view.CardId == id) : null;
+            return id > 0
+                ? DraggableCardViews.FindAll(
+                    view => view.CardData.BaseCard.Id == id && view.CardData.InventoryData.OwnerId == ownerId
+                )
+                : null;
         }
 
         /// <summary>

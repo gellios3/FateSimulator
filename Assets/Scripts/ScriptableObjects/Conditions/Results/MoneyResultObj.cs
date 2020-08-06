@@ -1,18 +1,19 @@
-﻿using System.Collections.Generic;
-using Enums.Aspects;
-using Interfaces.Conditions.Aspects;
-using Serializable.Conditions;
+﻿using Enums.Aspects;
+using Interfaces.Result.Cards;
 using UnityEngine;
 
 namespace ScriptableObjects.Conditions.Results
 {
     [CreateAssetMenu(fileName = "MoneyResultObj", menuName = "Conditions/Results/MoneyResultObj", order = 0)]
-    public class MoneyResultObj : AspectResultObj, IMoneyCondition
+    public class MoneyResultObj : AspectResultObj, IMoneyResult
     {
         public ResourceType resourceType;
         public ResourceType ResourceType => resourceType;
-        
-        public List<MoneyConditionValue> conditionValues;
-        public List<MoneyConditionValue> ConditionValues => conditionValues;
+
+        public MoneyType moneyType;
+        public MoneyType MoneyType => moneyType;
+
+        public ushort value;
+        public ushort Value => value;
     }
 }

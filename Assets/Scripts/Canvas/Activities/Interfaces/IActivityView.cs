@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Canvas.Cards.Interfaces;
 using Interfaces;
 
 namespace Canvas.Activities.Interfaces
@@ -7,6 +9,8 @@ namespace Canvas.Activities.Interfaces
     {
         ushort ActivityId { get; }
         Action RunTimer { get; }
-        Action RefreshActivity { get; }
+        void RunActivity(IEnumerable<IDraggableCardView> dropCardViews);
+        void RefreshActivity();
+        void OnFinishActivity();
     }
 }

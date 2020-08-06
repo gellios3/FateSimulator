@@ -1,5 +1,6 @@
 ﻿using Canvas.Cards.Interfaces;
 using Canvas.Cards.Services;
+using Canvas.Cards.Spawners;
 using Canvas.Cards.Views;
 using Interfaces.Cards;
 using UnityEngine;
@@ -20,7 +21,7 @@ namespace Canvas.Cards.Installers
         public override void InstallBindings()
         {
             Container.Bind<CardViewsService>().AsSingle(); 
-            Container.Bind<CardSignalsService>().AsSingle();
+            Container.Bind<CardSignalsService>().AsTransient().Lazy();
             Container.Bind<CardActionsService>().AsSingle();
 
             Container.Bind<CardAppearanceService>().AsTransient();
@@ -37,9 +38,9 @@ namespace Canvas.Cards.Installers
             Container.BindInstance(cardViewParent).AsTransient().WhenInjectedInto<CardViewSpawner>();
             Container.Bind<CardViewSpawner>().AsSingle();
 
-            Container.BindFactory<IBaseCard, ICardView, DraggableCardView, DraggableCardView.Factory>()
+            Container.BindFactory<ICardData, ICardView, DraggableCardView, DraggableCardView.Factory>()
                 .FromComponentInNewPrefab(cardPrefab);
-            Container.BindFactory<IBaseCard, CardView, CardView.Factory>().FromComponentInNewPrefab(cardViewPrefab);
+            Container.BindFactory<ICardData, CardView, CardView.Factory>().FromComponentInNewPrefab(cardViewPrefab);
         }
     }
 }

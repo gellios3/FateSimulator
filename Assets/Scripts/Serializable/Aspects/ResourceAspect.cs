@@ -1,6 +1,7 @@
 ﻿using System;
 using Enums.Aspects;
 using Interfaces.Aspects;
+using Interfaces.Aspects.Resource;
 using UnityEngine;
 
 namespace Serializable.Aspects
@@ -12,14 +13,11 @@ namespace Serializable.Aspects
     public class ResourceAspect : BaseAspect, IResourceAspect
     {
         public ResourceType ResourceType { get; }
-        public MoneyType MoneyType { get; }
-        public ushort ResourceValue { get; }
 
         public ResourceAspect(IResourceAspect aspect) : base(aspect)
         {
             ResourceType = aspect.ResourceType;
-            ResourceValue = aspect.ResourceValue;
-            MoneyType = aspect.MoneyType;
+
         }
     }
 }

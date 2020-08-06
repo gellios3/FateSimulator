@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Canvas.Cards.Interfaces;
+using Canvas.Common;
 using UnityEngine;
 using Zenject;
 
@@ -63,31 +64,33 @@ namespace Canvas.Cards.Services
         /// Call on out area by Id
         /// </summary>
         /// <param name="cardId"></param>
+        /// <param name="ownerId"></param>
         /// <param name="value"></param>
-        public void OnOutAreaById(ushort cardId, bool value)
+        public void OnOutAreaById(ushort cardId, ushort ownerId, bool value)
         {
-            GetCardById(cardId)?.OnOutArea.Invoke(value);
+            GetCardById(cardId, ownerId)?.OnOutArea.Invoke(value);
         }
 
         /// <summary>
         /// Call return back on start position by Id 
         /// </summary>
         /// <param name="view"></param>
-        /// <param name="value"></param>
-        public void ReturnBack(IDraggableCardView view, bool value = false)
+        public void ReturnBack(IDraggableCardView view)
         {
-            view?.OnReturnBack.Invoke(value);
+            view?.OnReturnBack.Invoke();
         }
 
         /// <summary>
         /// Call highlight card by Id
         /// </summary>
         /// <param name="cardId"></param>
-        public void HighlightAllCardsById(ushort cardId)
+        /// <param name="ownerId"></param>
+        public void HighlightAllCardsById(ushort cardId, ushort ownerId)
         {
-            foreach (var cardView in GetAllCardsById(cardId))
+            foreach (var cardView in GetAllCardsById(cardId, ownerId))
             {
-                cardView.OnHighlight.Invoke();
+                if (StatusHelper.IsUseableStatus(cardView.TopCard.CurrentStatus.cardStatus))
+                    cardView.OnHighlight.Invoke();
             }
         }
 
@@ -95,20 +98,22 @@ namespace Canvas.Cards.Services
         /// Get all cards by Id
         /// </summary>
         /// <param name="cardId"></param>
+        /// <param name="ownerId"></param>
         /// <returns></returns>
-        private IEnumerable<IDraggableCardView> GetAllCardsById(ushort cardId)
+        private IEnumerable<IDraggableCardView> GetAllCardsById(ushort cardId, ushort ownerId)
         {
-            return CardViewsService.GetAllCardsById(cardId);
-        } 
+            return CardViewsService.GetAllCardsById(cardId, ownerId);
+        }
 
         /// <summary>
         /// Get card by Id
         /// </summary>
         /// <param name="cardId"></param>
+        /// <param name="ownerId"></param>
         /// <returns></returns>
-        private IDraggableCardView GetCardById(ushort cardId)
+        private IDraggableCardView GetCardById(ushort cardId, ushort ownerId)
         {
-            return CardViewsService.GetDraggableCardById(cardId);
+            return CardViewsService.GetDraggableCardById(cardId, ownerId);
         }
     }
 }

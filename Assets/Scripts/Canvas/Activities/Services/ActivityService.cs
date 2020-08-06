@@ -1,6 +1,10 @@
-﻿using Canvas.Popups.Signals.Activity;
+﻿using System.Collections.Generic;
+using Canvas.Cards.Interfaces;
+using Enums;
 using Interfaces.Activity;
+using Interfaces.Cards;
 using ScriptableObjects;
+using UnityEngine;
 using Zenject;
 
 namespace Canvas.Activities.Services
@@ -12,13 +16,11 @@ namespace Canvas.Activities.Services
     {
         [Inject] private AllItemsDataBase ItemsDataBase { get; }
 
-        private SignalBus SignalBus { get; }
+        [Inject] private ActivityViewsService ActivityViewsService { get; }
 
-        public ActivityService(SignalBus signalBus)
-        {
-            SignalBus = signalBus;
-        }
+        [Inject] private RunActivityService RunActivityService { get; }
 
+        
         /// <summary>
         /// Get Activity by condition Id
         /// </summary>
@@ -35,23 +37,49 @@ namespace Canvas.Activities.Services
         /// <summary>
         /// Show popup
         /// </summary>
-        /// <param name="activityId"></param>
-        /// <param name="cardId"></param>
-        public void ShowPopup(ushort activityId, ushort cardId)
+        /// <param name="index"></param>
+        /// <param name="activity"></param>
+        /// <param name="cardData"></param>
+        public void ShowPopup(int index, IBaseActivity activity, ICardData cardData)
         {
-            SignalBus.Fire(new ShowActivityPopupSignal
-            {
-                ActivityId = activityId,
-                StartActivityCardId = cardId
-            });
+            var activityPopup = ActivityViewsService.GetActivityPopupByIndex(index);
+            activityPopup.ShowActivityPopup(activity, cardData);
         }
 
         /// <summary>
-        /// Show result popup
+        /// Run Activity
         /// </summary>
-        public void ShowResultPopup(ushort activityId)
+        /// <param name="currentActivityId"></param>
+        /// <param name="dropCardViews"></param>
+        public void RunActivity(ushort currentActivityId, List<IDraggableCardView> dropCardViews)
         {
-            SignalBus.Fire(new ShowActivityResultSignal {ActivityId = activityId});
+            var activity = ActivityViewsService.GetActivityViewById(currentActivityId);
+            if (activity == null)
+                return;
+            RunActivityService.Init(dropCardViews);
+            activity.RunTimer.Invoke();
+        }
+
+        public void OnFinishActivity()
+        {
+            RunActivityService.SetStatusToDroppedCards(CardStatus.Distress);
+            RunActivityService.Reset();
+        }
+
+        public void OnTimerFinish(int index, ushort activityId)
+        {
+            var activity = GetActivityById(activityId);
+            RunActivityService.OnFinishActivity(index,activity);
+        }
+        
+        /// <summary>
+        /// Get activity by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        private IBaseActivity GetActivityById(ushort id)
+        {
+            return ItemsDataBase.GetActivityById(id);
         }
     }
 }

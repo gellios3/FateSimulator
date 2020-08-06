@@ -6,6 +6,7 @@
         Distress,
         Broken,
         Buffed,
-        Death
+        Death,
+        Hide
     }
 }

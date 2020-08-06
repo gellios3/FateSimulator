@@ -1,5 +1,4 @@
-﻿using Enums.Aspects;
-using Enums.Person;
+﻿using Enums.Person;
 using Interfaces.Conditions.Cards;
 using UnityEngine;
 

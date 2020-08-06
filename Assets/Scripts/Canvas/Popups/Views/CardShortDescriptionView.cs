@@ -51,7 +51,7 @@ namespace Canvas.Popups.Views
             titleTxt.text = cardObj.CardName;
             descriptionTxt.text = cardObj.ShortDescription;
             iconImg.sprite = cardObj.CardIcon;
-            iconBg.color = CardAppearanceService.GetAppearance(CardStatus.Normal).color;
+            iconBg.color = CardAppearanceService.GetBgColorByStatus(CardStatus.Normal);
             aspectsBarView.SetAspectsBar(cardObj);
         }
     }
